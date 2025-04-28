@@ -54,7 +54,7 @@ const authAmplify = {
     {
       path: 'register',
       element: (
-        <AuthClassicLayout title="Manage the job more effectively with Minimal">
+        <AuthClassicLayout title="Manage the job more effectively with Quambiant">
           <AmplifyRegisterPage />
         </AuthClassicLayout>
       ),
@@ -95,7 +95,7 @@ const authJwt = {
     {
       path: 'register',
       element: (
-        <AuthClassicLayout title="Manage the job more effectively with Minimal">
+        <AuthClassicLayout title="Manage the job more effectively with Quambiant">
           <JwtRegisterPage />
         </AuthClassicLayout>
       ),
@@ -124,7 +124,7 @@ const authFirebase = {
     {
       path: 'register',
       element: (
-        <AuthClassicLayout title="Manage the job more effectively with Minimal">
+        <AuthClassicLayout title="Manage the job more effectively with Quambiant">
           <FirebaseRegisterPage />
         </AuthClassicLayout>
       ),

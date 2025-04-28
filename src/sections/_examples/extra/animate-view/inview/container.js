@@ -12,7 +12,7 @@ import getVariant from '../get-variant';
 
 // ----------------------------------------------------------------------
 
-const TEXT = 'Minimals';
+const TEXT = 'Quambiant';
 
 const IMG = [
   _mock.image.cover(2),

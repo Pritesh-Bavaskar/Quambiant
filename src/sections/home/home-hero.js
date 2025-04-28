@@ -191,7 +191,7 @@ export default function HomeHero() {
             repeat: Infinity,
           }}
         >
-          Minimal
+          Quambiant
         </StyledTextGradient>
       </m.div>
 

@@ -22,7 +22,8 @@ export function responsiveFontSizes({ sm, md, lg }) {
   };
 }
 
-const primaryFont = 'Public Sans, sans-serif'; // Google Font
+// const primaryFont = 'Public Sans, sans-serif'; // Google Font
+const primaryFont = 'Playfair Display Bold, serif';
 // const secondaryFont = 'CircularStd, sans-serif'; // Local Font
 
 // ----------------------------------------------------------------------
@@ -34,33 +35,33 @@ export const typography = {
   fontWeightSemiBold: 600,
   fontWeightBold: 700,
   h1: {
-    fontWeight: 800,
-    lineHeight: 80 / 64,
-    fontSize: pxToRem(40),
+    fontWeight: 500,
+    lineHeight: pxToRem(69),
+    fontSize: pxToRem(42),
     ...responsiveFontSizes({ sm: 52, md: 58, lg: 64 }),
   },
   h2: {
-    fontWeight: 800,
-    lineHeight: 64 / 48,
-    fontSize: pxToRem(32),
+    fontWeight: 500,
+    lineHeight: pxToRem(57),
+    fontSize: pxToRem(38),
     ...responsiveFontSizes({ sm: 40, md: 44, lg: 48 }),
   },
   h3: {
-    fontWeight: 700,
-    lineHeight: 1.5,
-    fontSize: pxToRem(24),
+    fontWeight: 500,
+    lineHeight: pxToRem(48),
+    fontSize: pxToRem(32),
     ...responsiveFontSizes({ sm: 26, md: 30, lg: 32 }),
   },
   h4: {
     fontWeight: 700,
-    lineHeight: 1.5,
-    fontSize: pxToRem(20),
+    lineHeight: pxToRem(39),
+    fontSize: pxToRem(26),
     ...responsiveFontSizes({ sm: 20, md: 24, lg: 24 }),
   },
   h5: {
     fontWeight: 700,
-    lineHeight: 1.5,
-    fontSize: pxToRem(18),
+    lineHeight: pxToRem(33),
+    fontSize: pxToRem(22),
     ...responsiveFontSizes({ sm: 19, md: 20, lg: 20 }),
   },
   h6: {
@@ -80,12 +81,24 @@ export const typography = {
     fontSize: pxToRem(14),
   },
   body1: {
-    lineHeight: 1.5,
-    fontSize: pxToRem(16),
+    lineHeight: pxToRem(27),
+    fontSize: pxToRem(18),
   },
   body2: {
-    lineHeight: 22 / 14,
+    lineHeight: pxToRem(24),
+    fontSize: pxToRem(16),
+  },
+  body3: {
+    lineHeight: pxToRem(21),
     fontSize: pxToRem(14),
+  },
+  body4: {
+    lineHeight: pxToRem(18),
+    fontSize: pxToRem(12),
+  },
+  body5: {
+    lineHeight: pxToRem(15),
+    fontSize: pxToRem(10),
   },
   caption: {
     lineHeight: 1.5,
