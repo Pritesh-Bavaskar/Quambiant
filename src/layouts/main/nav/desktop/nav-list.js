@@ -51,7 +51,7 @@ export default function NavList({ item, offsetTop }) {
         onMouseLeave={nav.onFalse}
       />
 
-      {!!children && nav.value && (
+      {/* {!!children && nav.value && (
         <Portal>
           <Fade in={nav.value}>
             <StyledMenu
@@ -71,7 +71,7 @@ export default function NavList({ item, offsetTop }) {
             </StyledMenu>
           </Fade>
         </Portal>
-      )}
+      )} */}
     </>
   );
 }

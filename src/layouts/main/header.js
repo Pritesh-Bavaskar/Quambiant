@@ -1,3 +1,6 @@
+import whatsapp_btn from 'src/assets/media/landing/whatsapp.svg';
+import phone_btn from 'src/assets/media/landing/call.svg';
+
 // @mui
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -7,6 +10,7 @@ import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
+import { IconButton } from '@mui/material';
 import Badge, { badgeClasses } from '@mui/material/Badge';
 // hooks
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
@@ -49,64 +53,96 @@ export default function Header() {
             duration: theme.transitions.duration.shorter,
           }),
           ...(offsetTop && {
-            ...bgBlur({
-              color: theme.palette.background.default,
-            }),
+            // ...bgBlur({
+            //   color: theme.palette.background.default,
+            // }),
             height: {
               md: HEADER.H_DESKTOP_OFFSET,
             },
           }),
         }}
       >
-        <Container sx={{ height: 1, display: 'flex', alignItems: 'center' }}>
+        <Container
+          sx={{
+            height: 1,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            maxWidth: '100% !important',
+            px: {
+              xs: 2,
+              sm: 3,
+              md: 5,
+              lg: 8,
+            },
+          }}
+        >
           <Badge
             sx={{
               [`& .${badgeClasses.badge}`]: {
                 top: 8,
                 right: -16,
               },
+              width: { xs: '0px', md: '15%' },
             }}
-            badgeContent={
-              <Link
-                href={paths.changelog}
-                target="_blank"
-                rel="noopener"
-                underline="none"
-                sx={{ ml: 1 }}
-              >
-                <Label color="info" sx={{ textTransform: 'unset', height: 22, px: 0.5 }}>
-                  v5.1.0
-                </Label>
-              </Link>
-            }
           >
             <Logo />
           </Badge>
 
-          <Box sx={{ flexGrow: 1 }} />
+          {/* <Box sx={{ flexGrow: 1 }} /> */}
 
           {mdUp && <NavDesktop offsetTop={offsetTop} data={navConfig} />}
 
           <Stack alignItems="center" direction={{ xs: 'row', md: 'row-reverse' }}>
-            <Button variant="contained" target="_blank" rel="noopener" href={paths.minimalUI}>
+            {/* <Button variant="contained" target="_blank" rel="noopener" href={paths.minimalUI}>
               Purchase Now
-            </Button>
+            </Button> */}
 
-            {mdUp && <LoginButton />}
-
-            <SettingsButton
+            {/* {mdUp && <LoginButton />} */}
+            <Button
+              variant="contained"
               sx={{
-                ml: { xs: 1, md: 0 },
-                mr: { md: 2 },
+                py: '7px',
+                px: '24px',
+                color: 'black',
+                bgcolor: 'neutral.lighter',
+                borderRadius: 0,
+                fontSize: { md: '16px', xs: '12px' },
+                '&:hover': {
+                  color: 'neutral.lighter',
+                },
               }}
-            />
+            >
+              Contact Us
+            </Button>
+            {mdUp && (
+              <IconButton
+                sx={{
+                  ml: { xs: 1, md: 0 },
+                  mr: { md: 2 },
+                }}
+              >
+                <img src={phone_btn} alt="Phone" style={{ width: 40, height: 40 }} />
+              </IconButton>
+            )}
+
+            {mdUp && (
+              <IconButton
+                sx={{
+                  ml: { xs: 1, md: 0 },
+                  mr: { md: 2 },
+                }}
+              >
+                <img src={whatsapp_btn} alt="WhatsApp" style={{ width: 40, height: 40 }} />
+              </IconButton>
+            )}
 
             {!mdUp && <NavMobile offsetTop={offsetTop} data={navConfig} />}
           </Stack>
         </Container>
       </Toolbar>
 
-      {offsetTop && <HeaderShadow />}
+      {/* {offsetTop && <HeaderShadow />} */}
     </AppBar>
   );
 }

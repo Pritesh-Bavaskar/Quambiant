@@ -22,6 +22,8 @@ import { HEADER } from 'src/layouts/config-layout';
 import Iconify from 'src/components/iconify';
 import { RouterLink } from 'src/routes/components';
 import { MotionContainer, varFade } from 'src/components/animate';
+import bck_img from 'src/assets/media/landing/bck_img.png';
+import { LandingCard } from 'src/components/landing-card/LandingCard';
 
 // ----------------------------------------------------------------------
 
@@ -380,7 +382,7 @@ export default function HomeHero() {
 
   return (
     <>
-      <StyledRoot
+      {/* <StyledRoot
         ref={heroRef}
         sx={{
           ...(hide && {
@@ -403,9 +405,57 @@ export default function HomeHero() {
         </StyledWrapper>
       </StyledRoot>
 
-      {mdUp && renderPolygons}
+      {mdUp && renderPolygons} */}
 
-      <Box sx={{ height: { md: '100vh' } }} />
+      <Box
+        sx={{
+          position: 'relative',
+          width: '100%',
+          height: '100vh', // Always use full height
+          overflow: 'hidden',
+        }}
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundImage: `url(${bck_img})`,
+            backgroundSize: 'cover',
+            backgroundPosition: {
+              xs: '20% center', // 👈 Align to left on small screens
+              md: 'center', // 👈 Center on medium and up
+            },
+            zIndex: 0,
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'rgba(0, 0, 0, 0.1)', // Adjust overlay as needed
+              zIndex: 1,
+            },
+          }}
+        />
+        <Box
+          sx={{
+            position: 'relative', // changed from absolute to relative
+            zIndex: 2,
+            display: 'flex',
+            justifyContent: { xs: 'center', md: 'flex-start' },
+            alignItems: { xs: 'flex-end', md: 'flex-end' },
+            height: '100%',
+            px: { xs: 2, md: 8 },
+            pb: { xs: 4, md: 8 },
+          }}
+        >
+          <LandingCard />
+        </Box>
+      </Box>
     </>
   );
 }

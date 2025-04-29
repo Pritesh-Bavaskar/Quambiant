@@ -19,4 +19,16 @@
   src: local('CircularStd'), url('CircularStd-Bold.otf') format('opentype');
 }
 
- 
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('PlayfairDisplay-Regular.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi Variable';
+  src: url('Satoshi-Variable.ttf') format('truetype');
+  font-weight: 100 900; /* if it's truly variable */
+  font-style: normal;
+}

@@ -21,7 +21,7 @@ export default function NavMobile({ offsetTop, data }) {
   const pathname = usePathname();
 
   const nav = useBoolean();
-
+  
   useEffect(() => {
     if (nav.value) {
       nav.onFalse();
@@ -36,7 +36,7 @@ export default function NavMobile({ offsetTop, data }) {
         sx={{
           ml: 1,
           ...(offsetTop && {
-            color: 'text.primary',
+            color: 'neutral.lighter',
           }),
         }}
       >

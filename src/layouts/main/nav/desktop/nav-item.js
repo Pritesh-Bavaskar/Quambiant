@@ -5,12 +5,14 @@ import { forwardRef } from 'react';
 import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import CardActionArea from '@mui/material/CardActionArea';
+import Typography from '@mui/material/Typography';
 // routes
 import { RouterLink } from 'src/routes/components';
 // components
 import Iconify from 'src/components/iconify';
 //
 import { ListItem } from './styles';
+// import { Typography } from '@mui/material';
 
 // ----------------------------------------------------------------------
 
@@ -26,9 +28,12 @@ export const NavItem = forwardRef(
         subItem={subItem}
         active={active}
         open={open}
+        sx={{ color: 'neutral.lighter' }}
         {...other}
       >
-        {title}
+        <Typography variant="body2" sx={{ color: 'neutral.lighter' }}>
+          {title}
+        </Typography>
 
         {!!children && <Iconify width={16} icon="eva:arrow-ios-downward-fill" sx={{ ml: 1 }} />}
       </ListItem>
