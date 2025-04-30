@@ -2,55 +2,7 @@ import { Box, Typography, Button } from '@mui/material';
 
 export function LandingCard() {
   return (
-    // <Box
-    //   sx={{
-    //     width: { xs: '90%', md: '60%' },
-    //     height: { xs: 'auto', md: 'auto' },
-    //     p: { xs: 3, md: 5 },
-    //     background: 'rgba(0, 0, 0, 0.4)',
-    //     color: 'white',
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     justifyContent: 'center',
-    //     gap: 2,
-    //     backdropFilter: 'blur(18px)',
-    //     // border: '2px solid white',
-    //   }}
-    // >
-    //   <Typography
-    //     variant="h1"
-    //     sx={{
-    //       fontFamily: `'Playfair Display', serif`,
-    //       fontWeight: 'bold',
-    //       lineHeight: '1.25',
-    //     }}
-    //   >
-    //     Elevating Residential Spaces With Timeless Quambiance
-    //   </Typography>
-
-    //   <Typography variant="body1" sx={{ color: '#CCCCCC' }}>
-    //     From vision to reality, we shape homes that inspire
-    //   </Typography>
-
-    //   <Button
-    //     variant="contained"
-    //     sx={{
-    //       py: '7px',
-    //       px: '24px',
-    //       color: 'black',
-    //       bgcolor: 'neutral.lighter',
-    //       borderRadius: 0,
-    //       width: 'fit-content',
-    //       mt: 1,
-    //       fontSize: '16px',
-    //         '&:hover': {
-    //             color: 'neutral.lighter',
-    //         },
-    //     }}
-    //   >
-    //     Explore Our Projects
-    //   </Button>
-    // </Box>
+   
     <Box
       sx={{
         width: { xs: '100%', sm: '90%', md: '60%' },

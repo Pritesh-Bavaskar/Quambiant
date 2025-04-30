@@ -40,7 +40,7 @@ export default function Header() {
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
 
   return (
-    <AppBar>
+    <AppBar position="absolute">
       <Toolbar
         disableGutters
         sx={{
