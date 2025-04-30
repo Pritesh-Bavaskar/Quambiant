@@ -7,7 +7,7 @@ export function LandingCard() {
       sx={{
         width: { xs: '100%', sm: '90%', md: '60%' },
         maxWidth: '600px',
-        p: { xs: 2, sm: 3, md: 5 },
+        p: { xs: 2, sm: 3, md: 3 },
         background: 'rgba(0, 0, 0, 0.1)',
         color: 'white',
         display: 'flex',
@@ -18,23 +18,13 @@ export function LandingCard() {
         boxShadow: { xs: 'none', sm: '0 8px 32px rgba(0,0,0,0.2)' },
       }}
     >
-      <Typography
-        variant="h1"
-        sx={{
-          fontSize: { xs: '28px', sm: '32px', md: '42px' },
-          fontWeight: 600,
-          fontFamily: `'Playfair Display', serif`,
-          lineHeight: 1.3,
-        }}
-      >
-        Elevating Residential Spaces With Timeless Quambiance
-      </Typography>
+      <Typography variant="h1">Elevating Residential Spaces With Timeless Quambiance</Typography>
 
       <Typography
         variant="body1"
         sx={{
-          fontSize: { xs: '14px', sm: '16px' },
-          color: 'grey.300',
+          fontWeight: '500 !important',
+          color: '#CCCCCC',
         }}
       >
         From vision to reality, we shape homes that inspire

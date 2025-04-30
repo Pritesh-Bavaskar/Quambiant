@@ -23,57 +23,56 @@ export function responsiveFontSizes({ sm, md, lg }) {
 }
 
 // const primaryFont = 'Public Sans, sans-serif'; // Google Font
-const primaryFont = 'Playfair Display Bold, serif';
+const primaryFont = 'Playfair Display';
 // const secondaryFont = 'CircularStd, sans-serif'; // Local Font
 
 // ----------------------------------------------------------------------
 
 export const typography = {
-  // fontFamily: 'Playfair Display',
+  fontFamily: primaryFont,
   fontWeightRegular: 400,
   fontWeightMedium: 500,
   fontWeightSemiBold: 600,
   fontWeightBold: 700,
   h1: {
-    fontFamily: 'Playfair Display, sans-serif',
     fontWeight: 500,
-    lineHeight: pxToRem(69),
-    fontSize: pxToRem(42),
-    ...responsiveFontSizes({ sm: 28, md: 28, lg: 28 }),
+    lineHeight: pxToRem(40),
+    fontSize: pxToRem(28),
+    ...responsiveFontSizes({ sm: 28, md: 58, lg: 42 }),
   },
   h2: {
     fontFamily: 'Playfair Display, sans-serif',
     fontWeight: 500,
     lineHeight: pxToRem(57),
     fontSize: pxToRem(38),
-    // ...responsiveFontSizes({ sm: 40, md: 44, lg: 48 }),
+    ...responsiveFontSizes({ sm: 40, md: 44, lg: 48 }),
   },
   h3: {
     fontFamily: 'Playfair Display, sans-serif',
     fontWeight: 500,
     lineHeight: pxToRem(48),
     fontSize: pxToRem(32),
-    // ...responsiveFontSizes({ sm: 26, md: 30, lg: 32 }),
+    ...responsiveFontSizes({ sm: 26, md: 30, lg: 32 }),
   },
   h4: {
     fontFamily: 'Playfair Display, sans-serif',
     fontWeight: 700,
     lineHeight: pxToRem(39),
     fontSize: pxToRem(26),
-    // ...responsiveFontSizes({ sm: 20, md: 24, lg: 24 }),
+    ...responsiveFontSizes({ sm: 20, md: 24, lg: 24 }),
   },
   h5: {
     fontFamily: 'Playfair Display, sans-serif',
     fontWeight: 700,
     lineHeight: pxToRem(33),
     fontSize: pxToRem(22),
-    // ...responsiveFontSizes({ sm: 19, md: 20, lg: 20 }),
+    ...responsiveFontSizes({ sm: 19, md: 20, lg: 20 }),
   },
   h6: {
     fontWeight: 700,
     lineHeight: 28 / 18,
     fontSize: pxToRem(17),
-    // ...responsiveFontSizes({ sm: 18, md: 18, lg: 18 }),
+    ...responsiveFontSizes({ sm: 18, md: 18, lg: 18 }),
   },
   subtitle1: {
     fontWeight: 600,
@@ -86,17 +85,17 @@ export const typography = {
     fontSize: pxToRem(14),
   },
   body1: {
-    fontFamily: 'Satoshi Variable, sans-serif',
+    fontFamily: 'Satoshi Variable',
     lineHeight: pxToRem(27),
     fontSize: pxToRem(18),
   },
   body2: {
-    fontFamily: 'Satoshi Variable, sans-serif',
+    fontFamily: 'Satoshi Variable',
     lineHeight: pxToRem(24),
     fontSize: pxToRem(16),
   },
   body3: {
-    fontFamily: 'Satoshi Variable, sans-serif',
+    fontFamily: 'Satoshi Variable',
     lineHeight: pxToRem(21),
     fontSize: pxToRem(14),
   },

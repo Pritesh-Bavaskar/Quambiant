@@ -21,14 +21,14 @@
 
 @font-face {
   font-family: 'Playfair Display';
-  src: url('PlayfairDisplay-Regular.ttf') format('truetype');
-  font-weight: bold;
+  src: url('PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Satoshi Variable';
   src: url('Satoshi-Variable.ttf') format('truetype');
-  font-weight: 100 900; /* if it's truly variable */
-  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
 }

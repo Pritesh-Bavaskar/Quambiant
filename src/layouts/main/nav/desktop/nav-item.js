@@ -31,7 +31,7 @@ export const NavItem = forwardRef(
         sx={{ color: 'neutral.lighter' }}
         {...other}
       >
-        <Typography variant="body2" sx={{ color: 'neutral.lighter' }}>
+        <Typography variant="body2" sx={{ color: 'neutral.lighter', fontWeight: '500' }}>
           {title}
         </Typography>
 
