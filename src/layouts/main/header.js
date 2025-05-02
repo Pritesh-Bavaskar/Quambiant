@@ -1,5 +1,6 @@
 import whatsapp_btn from 'src/assets/media/landing/whatsapp.svg';
 import phone_btn from 'src/assets/media/landing/call.svg';
+import { m } from 'framer-motion';
 
 // @mui
 import { useTheme } from '@mui/material/styles';
@@ -41,108 +42,127 @@ export default function Header() {
 
   return (
     <AppBar position="absolute">
-      <Toolbar
-        disableGutters
-        sx={{
-          height: {
-            xs: HEADER.H_MOBILE,
-            md: HEADER.H_DESKTOP,
-          },
-          transition: theme.transitions.create(['height'], {
-            easing: theme.transitions.easing.easeInOut,
-            duration: theme.transitions.duration.shorter,
-          }),
-          ...(offsetTop && {
-            // ...bgBlur({
-            //   color: theme.palette.background.default,
-            // }),
-            height: {
-              md: HEADER.H_DESKTOP_OFFSET,
-            },
-          }),
-        }}
+      <m.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
       >
-        <Container
+        <Toolbar
+          disableGutters
           sx={{
-            height: 1,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            maxWidth: '100% !important',
-            px: {
-              xs: 2,
-              sm: 3,
-              md: 5,
-              lg: 8,
+            height: {
+              xs: HEADER.H_MOBILE,
+              md: HEADER.H_DESKTOP,
             },
+            transition: theme.transitions.create(['height'], {
+              easing: theme.transitions.easing.easeInOut,
+              duration: theme.transitions.duration.shorter,
+            }),
+            ...(offsetTop && {
+              height: {
+                md: HEADER.H_DESKTOP_OFFSET,
+              },
+            }),
           }}
         >
-          <Badge
+          <Container
             sx={{
-              [`& .${badgeClasses.badge}`]: {
-                top: 8,
-                right: -16,
+              height: 1,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              maxWidth: '100% !important',
+              px: {
+                xs: 2,
+                sm: 3,
+                md: 5,
+                lg: 8,
               },
-              width: { xs: '0px', md: '15%' },
             }}
           >
-            <Logo />
-          </Badge>
-
-          {/* <Box sx={{ flexGrow: 1 }} /> */}
-
-          {mdUp && <NavDesktop offsetTop={offsetTop} data={navConfig} />}
-
-          <Stack alignItems="center" direction={{ xs: 'row', md: 'row-reverse' }}>
-            {/* <Button variant="contained" target="_blank" rel="noopener" href={paths.minimalUI}>
-              Purchase Now
-            </Button> */}
-
-            {/* {mdUp && <LoginButton />} */}
-            <Button
-              variant="contained"
-              sx={{
-                py: '7px',
-                px: '24px',
-                color: 'black',
-                bgcolor: 'neutral.lighter',
-                borderRadius: 0,
-                fontSize: { md: '16px', xs: '12px' },
-                '&:hover': {
-                  color: 'neutral.lighter',
-                },
-              }}
+            <m.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Contact Us
-            </Button>
-            {mdUp && (
-              <IconButton
+              <Badge
                 sx={{
-                  ml: { xs: 1, md: 0 },
-                  mr: { md: 2 },
+                  [`& .${badgeClasses.badge}`]: {
+                    top: 8,
+                    right: -16,
+                  },
+                  width: { xs: '0px', md: '15%' },
                 }}
               >
-                <img src={phone_btn} alt="Phone" style={{ width: 40, height: 40 }} />
-              </IconButton>
-            )}
+                <Logo />
+              </Badge>
+            </m.div>
 
-            {mdUp && (
-              <IconButton
-                sx={{
-                  ml: { xs: 1, md: 0 },
-                  mr: { md: 2 },
-                }}
+            {mdUp && <NavDesktop offsetTop={offsetTop} data={navConfig} />}
+
+            <Stack alignItems="center" direction={{ xs: 'row', md: 'row-reverse' }}>
+              <m.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <img src={whatsapp_btn} alt="WhatsApp" style={{ width: 40, height: 40 }} />
-              </IconButton>
-            )}
+                <Button
+                  variant="contained"
+                  sx={{
+                    py: '7px',
+                    px: '24px',
+                    color: 'black',
+                    bgcolor: 'neutral.lighter',
+                    borderRadius: 0,
+                    fontSize: { md: '16px', xs: '12px' },
+                    '&:hover': {
+                      color: 'neutral.lighter',
+                    },
+                  }}
+                >
+                  Contact Us
+                </Button>
+              </m.div>
 
-            {!mdUp && <NavMobile offsetTop={offsetTop} data={navConfig} />}
-          </Stack>
-        </Container>
-      </Toolbar>
+              {mdUp && (
+                <m.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                >
+                  <IconButton
+                    sx={{
+                      ml: { xs: 1, md: 0 },
+                      mr: { md: 2 },
+                    }}
+                  >
+                    <img src={phone_btn} alt="Phone" style={{ width: 40, height: 40 }} />
+                  </IconButton>
+                </m.div>
+              )}
 
-      {/* {offsetTop && <HeaderShadow />} */}
+              {mdUp && (
+                <m.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                >
+                  <IconButton
+                    sx={{
+                      ml: { xs: 1, md: 0 },
+                      mr: { md: 2 },
+                    }}
+                  >
+                    <img src={whatsapp_btn} alt="WhatsApp" style={{ width: 40, height: 40 }} />
+                  </IconButton>
+                </m.div>
+              )}
+
+              {!mdUp && <NavMobile offsetTop={offsetTop} data={navConfig} />}
+            </Stack>
+          </Container>
+        </Toolbar>
+      </m.div>
     </AppBar>
   );
 }
