@@ -18,6 +18,7 @@ import { _socials } from 'src/_mock';
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 
+
 // ----------------------------------------------------------------------
 
 const LINKS = [
@@ -44,79 +45,70 @@ const LINKS = [
 
 // ----------------------------------------------------------------------
 
+const styles = {
+  root: {
+    bgcolor: '#071317',
+    color: '#fff',
+    fontFamily: 'Satoshi, sans-serif',
+  },
+  quambiant: {
+    fontFamily: '"Playfair Display", serif',
+    fontWeight: 700,
+    fontSize: { xs: '73.34px', md: '200px' },
+    textAlign: { xs: 'center', md: 'left' },
+    lineHeight: 1,
+    mb: { xs: 3, md: 5 },
+  },
+  otherText: {
+    fontFamily: 'Satoshi, sans-serif',
+    fontWeight: 500,
+    fontSize: '16px',
+  },
+};
+
 export default function Footer() {
-  const pathname = usePathname();
-
-  const isHome = pathname === '/';
-
-  const simpleFooter = (
-    <Box
-      component="footer"
-      sx={{
-        py: 5,
-        textAlign: 'center',
-        position: 'relative',
-        bgcolor: 'background.default',
-      }}
-    >
-      <Container>
-        <Logo sx={{ mb: 1, mx: 'auto' }} />
-
-        <Typography variant="caption" component="div">
-          © All rights reserved
-          <br /> made by
-          <Link href="https://Quambiant.cc/"> Quambiant.cc </Link>
-        </Typography>
-      </Container>
-    </Box>
-  );
 
   const mainFooter = (
     <Box
       component="footer"
       sx={{
+        ...styles.root,
         position: 'relative',
-        bgcolor: 'background.default',
       }}
     >
-      <Divider />
+      <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)' }} />
 
       <Container
         sx={{
           pt: 10,
           pb: 5,
-          textAlign: { xs: 'center', md: 'unset' },
+          textAlign: { xs: 'center', md: 'center' },
         }}
       >
-        <Logo sx={{ mb: 3 }} />
+        <Divider sx={{ bgcolor: 'rgba(255,255,255,0.2)', mb: { xs: 3, md: 5 } }} />
+        <Typography sx={styles.quambiant}>
+          Quambiant
+        </Typography>
+        <Divider sx={{ bgcolor: 'rgba(255,255,255,0.2)', mt: { xs: 3, md: 5 }, mb: { xs: 3, md: 5 } }} />
 
-        <Grid
-          container
-          justifyContent={{
-            xs: 'center',
-            md: 'space-between',
-          }}
-        >
-          <Grid xs={8} md={3}>
-            <Typography
-              variant="body2"
-              sx={{
-                maxWidth: 270,
-                mx: { xs: 'auto', md: 'unset' },
-              }}
-            >
-              The starting point for your next project with Quambiant UI Kit, built on the newest
-              version of Material-UI ©, ready to be customized to your style.
-            </Typography>
-
-            <Stack
-              direction="row"
-              justifyContent={{ xs: 'center', md: 'flex-start' }}
-              sx={{
-                mt: 3,
-                mb: { xs: 5, md: 0 },
-              }}
-            >
+        {/* Responsive Footer Content */}
+        <Box sx={{ width: '100%', mb: 2 }}>
+          {/* Mobile Layout */}
+          <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+            {/* Navigation Links in two rows */}
+            <Stack spacing={1} alignItems="center" mb={4}>
+              <Stack direction="row" spacing={3}>
+                <Link component={RouterLink} href={paths.about} color="inherit" sx={styles.otherText}>About</Link>
+                <Link component={RouterLink} href={paths.contact} color="inherit" sx={styles.otherText}>Contact</Link>
+                <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>Projects</Link>
+              </Stack>
+              <Stack direction="row" spacing={3}>
+                <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>Investor Lounge</Link>
+                <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>Careers</Link>
+              </Stack>
+            </Stack>
+            {/* Social Media Icons */}
+            <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" mb={4}>
               {_socials.map((social) => (
                 <IconButton
                   key={social.name}
@@ -130,44 +122,66 @@ export default function Footer() {
                 </IconButton>
               ))}
             </Stack>
-          </Grid>
+            {/* Copyright */}
+            <Typography
+              sx={{
+                ...styles.otherText,
+                whiteSpace: 'nowrap',
+                textAlign: 'center',
+              }}
+            >
+              Copyright © 2025 Quambiant, Inc.
+            </Typography>
+          </Box>
 
-          <Grid xs={12} md={6}>
-            <Stack spacing={5} direction={{ xs: 'column', md: 'row' }}>
-              {LINKS.map((list) => (
-                <Stack
-                  key={list.headline}
-                  spacing={2}
-                  alignItems={{ xs: 'center', md: 'flex-start' }}
-                  sx={{ width: 1 }}
+          {/* Desktop Layout */}
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            sx={{ width: '100%', display: { xs: 'none', md: 'flex' } }}
+          >
+            {/* Social Media Icons - Left */}
+            <Stack direction="row" spacing={1} alignItems="center" justifyContent="flex-start" sx={{ flex: 1 }}>
+              {_socials.map((social) => (
+                <IconButton
+                  key={social.name}
+                  sx={{
+                    '&:hover': {
+                      bgcolor: alpha(social.color, 0.08),
+                    },
+                  }}
                 >
-                  <Typography component="div" variant="overline">
-                    {list.headline}
-                  </Typography>
-
-                  {list.children.map((link) => (
-                    <Link
-                      key={link.name}
-                      component={RouterLink}
-                      href={link.href}
-                      color="inherit"
-                      variant="body2"
-                    >
-                      {link.name}
-                    </Link>
-                  ))}
-                </Stack>
+                  <Iconify color={social.color} icon={social.icon} />
+                </IconButton>
               ))}
             </Stack>
-          </Grid>
-        </Grid>
 
-        <Typography variant="body2" sx={{ mt: 10 }}>
-          © 2021. All rights reserved
-        </Typography>
+            {/* Navigation Links - Center */}
+            <Stack direction="row" spacing={3} alignItems="center" justifyContent="center" sx={{ flex: 2 }}>
+              <Link component={RouterLink} href={paths.about} color="inherit" sx={styles.otherText}>About</Link>
+              <Link component={RouterLink} href={paths.contact} color="inherit" sx={styles.otherText}>Contact</Link>
+              <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>Projects</Link>
+              <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>Investor Lounge</Link>
+              <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>Careers</Link>
+            </Stack>
+
+            {/* Copyright - Right */}
+            <Typography
+              sx={{
+                ...styles.otherText,
+                whiteSpace: 'nowrap',
+                flex: 1,
+                textAlign: 'right',
+              }}
+            >
+              Copyright © 2025 Quambiant, Inc.
+            </Typography>
+          </Stack>
+        </Box>
       </Container>
     </Box>
   );
 
-  return isHome ? simpleFooter : mainFooter;
+  return mainFooter;
 }

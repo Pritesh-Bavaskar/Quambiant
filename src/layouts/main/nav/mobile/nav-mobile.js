@@ -35,12 +35,13 @@ export default function NavMobile({ offsetTop, data }) {
         onClick={nav.onTrue}
         sx={{
           ml: 1,
-          ...(offsetTop && {
-            color: 'neutral.lighter',
-          }),
+          width: 32,
+          height: 32,
+          color: '#FDF8F3',
+          padding: 0,
         }}
       >
-        <SvgColor src="/assets/icons/navbar/ic_menu_item.svg" />
+        <SvgColor src="/assets/icons/navbar/ic_logo.svg" sx={{ width: 32, height: 32 }} />
       </IconButton>
 
       <Drawer
@@ -54,7 +55,7 @@ export default function NavMobile({ offsetTop, data }) {
         }}
       >
         <Scrollbar>
-          <Logo sx={{ mx: 2.5, my: 3 }} />
+          <Logo sx={{ mx: 2.5, my: 3, width: 32, height: 32 }} />
 
           <List component="nav" disablePadding>
             {data.map((link) => (
