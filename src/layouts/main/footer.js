@@ -17,6 +17,7 @@ import { _socials } from 'src/_mock';
 // components
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
+import SvgColor from 'src/components/svg-color';
 
 
 // ----------------------------------------------------------------------
@@ -45,6 +46,12 @@ const LINKS = [
 
 // ----------------------------------------------------------------------
 
+const socialIcons = [
+  { name: 'Facebook', icon: '/assets/icons/brands/ic_facebook.svg', href: '#' },
+  { name: 'Instagram', icon: '/assets/icons/brands/ic_insta.svg', href: '#' },
+  { name: 'Twitter', icon: '/assets/icons/brands/ic_x.svg', href: '#' },
+];
+
 const styles = {
   root: {
     bgcolor: '#071317',
@@ -55,7 +62,7 @@ const styles = {
     fontFamily: '"Playfair Display", serif',
     fontWeight: 700,
     fontSize: { xs: '73.34px', md: '200px' },
-    textAlign: { xs: 'center', md: 'left' },
+    textAlign: { xs: 'center', md: 'center' },
     lineHeight: 1,
     mb: { xs: 3, md: 5 },
   },
@@ -67,7 +74,6 @@ const styles = {
 };
 
 export default function Footer() {
-
   const mainFooter = (
     <Box
       component="footer"
@@ -86,10 +92,10 @@ export default function Footer() {
         }}
       >
         <Divider sx={{ bgcolor: 'rgba(255,255,255,0.2)', mb: { xs: 3, md: 5 } }} />
-        <Typography sx={styles.quambiant}>
-          Quambiant
-        </Typography>
-        <Divider sx={{ bgcolor: 'rgba(255,255,255,0.2)', mt: { xs: 3, md: 5 }, mb: { xs: 3, md: 5 } }} />
+        <Typography sx={styles.quambiant}>Quambiant</Typography>
+        <Divider
+          sx={{ bgcolor: 'rgba(255,255,255,0.2)', mt: { xs: 3, md: 5 }, mb: { xs: 3, md: 5 } }}
+        />
 
         {/* Responsive Footer Content */}
         <Box sx={{ width: '100%', mb: 2 }}>
@@ -98,29 +104,50 @@ export default function Footer() {
             {/* Navigation Links in two rows */}
             <Stack spacing={1} alignItems="center" mb={4}>
               <Stack direction="row" spacing={3}>
-                <Link component={RouterLink} href={paths.about} color="inherit" sx={styles.otherText}>About</Link>
-                <Link component={RouterLink} href={paths.contact} color="inherit" sx={styles.otherText}>Contact</Link>
-                <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>Projects</Link>
+                <Link
+                  component={RouterLink}
+                  href={paths.about}
+                  color="inherit"
+                  sx={styles.otherText}
+                >
+                  About
+                </Link>
+                <Link
+                  component={RouterLink}
+                  href={paths.contact}
+                  color="inherit"
+                  sx={styles.otherText}
+                >
+                  Contact
+                </Link>
+                <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>
+                  Projects
+                </Link>
               </Stack>
               <Stack direction="row" spacing={3}>
-                <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>Investor Lounge</Link>
-                <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>Careers</Link>
+                <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>
+                  Investor Lounge
+                </Link>
+                <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>
+                  Careers
+                </Link>
               </Stack>
             </Stack>
             {/* Social Media Icons */}
             <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" mb={4}>
-              {_socials.map((social) => (
-                <IconButton
-                  key={social.name}
-                  sx={{
-                    '&:hover': {
-                      bgcolor: alpha(social.color, 0.08),
-                    },
-                  }}
-                >
-                  <Iconify color={social.color} icon={social.icon} />
-                </IconButton>
-              ))}
+              {socialIcons.map((social) => (
+              <IconButton
+                sx={{
+                  ml: 1,
+                  width: 18,
+                  height: 18,
+                  color: '#FDF8F3',
+                  padding: 0,
+                }}
+              >
+                <SvgColor src={social.icon} sx={{ width: 18, height: 18 }} />
+              </IconButton>
+               ))} 
             </Stack>
             {/* Copyright */}
             <Typography
@@ -142,28 +169,56 @@ export default function Footer() {
             sx={{ width: '100%', display: { xs: 'none', md: 'flex' } }}
           >
             {/* Social Media Icons - Left */}
-            <Stack direction="row" spacing={1} alignItems="center" justifyContent="flex-start" sx={{ flex: 1 }}>
-              {_socials.map((social) => (
-                <IconButton
-                  key={social.name}
-                  sx={{
-                    '&:hover': {
-                      bgcolor: alpha(social.color, 0.08),
-                    },
-                  }}
-                >
-                  <Iconify color={social.color} icon={social.icon} />
-                </IconButton>
-              ))}
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+              justifyContent="flex-start"
+              sx={{ flex: 1 }}
+            >
+              {socialIcons.map((social) => (
+              <IconButton
+                sx={{
+                  ml: 1,
+                  width: 22,
+                  height: 22,
+                  color: '#FDF8F3',
+                  padding: 0,
+                }}
+              >
+                <SvgColor src={social.icon} sx={{ width: 22, height: 22 }} />
+              </IconButton>
+               ))} 
             </Stack>
 
             {/* Navigation Links - Center */}
-            <Stack direction="row" spacing={3} alignItems="center" justifyContent="center" sx={{ flex: 2 }}>
-              <Link component={RouterLink} href={paths.about} color="inherit" sx={styles.otherText}>About</Link>
-              <Link component={RouterLink} href={paths.contact} color="inherit" sx={styles.otherText}>Contact</Link>
-              <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>Projects</Link>
-              <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>Investor Lounge</Link>
-              <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>Careers</Link>
+            <Stack
+              direction="row"
+              spacing={3}
+              alignItems="center"
+              justifyContent="center"
+              sx={{ flex: 2 }}
+            >
+              <Link component={RouterLink} href={paths.about} color="inherit" sx={styles.otherText}>
+                About
+              </Link>
+              <Link
+                component={RouterLink}
+                href={paths.contact}
+                color="inherit"
+                sx={styles.otherText}
+              >
+                Contact
+              </Link>
+              <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>
+                Projects
+              </Link>
+              <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>
+                Investor Lounge
+              </Link>
+              <Link component={RouterLink} href="#" color="inherit" sx={styles.otherText}>
+                Careers
+              </Link>
             </Stack>
 
             {/* Copyright - Right */}
