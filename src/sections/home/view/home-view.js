@@ -5,6 +5,7 @@ import Box from '@mui/material/Box';
 // components
 import ScrollProgress from 'src/components/scroll-progress';
 //
+import HomeStories from 'src/components/home-stories/HomeStories';
 import HomeHero from '../home-hero';
 // import HomeMinimal from '../home-minimal';
 // import HomePricing from '../home-pricing';
@@ -17,6 +18,7 @@ import HomeHero from '../home-hero';
 // import HomeHugePackElements from '../home-hugepack-elements';
 import CountUpSection from '../../../components/count-up/CountUp';
 import { SectionIntro } from '../../../components/section-into/SectionIntro';
+
 // ----------------------------------------------------------------------
 
 const StyledPolygon = styled('div')(({ anchor = 'top', theme }) => ({
@@ -51,35 +53,7 @@ export default function HomeView() {
       <HomeHero />
       <CountUpSection />
       <SectionIntro />
-      {/* <Box
-        sx={{
-          overflow: 'hidden',
-          position: 'relative',
-          bgcolor: 'background.default',
-        }}
-      >
-        <HomeMinimal />
-
-        <HomeHugePackElements />
-
-        <Box sx={{ position: 'relative' }}>
-          <StyledPolygon />
-          <HomeForDesigner />
-          <StyledPolygon anchor="bottom" />
-        </Box>
-
-        <HomeDarkMode />
-
-        <HomeColorPresets />
-
-        <HomeCleanInterfaces />
-
-        <HomePricing />
-
-        <HomeLookingFor />
-
-        <HomeAdvertisement />
-      </Box> */}
+      <HomeStories />
     </>
   );
 }
