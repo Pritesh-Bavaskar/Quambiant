@@ -7,6 +7,7 @@ import ScrollProgress from 'src/components/scroll-progress';
 //
 import HomeStories from 'src/components/home-stories/HomeStories';
 import SpotlightCarousel from 'src/components/home-stories/SpotlightCarousel';
+import BuildGreenSection from 'src/components/home-stories/BuildGreenSection';
 import HomeHero from '../home-hero';
 // import HomeMinimal from '../home-minimal';
 // import HomePricing from '../home-pricing';
@@ -19,7 +20,6 @@ import HomeHero from '../home-hero';
 // import HomeHugePackElements from '../home-hugepack-elements';
 import CountUpSection from '../../../components/count-up/CountUp';
 import { SectionIntro } from '../../../components/section-into/SectionIntro';
-
 // ----------------------------------------------------------------------
 
 const StyledPolygon = styled('div')(({ anchor = 'top', theme }) => ({
@@ -55,6 +55,7 @@ export default function HomeView() {
       <CountUpSection />
       <SectionIntro />
       <HomeStories />
+      <BuildGreenSection />
       <SpotlightCarousel />
     </>
   );

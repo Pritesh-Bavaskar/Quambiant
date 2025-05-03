@@ -49,7 +49,7 @@ export default function CountUpSection() {
                 color="primary.dark"
                 fontSize={{ xs: 48, md: 96 }}
                 fontWeight={500}
-                fontFamily="Playfair Display"
+                fontFamily="Satoshi Variable"
                 display="flex"
                 alignItems="baseline"
                 justifyContent="center"
@@ -69,6 +69,7 @@ export default function CountUpSection() {
                 variant="subtitle2"
                 color="text.secondary"
                 fontSize={{ xs: 14, md: 20 }}
+                pt={4}
                 fontWeight={500}
               >
                 {stat.label}
