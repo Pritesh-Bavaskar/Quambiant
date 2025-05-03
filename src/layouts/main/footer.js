@@ -61,7 +61,7 @@ const styles = {
   quambiant: {
     fontFamily: '"Playfair Display", serif',
     fontWeight: 700,
-    fontSize: { xs: '73.34px', md: '200px' },
+    fontSize: { xs: '65px', md: '200px' },
     textAlign: { xs: 'center', md: 'center' },
     lineHeight: 1,
     mb: { xs: 3, md: 5 },

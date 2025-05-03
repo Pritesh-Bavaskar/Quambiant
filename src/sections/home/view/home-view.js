@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import ScrollProgress from 'src/components/scroll-progress';
 //
 import HomeStories from 'src/components/home-stories/HomeStories';
+import SpotlightCarousel from 'src/components/home-stories/SpotlightCarousel';
 import HomeHero from '../home-hero';
 // import HomeMinimal from '../home-minimal';
 // import HomePricing from '../home-pricing';
@@ -54,6 +55,7 @@ export default function HomeView() {
       <CountUpSection />
       <SectionIntro />
       <HomeStories />
+      <SpotlightCarousel />
     </>
   );
 }
