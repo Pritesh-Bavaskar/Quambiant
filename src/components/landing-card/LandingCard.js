@@ -1,7 +1,8 @@
 import { Box, Typography, Button } from '@mui/material';
 import { m } from 'framer-motion';
+import PropTypes from 'prop-types';
 
-export function LandingCard() {
+export function LandingCard({ title, subtitle, buttonText, buttonClick }) {
   return (
     <m.div
       initial={{ opacity: 0, y: 50 }}
@@ -32,7 +33,7 @@ export function LandingCard() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Typography variant="h1">Elevating Residential Spaces With Timeless Quambiance</Typography>
+          <Typography variant="h1">{title}</Typography>
         </m.div>
 
         <m.div
@@ -47,32 +48,41 @@ export function LandingCard() {
               color: '#CCCCCC',
             }}
           >
-            From vision to reality, we shape homes that inspire
+            {subtitle}
           </Typography>
         </m.div>
-
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-        >
-          <Button
-            variant="contained"
-            sx={{
-              py: '7px',
-              px: '20px',
-              color: 'black',
-              bgcolor: 'neutral.lighter',
-              borderRadius: 0,
-              width: 'fit-content',
-              mt: 1,
-              fontSize: '16px',
-            }}
+        {buttonText && (
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
           >
-            Explore Our Projects
-          </Button>
-        </m.div>
+            <Button
+              variant="contained"
+              sx={{
+                py: '7px',
+                px: '20px',
+                color: 'black',
+                bgcolor: 'neutral.lighter',
+                borderRadius: 0,
+                width: 'fit-content',
+                mt: 1,
+                fontSize: '16px',
+              }}
+              onClick={buttonClick}
+            >
+              {buttonText}
+            </Button>
+          </m.div>
+        )}
       </Box>
     </m.div>
   );
 }
+
+LandingCard.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  buttonText: PropTypes.string,
+  buttonClick: PropTypes.func,
+};

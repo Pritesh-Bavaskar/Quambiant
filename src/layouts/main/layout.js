@@ -22,9 +22,9 @@ export default function MainLayout({ children }) {
         component="main"
         sx={{
           flexGrow: 1,
-          ...(!isHome && {
-            pt: { xs: 8, md: 10 },
-          }),
+          // ...(!isHome && {
+          //   pt: { xs: 8, md: 10 },
+          // }),
         }}
       >
         {children}

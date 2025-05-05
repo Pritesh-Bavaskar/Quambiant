@@ -27,21 +27,6 @@ import { LandingCard } from 'src/components/landing-card/LandingCard';
 
 // ----------------------------------------------------------------------
 
-const StyledRoot = styled('div')(({ theme }) => ({
-  ...bgGradient({
-    color: alpha(theme.palette.background.default, theme.palette.mode === 'light' ? 0.9 : 0.94),
-    imgUrl: '/assets/background/overlay_3.jpg',
-  }),
-  width: '100%',
-  height: '100vh',
-  position: 'relative',
-  [theme.breakpoints.up('md')]: {
-    top: 0,
-    left: 0,
-    position: 'fixed',
-  },
-}));
-
 const StyledWrapper = styled('div')(({ theme }) => ({
   height: '100%',
   overflow: 'hidden',
@@ -453,7 +438,14 @@ export default function HomeHero() {
             pb: { xs: 4, md: 8 },
           }}
         >
-          <LandingCard />
+          <LandingCard
+            title="Elevating Residential Spaces With Timeless Quambiance"
+            subtitle="From vision to reality, we shape homes that inspire"
+            buttonText="Explore Our Projects"
+            buttonClick={() => {
+              console.log('here');
+            }}
+          />
         </Box>
       </Box>
     </>
