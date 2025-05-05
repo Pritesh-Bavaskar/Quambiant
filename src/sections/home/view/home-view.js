@@ -8,16 +8,8 @@ import ScrollProgress from 'src/components/scroll-progress';
 import HomeStories from 'src/components/home-stories/HomeStories';
 import SpotlightCarousel from 'src/components/home-stories/SpotlightCarousel';
 import BuildGreenSection from 'src/components/home-stories/BuildGreenSection';
+import ContactConsultationForm from 'src/components/home-stories/ContactConsultationForm';
 import HomeHero from '../home-hero';
-// import HomeMinimal from '../home-minimal';
-// import HomePricing from '../home-pricing';
-// import HomeDarkMode from '../home-dark-mode';
-// import HomeLookingFor from '../home-looking-for';
-// import HomeForDesigner from '../home-for-designer';
-// import HomeColorPresets from '../home-color-presets';
-// import HomeAdvertisement from '../home-advertisement';
-// import HomeCleanInterfaces from '../home-clean-interfaces';
-// import HomeHugePackElements from '../home-hugepack-elements';
 import CountUpSection from '../../../components/count-up/CountUp';
 import { SectionIntro } from '../../../components/section-into/SectionIntro';
 // ----------------------------------------------------------------------
@@ -55,6 +47,7 @@ export default function HomeView() {
       <CountUpSection />
       <SectionIntro />
       <HomeStories />
+      <ContactConsultationForm />
       <BuildGreenSection />
       <SpotlightCarousel />
     </>
