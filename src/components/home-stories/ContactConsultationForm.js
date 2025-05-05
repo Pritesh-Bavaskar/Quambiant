@@ -143,7 +143,7 @@ export default function ContactConsultationForm() {
           }}
         >
           <FormControlLabel
-            control={<Checkbox sx={{ p: 0.5 }} />}
+            control={<Checkbox sx={{ p: 0, pr: 1.5, borderRadius: 0 }} />}
             label={<Typography variant="body3">Send recent offers and news on whatsapp</Typography>}
             sx={{
               m: 0,
