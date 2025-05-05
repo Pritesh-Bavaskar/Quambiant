@@ -8,6 +8,7 @@ import ScrollProgress from 'src/components/scroll-progress';
 import HomeStories from 'src/components/home-stories/HomeStories';
 import SpotlightCarousel from 'src/components/home-stories/SpotlightCarousel';
 import BuildGreenSection from 'src/components/home-stories/BuildGreenSection';
+import AwardsSection from 'src/components/home-stories/AwardsSection';
 import ContactConsultationForm from 'src/components/home-stories/ContactConsultationForm';
 import HomeHero from '../home-hero';
 import CountUpSection from '../../../components/count-up/CountUp';
@@ -47,6 +48,7 @@ export default function HomeView() {
       <CountUpSection />
       <SectionIntro />
       <HomeStories />
+      <AwardsSection />
       <ContactConsultationForm />
       <BuildGreenSection />
       <SpotlightCarousel />
