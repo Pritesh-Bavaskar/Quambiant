@@ -142,7 +142,11 @@ export default function HomeStories() {
   return (
     <StyledSection
       sx={{
-        background: 'url(/assets/backgrounds/pattern.svg) center/cover, #10181f',
+        backgroundColor: '#10181f',
+        backgroundImage: 'url(/assets/background/pattern.png)',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
         color: 'common.white',
       }}
     >
@@ -154,7 +158,14 @@ export default function HomeStories() {
         </Typography>
       </Box>
       {isMobile ? (
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
           <AspectContentSection sx={{ height: 360, mb: 2, width: '100%' }}>
             <CardContent
               sx={{
