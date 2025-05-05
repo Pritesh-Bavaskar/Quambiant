@@ -14,6 +14,8 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import bgImage from 'src/assets/media/landing/contact_form_bck.png';
+import contactPhone from 'src/assets/media/landing/contact_phone.svg';
+import contactWhatsapp from 'src/assets/media/landing/contact_whatsapp.svg';
 
 export default function ContactConsultationForm() {
   const theme = useTheme();
@@ -205,6 +207,13 @@ export default function ContactConsultationForm() {
           <Button
             variant="outlined"
             href="tel:+917792344646"
+            startIcon={
+              <img
+                src={contactPhone}
+                alt="phone Icon"
+                style={{ width: 20, height: 20 }}
+              />
+            }
             sx={{
               background: 'transparent',
               aspectRatio: { xs: '322 / 50.25', md: '224.25 / 50.25' },
@@ -218,11 +227,18 @@ export default function ContactConsultationForm() {
               '&:hover': { background: '#f5f5f5', borderColor: '#bbb' },
             }}
           >
-            +91 7792344646
+            +91 79923446465
           </Button>
           <Button
             variant="outlined"
             href="tel:+919792344646"
+            startIcon={
+              <img
+                src={contactWhatsapp}
+                alt="whatsapp Icon"
+                style={{ width: 20, height: 20 }}
+              />
+            }
             sx={{
               background: 'transparent',
               borderColor: '#5B432A',
@@ -237,7 +253,7 @@ export default function ContactConsultationForm() {
               '&:hover': { background: '#f5f5f5', borderColor: '#bbb' },
             }}
           >
-            +91 9792344646
+            +91 79923446465
           </Button>
         </Box>
       </Box>

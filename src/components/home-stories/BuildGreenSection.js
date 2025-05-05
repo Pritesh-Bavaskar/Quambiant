@@ -20,9 +20,10 @@ export default function BuildGreenSection() {
   return (
     <Box
       sx={{
+        aspectRatio: { xs: '393 / 950', md: '1440   / 800' },
         position: 'relative',
         width: '100%',
-        minHeight: { xs: 500, md: 800 },
+        minHeight: { xs: 800, md: 800 },
         overflow: 'hidden',
       }}
     >
@@ -45,6 +46,7 @@ export default function BuildGreenSection() {
         }}
       />
       {/* Overlay */}
+      {/* Gradient Overlay */}
       <Box
         sx={{
           position: 'absolute',
@@ -52,10 +54,11 @@ export default function BuildGreenSection() {
           left: 0,
           width: '100%',
           height: '100%',
-          bgcolor: 'rgba(24, 25, 27, 0.45)',
+          background: 'linear-gradient(to bottom, #071317 0%, #071317D1 50%, #07131700 100%)',
           zIndex: 2,
         }}
       />
+
       {/* Title and Subtitle at the Top */}
       <Box
         sx={{
@@ -108,6 +111,7 @@ export default function BuildGreenSection() {
           zIndex: 4,
           pb: { xs: 3, md: 5 },
           px: 2,
+          pt: { xs: 16, md: 2 }, // <-- Increased top padding only on mobile
         }}
       >
         <Grid container spacing={3} justifyContent="center">
@@ -117,22 +121,30 @@ export default function BuildGreenSection() {
               xs={12}
               sm={4}
               key={idx}
-              sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', py: 2 }}
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                py: 2,
+                aspectRatio: { xs: '320 / 136', md: '420   / 178' },
+              }}
             >
               <Paper
                 elevation={0}
                 sx={{
-                  bgcolor: 'rgba(24,25,27,0.65)',
+                  bgcolor: 'rgba(24,25,27,0.30)',
                   color: '#fff',
                   p: 3,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderRadius: 0,
+                  aspectRatio: { xs: '320 / 136', md: '420   / 178' },
                   width: { xs: '100%', sm: 420 },
-                  minHeight: 110,
-                  height: { xs: 110, sm: 178 },
-                  backdropFilter: 'blur(2px)',
+                  // width: { xs: '100%', sm: 420 },
+                  // minHeight: 110,
+                  // height: { xs: 110, sm: 178 },
+                  backdropFilter: 'blur(12px)',
                 }}
               >
                 <Box
