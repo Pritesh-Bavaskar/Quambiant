@@ -1,8 +1,8 @@
 {
-  "name": "@minimal-kit/cra-js",
-  "author": "Minimals",
+  "name": "@quambiant/react-js",
+  "author": "Quambiant",
   "version": "5.1.0",
-  "description": "Cra & JavaScript",
+  "description": "React Js",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
