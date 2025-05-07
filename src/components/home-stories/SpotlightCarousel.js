@@ -158,9 +158,9 @@ export default function SpotlightCarousel() {
       </Box>
       <Box
         sx={{
-          px: { xs: 0, md: 4 },
+          px: { xs: 0, md: 2 },
           width: '100%',
-          maxWidth: 1200,
+          // maxWidth: 1200,
           mx: 'auto',
         }}
       >
