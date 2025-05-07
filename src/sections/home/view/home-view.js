@@ -8,6 +8,7 @@ import BuildGreenSection from 'src/components/home-stories/BuildGreenSection';
 import AwardsSection from 'src/components/home-stories/AwardsSection';
 import ConceptToConcreteSection from 'src/components/home-stories/ConceptToConcreteSection';
 import ContactConsultationForm from 'src/components/home-stories/ContactConsultationForm';
+import UpcomingLaunchesCarousel from 'src/components/home-stories/upcomingAndLatestLaunches/UpcomingLaunchesCarousel';
 import HomeHero from '../home-hero';
 import CountUpSection from '../../../components/count-up/CountUp';
 import { SectionIntro } from '../../../components/section-into/SectionIntro';
@@ -26,6 +27,7 @@ export default function HomeView() {
       <SectionIntro />
       <ConceptToConcreteSection />
       <HomeStories />
+      <UpcomingLaunchesCarousel />
       <AwardsSection />
       <ContactConsultationForm />
       <BuildGreenSection />
