@@ -73,15 +73,19 @@ export const ListItem = styled(ListItemButton, {
 export const StyledMenu = styled(Paper)(({ theme }) => ({
   ...paper({ theme }),
   left: 0,
-  right: 0,
+  right: '10%',
   margin: 'auto',
   position: 'fixed',
   zIndex: theme.zIndex.modal,
-  padding: theme.spacing(5, 1, 1, 3),
+  padding: theme.spacing(2, 1, 1, 3),
   maxWidth: theme.breakpoints.values.lg,
+  width: '200px',
   top: HEADER.H_DESKTOP_OFFSET,
   boxShadow: theme.customShadows.dropdown,
   borderRadius: theme.shape.borderRadius * 2,
+  background: 'rgba(255, 255, 255, 0.2)', // make it more transparent
+  backdropFilter: 'blur(18px)',
+  WebkitBackdropFilter: 'blur(18px)',
 }));
 
 // ----------------------------------------------------------------------

@@ -19,7 +19,6 @@ export default function NavList({ item, offsetTop }) {
   const pathname = usePathname();
 
   const nav = useBoolean();
-
   const { path, children } = item;
 
   const active = useActiveLink(path, false);
@@ -51,27 +50,27 @@ export default function NavList({ item, offsetTop }) {
         onMouseLeave={nav.onFalse}
       />
 
-      {/* {!!children && nav.value && (
-        <Portal>
-          <Fade in={nav.value}>
-            <StyledMenu
-              onMouseEnter={handleOpenMenu}
-              onMouseLeave={nav.onFalse}
-              sx={{ display: 'flex' }}
-            >
-              {children.map((list) => (
-                <NavSubList
-                  key={list.subheader}
-                  subheader={list.subheader}
-                  items={list.items}
-                  isDashboard={list.subheader === 'Dashboard'}
-                  onClose={nav.onFalse}
-                />
-              ))}
-            </StyledMenu>
-          </Fade>
-        </Portal>
-      )} */}
+      {!!children && nav.value && (
+        // <Portal>
+        <Fade in={nav.value}>
+          <StyledMenu
+            onMouseEnter={handleOpenMenu}
+            onMouseLeave={nav.onFalse}
+            sx={{ display: 'flex', flexWrap: 'wrap' }}
+          >
+            {children.map((list) => (
+              <NavSubList
+                key={list.subheader}
+                subheader={list.subheader}
+                items={list.items}
+                isDashboard={list.subheader === 'Dashboard'}
+                onClose={nav.onFalse}
+              />
+            ))}
+          </StyledMenu>
+        </Fade>
+        // </Portal>
+      )}
     </>
   );
 }
@@ -97,7 +96,7 @@ function NavSubList({ items, isDashboard, subheader, onClose }) {
         }),
       }}
     >
-      <StyledSubheader disableSticky>{subheader}</StyledSubheader>
+      {subheader ? <StyledSubheader disableSticky>{subheader}</StyledSubheader> : null}
 
       {items.map((item) =>
         isDashboard ? (

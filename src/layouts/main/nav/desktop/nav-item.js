@@ -49,9 +49,9 @@ export const NavItem = forwardRef(
     }
 
     // Has child
-    if (children) {
-      return renderContent;
-    }
+    // if (children) {
+    //   return renderContent;
+    // }
 
     // Default
     return (

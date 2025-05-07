@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // @mui
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 
 // components
 import { Box, Grid } from '@mui/material';
+import { useSearchParams } from 'src/routes/hook';
 import OurProjectCard from './our-project-card';
 
 // ----------------------------------------------------------------------
@@ -132,6 +133,9 @@ const _projectsList = [
 // ----------------------------------------------------------------------
 
 export default function OurProjectTabs() {
+  const searchParams = useSearchParams();
+  const tabId = searchParams.get('tabId');
+
   const [currentTab, setCurrentTab] = useState('upcoming');
 
   const handleChangeTab = (event, newValue) => {
@@ -146,6 +150,14 @@ export default function OurProjectTabs() {
     ongoing: _projectsList.filter((p) => p.status === 'ongoing').length,
     completed: _projectsList.filter((p) => p.status === 'completed').length,
   };
+
+  useEffect(() => {
+    if (tabId) {
+      setCurrentTab(tabId);
+    } else {
+      setCurrentTab('upcoming');
+    }
+  }, [tabId]);
 
   return (
     <>
