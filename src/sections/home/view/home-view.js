@@ -6,6 +6,8 @@ import HomeStories from 'src/components/home-stories/HomeStories';
 import SpotlightCarousel from 'src/components/home-stories/SpotlightCarousel';
 import BuildGreenSection from 'src/components/home-stories/BuildGreenSection';
 import AwardsSection from 'src/components/home-stories/AwardsSection';
+import AmaranthineGrid from 'src/components/section-into/AmaranthineGrid';
+import AmaranthineCard from 'src/components/section-into/AmaranthineCard';
 import ConceptToConcreteSection from 'src/components/home-stories/ConceptToConcreteSection';
 import ContactConsultationForm from 'src/components/home-stories/ContactConsultationForm';
 import UpcomingLaunchesCarousel from 'src/components/home-stories/upcomingAndLatestLaunches/UpcomingLaunchesCarousel';
@@ -25,6 +27,8 @@ export default function HomeView() {
       <HomeHero />
       <CountUpSection />
       <SectionIntro />
+      {/* <AmaranthineGrid /> */}
+      {/* <AmaranthineCard /> */}
       <ConceptToConcreteSection />
       <HomeStories />
       <UpcomingLaunchesCarousel />
