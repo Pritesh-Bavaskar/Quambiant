@@ -14,16 +14,26 @@ export default function LaunchCard({ project }) {
       sx={{
         bgcolor: '#FDF8F3',
         overflow: 'hidden',
-        padding: '16px',
+        padding: '4px',
         // border: '1px solid rgba(0, 0, 0, 0.12)',
       }}
     >
       {/* Top Image + Tags */}
-      <Box sx={{ position: 'relative' }}>
+      <Box sx={{ position: 'relative', height: { xs: 350, md: 'auto' } }}>
         <Image
           src={project.image}
           alt={project.title}
-          style={{ width: '100%', height: 'auto', display: 'block' }}
+          style={{ width: '100%', height: '100%', display: 'block' }}
+        />
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%)',
+          }}
         />
         <Box
           sx={{
@@ -47,52 +57,185 @@ export default function LaunchCard({ project }) {
             <Chip
               key={tag}
               label={tag}
-              size="small"
+              // size="small"
               sx={{
-                bgcolor: 'rgba(255,255,255,0.3)',
+                fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
+                bgcolor: 'rgba(255,255,255,0.2)',
                 color: 'white',
-                backdropFilter: 'blur(4px)',
-                fontSize: 10,
+                backdropFilter: 'blur(8px)',
+                fontSize: { xs: 10, md: 12 },
                 borderRadius: 0,
+                textTransform: 'uppercase',
               }}
             />
           ))}
         </Box>
+        {/* Timeline */}
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: 16,
+            left: 16,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            bgcolor: 'rgba(0,0,0,0.0)',
+            py: 1,
+            px: 1,
+            borderRadius: 1,
+          }}
+        >
+          {project.timeline.map((stage, index) => {
+            const isCompleted = stage.status === 'ongoing';
+            const isLastItem = index === project.timeline.length - 1;
+
+            return (
+              <Box
+                key={index}
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  position: 'relative',
+                  width: '100%',
+                  maxWidth: 300,
+                  minHeight: 75,
+                }}
+              >
+                {/* Vertical progress line */}
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: '2px',
+                    bgcolor: isCompleted ? 'primary.main' : '#FDF8F3',
+                    transform: 'translateX(-50%)',
+                  }}
+                />
+                <Box
+                  sx={{
+                    position: 'relative',
+                    width: 12,
+                    height: 12,
+                    ml: '-6px',
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 8,
+                      height: 8,
+                      bgcolor: isCompleted ? 'primary.main' : '#FDF8F3',
+                      borderRadius: '50%',
+                      position: 'absolute',
+                      top: 2,
+                      left: 2,
+                      zIndex: 1,
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      width: 16,
+                      height: 16,
+                      bgcolor: isCompleted ? 'primary.main' : '#FDF8F3',
+                      borderRadius: '50%',
+                      position: 'absolute',
+                      top: -2,
+                      left: -2,
+                      opacity: 0.2,
+                      zIndex: 0,
+                    }}
+                  />
+                </Box>
+                <Box
+                  sx={{ display: 'flex', flexDirection: 'column', ml: 2, justifyContent: 'center' }}
+                >
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: '#FDF8F3',
+                      fontWeight: 500,
+                      lineHeight: 1.4,
+                      mb: 0.5,
+                      fontSize: { xs: 12, md: 14 },
+                      fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
+                    }}
+                  >
+                    {stage.title}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: 'rgba(253, 248, 243, 0.8)',
+                      lineHeight: 1.4,
+                      fontSize: { xs: 12, md: 14 },
+                      fontWeight: 500,
+                      fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
+                    }}
+                  >
+                    - {stage.date} {`(${stage.status})`}
+                  </Typography>
+                </Box>
+              </Box>
+            );
+          })}
+        </Box>
       </Box>
 
       {/* Project Details */}
-      <Box sx={{ p: 2 }}>
-        <Box
+      <Box
+        sx={{
+          px: 0,
+          py: 2,
+          position: { sm: 'relative' },
+        }}
+      >
+        <Typography
           sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            mb: 1,
+            fontWeight: 500,
+            fontSize: { xs: 24, sm: 32 },
+            fontFamily: 'playfair display',
+            mb: { xs: 1, sm: 0 },
           }}
         >
-          <Typography variant="h6" sx={{ fontWeight: 600 }}>
-            {project.title}
-          </Typography>
-          <Button
-            variant="contained"
-            size="small"
-            sx={{
-              bgcolor: '#18191B',
-              color: 'white',
-              fontSize: 12,
-              px: 2,
-              borderRadius: 0,
-              '&:hover': {
-                bgcolor: '#333',
-              },
-            }}
-          >
-            Enquire Now
-          </Button>
-        </Box>
-        <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
+          {project.title}
+        </Typography>
+        <Typography
+          sx={{
+            mt: { xs: 1, sm: 1 },
+            fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
+            fontWeight: 500,
+            fontSize: { xs: 12, sm: 14 },
+            textTransform: 'uppercase',
+            color: 'text.secondary',
+          }}
+        >
           {project.type} &bull; {project.location}
         </Typography>
+        <Button
+          variant="contained"
+          size="small"
+          sx={{
+            bgcolor: '#001016',
+            color: 'white',
+            fontSize: 12,
+            width: 120,
+            height: 40,
+            minWidth: 120,
+            borderRadius: 0,
+            display: { xs: 'inline-block', sm: 'inline-block' },
+            mt: { xs: 1, sm: 1 },
+            position: { xs: 'static', sm: 'absolute' },
+            right: { sm: 0 },
+            top: { sm: 0 },
+            alignSelf: { xs: 'flex-start', sm: 'auto' },
+            '&:hover': {
+              bgcolor: '#333',
+            },
+          }}
+        >
+          Enquire Now
+        </Button>
 
         {/* Timeline */}
         {/* <Box

@@ -16,9 +16,21 @@ const launches = [
     image: upcomingLatestImage,
     tags: ['Clubhouse & Wellness', 'Sustainable Living'],
     timeline: [
-      'Structural Completion – 2026 Q4 (ongoing)',
-      'Interiors & Finishing – 2027 Q3',
-      'Handover – 2028 Q2',
+      {
+        title: 'Structural Completion',
+        date: '2026 Q4',
+        status: 'ongoing'
+      },
+      {
+        title: 'Interiors & Finishing',
+        date: '2027 Q3',
+        status: 'upcoming'
+      },
+      {
+        title: 'Handover',
+        date: '2028 Q2',
+        status: 'future'
+      }
     ],
   },
   {
@@ -29,9 +41,21 @@ const launches = [
     image: upcomingLatestImage,
     tags: ['Clubhouse & Wellness', 'Sustainable Living'],
     timeline: [
-      'Structural Completion – 2026 Q4 (ongoing)',
-      'Interiors & Finishing – 2027 Q3',
-      'Handover – 2028 Q2',
+      {
+        title: 'Structural Completion',
+        date: '2026 Q4',
+        status: 'ongoing'
+      },
+      {
+        title: 'Interiors & Finishing',
+        date: '2027 Q3',
+        status: 'upcoming'
+      },
+      {
+        title: 'Handover',
+        date: '2028 Q2',
+        status: 'future'
+      }
     ],
   },
   {
@@ -42,9 +66,21 @@ const launches = [
     image: upcomingLatestImage,
     tags: ['Clubhouse & Wellness', 'Sustainable Living'],
     timeline: [
-      'Structural Completion – 2026 Q4 (ongoing)',
-      'Interiors & Finishing – 2027 Q3',
-      'Handover – 2028 Q2',
+      {
+        title: 'Structural Completion',
+        date: '2026 Q4',
+        status: 'ongoing'
+      },
+      {
+        title: 'Interiors & Finishing',
+        date: '2027 Q3',
+        status: 'upcoming'
+      },
+      {
+        title: 'Handover',
+        date: '2028 Q2',
+        status: 'future'
+      }
     ],
   },
 ];
@@ -97,7 +133,7 @@ export default function UpcomingLaunchesCarousel() {
         settings: {
           slidesToShow: 1,
           centerMode: true,
-          centerPadding: '32px',
+          centerPadding: '16px',
         },
       },
     ],
