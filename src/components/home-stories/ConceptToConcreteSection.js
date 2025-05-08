@@ -69,11 +69,11 @@ const TimelineItem = ({
   // Additional animation for active items
   const activeVariants = {
     inactive: {
-      scale: 1,
+      scale: 0.8,
       filter: 'grayscale(30%) brightness(90%)',
     },
     active: {
-      scale: 1.02,
+      scale: 1,
       filter: 'grayscale(0%) brightness(100%)',
       transition: {
         type: 'spring',
@@ -92,6 +92,16 @@ const TimelineItem = ({
         alignItems: 'center',
         position: 'relative',
         '&:last-child': { mb: 0 },
+        '&.MuiGrid-root': {
+          paddingRight: {
+            xs: 0, // No padding on mobile
+            md: reverse ? 0 : 4, // Conditional padding on desktop
+          },
+          paddingLeft: {
+            xs: 0, // No padding on mobile
+            md: reverse ? 4 : 0, // Conditional padding on desktop
+          },
+        },
       }}
       ref={ref}
     >
@@ -104,8 +114,7 @@ const TimelineItem = ({
             xs: 1,
             md: reverse ? 2 : 1,
           },
-          position: { md: 'sticky' },
-          top: { md: '100px' },
+          position: { md: 'static' },
           zIndex: 1,
           alignSelf: 'flex-start',
         }}
@@ -185,9 +194,18 @@ const TimelineItem = ({
             xs: 2,
             md: reverse ? 1 : 2,
           },
-          position: { md: 'sticky' },
-          top: { md: '140px' },
+          position: { md: 'static' }, // Changed from 'sticky'
           zIndex: 1,
+          '&.MuiGrid-root': {
+            paddingLeft: {
+              xs: 1, // No padding on mobile
+              md: 5,
+            },
+            paddingTop: {
+              xs: 0, // No padding on mobile
+              md: 4,
+            },
+          },
           alignSelf: 'flex-start',
         }}
       >
@@ -218,7 +236,7 @@ const TimelineItem = ({
                   fontWeight: 500,
                   fontSize: { xs: '24px', md: '32px' },
                   mb: 2,
-                  color: isActive ? 'primary.main' : 'text.primary',
+                  color: '#18191B',
                   transition: 'color 0.3s ease-out',
                 }}
               >
