@@ -26,7 +26,7 @@ export function SectionIntro() {
   const cardScale = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
 
   return (
-    <Box ref={containerRef} sx={{ position: 'relative', height: '300vh' }}>
+    <Box ref={containerRef} sx={{ position: 'relative', height: '400vh' }}>
       {/* First Section - Intro */}
       <m.div
         style={{
@@ -86,19 +86,24 @@ export function SectionIntro() {
       {/* Third Section - Cards */}
       <m.div
         style={{
-          position: 'sticky',
-          top: 0,
-          height: '100vh',
-          y: y2,
-          opacity: cardOpacity,
-          scale: cardScale,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          transformOrigin: 'center center', // ✅ THIS LINE is key
+          position: 'relative',
+          height: '200vh',
         }}
       >
-        <AmaranthineCard />
+        <m.div
+          style={{
+            position: 'sticky',
+            top: 0,
+            opacity: cardOpacity,
+            scale: cardScale,
+            height: '100vh',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <AmaranthineCard scrollYProgress={scrollYProgress} />
+        </m.div>
       </m.div>
     </Box>
   );
