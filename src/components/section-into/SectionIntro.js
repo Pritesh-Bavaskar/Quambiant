@@ -15,11 +15,11 @@ export function SectionIntro() {
   // Animation values
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const opacity1 = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8], [0, 1, 1, 1, 0]);
+  const opacity1 = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8], [1, 1, 1, 0.5, 0]);
   const opacity2 = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8], [0, 0, 1, 1, 0]);
   const opacity3 = useTransform(scrollYProgress, [0.4, 0.6, 0.8], [0, 1, 1]);
   const scale1 = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-  const scale2 = useTransform(scrollYProgress, [0.3, 0.8], [0.9, 1]);
+  const scale2 = useTransform(scrollYProgress, [0.3, 0.5], [0.9, 1]);
 
   // Adjust card section opacity based on fifth image progress
   const cardOpacity = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
@@ -46,7 +46,7 @@ export function SectionIntro() {
         }}
       >
         <Typography
-          sx={{ typography: { xs: 'h4', md: 'h1' } }}
+          sx={{ typography: 'h1' }}
           fontWeight="bold"
           fontFamily={`'Playfair Display', serif`}
           gutterBottom
@@ -55,8 +55,9 @@ export function SectionIntro() {
         </Typography>
 
         <Typography
-          sx={{ typography: { xs: 'body3', md: 'body1' } }}
-          maxWidth="700px"
+          sx={{ fontSize: 20, fontWeight: 500 }}
+          maxWidth="914px"
+          fontFamily="Satoshi Variable, sans-serif"
           color="text.secondary"
         >
           Explore our finest residential projects that redefine luxury, innovation, and
