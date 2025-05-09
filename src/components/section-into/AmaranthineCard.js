@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
-import { Box, Grid, Typography, Card, CardContent, CardMedia } from '@mui/material';
+import { Box, Grid, Typography, Card, CardContent, CardMedia, useMediaQuery } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { m as motion, useTransform } from 'framer-motion';
 import backgroundImage from 'src/assets/media/landing/card/bck-img.png';
 import img1 from 'src/assets/media/landing/card/card-img1.png';
 import img2 from 'src/assets/media/landing/card/card-img2.png';
 import img3 from 'src/assets/media/landing/card/card-img3.png';
+import Carousel, { useCarousel } from 'src/components/carousel';
+import IconButton from '@mui/material/IconButton';
+import Iconify from 'src/components/iconify';
 
 const cards = [
   {
@@ -17,32 +21,133 @@ const cards = [
     image: img2,
     title: 'Resort-Style Amenities & Green Living',
     description:
-      'Situated in a well-connected neighborhood with easy access to schools, business hubs, and lifestyle destinations.',
+      'Experience luxury living with our resort-style amenities while embracing sustainable green living practices.',
   },
   {
     image: img3,
-    title: 'Prime Location with Seamless Connectivity',
+    title: 'Premium Quality Construction & Design',
     description:
-      'Situated in a well-connected neighborhood with easy access to schools, business hubs, and lifestyle destinations.',
+      'Built with the finest materials and thoughtful design to ensure lasting quality and timeless aesthetics.',
   },
 ];
 
-export default function AmaranthineHighlightSection({ scrollYProgress }) {
-  // Animate title opacity
-  const titleOpacity = useTransform(scrollYProgress, [0.75, 0.9], [0, 1]);
+// Custom Arrows with improved styling
+const CustomArrow = ({ icon, onClick, sx }) => (
+  <IconButton
+    onClick={onClick}
+    sx={{
+      border: '1px solid white',
+      borderRadius: '0%',
+      color: 'white',
+      bgcolor: 'transparent',
+      mx: 1,
+      '&:hover': { bgcolor: '#071317', color: '#E2EBF6', border: '1px solid #071317' },
+      width: 40,
+      height: 40,
+      ...sx,
+    }}
+  >
+    <Iconify icon={icon} width={20} />
+  </IconButton>
+);
 
-  // Animate each card individually (declared outside .map for ESLint compliance)
+CustomArrow.propTypes = {
+  icon: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  sx: PropTypes.object,
+};
+
+export default function AmaranthineHighlightSection({ scrollYProgress }) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  // Carousel settings for mobile
+  const carousel = useCarousel({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: true,
+    speed: 500,
+    arrows: false,
+    centerMode: true,
+    centerPadding: '32px', // Increased padding for side gaps
+    responsive: [
+      {
+        breakpoint: theme.breakpoints.values.sm,
+        settings: {
+          centerPadding: '16px',
+        },
+      },
+    ],
+  });
+
+  // Animation values
+  const titleOpacity = useTransform(scrollYProgress, [0.75, 0.9], [0, 1]);
   const card1Opacity = useTransform(scrollYProgress, [0.8, 0.9], [0, 1]);
   const card1Y = useTransform(scrollYProgress, [0.8, 0.9], [30, 0]);
-
   const card2Opacity = useTransform(scrollYProgress, [0.85, 0.95], [0, 1]);
   const card2Y = useTransform(scrollYProgress, [0.85, 0.95], [30, 0]);
-
   const card3Opacity = useTransform(scrollYProgress, [0.9, 1.0], [0, 1]);
   const card3Y = useTransform(scrollYProgress, [0.9, 1.0], [30, 0]);
 
   const opacities = [card1Opacity, card2Opacity, card3Opacity];
   const yTransforms = [card1Y, card2Y, card3Y];
+
+  const renderCard = (card) => (
+    <Card
+      sx={{
+        borderRadius: 0,
+        width: '97%',
+        // maxWidth: 350,
+        height: 500,
+        mx: 'auto',
+        p: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+      }}
+    >
+      <CardMedia
+        component="img"
+        image={card.image}
+        alt={card.title}
+        sx={{
+          width: '100%',
+          height: 256,
+          objectFit: 'cover',
+        }}
+      />
+      <CardContent
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          flexGrow: 1,
+          p: 3,
+        }}
+      >
+        <Typography
+          fontFamily="Satoshi Variable, sans-serif"
+          fontSize={24}
+          fontWeight={700}
+          color="#18191B"
+          sx={{ lineHeight: 1.3 }}
+        >
+          {card.title}
+        </Typography>
+        <Typography
+          fontFamily="Satoshi Variable, sans-serif"
+          fontSize={16}
+          fontWeight={500}
+          color="#666666"
+          mt={2}
+          sx={{ lineHeight: 1.6 }}
+        >
+          {card.description}
+        </Typography>
+      </CardContent>
+    </Card>
+  );
 
   return (
     <Box
@@ -51,89 +156,78 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        objectFit: 'cover',
         width: '100%',
-        height: '100vh',
+        minHeight: '100vh',
         py: 10,
-        px: { xs: 2, md: 4 },
+        px: { xs: 0, md: 4 },
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
+        alignItems: 'center',
       }}
     >
       <motion.div style={{ opacity: titleOpacity }}>
         <Typography
           align="center"
           fontFamily={`'Playfair Display', serif`}
-          fontSize={64}
+          fontSize={{ xs: 48, md: 64 }}
           sx={{
             color: 'white',
             fontWeight: 400,
             mb: 6,
             textShadow: '0px 2px 10px rgba(0,0,0,0.6)',
+            letterSpacing: '0.05em',
           }}
         >
           AMARANTHINE
         </Typography>
       </motion.div>
 
-      <Grid container spacing={4} justifyContent="center">
-        {cards.map((card, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <motion.div style={{ opacity: opacities[index], y: yTransforms[index] }}>
-              <Card
-                sx={{
-                  borderRadius: 0,
-                  width: '100%',
-                  maxWidth: 410,
-                  height: 500,
-                  mx: 'auto',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  image={card.image}
-                  alt={card.title}
-                  sx={{
-                    width: '100%',
-                    height: 256,
-                    objectFit: 'cover',
-                    p: 2,
-                  }}
-                />
-                <CardContent
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    width: '100%',
+      {isMobile ? (
+        <Box sx={{ width: '100%', position: 'relative' }}>
+          <Box
+            sx={{
+              px: { xs: 0, sm: 4 }, // Added horizontal padding for side gaps
+              width: '100%',
+              maxWidth: 1200,
+              mx: 'auto',
+            }}
+          >
+            <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
+              {cards.map((card, index) => (
+                <motion.div
+                  key={index}
+                  style={{
+                    opacity: opacities[index],
+                    y: yTransforms[index],
+                    padding: '0 8px', // Additional padding between cards
                   }}
                 >
-                  <Typography
-                    fontFamily="Satoshi Variable, sans-serif"
-                    fontSize={24}
-                    fontWeight={700}
-                  >
-                    {card.title}
-                  </Typography>
-                  <Typography
-                    fontFamily="Satoshi Variable, sans-serif"
-                    fontSize={16}
-                    fontWeight={500}
-                    color="text.secondary"
-                    mt={1}
-                  >
-                    {card.description}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </Grid>
-        ))}
-      </Grid>
+                  {renderCard(card)}
+                </motion.div>
+              ))}
+            </Carousel>
+          </Box>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+            <CustomArrow icon="eva:arrow-ios-back-fill" onClick={carousel.onPrev} sx={{ mr: 2 }} />
+            <CustomArrow
+              icon="eva:arrow-ios-forward-fill"
+              onClick={carousel.onNext}
+              sx={{ ml: 2 }}
+            />
+          </Box>
+        </Box>
+      ) : (
+        <Grid container spacing={4} justifyContent="center" maxWidth={1300}>
+          {cards.map((card, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <motion.div style={{ opacity: opacities[index], y: yTransforms[index] }}>
+                {renderCard(card)}
+              </motion.div>
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </Box>
   );
 }
