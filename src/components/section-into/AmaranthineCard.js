@@ -35,6 +35,11 @@ export default function AmaranthineHighlightSection() {
         backgroundPosition: 'center',
         py: { xs: 8, md: 12 },
         px: { xs: 2, md: 4 },
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       <Typography
@@ -54,15 +59,15 @@ export default function AmaranthineHighlightSection() {
                 // boxShadow: 6,
               }}
             >
-              <CardMedia 
-                component="img" 
-                height="200" 
-                image={card.image} 
-                alt={card.title} 
-                sx={{ 
-                  p: 1, 
-                  objectFit: 'cover' 
-                }} 
+              <CardMedia
+                component="img"
+                height="200"
+                image={card.image}
+                alt={card.title}
+                sx={{
+                  p: 1,
+                  objectFit: 'cover',
+                }}
               />
               <CardContent>
                 <Typography variant="subtitle1" fontWeight={600}>

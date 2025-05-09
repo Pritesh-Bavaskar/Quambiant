@@ -1,12 +1,12 @@
-// SectionIntro.js
 import { Box, Typography } from '@mui/material';
 import { useScroll, useTransform, m } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import AmaranthineGrid from './AmaranthineGrid';
 import AmaranthineCard from './AmaranthineCard';
 
 export function SectionIntro() {
   const containerRef = useRef(null);
+  const [fifthImageProgress, setFifthImageProgress] = useState(0);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
@@ -20,6 +20,9 @@ export function SectionIntro() {
   const opacity3 = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
   const scale1 = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
   const scale2 = useTransform(scrollYProgress, [0.3, 0.8], [0.9, 1]);
+
+  // Adjust card section opacity based on fifth image progress
+  const cardOpacity = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
 
   return (
     <Box ref={containerRef} sx={{ position: 'relative', height: '300vh' }}>
@@ -75,7 +78,7 @@ export function SectionIntro() {
           backgroundColor: 'white',
         }}
       >
-        <AmaranthineGrid />
+        <AmaranthineGrid onFifthImageProgress={setFifthImageProgress} />
       </m.div>
 
       {/* Third Section - Cards */}
@@ -85,7 +88,7 @@ export function SectionIntro() {
           top: 0,
           height: '100vh',
           y: y2,
-          opacity: opacity3,
+          opacity: cardOpacity,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
