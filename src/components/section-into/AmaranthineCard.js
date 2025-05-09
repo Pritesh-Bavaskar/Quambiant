@@ -33,13 +33,13 @@ export default function AmaranthineHighlightSection() {
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        py: { xs: 8, md: 12 },
-        px: { xs: 2, md: 4 },
-        minHeight: '100vh',
+        width: '100%',
+        height: '100vh', // ✅ Important: make it full viewport height
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        px: { xs: 2, md: 4 },
       }}
     >
       <Typography

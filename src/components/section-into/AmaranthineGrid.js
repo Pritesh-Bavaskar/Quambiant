@@ -25,13 +25,16 @@ export default function AmaranthineGrid({ onFifthImageProgress = () => {} }) {
     amaranthineImage6,
   ];
 
-  // Track the 5th image's animation progress
-  const fifthImageProgress = useTransform(scrollYProgress, [0.6, 0.9], [0, 1]);
+  // Track the 5th image's animation progress while scrolling through the grid
+  const fifthImageProgress = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]);
 
   // Pass progress to parent component
-  const handleProgressChange = useCallback((v) => {
-    onFifthImageProgress(v);
-  }, [onFifthImageProgress]);
+  const handleProgressChange = useCallback(
+    (v) => {
+      onFifthImageProgress(v);
+    },
+    [onFifthImageProgress]
+  );
 
   React.useEffect(() => {
     const unsubscribe = fifthImageProgress.on('change', handleProgressChange);
@@ -42,21 +45,25 @@ export default function AmaranthineGrid({ onFifthImageProgress = () => {} }) {
     <Grid
       ref={ref}
       container
-      spacing={2}
+      rowSpacing={2}
+      columnSpacing={2}
       justifyContent="center"
       alignItems="center"
       sx={{
-        minHeight: '100vh',
-        p: 2.5,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        position: 'relative',
+        height: 'fit-content',
+        px: 4,
+        pt: 30,
       }}
     >
       {images.map((img, index) => (
-        <Grid key={index} item xs={12} sm={6} md={4}>
+        <Grid
+          key={index}
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        >
           <ImageBox
             src={img}
             alt={`Image ${index + 1}`}
@@ -73,26 +80,23 @@ export default function AmaranthineGrid({ onFifthImageProgress = () => {} }) {
 function ImageBox({ src, alt, scrollYProgress, isFifthImage = false, fifthImageProgress }) {
   const ref = useRef(null);
   const baseScale = useTransform(scrollYProgress, [0, 1], [1.4, 1]);
-  const zoomScale = useTransform(fifthImageProgress, [0, 1], [1, 5]);
-  const baseOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 1]);
-  const fadeOpacity = useTransform(fifthImageProgress, [0, 1], [1, 0]);
-  const baseRadius = 0;
-  const zoomRadius = useTransform(fifthImageProgress, [0, 1], [0, 0]);
+  const zoomScale = useTransform(fifthImageProgress, [0, 1], [1, 1.3]);
 
-  const scale = React.useMemo(() => isFifthImage ? zoomScale : baseScale, [isFifthImage, zoomScale, baseScale]);
-  const opacity = React.useMemo(() => isFifthImage ? fadeOpacity : baseOpacity, [isFifthImage, fadeOpacity, baseOpacity]);
-  const borderRadius = React.useMemo(() => isFifthImage ? zoomRadius : baseRadius, [isFifthImage, zoomRadius, baseRadius]);
+  const scale = React.useMemo(
+    () => (isFifthImage ? zoomScale : baseScale),
+    [isFifthImage, zoomScale, baseScale]
+  );
 
   return (
     <Box
       sx={{
         width: '100%',
-        aspectRatio: '16/9',
+        aspectRatio: '43 / 30', // or use padding-bottom trick if needed
         overflow: 'hidden',
-        borderRadius: 0,
         boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
         position: 'relative',
         zIndex: isFifthImage ? 10 : 1,
+        flexGrow: 1,
       }}
     >
       <m.div
@@ -105,8 +109,6 @@ function ImageBox({ src, alt, scrollYProgress, isFifthImage = false, fifthImageP
           height: '100%',
           overflow: 'hidden',
           scale,
-          opacity,
-          borderRadius,
           transformOrigin: 'center center',
         }}
       >

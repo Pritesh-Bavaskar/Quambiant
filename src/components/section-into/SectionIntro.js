@@ -15,14 +15,15 @@ export function SectionIntro() {
   // Animation values
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const opacity1 = useTransform(scrollYProgress, [0, 0.3, 0.5], [1, 1, 0]);
-  const opacity2 = useTransform(scrollYProgress, [0.3, 0.5, 0.8], [0, 1, 0]);
-  const opacity3 = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
+  const opacity1 = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8], [0, 1, 1, 1, 0]);
+  const opacity2 = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8], [0, 0, 1, 1, 0]);
+  const opacity3 = useTransform(scrollYProgress, [0.4, 0.6, 0.8], [0, 1, 1]);
   const scale1 = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
   const scale2 = useTransform(scrollYProgress, [0.3, 0.8], [0.9, 1]);
 
   // Adjust card section opacity based on fifth image progress
   const cardOpacity = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
+  const cardScale = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
 
   return (
     <Box ref={containerRef} sx={{ position: 'relative', height: '300vh' }}>
@@ -89,9 +90,11 @@ export function SectionIntro() {
           height: '100vh',
           y: y2,
           opacity: cardOpacity,
+          scale: cardScale,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          transformOrigin: 'center center', // ✅ THIS LINE is key
         }}
       >
         <AmaranthineCard />
