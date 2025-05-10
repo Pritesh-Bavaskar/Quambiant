@@ -31,7 +31,7 @@ const StyledRoot = styled(Box)(({ theme }) => ({
   gap: theme.spacing(3),
   justifyContent: 'center',
   alignItems: 'stretch',
-  maxWidth: 1100,
+  maxWidth: "89%",
   margin: '0 auto',
   [theme.breakpoints.down('md')]: {
     flexDirection: 'column',
@@ -152,7 +152,9 @@ export default function HomeStories() {
     >
       <Box sx={{ textAlign: 'center', mb: 6 }}>
         <Typography variant="h1">Home Stories</Typography>
-        <Typography variant="body1" sx={{ mt: 1, maxWidth: 700, mx: 'auto' }}>
+        <Typography
+          sx={{ mt: 1, maxWidth: { xs: '90%', md: 900 }, mx: 'auto', fontSize: { xs: 14, md: 20 } }}
+        >
           Every home has a story. Here are the heartfelt experiences of those who now call a
           Quambiant residence their own
         </Typography>
@@ -183,10 +185,11 @@ export default function HomeStories() {
                 {storiesData[activeStep].description}
               </Typography>
               <Typography
-                variant="body3"
                 sx={{
+                  fontFamily: 'Playfair Display',
+                  fontSize: 18,
                   fontStyle: 'italic',
-                  color: 'primary.main',
+                  color: '#18191B',
                   fontWeight: 500,
                   mb: 0,
                 }}
@@ -261,7 +264,14 @@ export default function HomeStories() {
               <Typography variant="h1" sx={{ fontWeight: 500, mb: 2, color: '#18191B' }}>
                 {storiesData[activeStep].title}
               </Typography>
-              <Typography variant="body3" sx={{ color: 'text.secondary', mb: 4 }}>
+              <Typography
+                sx={{
+                  color: 'text.secondary',
+                  mb: 4,
+                  fontSize: { xs: 14, md: 16 },
+                  fontWeight: 500,
+                }}
+              >
                 {storiesData[activeStep].description}
               </Typography>
               <Box
@@ -277,10 +287,11 @@ export default function HomeStories() {
                 }}
               >
                 <Typography
-                  variant="body3"
                   sx={{
+                    fontFamily: 'Playfair Display',
+                    fontSize: 20,
                     fontStyle: 'italic',
-                    color: 'primary.main',
+                    color: '#18191B',
                     fontWeight: 500,
                     mb: 0,
                   }}

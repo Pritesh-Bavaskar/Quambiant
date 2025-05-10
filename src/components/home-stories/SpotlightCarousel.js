@@ -128,19 +128,18 @@ export default function SpotlightCarousel() {
           <Typography
             variant="h1"
             sx={{
-              fontWeight: 700,
+              fontWeight: 500,
               mb: 1,
-              fontFamily: 'Satoshi, sans-serif',
               textAlign: { xs: 'center', md: 'left' },
             }}
           >
             In the Spotlight
           </Typography>
           <Typography
-            variant="b1"
             sx={{
-              color: 'text.secondary',
-              maxWidth: 600,
+              color: '#5C6170',
+              fontSize: { md: '20px', xs: '14px' },
+              maxWidth: 500,
               display: 'flex',
               textAlign: { xs: 'center', md: 'left' },
             }}
@@ -207,7 +206,7 @@ export default function SpotlightCarousel() {
                 <Typography
                   sx={{
                     fontWeight: 700,
-                    fontSize: '20px',
+                    fontSize: { md: '20px', xs: '18px' },
                     fontFamily: 'Satoshi, sans-serif',
                     mb: 1,
                   }}
@@ -216,8 +215,8 @@ export default function SpotlightCarousel() {
                 </Typography>
                 <Typography
                   sx={{
-                    color: 'text.secondary',
                     fontWeight: 400,
+                    color: '#333333',
                     fontSize: '14px',
                     fontFamily: 'Satoshi, sans-serif',
                   }}

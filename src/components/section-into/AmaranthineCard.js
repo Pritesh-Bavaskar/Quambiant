@@ -103,7 +103,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
         p: 2,
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        backgroundColor: 'rgba(255, 255, 255, 1)',
         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
       }}
     >
@@ -123,12 +123,12 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
           flexDirection: 'column',
           justifyContent: 'center',
           flexGrow: 1,
-          p: 3,
+          p: 0,
         }}
       >
         <Typography
           fontFamily="Satoshi Variable, sans-serif"
-          fontSize={24}
+          fontSize={{ xs: 20, md: 24 }}
           fontWeight={700}
           color="#18191B"
           sx={{ lineHeight: 1.3 }}
@@ -137,7 +137,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
         </Typography>
         <Typography
           fontFamily="Satoshi Variable, sans-serif"
-          fontSize={16}
+          fontSize={{ xs: 14, md: 16 }}
           fontWeight={500}
           color="#666666"
           mt={2}
@@ -170,7 +170,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
         <Typography
           align="center"
           fontFamily={`'Playfair Display', serif`}
-          fontSize={{ xs: 48, md: 64 }}
+          fontSize={{ xs: 38, md: 64 }}
           sx={{
             color: 'white',
             fontWeight: 400,
@@ -198,8 +198,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
                 <motion.div
                   key={index}
                   style={{
-                    opacity: opacities[index],
-                    y: yTransforms[index],
+                    opacity: titleOpacity,
                     padding: '0 8px', // Additional padding between cards
                   }}
                 >

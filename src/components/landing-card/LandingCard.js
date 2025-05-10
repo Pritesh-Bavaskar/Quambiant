@@ -45,6 +45,7 @@ export function LandingCard({ title, subtitle, buttonText, buttonClick }) {
             variant="body1"
             sx={{
               fontWeight: '500 !important',
+              fontSize: { xs : "14px",  md: "18px"},
               color: '#CCCCCC',
             }}
           >

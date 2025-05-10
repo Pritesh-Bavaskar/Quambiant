@@ -195,6 +195,7 @@ export default function LaunchCard({ project }) {
             fontWeight: 500,
             fontSize: { xs: 24, sm: 32 },
             fontFamily: 'playfair display',
+            color: '#18191B',
             mb: { xs: 1, sm: 0 },
           }}
         >
@@ -207,7 +208,7 @@ export default function LaunchCard({ project }) {
             fontWeight: 500,
             fontSize: { xs: 12, sm: 14 },
             textTransform: 'uppercase',
-            color: 'text.secondary',
+            color: '#5C6170',
           }}
         >
           {project.type} &bull; {project.location}

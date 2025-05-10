@@ -55,8 +55,8 @@ export function SectionIntro() {
         </Typography>
 
         <Typography
-          sx={{ fontSize: 20, fontWeight: 500 }}
-          maxWidth="914px"
+          sx={{ fontSize: { xs: 14, md: 20 }, fontWeight: 500, pt: 1 }}
+          maxWidth={{xs: "90%", md:"914px"}}
           fontFamily="Satoshi Variable, sans-serif"
           color="text.secondary"
         >

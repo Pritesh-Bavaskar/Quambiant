@@ -76,10 +76,10 @@ export default function AmaranthineGrid({ onFifthImageProgress = () => {} }) {
                 px: 2,
               }}
             >
-              <Typography fontFamily={`'Playfair Display', serif`} fontSize={24} fontWeight={600}>
+              <Typography fontFamily={`'Playfair Display', serif`} fontSize={38} fontWeight={400}>
                 AMARANTHINE
               </Typography>
-              <Typography mt={1} fontSize={14}>
+              <Typography mt={1} fontSize={12} fontWeight={500}>
                 2/3 BHK LUXURY APARTMENTS
               </Typography>
             </Box>

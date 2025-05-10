@@ -367,31 +367,6 @@ export default function HomeHero() {
 
   return (
     <>
-      {/* <StyledRoot
-        ref={heroRef}
-        sx={{
-          ...(hide && {
-            opacity: 0,
-          }),
-        }}
-      >
-        <StyledWrapper>
-          <Container component={MotionContainer} sx={{ height: 1 }}>
-            <Grid container columnSpacing={{ md: 10 }} sx={{ height: 1 }}>
-              <Grid xs={12} md={6}>
-                {renderDescription}
-              </Grid>
-
-              {mdUp && <Grid md={6}>{renderSlides}</Grid>}
-            </Grid>
-          </Container>
-
-          {renderEllipses}
-        </StyledWrapper>
-      </StyledRoot>
-
-      {mdUp && renderPolygons} */}
-
       <Box
         sx={{
           position: 'relative',

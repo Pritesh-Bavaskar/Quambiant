@@ -41,7 +41,10 @@ export default function ContactConsultationForm() {
         },
       }}
     >
-      <Typography variant="h1" sx={{ color: '#fff', mb: 10, fontWeight: 400, textAlign: 'center' }}>
+      <Typography
+        variant="h1"
+        sx={{ color: '#FDF8F3', mb: 10, fontWeight: 500, textAlign: 'center' }}
+      >
         Let our experts help you find the perfect home
       </Typography>
 
@@ -208,11 +211,7 @@ export default function ContactConsultationForm() {
             variant="outlined"
             href="tel:+917792344646"
             startIcon={
-              <img
-                src={contactPhone}
-                alt="phone Icon"
-                style={{ width: 20, height: 20 }}
-              />
+              <img src={contactPhone} alt="phone Icon" style={{ width: 20, height: 20 }} />
             }
             sx={{
               background: 'transparent',
@@ -233,11 +232,7 @@ export default function ContactConsultationForm() {
             variant="outlined"
             href="tel:+919792344646"
             startIcon={
-              <img
-                src={contactWhatsapp}
-                alt="whatsapp Icon"
-                style={{ width: 20, height: 20 }}
-              />
+              <img src={contactWhatsapp} alt="whatsapp Icon" style={{ width: 20, height: 20 }} />
             }
             sx={{
               background: 'transparent',

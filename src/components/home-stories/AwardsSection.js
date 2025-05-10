@@ -144,6 +144,7 @@ export default function AwardsSection() {
                 fontFamily: 'Playfair Display, serif',
                 fontSize: '28px',
                 textAlign: 'center',
+                color: '#18191B',
               }}
             >
               Recognizing Excellence in Real Estate
@@ -151,8 +152,9 @@ export default function AwardsSection() {
             <Typography
               variant="body1"
               sx={{
-                color: 'text.secondary',
-                maxWidth: 600,
+                color: '#5C6170',
+                pt: 1,
+                maxWidth: "90%",
                 fontFamily: 'Satoshi Variable, sans-serif',
                 fontWeight: 500,
                 fontSize: '14px',
@@ -218,11 +220,11 @@ export default function AwardsSection() {
             px: 4,
             display: 'flex',
             width: '100%',
-            maxWidth: 1200,
+            maxWidth: "90%",
             mx: 'auto',
             alignItems: 'center',
           }}
-        >
+        > 
           {/* Left side: Text content - 50% */}
           <Box
             sx={{
@@ -238,6 +240,8 @@ export default function AwardsSection() {
                 fontFamily: 'Playfair Display, serif',
                 fontSize: '42px',
                 textAlign: 'left',
+                maxWidth: 500,
+                color: '#18191B',
               }}
             >
               Recognizing Excellence in Real Estate
@@ -245,9 +249,11 @@ export default function AwardsSection() {
             <Typography
               variant="body1"
               sx={{
-                color: 'text.secondary',
+                pt: 1,
+                color: '#5C6170',
                 fontFamily: 'Satoshi Variable, sans-serif',
                 fontWeight: 500,
+                maxWidth: 500,
                 fontSize: '20px',
                 textAlign: 'left',
               }}
