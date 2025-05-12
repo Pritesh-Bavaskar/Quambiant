@@ -20,6 +20,7 @@ const _projectsList = [
   {
     id: 1,
     status: 'upcoming',
+    slug: 'downtown-central',
     location: 'Downtown Central',
     title: 'Horizon Heights',
     description:
@@ -45,6 +46,7 @@ const _projectsList = [
     id: 4,
     status: 'upcoming',
     location: 'Downtown Central',
+    slug: 'horizon-heights',
     title: 'Horizon Heights',
     description:
       'A premium residential tower featuring luxury apartments with panoramic city views, smart home technology, and exceptional amenities designed for modern urban living.',
@@ -68,6 +70,7 @@ const _projectsList = [
   {
     id: 2,
     status: 'ongoing',
+    slug:'uptown-east',
     location: 'Uptown East',
     title: 'Skyline Residences',
     description:
@@ -108,6 +111,7 @@ const _projectsList = [
   {
     id: 3,
     status: 'completed',
+    slug:'west-bay-area',
     location: 'West Bay Area',
     title: 'Oceanview Towers',
     description:

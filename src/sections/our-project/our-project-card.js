@@ -24,9 +24,12 @@ import {
 } from '@mui/lab';
 import Image from 'src/components/image';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router';
 
 export default function OurProjectCard({ project }) {
   console.log(project);
+  const navigate = useNavigate();
+
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [showStages, setShowStages] = useState(false);
@@ -74,9 +77,10 @@ export default function OurProjectCard({ project }) {
       {/* Top Image + Tags */}
       <Box sx={{ position: 'relative' }}>
         <Image
+          onClick={() => navigate(`/our-project/${project.slug}`)}
           src="/assets/images/our-project/card-img.png"
           alt="Project"
-          style={{ width: '100%', height: 'auto', display: 'block' }}
+          style={{ width: '100%', height: 'auto', display: 'block', cursor: 'pointer' }}
         />
         <Box
           sx={{
@@ -699,5 +703,5 @@ export default function OurProjectCard({ project }) {
 }
 
 OurProjectCard.propTypes = {
-  project: PropTypes.node,
+  project: PropTypes.object,
 };
