@@ -170,6 +170,9 @@ export default function OurProjectTabs() {
           px: { xs: 0, md: 8 },
           py: 4,
           backgroundColor: '#FDF8F3',
+          '& .MuiTabs-flexContainer': {
+            justifyContent: { xs: 'center', md: 'flex-start' },
+          },
         }}
       >
         {STATUS_OPTIONS.map((tab) => {
@@ -183,12 +186,12 @@ export default function OurProjectTabs() {
                   {tab.label}
                   <Box
                     sx={{
+                      display: { xs: 'none', md: 'flex' },
                       width: 24,
                       height: 24,
                       borderRadius: '50%',
                       bgcolor: selected ? 'common.black' : 'grey.300',
                       color: selected ? 'common.white' : 'text.primary',
-                      display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       fontSize: 12,
@@ -211,9 +214,7 @@ export default function OurProjectTabs() {
       </Tabs>
       <Box
         sx={{
-          px: { xs: 2, md: 0 },
-          py: { xs: 4, md: 0 },
-          pb: { md: 2 },
+          padding: '10px 32px 64px 32px',
           backgroundColor: '#FDF8F3',
         }}
       >

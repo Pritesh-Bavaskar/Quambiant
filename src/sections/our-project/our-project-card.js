@@ -65,7 +65,7 @@ export default function OurProjectCard({ project }) {
   return (
     <Box
       sx={{
-        maxWidth: 600,
+        maxWidth: 670,
         bgcolor: 'background.paper',
         overflow: 'hidden',
         mx: 'auto',
