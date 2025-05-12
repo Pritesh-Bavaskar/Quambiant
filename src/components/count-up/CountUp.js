@@ -15,26 +15,21 @@ export default function CountUpSection() {
 
   return (
     <Box ref={ref} sx={{ py: { xs: 6, md: 10 }, bgcolor: '#FDF8F3' }}>
-      <Typography
-        align="center"
-        fontFamily="Playfair Display"
-        gutterBottom
-        sx={{
-          typography: { xs: 'h4', md: 'h1' },
-        }}
-      >
+      <Typography variant="h1" align="center" fontFamily="Playfair Display" gutterBottom>
         A Legacy in Every Detail
       </Typography>
       <Typography
         align="center"
         sx={{
           color: 'text.secondary',
-          fontSize: { xs: 16, md: 20 },
+          fontSize: { xs: 14, md: 20 },
+          fontWeight: 500,
           mb: { xs: 5, md: 8 },
+          pt: 1,
           fontFamily: 'Satoshi Variable, sans-serif',
         }}
       >
-        Our numbers reflect our commitment to excellence and innovation.
+        Years of expertise, happy homeowners, and stunning residences—see what makes us stand apart
       </Typography>
       <Grid
         container

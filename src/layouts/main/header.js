@@ -45,7 +45,11 @@ export default function Header() {
       <m.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
+        transition={{ 
+          duration: 0.8, 
+          ease: 'easeOut',
+          delay: 4 // Delay to match the IntroSection animation completion
+        }}
       >
         <Toolbar
           disableGutters
@@ -132,7 +136,7 @@ export default function Header() {
                 >
                   <IconButton
                     sx={{
-                      ml: { xs: 1, md: 0 },
+                      ml: { xs: 1, md: -1 },
                       mr: { md: 2 },
                     }}
                   >

@@ -2,12 +2,23 @@ import { Box, Typography, Button } from '@mui/material';
 import { m } from 'framer-motion';
 import PropTypes from 'prop-types';
 
-export function LandingCard({ title, subtitle, buttonText, buttonClick }) {
+export function LandingCard({
+  title,
+  subtitle,
+  buttonText,
+  buttonClick,
+  location,
+  completionDate,
+}) {
   return (
     <m.div
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
+      transition={{
+        duration: 0.8,
+        ease: 'easeOut',
+        delay: 4, // Delay to match the IntroSection animation completion
+      }}
     >
       <Box
         component={m.div}
@@ -28,6 +39,48 @@ export function LandingCard({ title, subtitle, buttonText, buttonClick }) {
           boxShadow: { xs: 'none', sm: '0 8px 32px rgba(0,0,0,0.2)' },
         }}
       >
+        {completionDate ? (
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                fontSize: 12,
+                color: 'text.secondary',
+                border: '1px solid #E4E4E7',
+                px: 1,
+                py: 0.5,
+                bgcolor: '#FAFAFA',
+                width: '55%',
+                maxWidth: '100%',
+              }}
+            >
+              <img
+                src="/assets/icons/our-project/calendar.png"
+                alt="Calendar Icon"
+                style={{ display: 'block', height: '16px', width: '16px', marginRight: '10px' }}
+              />
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{
+                  fontWeight: 500,
+                  gap: 1,
+                  color: '#18181B',
+                  fontFamily: 'Satoshi Variable',
+                  fontSize: '12px',
+                }}
+              >
+                {completionDate}
+              </Typography>
+            </Box>
+          </m.div>
+        ) : null}
+
         <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -36,21 +89,85 @@ export function LandingCard({ title, subtitle, buttonText, buttonClick }) {
           <Typography variant="h1">{title}</Typography>
         </m.div>
 
-        <m.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-        >
-          <Typography
-            variant="body1"
-            sx={{
-              fontWeight: '500 !important',
-              color: '#CCCCCC',
-            }}
+        {subtitle ? (
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
           >
-            {subtitle}
-          </Typography>
-        </m.div>
+            <Typography
+              variant="body1"
+              sx={{
+                fontWeight: '500 !important',
+                fontSize: { xs: '14px', md: '18px' },
+                color: '#CCCCCC',
+              }}
+            >
+              {subtitle}
+            </Typography>
+          </m.div>
+        ) : null}
+        {completionDate && location ? (
+          <m.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                fontSize: 12,
+                color: 'text.secondary',
+                width: '100%',
+                maxWidth: '100%',
+                justifyContent: 'flex-start',
+                gap: 2, // spacing between two sections
+              }}
+            >
+              {/* Location */}
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <img
+                  src="/assets/icons/our-project-details/location.png" // <-- Location icon
+                  alt="Location Icon"
+                  style={{ height: '16px', width: '16px' }}
+                />
+                <Typography
+                  variant="caption"
+                  sx={{
+                    fontWeight: 500,
+                    color: '#ABAFBA',
+                    fontSize: '14px',
+                    fontFamily: 'Satoshi Variable',
+                  }}
+                >
+                  {location}
+                </Typography>
+              </Box>
+
+              {/* Completion Date */}
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                <img
+                  src="/assets/icons/our-project-details/checkmark.png"
+                  alt="Check Icon"
+                  style={{ height: '16px', width: '16px' }}
+                />
+                <Typography
+                  variant="caption"
+                  sx={{
+                    fontWeight: 500,
+                    color: '#ABAFBA',
+                    fontSize: '14px',
+                    fontFamily: 'Satoshi Variable',
+                  }}
+                >
+                  {completionDate}
+                </Typography>
+              </Box>
+            </Box>
+          </m.div>
+        ) : null}
+
         {buttonText && (
           <m.div
             initial={{ opacity: 0, y: 20 }}
@@ -85,4 +202,6 @@ LandingCard.propTypes = {
   subtitle: PropTypes.string,
   buttonText: PropTypes.string,
   buttonClick: PropTypes.func,
+  completionDate: PropTypes.string,
+  location: PropTypes.string,
 };

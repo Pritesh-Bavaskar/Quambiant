@@ -19,18 +19,18 @@ const launches = [
       {
         title: 'Structural Completion',
         date: '2026 Q4',
-        status: 'ongoing'
+        status: 'ongoing',
       },
       {
         title: 'Interiors & Finishing',
         date: '2027 Q3',
-        status: 'upcoming'
+        status: 'upcoming',
       },
       {
         title: 'Handover',
         date: '2028 Q2',
-        status: 'future'
-      }
+        status: 'future',
+      },
     ],
   },
   {
@@ -44,18 +44,18 @@ const launches = [
       {
         title: 'Structural Completion',
         date: '2026 Q4',
-        status: 'ongoing'
+        status: 'ongoing',
       },
       {
         title: 'Interiors & Finishing',
         date: '2027 Q3',
-        status: 'upcoming'
+        status: 'upcoming',
       },
       {
         title: 'Handover',
         date: '2028 Q2',
-        status: 'future'
-      }
+        status: 'future',
+      },
     ],
   },
   {
@@ -69,18 +69,18 @@ const launches = [
       {
         title: 'Structural Completion',
         date: '2026 Q4',
-        status: 'ongoing'
+        status: 'ongoing',
       },
       {
         title: 'Interiors & Finishing',
         date: '2027 Q3',
-        status: 'upcoming'
+        status: 'upcoming',
       },
       {
         title: 'Handover',
         date: '2028 Q2',
-        status: 'future'
-      }
+        status: 'future',
+      },
     ],
   },
 ];
@@ -124,7 +124,7 @@ export default function UpcomingLaunchesCarousel() {
   const carousel = useCarousel({
     slidesToShow: 2,
     slidesToScroll: 1,
-    infinite: true,
+    infinite: false,
     speed: 500,
     arrows: false,
     responsive: [
@@ -150,11 +150,19 @@ export default function UpcomingLaunchesCarousel() {
           justifyContent: 'space-between',
         }}
       >
-        <Box sx={{ pl: 2, textAlign: 'center'}}>
-          <Typography variant="h3" sx={{ fontWeight: 700 }}>
+        <Box sx={{ pl: 2, textAlign: { xs: 'center', md: 'left' } }}>
+          <Typography variant="h1" sx={{ fontWeight: 500 }}>
             Upcoming and Latest Launches
           </Typography>
-          <Typography color="text.secondary">
+          <Typography
+            sx={{
+              pt: 1,
+              fontFamily: 'Satoshi Variable, sans-serif',
+              fontWeight: 500,
+              color: '#5C6170',
+              fontSize: { xs: 14, md: 20 },
+            }}
+          >
             Be the first to discover the hottest launches in Hyderabad
           </Typography>
         </Box>
@@ -167,19 +175,28 @@ export default function UpcomingLaunchesCarousel() {
       </Box>
 
       <Box sx={{ px: { xs: 0, md: 4 } }}>
-        <Carousel 
-          ref={carousel.carouselRef} 
+        <Carousel
+          ref={carousel.carouselRef}
           {...carousel.carouselSettings}
           sx={{
             '& .slick-list': {
-              margin: '0 -15px',
+              margin: {
+                xs: '0 -15px',
+                md: '0 -30px', // Increased negative margin for desktop
+              },
             },
             '& .slick-slide': {
-              padding: '0 15px',
+              padding: {
+                xs: '0 15px',
+                md: '0 30px', // Increased padding for desktop
+              },
               boxSizing: 'border-box',
             },
             '& .slick-slide > div': {
-              padding: '20px',
+              padding: {
+                xs: '20px',
+                md: '30px', // Increased inner padding for desktop
+              },
               boxSizing: 'border-box',
             },
           }}

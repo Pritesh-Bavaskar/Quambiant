@@ -20,6 +20,7 @@ const _projectsList = [
   {
     id: 1,
     status: 'upcoming',
+    slug: 'downtown-central',
     location: 'Downtown Central',
     title: 'Horizon Heights',
     description:
@@ -45,6 +46,7 @@ const _projectsList = [
     id: 4,
     status: 'upcoming',
     location: 'Downtown Central',
+    slug: 'horizon-heights',
     title: 'Horizon Heights',
     description:
       'A premium residential tower featuring luxury apartments with panoramic city views, smart home technology, and exceptional amenities designed for modern urban living.',
@@ -68,6 +70,7 @@ const _projectsList = [
   {
     id: 2,
     status: 'ongoing',
+    slug:'uptown-east',
     location: 'Uptown East',
     title: 'Skyline Residences',
     description:
@@ -108,6 +111,7 @@ const _projectsList = [
   {
     id: 3,
     status: 'completed',
+    slug:'west-bay-area',
     location: 'West Bay Area',
     title: 'Oceanview Towers',
     description:
@@ -170,6 +174,9 @@ export default function OurProjectTabs() {
           px: { xs: 0, md: 8 },
           py: 4,
           backgroundColor: '#FDF8F3',
+          '& .MuiTabs-flexContainer': {
+            justifyContent: { xs: 'center', md: 'flex-start' },
+          },
         }}
       >
         {STATUS_OPTIONS.map((tab) => {
@@ -183,12 +190,12 @@ export default function OurProjectTabs() {
                   {tab.label}
                   <Box
                     sx={{
+                      display: { xs: 'none', md: 'flex' },
                       width: 24,
                       height: 24,
                       borderRadius: '50%',
                       bgcolor: selected ? 'common.black' : 'grey.300',
                       color: selected ? 'common.white' : 'text.primary',
-                      display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
                       fontSize: 12,
@@ -211,9 +218,7 @@ export default function OurProjectTabs() {
       </Tabs>
       <Box
         sx={{
-          px: { xs: 2, md: 0 },
-          py: { xs: 4, md: 0 },
-          pb: { md: 2 },
+          padding: '10px 32px 64px 32px',
           backgroundColor: '#FDF8F3',
         }}
       >

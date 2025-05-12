@@ -198,12 +198,12 @@ const TimelineItem = ({
           zIndex: 1,
           '&.MuiGrid-root': {
             paddingLeft: {
-              xs: 1, // No padding on mobile
+              xs: 1.5, // No padding on mobile
               md: 5,
             },
             paddingTop: {
               xs: 0, // No padding on mobile
-              md: 4,
+              md: 7,
             },
           },
           alignSelf: 'flex-start',
@@ -230,11 +230,11 @@ const TimelineItem = ({
           >
             <Box sx={{ pl: reverse ? 0 : { md: 4 }, pr: reverse ? { md: 4 } : 0 }}>
               <Typography
-                variant="h3"
+                // variant="h3"
                 sx={{
-                  fontFamily: 'Playfair Display, serif',
-                  fontWeight: 500,
-                  fontSize: { xs: '24px', md: '32px' },
+                  fontFamily: 'Satoshi Variable, sans-serif',
+                  fontWeight: 700,
+                  fontSize: { xs: '18px', md: '32px' },
                   mb: 2,
                   color: '#18191B',
                   transition: 'color 0.3s ease-out',
@@ -243,12 +243,13 @@ const TimelineItem = ({
                 {title}
               </Typography>
               <Typography
-                variant="body1"
+                // variant="body1"
                 sx={{
                   color: 'text.secondary',
-                  lineHeight: 1.8,
+                  // lineHeight: 1.8,
+                  fontWeight: 500,
                   fontFamily: 'Satoshi Variable, sans-serif',
-                  fontSize: { xs: '14px', md: '18px' },
+                  fontSize: { xs: '14px', md: '20px' },
                 }}
               >
                 {content}
@@ -539,7 +540,7 @@ export default function ConceptToConcreteSection() {
 
   return (
     <LazyMotion features={domAnimation}>
-      <Container maxWidth="lg" sx={{ py: 8 }}>
+      <Container maxWidth="lg" sx={{ py: 16 }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -561,9 +562,10 @@ export default function ConceptToConcreteSection() {
               variant="body1"
               sx={{
                 color: 'text.secondary',
-                fontSize: { xs: '16px', md: '20px' },
+                fontSize: { xs: '14px', md: '20px' },
                 fontFamily: 'Satoshi Variable, sans-serif',
-                maxWidth: 600,
+                maxWidth: 900,
+                fontWeight: 500,
                 mx: 'auto',
               }}
             >
@@ -667,7 +669,7 @@ export default function ConceptToConcreteSection() {
                 top: 0,
                 bottom: 0,
                 left: '50%',
-                width: 2,
+                width: 4,
                 transform: 'translateX(-50%)',
                 display: { xs: 'none', md: 'block' },
                 zIndex: 1,
@@ -702,7 +704,7 @@ export default function ConceptToConcreteSection() {
                   minHeight: '4px',
                   zIndex: 3,
                   transition: 'height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1.0)',
-                  boxShadow: '0 1px 3px rgba(0,0,0,0.3)',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.0)',
                 }}
               />
               {/* Dots/points for each timeline item (skip the first/top dot) */}
@@ -728,8 +730,8 @@ export default function ConceptToConcreteSection() {
                         borderRadius: '50%',
                         backgroundColor:
                           timelineProgress >= pos ? 'primary.main' : 'rgba(0,120,255,0.2)',
-                        border: '3px solid white',
-                        boxShadow: '0 0 0 2px rgba(0,0,0,0.07)',
+                        border: '6px solid white',
+                        boxShadow: '0 0 0 2px rgba(0,0,0,0.0)',
                         transition: 'all 0.3s',
                         // When the dot is active (at center), make it slightly smaller
                         transform: dotAtCenterIdx === i ? 'scale(0.85)' : 'scale(1)',

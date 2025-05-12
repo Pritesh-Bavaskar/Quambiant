@@ -12,7 +12,7 @@ const spotlightData = [
     title: 'Sustainable Living: The Future Of Modern Homes',
     description:
       'Discover advances in shaping the future of residential living. Observe our eco-friendly practices, from energy-efficient design.',
-    type: 'TYPE: 20/5',
+    date: '17 FEB, 2016',
     image: '/assets/images/home/spotlight.png',
   },
   {
@@ -20,7 +20,7 @@ const spotlightData = [
     title: 'Sustainable Living: The Future Of Modern Homes',
     description:
       'Observe architecture in shaping the future of residential living. Discover how our eco-friendly practices, from energy-efficient design.',
-    type: 'TYPE: 20/5',
+    date: '17 FEB, 2016',
     image: '/assets/images/home/spotlight.png',
   },
   {
@@ -28,7 +28,7 @@ const spotlightData = [
     title: 'Sustainable Living: The Future Of Modern Homes',
     description:
       'Discover advances in shaping the future of residential living. Observe our eco-friendly practices, from energy-efficient design.',
-    type: 'TYPE: 20/5',
+    date: '17 FEB, 2016',
     image: '/assets/images/home/spotlight.png',
   },
   {
@@ -36,7 +36,7 @@ const spotlightData = [
     title: 'Sustainable Living: The Future Of Modern Homes',
     description:
       'Observe architecture in shaping the future of residential living. Discover how our eco-friendly practices, from energy-efficient design.',
-    type: 'TYPE: 20/5',
+    date: '17 FEB, 2016',
     image: '/assets/images/home/spotlight.png',
   },
 ];
@@ -46,6 +46,7 @@ const CarouselContainer = styled(Box)(({ theme }) => ({
   width: '100%',
   overflow: 'hidden',
   padding: theme.spacing(4, 0),
+  backgroundColor: '#FDF8F3',
 }));
 
 // Custom Previous Arrow
@@ -56,7 +57,7 @@ const CustomPrevArrow = ({ sx, ...props }) => (
       border: '1px solid #18191B',
       borderRadius: '0%',
       color: '#18191B',
-      bgcolor: '#fff',
+      bgcolor: 'transparent',
       mx: 1,
       '&:hover': { bgcolor: '#18191B', color: '#fff' },
     }}
@@ -73,7 +74,7 @@ const CustomNextArrow = ({ sx, ...props }) => (
       border: '1px solid #18191B',
       borderRadius: '0%',
       color: '#18191B',
-      bgcolor: '#fff',
+      bgcolor: 'transparent',
       mx: 1,
       '&:hover': { bgcolor: '#18191B', color: '#fff' },
     }}
@@ -117,7 +118,7 @@ export default function SpotlightCarousel() {
       <Box
         sx={{
           mb: 3,
-          px: { xs: 2, md: 4 },
+          px: { xs: 2, md: 7 },
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -127,19 +128,19 @@ export default function SpotlightCarousel() {
           <Typography
             variant="h1"
             sx={{
-              fontWeight: 700,
+              fontWeight: 500,
               mb: 1,
-              fontFamily: 'Satoshi, sans-serif',
               textAlign: { xs: 'center', md: 'left' },
             }}
           >
             In the Spotlight
           </Typography>
           <Typography
-            variant="b1"
             sx={{
-              color: 'text.secondary',
-              maxWidth: 600,
+              color: '#5C6170',
+              fontSize: { md: '20px', xs: '14px' },
+              maxWidth: 500,
+              fontWeight: 500,
               display: 'flex',
               textAlign: { xs: 'center', md: 'left' },
             }}
@@ -157,9 +158,9 @@ export default function SpotlightCarousel() {
       </Box>
       <Box
         sx={{
-          px: { xs: 0, md: 4 },
+          px: { xs: 0, md: 6 },
           width: '100%',
-          maxWidth: 1200,
+          // maxWidth: 1200,
           mx: 'auto',
         }}
       >
@@ -170,6 +171,7 @@ export default function SpotlightCarousel() {
               sx={{
                 minWidth: 0,
                 width: '100%',
+                backgroundColor: '#FDF8F3',
                 boxShadow: 0,
                 padding: '10px',
                 borderRadius: '2px',
@@ -189,23 +191,23 @@ export default function SpotlightCarousel() {
                 sx={{ height: 180, objectFit: 'cover' }}
               />
               <CardContent sx={{ padding: '0px', paddingTop: '16px' }}>
-                {/* <Typography
+                <Typography
                   variant="caption"
                   sx={{
-                    color: 'text.secondary',
+                    color: '#DDAB76',
                     mb: 0.5,
                     display: 'block',
                     fontFamily: 'Satoshi, sans-serif',
-                    fontWeight: 400,
-                    fontSize: '14px',
+                    fontWeight: 700,
+                    fontSize: { md: '14px', xs: '12px' },
                   }}
                 >
-                  {item.type}
-                </Typography> */}
+                  {item.date}
+                </Typography>
                 <Typography
                   sx={{
                     fontWeight: 700,
-                    fontSize: '20px',
+                    fontSize: { md: '20px', xs: '18px' },
                     fontFamily: 'Satoshi, sans-serif',
                     mb: 1,
                   }}
@@ -214,8 +216,8 @@ export default function SpotlightCarousel() {
                 </Typography>
                 <Typography
                   sx={{
-                    color: 'text.secondary',
                     fontWeight: 400,
+                    color: '#333333',
                     fontSize: '14px',
                     fontFamily: 'Satoshi, sans-serif',
                   }}
