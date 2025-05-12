@@ -1,7 +1,7 @@
 import { useScroll } from 'framer-motion';
 // components
 import ScrollProgress from 'src/components/scroll-progress';
-import ContactConsultationForm from 'src/components/home-stories/ContactConsultationForm';
+import ContactConsultationForm from 'src/components/contact-consultation-form/ContactConsultationForm';
 import OurProjectHero from '../our-project-hero';
 import OurProjectTabs from '../our-project-tabs';
 
