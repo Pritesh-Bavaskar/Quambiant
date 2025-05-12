@@ -198,7 +198,7 @@ const TimelineItem = ({
           zIndex: 1,
           '&.MuiGrid-root': {
             paddingLeft: {
-              xs: 1, // No padding on mobile
+              xs: 1.5, // No padding on mobile
               md: 5,
             },
             paddingTop: {
