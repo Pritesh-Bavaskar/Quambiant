@@ -14,7 +14,7 @@ export default function LaunchCard({ project }) {
       sx={{
         bgcolor: '#FDF8F3',
         overflow: 'hidden',
-        padding: '4px',
+        padding: '15px',
         // border: '1px solid rgba(0, 0, 0, 0.12)',
       }}
     >

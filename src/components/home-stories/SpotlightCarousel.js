@@ -12,7 +12,7 @@ const spotlightData = [
     title: 'Sustainable Living: The Future Of Modern Homes',
     description:
       'Discover advances in shaping the future of residential living. Observe our eco-friendly practices, from energy-efficient design.',
-    type: 'TYPE: 20/5',
+    date: '17 FEB, 2016',
     image: '/assets/images/home/spotlight.png',
   },
   {
@@ -20,7 +20,7 @@ const spotlightData = [
     title: 'Sustainable Living: The Future Of Modern Homes',
     description:
       'Observe architecture in shaping the future of residential living. Discover how our eco-friendly practices, from energy-efficient design.',
-    type: 'TYPE: 20/5',
+    date: '17 FEB, 2016',
     image: '/assets/images/home/spotlight.png',
   },
   {
@@ -28,7 +28,7 @@ const spotlightData = [
     title: 'Sustainable Living: The Future Of Modern Homes',
     description:
       'Discover advances in shaping the future of residential living. Observe our eco-friendly practices, from energy-efficient design.',
-    type: 'TYPE: 20/5',
+    date: '17 FEB, 2016',
     image: '/assets/images/home/spotlight.png',
   },
   {
@@ -36,7 +36,7 @@ const spotlightData = [
     title: 'Sustainable Living: The Future Of Modern Homes',
     description:
       'Observe architecture in shaping the future of residential living. Discover how our eco-friendly practices, from energy-efficient design.',
-    type: 'TYPE: 20/5',
+    date: '17 FEB, 2016',
     image: '/assets/images/home/spotlight.png',
   },
 ];
@@ -140,6 +140,7 @@ export default function SpotlightCarousel() {
               color: '#5C6170',
               fontSize: { md: '20px', xs: '14px' },
               maxWidth: 500,
+              fontWeight: 500,
               display: 'flex',
               textAlign: { xs: 'center', md: 'left' },
             }}
@@ -190,19 +191,19 @@ export default function SpotlightCarousel() {
                 sx={{ height: 180, objectFit: 'cover' }}
               />
               <CardContent sx={{ padding: '0px', paddingTop: '16px' }}>
-                {/* <Typography
+                <Typography
                   variant="caption"
                   sx={{
-                    color: 'text.secondary',
+                    color: '#DDAB76',
                     mb: 0.5,
                     display: 'block',
                     fontFamily: 'Satoshi, sans-serif',
-                    fontWeight: 400,
-                    fontSize: '14px',
+                    fontWeight: 700,
+                    fontSize: { md: '14px', xs: '12px' },
                   }}
                 >
-                  {item.type}
-                </Typography> */}
+                  {item.date}
+                </Typography>
                 <Typography
                   sx={{
                     fontWeight: 700,

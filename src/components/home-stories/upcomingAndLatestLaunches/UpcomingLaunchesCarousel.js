@@ -180,14 +180,23 @@ export default function UpcomingLaunchesCarousel() {
           {...carousel.carouselSettings}
           sx={{
             '& .slick-list': {
-              margin: '0 -15px',
+              margin: {
+                xs: '0 -15px',
+                md: '0 -30px', // Increased negative margin for desktop
+              },
             },
             '& .slick-slide': {
-              padding: '0 15px',
+              padding: {
+                xs: '0 15px',
+                md: '0 30px', // Increased padding for desktop
+              },
               boxSizing: 'border-box',
             },
             '& .slick-slide > div': {
-              padding: '20px',
+              padding: {
+                xs: '20px',
+                md: '30px', // Increased inner padding for desktop
+              },
               boxSizing: 'border-box',
             },
           }}

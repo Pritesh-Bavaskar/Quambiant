@@ -78,7 +78,19 @@ export default function ContactConsultationForm() {
             variant="standard"
             fullWidth
             required
-            InputProps={{ disableUnderline: false }}
+            InputProps={{ 
+              disableUnderline: false,
+              sx: { 
+                fontSize: { xs: '14px', md: '16px' },
+                fontWeight: 500
+              }
+            }}
+            InputLabelProps={{
+              sx: { 
+                fontSize: { xs: '14px', md: '16px' },
+                fontWeight: 500
+              }
+            }}
           />
           <TextField
             label="Phone Number (required)"
@@ -86,7 +98,19 @@ export default function ContactConsultationForm() {
             fullWidth
             required
             size="small"
-            InputProps={{ disableUnderline: false }}
+            InputProps={{ 
+              disableUnderline: false,
+              sx: { 
+                fontSize: { xs: '14px', md: '16px' },
+                fontWeight: 500
+              }
+            }}
+            InputLabelProps={{
+              sx: { 
+                fontSize: { xs: '14px', md: '16px' },
+                fontWeight: 500
+              }
+            }}
           />
         </Box>
 
@@ -104,15 +128,29 @@ export default function ContactConsultationForm() {
             variant="standard"
             fullWidth
             size="small"
-            InputProps={{ disableUnderline: false }}
+            InputProps={{ 
+              disableUnderline: false,
+              sx: { 
+                fontSize: { xs: '14px', md: '16px' },
+                fontWeight: 500
+              }
+            }}
+            InputLabelProps={{
+              sx: { 
+                fontSize: { xs: '14px', md: '16px' },
+                fontWeight: 500
+              }
+            }}
           />
           <FormControl fullWidth size="small" variant="standard">
-            <InputLabel>Preferred Location</InputLabel>
+            <InputLabel sx={{ fontSize: { xs: '14px', md: '16px' }, fontWeight: 500 }}>Preferred Location</InputLabel>
             <Select
               label="Preferred Location"
               defaultValue=""
               disableUnderline={false}
               sx={{
+                fontSize: { xs: '14px', md: '16px' },
+                fontWeight: 500,
                 '&:before': {
                   borderBottom: '1px solid #ccc',
                 },
@@ -147,7 +185,11 @@ export default function ContactConsultationForm() {
         >
           <FormControlLabel
             control={<Checkbox sx={{ p: 0, pr: 1.5, borderRadius: 0 }} />}
-            label={<Typography variant="body3">Send recent offers and news on whatsapp</Typography>}
+            label={
+              <Typography sx={{ color: '#232323', fontSize: { xs: '14px', md: '16px' }, fontWeight: 500 }} variant="body3">
+                Send recent offers and news on whatsapp
+              </Typography>
+            }
             sx={{
               m: 0,
               color: '#232323',
@@ -187,7 +229,8 @@ export default function ContactConsultationForm() {
               mx: 2,
               color: '#232323',
               whiteSpace: 'nowrap',
-              fontSize: '14px',
+              fontSize: { xs: '14px', md: '16px' },
+              fontWeight: 500
             }}
           >
             Reach out to us directly on

@@ -76,8 +76,8 @@ export default function BuildGreenSection() {
         <Typography
           variant="h1"
           sx={{
-            color: '#fff',
-            fontWeight: 700,
+            color: '#FDF8F3',
+            fontWeight: 500,
             mb: 2,
             textAlign: 'center',
             textShadow: '0 2px 16px rgba(0,0,0,0.4)',
@@ -87,7 +87,7 @@ export default function BuildGreenSection() {
         </Typography>
         <Typography
           sx={{
-            color: '#fff',
+            color: '#C7C9D1',
             maxWidth: 900,
             mb: 0,
             textAlign: 'center',
@@ -172,7 +172,10 @@ export default function BuildGreenSection() {
                 >
                   {stat.value}
                 </Box>
-                <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.92)' }}>
+                <Typography
+                  variant="body1"
+                  sx={{ color: 'rgba(255,255,255,0.92)', fontWeight: 500, fontSize: { xs: '16px', md: '20px' } }}
+                >
                   {stat.description}
                 </Typography>
               </Paper>

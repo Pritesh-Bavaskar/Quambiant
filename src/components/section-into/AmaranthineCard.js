@@ -174,7 +174,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
           sx={{
             color: 'white',
             fontWeight: 400,
-            mb: 6,
+            mb: 12,
             textShadow: '0px 2px 10px rgba(0,0,0,0.6)',
             letterSpacing: '0.05em',
           }}

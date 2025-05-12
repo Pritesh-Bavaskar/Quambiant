@@ -153,7 +153,7 @@ export default function HomeStories() {
       <Box sx={{ textAlign: 'center', mb: 6 }}>
         <Typography variant="h1">Home Stories</Typography>
         <Typography
-          sx={{ mt: 1, maxWidth: { xs: '90%', md: 900 }, mx: 'auto', fontSize: { xs: 14, md: 20 } }}
+          sx={{ mt: 1, fontWeight: 500, maxWidth: { xs: '90%', md: 900 }, mx: 'auto', fontSize: { xs: 14, md: 20 } }}
         >
           Every home has a story. Here are the heartfelt experiences of those who now call a
           Quambiant residence their own

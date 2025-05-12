@@ -7,7 +7,11 @@ export function LandingCard({ title, subtitle, buttonText, buttonClick }) {
     <m.div
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: 'easeOut' }}
+      transition={{
+        duration: 0.8,
+        ease: 'easeOut',
+        delay: 4, // Delay to match the IntroSection animation completion
+      }}
     >
       <Box
         component={m.div}
@@ -33,7 +37,9 @@ export function LandingCard({ title, subtitle, buttonText, buttonClick }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Typography variant="h1">{title}</Typography>
+          <Typography variant="h1" sx={{ lineHeight: { xs: '32px', md: '48px' } }}>
+            {title}
+          </Typography>
         </m.div>
 
         <m.div
@@ -45,7 +51,7 @@ export function LandingCard({ title, subtitle, buttonText, buttonClick }) {
             variant="body1"
             sx={{
               fontWeight: '500 !important',
-              fontSize: { xs : "14px",  md: "18px"},
+              fontSize: { xs: '14px', md: '18px' },
               color: '#CCCCCC',
             }}
           >
