@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Box, Grid, Typography, Card, CardContent, CardMedia, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { m as motion, useTransform } from 'framer-motion';
+import { m , useTransform } from 'framer-motion';
 import backgroundImage from 'src/assets/media/landing/card/bck-img.png';
 import img1 from 'src/assets/media/landing/card/card-img1.png';
 import img2 from 'src/assets/media/landing/card/card-img2.png';
@@ -166,7 +166,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
         alignItems: 'center',
       }}
     >
-      <motion.div style={{ opacity: titleOpacity }}>
+      <m.div style={{ opacity: titleOpacity }}>
         <Typography
           align="center"
           fontFamily={`'Playfair Display', serif`}
@@ -181,7 +181,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
         >
           AMARANTHINE
         </Typography>
-      </motion.div>
+      </m.div>
 
       {isMobile ? (
         <Box sx={{ width: '100%', position: 'relative' }}>
@@ -195,7 +195,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
           >
             <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
               {cards.map((card, index) => (
-                <motion.div
+                <m.div
                   key={index}
                   style={{
                     opacity: titleOpacity,
@@ -203,7 +203,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
                   }}
                 >
                   {renderCard(card)}
-                </motion.div>
+                </m.div>
               ))}
             </Carousel>
           </Box>
@@ -220,9 +220,9 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
         <Grid container spacing={4} justifyContent="center" maxWidth={1300}>
           {cards.map((card, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>
-              <motion.div style={{ opacity: opacities[index], y: yTransforms[index] }}>
+              <m.div style={{ opacity: opacities[index], y: yTransforms[index] }}>
                 {renderCard(card)}
-              </motion.div>
+              </m.div>
             </Grid>
           ))}
         </Grid>

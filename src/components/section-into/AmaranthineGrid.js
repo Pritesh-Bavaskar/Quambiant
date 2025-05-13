@@ -1,58 +1,39 @@
-import React, { useRef, useEffect } from 'react';
-import { Grid, Box, Typography, Button, useMediaQuery, useTheme } from '@mui/material';
+import React, { useRef } from 'react';
+import { Grid, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
-import { m, useScroll, useTransform, motionValue } from 'framer-motion'; // Ensure motionValue is imported
+import { m, useScroll, useTransform, motionValue } from 'framer-motion';
+
 import amaranthineImage1 from 'src/assets/media/landing/grid/grid-img1.png';
 import amaranthineImage2 from 'src/assets/media/landing/grid/grid-img2.png';
 import amaranthineImage3 from 'src/assets/media/landing/grid/grid-img3.png';
 import amaranthineImage4 from 'src/assets/media/landing/grid/grid-img4.png';
-import amaranthineImage5 from 'src/assets/media/landing/grid/grid-img5.png';
 import amaranthineImage6 from 'src/assets/media/landing/grid/grid-img6.png';
 
-export default function AmaranthineGrid({ onFifthImageProgress = () => {} }) {
+export default function AmaranthineGrid() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
   const ref = useRef(null);
 
-  // Scroll tracking for desktop
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'end start'],
   });
-
-  // Only create the transform if scrollYProgress exists
-  const fifthImageProgress = useTransform(
-    scrollYProgress || 0, // Fallback to 0 if scrollYProgress is undefined
-    [0.3, 0.5],
-    [0, 1]
-  );
-
-  useEffect(() => {
-    if (!isMobile && fifthImageProgress) {
-      const unsubscribe = fifthImageProgress.onChange(onFifthImageProgress);
-      return () => {
-        unsubscribe(); // Ensure cleanup
-      };
-    }
-    return undefined; // Ensure that the useEffect always returns something
-  }, [fifthImageProgress, onFifthImageProgress, isMobile]);
 
   const images = [
     amaranthineImage1,
     amaranthineImage2,
     amaranthineImage3,
     amaranthineImage4,
-    amaranthineImage5,
-    amaranthineImage6,
+    amaranthineImage6, // Note: Skipped index 4 (img5)
   ];
 
+  // Special transform for the title block (grid item 5)
+  const titleBlockScale = useTransform(scrollYProgress, [0.7, 1], [1, 1.2]);
+
   if (isMobile) {
-    // Mobile view layout
     return (
       <Box ref={ref} sx={{ px: 2, width: '100%', pt: 30 }}>
         <Grid container spacing={2}>
-          {/* Top 2 images */}
           <Grid item xs={6}>
             <ImageBox src={images[0]} alt="img1" />
           </Grid>
@@ -60,7 +41,6 @@ export default function AmaranthineGrid({ onFifthImageProgress = () => {} }) {
             <ImageBox src={images[1]} alt="img2" />
           </Grid>
 
-          {/* Center title block */}
           <Grid item xs={12}>
             <Box
               sx={{
@@ -85,7 +65,6 @@ export default function AmaranthineGrid({ onFifthImageProgress = () => {} }) {
             </Box>
           </Grid>
 
-          {/* Bottom 2 images */}
           <Grid item xs={6}>
             <ImageBox src={images[2]} alt="img3" />
           </Grid>
@@ -97,7 +76,6 @@ export default function AmaranthineGrid({ onFifthImageProgress = () => {} }) {
     );
   }
 
-  // Desktop View (Unchanged)
   return (
     <Grid
       ref={ref}
@@ -112,43 +90,68 @@ export default function AmaranthineGrid({ onFifthImageProgress = () => {} }) {
         pt: 30,
       }}
     >
-      {images.map((img, index) => (
-        <Grid
-          key={index}
-          item
-          xs={12}
-          sm={6}
-          md={4}
-          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+      <Grid item xs={12} sm={6} md={4}>
+        <ImageBox src={images[0]} alt="Image 1" scrollYProgress={scrollYProgress} />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4}>
+        <ImageBox src={images[1]} alt="Image 2" scrollYProgress={scrollYProgress} />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4}>
+        <ImageBox src={images[2]} alt="Image 3" scrollYProgress={scrollYProgress} />
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4}>
+        <ImageBox src={images[3]} alt="Image 4" scrollYProgress={scrollYProgress} />
+      </Grid>
+
+      {/* ✅ STATIC TITLE BLOCK WITH SPECIAL PARALLAX EFFECT */}
+      <Grid item xs={12} sm={6} md={4}>
+        <m.div
+          style={{
+            width: '100%',
+            height: '100%',
+            scale: titleBlockScale,
+            transformOrigin: 'center center',
+          }}
         >
-          <ImageBox
-            src={img}
-            alt={`Image ${index + 1}`}
-            scrollYProgress={scrollYProgress}
-            isFifthImage={index === 4}
-            fifthImageProgress={fifthImageProgress}
-          />
-        </Grid>
-      ))}
+          <Box
+            sx={{
+              backgroundColor: '#0A2640',
+              width: '100%',
+              color: 'white',
+              aspectRatio: '43 / 30',
+              textAlign: 'center',
+              alignItems: 'center',
+              justifyContent: 'center',
+              display: 'flex',
+              flexDirection: 'column',
+              py: 6,
+              px: 2,
+            }}
+          >
+            <Typography fontFamily={`'Playfair Display', serif`} fontSize={38} fontWeight={400}>
+              AMARANTHINE
+            </Typography>
+            <Typography mt={1} fontSize={12} fontWeight={500}>
+              2/3 BHK LUXURY APARTMENTS
+            </Typography>
+          </Box>
+        </m.div>
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4}>
+        <ImageBox src={images[4]} alt="Image 6" scrollYProgress={scrollYProgress} />
+      </Grid>
     </Grid>
   );
 }
 
-function ImageBox({ src, alt, scrollYProgress, isFifthImage = false, fifthImageProgress }) {
+function ImageBox({ src, alt, scrollYProgress }) {
   const ref = useRef(null);
-
-  // Ensure default motion values if the progress values are undefined or null
-  const validScrollYProgress = scrollYProgress || motionValue(0); // Default to motionValue(0)
-  const validFifthImageProgress = fifthImageProgress || motionValue(0); // Default to motionValue(0)
-
-  // Default scale if no progress
-  const defaultScale = useTransform(validScrollYProgress, [0, 1], [1.4, 1]);
-
-  // For the fifth image, use a different scale based on the `fifthImageProgress`
-  const fifthImageScale = useTransform(validFifthImageProgress, [0, 1], [1, 1.3]);
-
-  // Use the scale transform depending on whether it's the 5th image
-  const scale = isFifthImage ? fifthImageScale : defaultScale;
+  const validScrollYProgress = scrollYProgress || motionValue(0);
+  const scale = useTransform(validScrollYProgress, [0, 1], [1.4, 1]);
 
   return (
     <Box
@@ -158,7 +161,6 @@ function ImageBox({ src, alt, scrollYProgress, isFifthImage = false, fifthImageP
         overflow: 'hidden',
         boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
         position: 'relative',
-        zIndex: isFifthImage ? 10 : 1,
         flexGrow: 1,
       }}
     >
@@ -189,14 +191,10 @@ function ImageBox({ src, alt, scrollYProgress, isFifthImage = false, fifthImageP
   );
 }
 
-AmaranthineGrid.propTypes = {
-  onFifthImageProgress: PropTypes.func,
-};
+AmaranthineGrid.propTypes = {};
 
 ImageBox.propTypes = {
   src: PropTypes.string.isRequired,
   alt: PropTypes.string.isRequired,
   scrollYProgress: PropTypes.object,
-  isFifthImage: PropTypes.bool,
-  fifthImageProgress: PropTypes.object,
 };
