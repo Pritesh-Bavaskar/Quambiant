@@ -110,7 +110,7 @@ export default function BuildGreenSection() {
           width: '100%',
           zIndex: 4,
           pb: { xs: 3, md: 5 },
-          px: 6,
+          px: { xs: 2, md: 6 }, // reduced padding on xs
           pt: { xs: 16, md: 2 },
         }}
       >
@@ -129,11 +129,9 @@ export default function BuildGreenSection() {
                 aspectRatio: { xs: '320 / 136', md: '420 / 178' },
               }}
             >
-              {/* This Box uses a background image of the blurred card */}
               <Box
                 sx={{
-                  width: '100%',
-                  minWidth: 420,
+                  width: { xs: '100%', sm: 420 },
                   aspectRatio: { xs: '320 / 136', md: '420 / 178' },
                   backgroundImage: 'url(/assets/images/home/Subtract.png)',
                   backgroundSize: 'cover',
@@ -159,7 +157,7 @@ export default function BuildGreenSection() {
                     mr: 2,
                     background: 'transparent',
                     color: '#fff',
-                    marginLeft: '50px',
+                    ml: { xs: '40px', md: '45px' },
                   }}
                 >
                   {stat.value}
