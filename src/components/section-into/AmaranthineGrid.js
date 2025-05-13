@@ -9,7 +9,7 @@ import amaranthineImage3 from 'src/assets/media/landing/grid/grid-img3.png';
 import amaranthineImage4 from 'src/assets/media/landing/grid/grid-img4.png';
 import amaranthineImage6 from 'src/assets/media/landing/grid/grid-img6.png';
 
-export default function AmaranthineGrid() {
+export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const ref = useRef(null);
@@ -27,13 +27,17 @@ export default function AmaranthineGrid() {
     amaranthineImage6, // Note: Skipped index 4 (img5)
   ];
 
-  // Special transform for the title block (grid item 5)
-  const titleBlockScale = useTransform(scrollYProgress, [0.7, 1], [1, 1.2]);
+  // Default animations if not provided through props
+  const defaultScale = useTransform(scrollYProgress, [0.7, 1], [1, 1.2]);
+  
+  // Use provided scale/opacity for fifth item if available, otherwise use defaults
+  const titleBlockScale = fifthItemScale || defaultScale;
+  const titleBlockOpacity = fifthItemOpacity || 1;
 
   if (isMobile) {
     return (
-      <Box ref={ref} sx={{ px: 2, width: '100%', pt: 30 }}>
-        <Grid container spacing={2}>
+      <Box ref={ref} sx={{ px: 2, width: '100%', pt: 30, display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+        <Grid container spacing={2} sx={{ maxWidth: 'md', justifyContent: 'center' }}>
           <Grid item xs={6}>
             <ImageBox src={images[0]} alt="img1" />
           </Grid>
@@ -42,27 +46,34 @@ export default function AmaranthineGrid() {
           </Grid>
 
           <Grid item xs={12}>
-            <Box
-              sx={{
-                backgroundColor: '#0A2640',
-                color: 'white',
-                aspectRatio: '35 / 26',
-                textAlign: 'center',
-                alignItems: 'center',
-                justifyContent: 'center',
-                display: 'flex',
-                flexDirection: 'column',
-                py: 6,
-                px: 2,
+            <m.div
+              style={{
+                opacity: titleBlockOpacity,
+                scale: titleBlockScale
               }}
             >
+              <Box
+                sx={{
+                  backgroundColor: '#0A2640',
+                  color: 'white',
+                  aspectRatio: '35 / 26',
+                  textAlign: 'center',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  py: 6,
+                  px: 2,
+                }}
+              >
               <Typography fontFamily={`'Playfair Display', serif`} fontSize={38} fontWeight={400}>
                 AMARANTHINE
               </Typography>
               <Typography mt={1} fontSize={12} fontWeight={500}>
                 2/3 BHK LUXURY APARTMENTS
               </Typography>
-            </Box>
+              </Box>
+            </m.div>
           </Grid>
 
           <Grid item xs={6}>
@@ -77,19 +88,27 @@ export default function AmaranthineGrid() {
   }
 
   return (
-    <Grid
+    <Box
       ref={ref}
-      container
-      rowSpacing={2}
-      columnSpacing={2}
-      justifyContent="center"
-      alignItems="center"
       sx={{
-        height: 'fit-content',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '100vh',
+        width: '100%',
         px: 4,
-        pt: 30,
       }}
     >
+      <Grid
+        container
+        rowSpacing={2}
+        columnSpacing={2}
+        sx={{
+          maxWidth: 'xl',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
       <Grid item xs={12} sm={6} md={4}>
         <ImageBox src={images[0]} alt="Image 1" scrollYProgress={scrollYProgress} />
       </Grid>
@@ -107,13 +126,14 @@ export default function AmaranthineGrid() {
       </Grid>
 
       {/* ✅ STATIC TITLE BLOCK WITH SPECIAL PARALLAX EFFECT */}
-      <Grid item xs={12} sm={6} md={4}>
+      <Grid item xs={12} sm={6} md={4} zIndex={1000}>
         <m.div
           style={{
             width: '100%',
             height: '100%',
             scale: titleBlockScale,
-            transformOrigin: 'center center',
+            transformOrigin: 'center 75%',
+            opacity: titleBlockOpacity
           }}
         >
           <Box
@@ -144,7 +164,8 @@ export default function AmaranthineGrid() {
       <Grid item xs={12} sm={6} md={4}>
         <ImageBox src={images[4]} alt="Image 6" scrollYProgress={scrollYProgress} />
       </Grid>
-    </Grid>
+      </Grid>
+    </Box>
   );
 }
 
@@ -191,7 +212,10 @@ function ImageBox({ src, alt, scrollYProgress }) {
   );
 }
 
-AmaranthineGrid.propTypes = {};
+AmaranthineGrid.propTypes = {
+  fifthItemScale: PropTypes.object,
+  fifthItemOpacity: PropTypes.object,
+};
 
 ImageBox.propTypes = {
   src: PropTypes.string.isRequired,

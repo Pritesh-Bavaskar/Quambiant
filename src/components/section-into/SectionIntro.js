@@ -1,32 +1,63 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { useScroll, useTransform, m } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import AmaranthineGrid from './AmaranthineGrid';
 import AmaranthineCard from './AmaranthineCard';
 
 export function SectionIntro() {
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const containerRef = useRef(null);
-  const [fifthImageProgress, setFifthImageProgress] = useState(0);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  // Animation values
+  // First section animations
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
   const y2 = useTransform(scrollYProgress, [0, 1], [0, -200]);
-  const opacity1 = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8], [1, 1, 1, 0.5, 0]);
-  const opacity2 = useTransform(scrollYProgress, [0, 0.2, 0.4, 0.6, 0.8], [0, 0, 1, 1, 0]);
-  const opacity3 = useTransform(scrollYProgress, [0.4, 0.6, 0.8], [0, 1, 1]);
+  const opacity1 = useTransform(scrollYProgress, [0, 0.2, 0.4], [1, 1, 0]);
   const scale1 = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
-  const scale2 = useTransform(scrollYProgress, [0.3, 0.5], [0.9, 1]);
 
-  // Adjust card section opacity based on fifth image progress
-  const cardOpacity = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
-  const cardScale = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
+  // Grid section animations
+  const gridOpacity = useTransform(scrollYProgress, [0.2, 0.5, 0.6], [0, 1, 1]);
+  const gridScale = useTransform(scrollYProgress, [0.2, 0.5], [0.9, 1]);
+
+  // Fifth grid item and card synchronized animations
+  const transition = {
+    start: 0.5,
+    mid1: 0.6,
+    mid2: 0.65,
+    mid3: 0.7,
+    end: 0.8,
+  };
+
+  // Fifth grid item animations
+  const fifthItemScale = useTransform(
+    scrollYProgress,
+    [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
+    [1, 1.2, 1.4, 1.6, 1.8]
+  );
+  const fifthItemOpacity = useTransform(
+    scrollYProgress,
+    [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
+    [1, 0.6, 0.4, 0.2, 0]
+  );
+
+  // Card animations - start appearing as fifth item fades
+  const cardOpacity = useTransform(
+    scrollYProgress,
+    [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
+    [0, 0.4, 0.6, 0.8, 1]
+  );
+  const cardScale = useTransform(
+    scrollYProgress,
+    [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
+    [0.2, 0.4, 0.6, 0.8, 1]
+  );
 
   return (
-    <Box ref={containerRef} sx={{ position: 'relative', height: '400vh' }}>
+    <Box ref={containerRef} sx={{ position: 'relative', height: isDesktop ? '400vh' : '300vh' }}>
       {/* First Section - Intro */}
       <m.div
         style={{
@@ -56,7 +87,7 @@ export function SectionIntro() {
 
         <Typography
           sx={{ fontSize: { xs: 14, md: 20 }, fontWeight: 500, pt: 1 }}
-          maxWidth={{xs: "90%", md:"914px"}}
+          maxWidth={{ xs: '90%', md: '914px' }}
           fontFamily="Satoshi Variable, sans-serif"
           color="text.secondary"
         >
@@ -65,46 +96,134 @@ export function SectionIntro() {
         </Typography>
       </m.div>
 
-      {/* Second Section - Grid */}
-      <m.div
-        style={{
-          position: 'sticky',
-          top: 0,
-          height: '100vh',
-          y: y2,
-          opacity: opacity2,
-          scale: scale2,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'white',
-        }}
-      >
-        <AmaranthineGrid onFifthImageProgress={setFifthImageProgress} />
-      </m.div>
-
-      {/* Third Section - Cards */}
-      <m.div
-        style={{
-          position: 'relative',
-          height: '200vh',
-        }}
-      >
+      {/* Grid and Card Transition Section */}
+      {isDesktop ? (
         <m.div
           style={{
             position: 'sticky',
             top: 0,
-            opacity: cardOpacity,
-            scale: cardScale,
             height: '100vh',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            width: '100%',
+            overflow: 'hidden',
           }}
         >
-          <AmaranthineCard scrollYProgress={scrollYProgress} />
+          {/* Grid Section */}
+          <m.div
+            style={{
+              opacity: gridOpacity,
+              scale: gridScale,
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              backgroundColor: 'white',
+            }}
+          >
+            <AmaranthineGrid fifthItemScale={fifthItemScale} fifthItemOpacity={fifthItemOpacity} />
+          </m.div>
+
+          {/* Card Section */}
+          <m.div
+            style={{
+              opacity: cardOpacity,
+              scale: cardScale,
+              transformOrigin: 'center 80%',
+              position: 'sticky',
+              width: '100%',
+              height: '100vh',
+            }}
+          >
+            <AmaranthineCard scrollYProgress={scrollYProgress} />
+          </m.div>
         </m.div>
-      </m.div>
+      ) : (
+        // Mobile view with parallax
+        <>
+          {/* First Section - Intro */}
+          <m.div
+            style={{
+              position: 'sticky',
+              top: 0,
+              height: '100vh',
+              y: y1,
+              opacity: opacity1,
+              scale: scale1,
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: '#FDF8F3',
+              padding: 2,
+              textAlign: 'center',
+            }}
+          >
+            <Typography
+              variant="h2"
+              fontWeight="bold"
+              fontFamily={`'Playfair Display', serif`}
+              gutterBottom
+            >
+              Landmarks of Excellence in Residential Living
+            </Typography>
+
+            <Typography
+              sx={{ fontSize: 14, fontWeight: 500, pt: 1 }}
+              maxWidth="90%"
+              fontFamily="Satoshi Variable, sans-serif"
+              color="text.secondary"
+            >
+              Explore our finest residential projects that redefine luxury, innovation, and
+              craftsmanship— each home built to perfection, each space designed for life.
+            </Typography>
+          </m.div>
+
+          {/* Grid Section */}
+          <m.div
+            style={{
+              position: 'sticky',
+              top: 0,
+              height: '100vh',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: 'white',
+              y: y2,
+              opacity: gridOpacity,
+              scale: gridScale,
+            }}
+          >
+            <AmaranthineGrid fifthItemScale={fifthItemScale} fifthItemOpacity={fifthItemOpacity} />
+          </m.div>
+
+          {/* Card Section */}
+          <m.div
+            style={{
+              position: 'sticky',
+              top: 0,
+              height: '100vh',
+              width: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <m.div
+              style={{
+                opacity: cardOpacity,
+                scale: cardScale,
+                transformOrigin: 'center 80%',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <AmaranthineCard scrollYProgress={scrollYProgress} />
+            </m.div>
+          </m.div>
+        </>
+      )}
     </Box>
   );
 }
