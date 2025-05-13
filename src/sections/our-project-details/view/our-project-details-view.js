@@ -4,7 +4,8 @@ import ScrollProgress from 'src/components/scroll-progress';
 import HomeStories from 'src/components/home-stories/HomeStories';
 import AwardsSection from 'src/components/award-section/AwardsSection';
 import ContactConsultationForm from 'src/components/contact-consultation-form/ContactConsultationForm';
-import OurProjectHero from '../our-project-details-hero';
+import OurProjectDetailsOverviewStats from '../our-project-details-overview-stats';
+import OurProjectDetailsHero from '../our-project-details-hero';
 
 // ----------------------------------------------------------------------
 
@@ -15,7 +16,8 @@ export default function OurProjectDetailsView() {
     <>
       <ScrollProgress scrollYProgress={scrollYProgress} />
 
-      <OurProjectHero />
+      <OurProjectDetailsHero />
+      <OurProjectDetailsOverviewStats />
       <AwardsSection />
       <HomeStories />
       <ContactConsultationForm />
