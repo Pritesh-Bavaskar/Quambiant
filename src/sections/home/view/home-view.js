@@ -11,6 +11,7 @@ import AmaranthineCard from 'src/components/section-into/AmaranthineCard';
 import ConceptToConcreteSection from 'src/sections/home/ConceptToConcreteSection';
 import ContactConsultationForm from 'src/components/contact-consultation-form/ContactConsultationForm';
 import UpcomingLaunchesCarousel from 'src/components/upcoming-and-latest-launches/UpcomingLaunchesCarousel';
+import EmiCalculator from 'src/components/emi-calculator/EmiCalculator';
 import IntroSection from 'src/sections/home/IntroSection';
 import HomeHero from '../home-hero';
 import CountUpSection from '../../../components/count-up/CountUp';

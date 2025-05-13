@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import bckImg from 'src/assets/media/landing/bck_img.png';
 import loaderImg from 'src/assets/media/landing/quambiant-loader.svg';
+import loaderImgMob from 'src/assets/media/landing/quambiant-loader-mob.svg';
 
 export default function IntroSection() {
   const [isVisible, setIsVisible] = useState(true);
   const [isZoomed, setIsZoomed] = useState(false);
   const [stage, setStage] = useState(0); // 0: dark, 1: white, 2: background
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -54,10 +65,20 @@ export default function IntroSection() {
     backgroundColor: '#071317',
     backgroundImage: stage === 2 ? `url(${bckImg})` : 'none',
     backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundPosition: isMobile ? '20% center' : 'center',
     transition: 'all 1s ease',
     opacity: isVisible ? 1 : 0,
     pointerEvents: 'auto',
+  };
+
+  const darkOverlayStyle = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    zIndex: 1,
   };
 
   const overlayStyle = {
@@ -83,16 +104,18 @@ export default function IntroSection() {
     height: '100vh',
     objectFit: 'cover',
     opacity: isZoomed ? 1 : 1,
-    transition: 'all 1s ease',
+    transition: 'all 2.5s ease',
     transform: isZoomed ? 'scale(100)' : 'scale(1)',
+    transformOrigin: isMobile ? 'calc(50% + 5px) center' : 'calc(50% + 20px) center'
   };
 
   if (!isVisible) return null;
 
   return (
     <div style={containerStyle}>
+      <div style={darkOverlayStyle} />
       <div style={overlayStyle} />
-      <img src={loaderImg} alt="Quambiant" style={loaderStyle} />
+      <img src={isMobile ? loaderImgMob : loaderImg} alt="Quambiant" style={loaderStyle} />
     </div>
   );
 }
