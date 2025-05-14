@@ -20,6 +20,7 @@ import { useResponsive } from 'src/hooks/use-responsive';
 import { bgBlur } from 'src/theme/css';
 // routes
 import { paths } from 'src/routes/paths';
+import { useLocation } from 'react-router-dom';
 // components
 import Logo from 'src/components/logo';
 import Label from 'src/components/label';
@@ -35,20 +36,23 @@ import { SettingsButton, HeaderShadow, LoginButton } from '../_common';
 
 export default function Header() {
   const theme = useTheme();
+  const location = useLocation();
 
   const mdUp = useResponsive('up', 'md');
 
   const offsetTop = useOffSetTop(HEADER.H_DESKTOP);
+
+  const delay = location.pathname === '/' ? 4 : 0;
 
   return (
     <AppBar position="absolute">
       <m.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ 
-          duration: 0.8, 
+        transition={{
+          duration: 0.8,
           ease: 'easeOut',
-          delay: 4 // Delay to match the IntroSection animation completion
+          delay
         }}
       >
         <Toolbar

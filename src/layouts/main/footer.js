@@ -18,31 +18,7 @@ import { _socials } from 'src/_mock';
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 import SvgColor from 'src/components/svg-color';
-
-
-// ----------------------------------------------------------------------
-
-const LINKS = [
-  {
-    headline: 'Quambiant',
-    children: [
-      { name: 'About us', href: paths.about },
-      { name: 'Contact us', href: paths.contact },
-      { name: 'FAQs', href: paths.faqs },
-    ],
-  },
-  {
-    headline: 'Legal',
-    children: [
-      { name: 'Terms and Condition', href: '#' },
-      { name: 'Privacy Policy', href: '#' },
-    ],
-  },
-  {
-    headline: 'Contact',
-    children: [{ name: 'support@Quambiant.cc', href: '#' }],
-  },
-];
+import React, { useState } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -74,6 +50,12 @@ const styles = {
 };
 
 export default function Footer() {
+  const [isHovering, setIsHovering] = useState(false);
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    setCursorPosition({ x: e.clientX, y: e.clientY });
+  };
   const mainFooter = (
     <Box
       component="footer"
@@ -92,7 +74,163 @@ export default function Footer() {
         }}
       >
         <Divider sx={{ bgcolor: 'rgba(255,255,255,0.2)', mb: { xs: 3, md: 5 } }} />
-        <Typography sx={styles.quambiant}>Quambiant</Typography>
+        <Box
+          sx={{
+            position: 'relative',
+            width: 'fit-content',
+            display: 'inline-block',
+          }}
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
+          onMouseMove={handleMouseMove}
+        >
+          <Typography
+            sx={{
+              ...styles.quambiant,
+              position: 'relative',
+              cursor: 'pointer ',
+            }}
+          >
+            Quambiant
+          </Typography>
+
+          {isHovering && (
+            <>
+              <Box
+                sx={{
+                  position: 'fixed',
+                  left: `${cursorPosition.x}px`,
+                  top: `${cursorPosition.y - 60}px`,
+                  transform: 'translate(-50%, -50%)',
+                  backgroundColor: '#f8f3ee',
+                  borderRadius: '999px',
+                  padding: '6px 20px',
+                  width: '150px',
+                  height: '42px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  overflow: 'hidden',
+                  pointerEvents: 'none',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                  zIndex: 1000,
+                }}
+              >
+                <Box
+                  sx={{
+                    position: 'relative',
+                    display: 'inline-block',
+                    whiteSpace: 'nowrap',
+                    animation: 'scrollText 8s linear infinite',
+                    maskImage:
+                      'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
+                    WebkitMaskImage:
+                      'linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%)',
+                  }}
+                >
+                  <Typography
+                    component="span"
+                    sx={{
+                      mx: 1,
+                      color: '#071317',
+                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontWeight: 500,
+                      fontSize: '14px',
+                    }}
+                  >
+                    Reliable
+                  </Typography>
+                  <Typography
+                    component="span"
+                    sx={{
+                      mx: 1,
+                      color: '#071317',
+                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontWeight: 500,
+                      fontSize: '14px',
+                    }}
+                  >
+                    •
+                  </Typography>
+                  <Typography
+                    component="span"
+                    sx={{
+                      mx: 1,
+                      color: '#071317',
+                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontWeight: 500,
+                      fontSize: '14px',
+                    }}
+                  >
+                    Sustainable
+                  </Typography>
+                  <Typography
+                    component="span"
+                    sx={{
+                      mx: 1,
+                      color: '#071317',
+                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontWeight: 500,
+                      fontSize: '14px',
+                    }}
+                  >
+                    •
+                  </Typography>
+                  <Typography
+                    component="span"
+                    sx={{
+                      mx: 1,
+                      color: '#071317',
+                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontWeight: 500,
+                      fontSize: '14px',
+                    }}
+                  >
+                    Scalable
+                  </Typography>
+                  <Typography
+                    component="span"
+                    sx={{
+                      mx: 1,
+                      color: '#071317',
+                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontWeight: 500,
+                      fontSize: '14px',
+                    }}
+                  >
+                    •
+                  </Typography>
+                  <Typography
+                    component="span"
+                    sx={{
+                      mx: 1,
+                      color: '#071317',
+                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontWeight: 500,
+                      fontSize: '14px',
+                    }}
+                  >
+                    Secure
+                  </Typography>
+                </Box>
+              </Box>
+
+              {/* Inject keyframes */}
+              <style>
+                {`
+              @keyframes scrollText {
+                0% {
+                  transform: translateX(0%);
+                }
+                100% {
+                  transform: translateX(-50%);
+                }
+              }
+            `}
+              </style>
+            </>
+          )}
+        </Box>
+
         <Divider
           sx={{ bgcolor: 'rgba(255,255,255,0.2)', mt: { xs: 3, md: 5 }, mb: { xs: 3, md: 5 } }}
         />
@@ -136,18 +274,18 @@ export default function Footer() {
             {/* Social Media Icons */}
             <Stack direction="row" spacing={1} alignItems="center" justifyContent="center" mb={4}>
               {socialIcons.map((social) => (
-              <IconButton
-                sx={{
-                  ml: 1,
-                  width: 18,
-                  height: 18,
-                  color: '#FDF8F3',
-                  padding: 0,
-                }}
-              >
-                <SvgColor src={social.icon} sx={{ width: 18, height: 18 }} />
-              </IconButton>
-               ))} 
+                <IconButton
+                  sx={{
+                    ml: 1,
+                    width: 18,
+                    height: 18,
+                    color: '#FDF8F3',
+                    padding: 0,
+                  }}
+                >
+                  <SvgColor src={social.icon} sx={{ width: 18, height: 18 }} />
+                </IconButton>
+              ))}
             </Stack>
             {/* Copyright */}
             <Typography
@@ -177,18 +315,18 @@ export default function Footer() {
               sx={{ flex: 1 }}
             >
               {socialIcons.map((social) => (
-              <IconButton
-                sx={{
-                  ml: 1,
-                  width: 22,
-                  height: 22,
-                  color: '#FDF8F3',
-                  padding: 0,
-                }}
-              >
-                <SvgColor src={social.icon} sx={{ width: 22, height: 22 }} />
-              </IconButton>
-               ))} 
+                <IconButton
+                  sx={{
+                    ml: 1,
+                    width: 22,
+                    height: 22,
+                    color: '#FDF8F3',
+                    padding: 0,
+                  }}
+                >
+                  <SvgColor src={social.icon} sx={{ width: 22, height: 22 }} />
+                </IconButton>
+              ))}
             </Stack>
 
             {/* Navigation Links - Center */}
