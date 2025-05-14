@@ -154,7 +154,14 @@ export function SectionAmaranthine() {
   }
 
   return (
-    <Box ref={containerRef} sx={{ position: 'relative', height: '400vh' }}>
+    <Box ref={containerRef} sx={{ 
+      position: 'relative', 
+      height: '400vh', 
+      width: '100%', 
+      overflow: 'clip', // Use clip instead of hidden to preserve animations
+      margin: 0,
+      padding: 0,
+    }}>
       {/* First Section - Intro */}
       <m.div
         style={{
