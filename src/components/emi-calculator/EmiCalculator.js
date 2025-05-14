@@ -38,10 +38,19 @@ export default function EmiCalculatorSection() {
 
   return (
     <Box sx={{ px: { xs: 2, md: 8 }, py: 6, bgcolor: '#FDF8F3' }}>
-      <Grid container spacing={4} alignItems="flex-start">
+      <Grid
+        container
+        spacing={6}
+        alignItems="flex-start"
+        justifyContent="space-between"
+        sx={{
+          width: '100%',
+          margin: 0,
+        }}
+      >
         {/* Left Column: Price List */}
-        <Grid item xs={12} md={6} maxWidth={538}>
-          <Typography variant="h1" pb={4} gutterBottom>
+        <Grid item xs={12} md={5}>
+          <Typography variant="h1" color="#000000" pb={4} gutterBottom>
             Price
           </Typography>
           <Stack spacing={3}>
@@ -76,7 +85,7 @@ export default function EmiCalculatorSection() {
                 {index < priceList.length - 1 && <Divider />}
               </React.Fragment>
             ))}
-            <Box pt={2}>
+            <Box pt={4}>
               <Button
                 variant="contained"
                 sx={{
@@ -104,14 +113,13 @@ export default function EmiCalculatorSection() {
             src={emiBck}
             alt="EMI Background"
             sx={{
-              position: 'absolute',
+              position: 'static',
               bottom: 0,
               left: 0,
               width: '100%',
-              maxHeight: '200px',
+              maxHeight: '293px',
               objectFit: 'cover',
               zIndex: -1,
-              opacity: 0.5,
             }}
           />
         </Grid>
@@ -163,9 +171,10 @@ export default function EmiCalculatorSection() {
                           cursor: 'default',
                           textAlign: 'right',
                           minHeight: '32px',
+                          fontWeight: 500,
                         }}
                       >
-                        {`₹ ${loanAmount}`}
+                        {`${loanAmount}`}
                       </Box>
                     </Grid>
                   </Grid>
@@ -186,9 +195,11 @@ export default function EmiCalculatorSection() {
                       },
                       '& .MuiSlider-track': {
                         color: '#005F86',
+                        height: 6,
                       },
                       '& .MuiSlider-rail': {
                         color: '#005F86',
+                        height: 6,
                       },
                     }}
                   />
@@ -231,6 +242,7 @@ export default function EmiCalculatorSection() {
                           lineHeight: 1.43,
                           cursor: 'default',
                           textAlign: 'right',
+                          fontWeight: 500,
                           minHeight: '32px', // match TextField height
                         }}
                       >
@@ -255,9 +267,11 @@ export default function EmiCalculatorSection() {
                       },
                       '& .MuiSlider-track': {
                         color: '#005F86',
+                        height: 6,
                       },
                       '& .MuiSlider-rail': {
                         color: '#005F86',
+                        height: 6,
                       },
                     }}
                   />
@@ -300,6 +314,7 @@ export default function EmiCalculatorSection() {
                           lineHeight: 1.43,
                           cursor: 'default',
                           textAlign: 'right',
+                          fontWeight: 500,
                           minHeight: '32px', // match TextField height
                         }}
                       >
@@ -324,9 +339,11 @@ export default function EmiCalculatorSection() {
                       },
                       '& .MuiSlider-track': {
                         color: '#005F86',
+                        height: 6,
                       },
                       '& .MuiSlider-rail': {
                         color: '#005F86',
+                        height: 6,
                       },
                     }}
                   />
@@ -358,7 +375,6 @@ export default function EmiCalculatorSection() {
                   </Grid>
                   <Grid item xs={12} sm={6}>
                     <Typography
-                      variant="h5"
                       sx={{
                         fontFamily: 'Satoshi Variable, sans-serif',
                         fontWeight: 500,
