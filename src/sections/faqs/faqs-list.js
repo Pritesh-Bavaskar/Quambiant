@@ -20,6 +20,7 @@ const StyledAccordion = styled(Accordion)(({ theme }) => ({
   '&.Mui-expanded': {
     margin: 0,
     backgroundColor: 'transparent',
+    boxShadow: 'none',
   },
   '&:before': {
     display: 'none',
@@ -27,11 +28,17 @@ const StyledAccordion = styled(Accordion)(({ theme }) => ({
   '& .MuiCollapse-root': {
     backgroundColor: 'transparent',
   },
+  '& .MuiPaper-root': {
+    boxShadow: 'none',
+  },
   borderBottom: '1px solid #5C6170',
-  borderRadius: 0,
-  boxShadow: 'none',
+  borderRadius: '0 !important',
+  boxShadow: 'none !important',
   transition: 'none',
   elevation: 0,
+  '&:last-of-type': {
+    borderRadius: '0 !important',
+  },
 }));
 
 const StyledAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
@@ -92,7 +99,14 @@ export default function FaqsList({ onAccordionChange }) {
   };
 
   return (
-    <Box sx={{ width: '100%', maxWidth: 600 }}>
+    <Box sx={{ 
+      width: '100%', 
+      maxWidth: 600, 
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'space-evenly'
+    }}>
       {_faqs.map((accordion) => {
         const isExpanded = expandedPanel === accordion.value;
 
