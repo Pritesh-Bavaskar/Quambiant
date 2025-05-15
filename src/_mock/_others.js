@@ -11,12 +11,38 @@ export const _carouselsMembers = [...Array(6)].map((_, index) => ({
 
 // ----------------------------------------------------------------------
 
-export const _faqs = [...Array(8)].map((_, index) => ({
-  id: _mock.id(index),
-  value: `panel${index + 1}`,
-  heading: `Questions ${index + 1}`,
-  detail: _mock.description(index),
-}));
+export const _faqs = [
+  {
+    id: _mock.id(0),
+    value: 'panel1',
+    heading: 'What are the available unit sizes in Horizon Heights?',
+    detail: 'We offer a variety of unit sizes to accommodate different needs. Please contact our sales team for specific details on currently available units.',
+  },
+  {
+    id: _mock.id(1),
+    value: 'panel2',
+    heading: 'What amenities are included in the property?',
+    detail: 'Our property includes premium amenities such as a fitness center, swimming pool, landscaped gardens, and 24/7 security services.',
+  },
+  {
+    id: _mock.id(2),
+    value: 'panel3',
+    heading: 'Is there a payment plan available for purchasing a unit?',
+    detail: 'Yes, we offer flexible payment plans tailored to meet your financial needs. Our sales representatives can provide you with detailed information about the available options.',
+  },
+  {
+    id: _mock.id(3),
+    value: 'panel4',
+    heading: 'What is the expected handover date for Horizon Heights?',
+    detail: 'The expected handover date is scheduled for Q4 2025, subject to construction progress and regulatory approvals.',
+  },
+  {
+    id: _mock.id(4),
+    value: 'panel5',
+    heading: 'Are there any nearby schools, hospitals, or shopping centers?',
+    detail: 'Horizon Heights is strategically located with easy access to top-rated schools, medical facilities, and shopping destinations within a 5-10 minute drive.',
+  }
+];
 
 // ----------------------------------------------------------------------
 

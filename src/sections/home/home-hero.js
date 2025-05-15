@@ -417,6 +417,7 @@ export default function HomeHero() {
             title="Elevating Residential Spaces With Timeless Quambiance"
             subtitle="From vision to reality, we shape homes that inspire"
             buttonText="Explore Our Projects"
+            delayNo={4}
             buttonClick={() => {
               console.log('here');
             }}

@@ -4,7 +4,9 @@ import ScrollProgress from 'src/components/scroll-progress';
 import HomeStories from 'src/components/home-stories/HomeStories';
 import AwardsSection from 'src/components/award-section/AwardsSection';
 import ContactConsultationForm from 'src/components/contact-consultation-form/ContactConsultationForm';
-import OurProjectHero from '../our-project-details-hero';
+import EmiCalculatorSection from 'src/components/emi-calculator/EmiCalculator';
+import OurProjectDetailsOverviewStats from '../our-project-details-overview-stats';
+import OurProjectDetailsHero from '../our-project-details-hero';
 
 // ----------------------------------------------------------------------
 
@@ -15,9 +17,11 @@ export default function OurProjectDetailsView() {
     <>
       <ScrollProgress scrollYProgress={scrollYProgress} />
 
-      <OurProjectHero />
+      <OurProjectDetailsHero />
+      <OurProjectDetailsOverviewStats />
       <AwardsSection />
       <HomeStories />
+      <EmiCalculatorSection />
       <ContactConsultationForm />
     </>
   );

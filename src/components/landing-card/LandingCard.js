@@ -9,6 +9,7 @@ export function LandingCard({
   buttonClick,
   location,
   completionDate,
+  delayNo,
 }) {
   return (
     <m.div
@@ -17,7 +18,7 @@ export function LandingCard({
       transition={{
         duration: 0.8,
         ease: 'easeOut',
-        delay: 4, // Delay to match the IntroSection animation completion
+        delay: delayNo,
       }}
     >
       <Box
@@ -204,4 +205,5 @@ LandingCard.propTypes = {
   buttonClick: PropTypes.func,
   completionDate: PropTypes.string,
   location: PropTypes.string,
+  delayNo: PropTypes.number,
 };

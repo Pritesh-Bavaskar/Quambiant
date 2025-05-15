@@ -8,7 +8,7 @@ import { LandingCard } from 'src/components/landing-card/LandingCard';
 
 // ----------------------------------------------------------------------
 
-export default function OurProjectDetailsDetailsHero() {
+export default function OurProjectDetailsHero() {
   return (
     <Box
       sx={{

@@ -45,7 +45,7 @@ export const typography = {
     fontWeight: 500,
     lineHeight: pxToRem(57),
     fontSize: pxToRem(38),
-    ...responsiveFontSizes({ sm: 40, md: 44, lg: 48 }),
+    ...responsiveFontSizes({ sm: 28, md: 38, lg: 38 }),
   },
   h3: {
     fontFamily: 'Playfair Display, sans-serif',

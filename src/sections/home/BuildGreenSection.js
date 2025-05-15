@@ -110,8 +110,8 @@ export default function BuildGreenSection() {
           width: '100%',
           zIndex: 4,
           pb: { xs: 3, md: 5 },
-          px: 2,
-          pt: { xs: 16, md: 2 }, // <-- Increased top padding only on mobile
+          px: { xs: 2, md: 6 }, // reduced padding on xs
+          pt: { xs: 16, md: 2 },
         }}
       >
         <Grid container spacing={3} justifyContent="center">
@@ -126,27 +126,24 @@ export default function BuildGreenSection() {
                 justifyContent: 'center',
                 alignItems: 'center',
                 py: 2,
-                aspectRatio: { xs: '320 / 136', md: '420   / 178' },
+                aspectRatio: { xs: '320 / 136', md: '420 / 178' },
               }}
             >
-              <Paper
-                elevation={0}
+              <Box
                 sx={{
-                  bgcolor: 'rgba(24,25,27,0.30)',
-                  color: '#fff',
-                  p: 3,
+                  width: { xs: '100%', sm: 420 },
+                  aspectRatio: { xs: '320 / 136', md: '420 / 178' },
+                  backgroundImage: 'url(/assets/images/home/Subtract.png)',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  position: 'relative',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  borderRadius: 0,
-                  aspectRatio: { xs: '320 / 136', md: '420   / 178' },
-                  width: { xs: '100%', sm: 420 },
-                  // width: { xs: '100%', sm: 420 },
-                  // minHeight: 110,
-                  // height: { xs: 110, sm: 178 },
-                  backdropFilter: 'blur(12px)',
+                  color: '#fff',
                 }}
               >
+                {/* Stat Value */}
                 <Box
                   sx={{
                     fontFamily: 'Satoshi Variable',
@@ -154,31 +151,32 @@ export default function BuildGreenSection() {
                     fontSize: { xs: '32px', md: '42px' },
                     width: { xs: '99px', md: '130px' },
                     height: { xs: '99px', md: '130px' },
-                    objectFit: 'contain',
-                    textAlign: 'center',
                     display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
                     alignItems: 'center',
+                    justifyContent: 'center',
                     mr: 2,
-                    color: '#fff',
                     background: 'transparent',
-                    backdropFilter: 'none',
-                    px: 2,
-                    py: 1,
-                    border: '2px solid rgba(255,255,255,0.18)',
-                    borderRadius: 0,
+                    color: '#fff',
+                    ml: { xs: '40px', md: '45px' },
                   }}
                 >
                   {stat.value}
                 </Box>
+
+                {/* Description */}
                 <Typography
                   variant="body1"
-                  sx={{ color: 'rgba(255,255,255,0.92)', fontWeight: 500, fontSize: { xs: '16px', md: '20px' } }}
+                  sx={{
+                    color: 'rgba(255,255,255,0.92)',
+                    fontWeight: 500,
+                    fontSize: { xs: '16px', md: '20px' },
+                    marginLeft: '20px',
+                    padding: '10px',
+                  }}
                 >
                   {stat.description}
                 </Typography>
-              </Paper>
+              </Box>
             </Grid>
           ))}
         </Grid>
