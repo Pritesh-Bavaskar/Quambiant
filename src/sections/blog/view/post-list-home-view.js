@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react';
 import Stack from '@mui/material/Stack';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 // routes
 import { paths } from 'src/routes/paths';
 // hooks
@@ -14,6 +15,9 @@ import { POST_SORT_OPTIONS } from 'src/_mock';
 import { useGetPosts, useSearchPosts } from 'src/api/blog';
 // components
 import { useSettingsContext } from 'src/components/settings';
+import postSliderImg from 'src/assets/media/news/post-slider-img.jpg';
+import PostHero from '../post-hero';
+import PostSlider from '../post-slider';
 //
 import PostList from '../post-list';
 import PostSort from '../post-sort';
@@ -47,18 +51,52 @@ export default function PostListHomeView() {
     setSearchQuery(inputValue);
   }, []);
 
+  // Sample blog posts data
+  const samplePosts = [
+    {
+      id: '1',
+      title: 'The Future of Sustainable Architecture',
+      description:
+        'Exploring innovative materials and designs that are shaping the future of sustainable architecture and urban development.',
+      cover: postSliderImg,
+      createdAt: '2025-05-15T12:00:00Z',
+      categories: ['Awards'],
+    },
+    {
+      id: '2',
+      title: 'Modern Interior Design Trends 2025',
+      description:
+        'Discover the latest trends in interior design that are transforming living spaces this year.',
+      cover: postSliderImg,
+      createdAt: '2025-05-10T10:30:00Z',
+      categories: ['Awards'],
+    },
+    {
+      id: '3',
+      title: 'Smart Home Integration',
+      description:
+        'How smart home technology is being seamlessly integrated into modern architectural designs.',
+      cover: postSliderImg,
+      createdAt: '2025-05-05T15:45:00Z',
+      categories: ['Awards'],
+    },
+  ];
+
   return (
-    <Container maxWidth={settings.themeStretch ? false : 'lg'}>
-      <Typography
+    <Box sx={{ width: '100%', overflow: 'hidden' }}>
+      <PostHero />
+      <PostSlider posts={samplePosts} />
+      <Container maxWidth={settings.themeStretch ? false : 'lg'} sx={{ mt: 4 }}>
+        {/* <Typography
         variant="h4"
         sx={{
           my: { xs: 3, md: 5 },
         }}
       >
         Blog
-      </Typography>
+      </Typography> */}
 
-      <Stack
+        {/* <Stack
         spacing={3}
         justifyContent="space-between"
         alignItems={{ xs: 'flex-end', sm: 'center' }}
@@ -74,10 +112,11 @@ export default function PostListHomeView() {
         />
 
         <PostSort sort={sortBy} onSort={handleSortBy} sortOptions={POST_SORT_OPTIONS} />
-      </Stack>
+      </Stack> */}
 
-      <PostList posts={dataFiltered} loading={postsLoading} />
-    </Container>
+        <PostList posts={dataFiltered} loading={postsLoading} />
+      </Container>
+    </Box>
   );
 }
 
