@@ -6,7 +6,8 @@ import Typography from '@mui/material/Typography';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+import { styled, useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 // _mock
 import { _faqs } from 'src/_mock';
 // components
@@ -52,6 +53,12 @@ const StyledAccordionSummary = styled(AccordionSummary)(({ theme }) => ({
     '&.Mui-expanded': {
       margin: '12px 0',
     },
+    [theme.breakpoints.down('sm')]: {
+      margin: '8px 0',
+      '&.Mui-expanded': {
+        margin: '8px 0',
+      },
+    },
   },
   '&:hover': {
     backgroundColor: 'transparent',
@@ -68,28 +75,51 @@ const ExpandIcon = styled('div')(({ theme, expanded }) => ({
   justifyContent: 'center',
   position: 'relative',
   borderRadius: 0,
+  [theme.breakpoints.down('sm')]: {
+    width: 24,
+    height: 24,
+  },
 }));
 
-const PlusIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M12 4.5V19.5" stroke="#141B34" strokeWidth="3" strokeLinecap="round" />
-    <path d="M4.5 12H19.5" stroke="#141B34" strokeWidth="3" strokeLinecap="round" />
-  </svg>
-);
+const PlusIcon = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const size = isMobile ? "10" : "13";
+  const strokeWidth = isMobile ? "2.5" : "3";
+  
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 4.5V19.5" stroke="#141B34" strokeWidth={strokeWidth} strokeLinecap="round" />
+      <path d="M4.5 12H19.5" stroke="#141B34" strokeWidth={strokeWidth} strokeLinecap="round" />
+    </svg>
+  );
+};
 
-const MinusIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M4.5 12H19.5" stroke="#141B34" strokeWidth="3" strokeLinecap="round" />
-  </svg>
-);
+const MinusIcon = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const size = isMobile ? "10" : "13";
+  const strokeWidth = isMobile ? "2.5" : "3";
+  
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4.5 12H19.5" stroke="#141B34" strokeWidth={strokeWidth} strokeLinecap="round" />
+    </svg>
+  );
+};
 
 const StyledAccordionDetails = styled(AccordionDetails)(({ theme }) => ({
   padding: '0 0 16px 0',
   backgroundColor: 'transparent',
+  [theme.breakpoints.down('sm')]: {
+    padding: '0 0 12px 0',
+  },
 }));
 
 export default function FaqsList({ onAccordionChange }) {
   const [expandedPanel, setExpandedPanel] = useState(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpandedPanel(isExpanded ? panel : null);
@@ -101,11 +131,12 @@ export default function FaqsList({ onAccordionChange }) {
   return (
     <Box sx={{ 
       width: '100%', 
-      maxWidth: 600, 
-      height: '100%',
+      maxWidth: { xs: '100%', md: 600 }, 
+      height: 'fit-content',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'space-evenly'
+      justifyContent: 'flex-start',
+      gap: { xs: 1, md: 2 }
     }}>
       {_faqs.map((accordion) => {
         const isExpanded = expandedPanel === accordion.value;
@@ -119,13 +150,23 @@ export default function FaqsList({ onAccordionChange }) {
             <StyledAccordionSummary
               expandIcon={<ExpandIcon>{isExpanded ? <MinusIcon /> : <PlusIcon />}</ExpandIcon>}
             >
-              <Typography variant="subtitle1" sx={{ color: 'white', fontWeight: 400 }}>
+              <Typography variant="subtitle1" sx={{ 
+                color: 'white', 
+                fontWeight: 400,
+                fontSize: { xs: '0.9rem', sm: '1rem', md: '1.1rem' }
+              }}>
                 {accordion.heading}
               </Typography>
             </StyledAccordionSummary>
 
             <StyledAccordionDetails>
-              <Typography sx={{ color: 'white', opacity: 0.8 }}>{accordion.detail}</Typography>
+              <Typography sx={{ 
+                color: 'white', 
+                opacity: 0.8,
+                fontSize: { xs: '0.8rem', sm: '0.875rem', md: '1rem' }
+              }}>
+                {accordion.detail}
+              </Typography>
             </StyledAccordionDetails>
           </StyledAccordion>
         );

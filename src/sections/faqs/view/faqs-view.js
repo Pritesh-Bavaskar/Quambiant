@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // @mui
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 //
 import faqBck from 'src/assets/media/landing/faq-bck.jpg';
 
@@ -14,6 +16,9 @@ import FaqsList from '../faqs-list';
 
 export default function FaqsView() {
   const [isAccordionExpanded, setIsAccordionExpanded] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
 
   const handleAccordionChange = (expanded) => {
     setIsAccordionExpanded(expanded);
@@ -24,19 +29,21 @@ export default function FaqsView() {
       <Box
         sx={{
           width: '100%',
-          height: '100vh',
+          minHeight: '100vh',
+          height: 'fit-content',
           position: 'relative',
           backgroundImage: `url(${faqBck})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
+          backgroundAttachment: 'fixed',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           padding: 0,
           margin: 0,
-          overflow: 'hidden',
+          overflow: 'visible',
           '&:before': {
             content: '""',
             position: 'absolute',
@@ -50,7 +57,14 @@ export default function FaqsView() {
         }}
       >
         <Box
-          sx={{ position: 'relative', zIndex: 2, height: '100%', width: '100%', py: 12, px: 12 }}
+          sx={{ 
+            position: 'relative', 
+            zIndex: 2, 
+            height: '100%', 
+            width: '100%', 
+            py: { xs: 4, sm: 6, md: 12 }, 
+            px: { xs: 2, sm: 6, md: 12 } 
+          }}
         >
           <Box
             sx={{
@@ -61,13 +75,14 @@ export default function FaqsView() {
               gap: { xs: 4, md: 8 },
               backgroundColor: 'rgba(0, 0, 0, 0.5)',
               backdropFilter: 'blur(8px)',
-              p: { xs: 4, md: 10 },
+              p: { xs: 3, sm: 4, md: 10 },
               borderRadius: 0,
               width: '100%',
-              height: { xs: 'auto', md: '100%' },
+              height: 'auto',
               boxSizing: 'border-box',
               mx: 0,
               maxWidth: 'none',
+              overflow: 'visible',
             }}
           >
             {/* Left side content */}
@@ -76,11 +91,12 @@ export default function FaqsView() {
                 position: 'relative',
                 zIndex: 2,
                 textAlign: 'left',
-                maxWidth: 700,
+                maxWidth: { xs: '100%', md: 700 },
                 alignSelf: 'stretch', // makes it stretch full height
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between', // key for top-bottom spacing
+                mb: { xs: 6, md: 0 },
               }}
             >
               {/* Large Background "FAQ" */}
@@ -90,7 +106,7 @@ export default function FaqsView() {
                   position: 'absolute',
                   top: 0,
                   left: 0,
-                  fontSize: { xs: 100, md: 160 },
+                  fontSize: { xs: 80, sm: 100, md: 160 },
                   color: 'rgba(255,255,255,0.05)',
                   zIndex: 0,
                   pointerEvents: 'none',
@@ -106,10 +122,11 @@ export default function FaqsView() {
                 <Typography
                   variant="h4"
                   sx={{
-                    paddingTop: '8%',
+                    paddingTop: { xs: '12%', md: '8%' },
                     color: 'common.white',
                     fontWeight: 500,
                     mb: 2,
+                    fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' },
                   }}
                 >
                   In case you’re wondering
@@ -121,6 +138,7 @@ export default function FaqsView() {
                     color: 'common.white',
                     opacity: 0.8,
                     mb: 4,
+                    fontSize: { xs: '0.875rem', md: '1rem' },
                   }}
                 >
                   Some of our most common things people ask us about our service
@@ -134,6 +152,7 @@ export default function FaqsView() {
                   sx={{
                     color: 'common.white',
                     mb: 1,
+                    fontSize: { xs: '0.75rem', md: '0.875rem' },
                   }}
                 >
                   Have a specific question?
@@ -168,7 +187,7 @@ export default function FaqsView() {
                 flex: '1 1 auto',
                 width: { xs: '100%', md: 'auto' },
                 maxWidth: { xs: '100%', md: '700px' },
-                height: '100%',
+                height: 'fit-content',
               }}
             >
               <FaqsList onAccordionChange={handleAccordionChange} />
