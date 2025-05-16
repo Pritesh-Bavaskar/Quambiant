@@ -150,21 +150,26 @@ export default function FaqsList({ onAccordionChange }) {
             <StyledAccordionSummary
               expandIcon={<ExpandIcon>{isExpanded ? <MinusIcon /> : <PlusIcon />}</ExpandIcon>}
             >
-              <Typography variant="subtitle1" sx={{ 
-                color: 'white', 
-                fontWeight: 400,
-                fontSize: { xs: '0.9rem', sm: '1rem', md: '1.1rem' }
-              }}>
+              <Typography
+                variant="body1"
+                sx={{
+                  color: 'white',
+                  fontWeight: 500,
+                }}
+              >
                 {accordion.heading}
               </Typography>
             </StyledAccordionSummary>
 
             <StyledAccordionDetails>
-              <Typography sx={{ 
-                color: 'white', 
-                opacity: 0.8,
-                fontSize: { xs: '0.8rem', sm: '0.875rem', md: '1rem' }
-              }}>
+              <Typography
+                sx={{
+                  fontFamily: 'Satoshi Variable',
+                  color: '#B4B4B4',
+                  fontWeight: 500,
+                  fontSize: { xs: '14px', md: '16px' },
+                }}
+              >
                 {accordion.detail}
               </Typography>
             </StyledAccordionDetails>
