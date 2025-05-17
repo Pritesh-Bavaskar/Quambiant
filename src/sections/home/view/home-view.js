@@ -10,6 +10,8 @@ import ConceptToConcreteSection from 'src/sections/home/ConceptToConcreteSection
 import ContactConsultationForm from 'src/components/contact-consultation-form/ContactConsultationForm';
 import UpcomingLaunchesCarousel from 'src/components/upcoming-and-latest-launches/UpcomingLaunchesCarousel';
 import IntroSection from 'src/sections/home/IntroSection';
+// api
+import { useGetHomepageWithFilter } from 'src/api/home';
 import HomeHero from '../home-hero';
 import CountUpSection from '../../../components/count-up/CountUp';
 import { SectionAmaranthine } from '../../../components/section-amaranthine/SectionAmaranthine';
@@ -17,13 +19,19 @@ import { SectionAmaranthine } from '../../../components/section-amaranthine/Sect
 
 export default function HomeView() {
   const { scrollYProgress } = useScroll();
+  const { filteredHomepage, filteredHomepageLoading, filteredHomepageError } =
+    useGetHomepageWithFilter(
+      `populate[hero][populate]=heroImage&populate[StatsSection]=*&populate[TimelineSection][populate][Steps][populate]=*&populate[HomeStoriesSlider][populate]=*&populate[ContactUs][populate]=*&populate[Spotlight][populate]=*`
+    );
+
+  console.log(filteredHomepage);
 
   return (
     <>
       <ScrollProgress scrollYProgress={scrollYProgress} />
 
       <IntroSection />
-      <HomeHero />
+      <HomeHero hero={filteredHomepage?.data?.hero} />
       <CountUpSection />
       <SectionAmaranthine />
       <ConceptToConcreteSection />

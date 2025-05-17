@@ -5,7 +5,6 @@ import { styled } from '@mui/material/styles';
 // components
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
-import TextMaxLine from 'src/components/text-max-line';
 import readMoreImg from 'src/assets/media/news/read-more.svg';
 
 // ----------------------------------------------------------------------
