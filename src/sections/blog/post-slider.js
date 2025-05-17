@@ -14,6 +14,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 // components
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
+import readMoreImg from 'src/assets/media/news/read-more.svg';
 
 // ----------------------------------------------------------------------
 
@@ -75,13 +76,15 @@ const AspectImageSection = styled(StyledImageSection)(({ theme }) => ({
   alignItems: 'stretch',
   [theme.breakpoints.down('md')]: {
     width: '100%',
-    aspectRatio: '16/9',
+    aspectRatio: '353/306',
+    margin: '0 auto',
   },
 }));
 
 const AspectContentSection = styled(StyledContentSection)(({ theme }) => ({
   aspectRatio: '657/570',
-  backgroundColor: '#fff',
+  backgroundColor: 'transparent',
+  boxShadow: 'none',
   width: '50%',
   minWidth: 0,
   display: 'flex',
@@ -117,7 +120,6 @@ const PostSlider = ({ posts = [] }) => {
 
   return (
     <StyledSection>
-      
       {isMobile ? (
         <Box
           sx={{
@@ -128,7 +130,7 @@ const PostSlider = ({ posts = [] }) => {
           }}
         >
           <AspectImageSection sx={{ width: '100%', mb: 2 }}>
-            <Box sx={{ width: '100%', height: '100%', position: 'relative' }}>
+            <Box sx={{ width: '100%', height: '100%', position: 'relative', padding: 2 }}>
               <Image
                 alt={currentPost.title}
                 src={currentPost.cover}
@@ -181,12 +183,14 @@ const PostSlider = ({ posts = [] }) => {
               </Box>
             </Box>
           </AspectImageSection>
-          <AspectContentSection sx={{ 
-        height: { xs: 'auto', md: 'auto' },
-        minHeight: { xs: 'auto', md: '570px' },
-        mb: 2, 
-        width: '100%' 
-      }}>
+          <AspectContentSection
+            sx={{
+              height: { xs: 'auto', md: 'auto' },
+              minHeight: { xs: 'auto', md: '570px' },
+              mb: 2,
+              width: '100%',
+            }}
+          >
             <CardContent
               sx={{
                 height: '100%',
@@ -196,29 +200,51 @@ const PostSlider = ({ posts = [] }) => {
                 justifyContent: 'center',
               }}
             >
+              <Typography
+                sx={{ fontFamily: 'Satoshi Variable', fontWeight: 500, color: '#5C6170', mb: 3 }}
+              >
+                {currentPost.readTime}
+              </Typography>
               <Box sx={{ mb: 2 }}>
-                <Typography variant="h4" sx={{ fontWeight: 600, color: 'text.primary' }}>
+                <Typography variant="h1" sx={{ fontWeight: 500, color: '#000000' }}>
                   {currentPost.title}
                 </Typography>
               </Box>
-              <Typography variant="body1" sx={{ color: 'text.secondary', mb: 3 }}>
+              <Typography
+                variant="body1"
+                sx={{ color: '#454954', mb: 3, fontWeight: 500, fontSize: '16px' }}
+              >
                 {currentPost.description}
               </Typography>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <Typography
+                  sx={{
+                    fontFamily: 'Satoshi Variable',
+                    color: '#001016',
+                    fontSize: '16px',
+                    fontWeight: 500,
+                  }}
+                >
+                  Read More
+                </Typography>
+                <Box component="img" src={readMoreImg} alt="" sx={{ width: 16, height: 16 }} />
+              </Stack>
+
               <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
                 <IconButton
                   onClick={handlePrev}
                   sx={{
-                    width: '42px',
-                    height: '42px',
+                    width: '52px',
+                    height: '52px',
                     backgroundColor: 'transparent',
                     border: '1px solid',
-                    borderColor: 'primary.main',
+                    borderColor: '#001016',
                     borderRadius: '2px',
-                    color: 'primary.main',
+                    color: '#001016',
                     mx: 1,
                     '&:hover': {
                       color: 'primary.contrastText',
-                      backgroundColor: 'primary.main',
+                      backgroundColor: '#001016',
                     },
                   }}
                 >
@@ -227,17 +253,17 @@ const PostSlider = ({ posts = [] }) => {
                 <IconButton
                   onClick={handleNext}
                   sx={{
-                    width: '42px',
-                    height: '42px',
-                    backgroundColor: 'primary.main',
-                    color: 'primary.contrastText',
-                    borderRadius: '2px',
+                    width: '52px',
+                    height: '52px',
+                    backgroundColor: 'transparent',
                     border: '1px solid',
-                    borderColor: 'primary.main',
+                    borderColor: '#001016',
+                    borderRadius: '2px',
+                    color: '#001016',
                     mx: 1,
                     '&:hover': {
-                      backgroundColor: 'primary.dark',
-                      borderColor: 'primary.dark',
+                      color: 'primary.contrastText',
+                      backgroundColor: '#001016',
                     },
                   }}
                 >
@@ -286,7 +312,7 @@ const PostSlider = ({ posts = [] }) => {
                       border: '1px solid #FFFFFF1A',
                       color: 'white',
                       fontFamily: 'Satoshi Variable',
-                      fontSize: '12px',
+                      fontSize: '14px',
                       fontWeight: 500,
                       borderRadius: '4px',
                       height: '32px',
@@ -304,23 +330,37 @@ const PostSlider = ({ posts = [] }) => {
             </Box>
           </AspectImageSection>
           <AspectContentSection>
-            <CardContent sx={{ 
-              height: '100%',
-              minHeight: '570px',
-              position: 'relative', 
-              p: { xs: 2, md: 4 } 
-            }}>
+            <CardContent
+              sx={{
+                height: '100%',
+                minHeight: '570px',
+                position: 'relative',
+                p: { xs: 2, md: 4 },
+              }}
+            >
               <Box sx={{ mb: 3 }}>
-                <Typography variant="h3" sx={{ fontWeight: 600, color: 'text.primary' }}>
+                <Typography
+                  sx={{
+                    color: '#5C6170',
+                    mb: 4,
+                    fontSize: 14,
+                    fontWeight: 500,
+                  }}
+                >
+                  {currentPost.readTime}
+                </Typography>
+              </Box>
+              <Box sx={{ mb: 3 }}>
+                <Typography variant="h1" sx={{ fontWeight: 500 }}>
                   {currentPost.title}
                 </Typography>
               </Box>
               <Typography
                 sx={{
-                  color: 'text.secondary',
+                  color: '#454954',
                   mb: 4,
-                  fontSize: { xs: 14, md: 16 },
-                  fontWeight: 400,
+                  fontSize: 16,
+                  fontWeight: 500,
                 }}
               >
                 {currentPost.description}
@@ -337,19 +377,17 @@ const PostSlider = ({ posts = [] }) => {
                   zIndex: 2,
                 }}
               >
-                <Typography
-                  variant="body2"
-                  sx={{
-                    color: 'text.secondary',
-                    fontStyle: 'italic',
-                  }}
-                >
-                  {new Date(currentPost.createdAt).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </Typography>
+                <Stack direction="row" spacing={1} alignItems="center">
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      color: '#001016',
+                    }}
+                  >
+                    Read More
+                  </Typography>
+                  <Box component="img" src={readMoreImg} alt="" sx={{ width: 16, height: 16 }} />
+                </Stack>
                 <Stack direction="row" spacing={2}>
                   <IconButton
                     onClick={handlePrev}
@@ -358,12 +396,12 @@ const PostSlider = ({ posts = [] }) => {
                       height: '52px',
                       backgroundColor: 'transparent',
                       border: '1px solid',
-                      borderColor: 'primary.main',
+                      borderColor: '#001016',
                       borderRadius: '2px',
-                      color: 'primary.main',
+                      color: '#001016',
                       '&:hover': {
                         color: 'primary.contrastText',
-                        backgroundColor: 'primary.main',
+                        backgroundColor: '#001016',
                       },
                     }}
                   >
@@ -374,14 +412,14 @@ const PostSlider = ({ posts = [] }) => {
                     sx={{
                       width: '52px',
                       height: '52px',
-                      backgroundColor: 'primary.main',
-                      color: 'primary.contrastText',
-                      borderRadius: '2px',
+                      backgroundColor: 'transparent',
                       border: '1px solid',
-                      borderColor: 'primary.main',
+                      borderColor: '#001016',
+                      borderRadius: '2px',
+                      color: '#001016',
                       '&:hover': {
-                        backgroundColor: 'primary.dark',
-                        borderColor: 'primary.dark',
+                        color: 'primary.contrastText',
+                        backgroundColor: '#001016',
                       },
                     }}
                   >

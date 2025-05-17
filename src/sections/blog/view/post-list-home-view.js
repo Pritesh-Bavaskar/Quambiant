@@ -16,6 +16,8 @@ import { useGetPosts, useSearchPosts } from 'src/api/blog';
 // components
 import { useSettingsContext } from 'src/components/settings';
 import postSliderImg from 'src/assets/media/news/post-slider-img.jpg';
+import { _blogPosts } from 'src/_mock/blog.ts';
+
 import PostHero from '../post-hero';
 import PostSlider from '../post-slider';
 //
@@ -31,6 +33,7 @@ export default function PostListHomeView() {
   const [sortBy, setSortBy] = useState('latest');
 
   const [searchQuery, setSearchQuery] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const debouncedQuery = useDebounce(searchQuery);
 
@@ -59,8 +62,8 @@ export default function PostListHomeView() {
       description:
         'Exploring innovative materials and designs that are shaping the future of sustainable architecture and urban development.',
       cover: postSliderImg,
-      createdAt: '2025-05-15T12:00:00Z',
       categories: ['Awards'],
+      readTime: '5 min read',
     },
     {
       id: '2',
@@ -68,8 +71,8 @@ export default function PostListHomeView() {
       description:
         'Discover the latest trends in interior design that are transforming living spaces this year.',
       cover: postSliderImg,
-      createdAt: '2025-05-10T10:30:00Z',
       categories: ['Awards'],
+      readTime: '5 min read',
     },
     {
       id: '3',
@@ -77,8 +80,8 @@ export default function PostListHomeView() {
       description:
         'How smart home technology is being seamlessly integrated into modern architectural designs.',
       cover: postSliderImg,
-      createdAt: '2025-05-05T15:45:00Z',
       categories: ['Awards'],
+      readTime: '5 min read',
     },
   ];
 
@@ -86,7 +89,7 @@ export default function PostListHomeView() {
     <Box sx={{ width: '100%', overflow: 'hidden' }}>
       <PostHero />
       <PostSlider posts={samplePosts} />
-      <Container maxWidth={settings.themeStretch ? false : 'lg'} sx={{ mt: 4 }}>
+      {/* <Container maxWidth={settings.themeStretch ? false : 'lg'} sx={{ mt: 4 }}> */}
         {/* <Typography
         variant="h4"
         sx={{
@@ -114,8 +117,8 @@ export default function PostListHomeView() {
         <PostSort sort={sortBy} onSort={handleSortBy} sortOptions={POST_SORT_OPTIONS} />
       </Stack> */}
 
-        <PostList posts={dataFiltered} loading={postsLoading} />
-      </Container>
+        <PostList posts={_blogPosts} loading={loading} />
+      {/* </Container> */}
     </Box>
   );
 }

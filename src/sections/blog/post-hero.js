@@ -12,7 +12,7 @@ export default function PostHero() {
         position: 'relative',
         width: '100%',
         height: 0,
-        paddingTop: '34.72%' /* 500/1440 = 0.3472 or 34.72% */,
+        paddingTop: { xs: '152.67%', md: '34.72%' }, // 600/393 = 1.5267 or 152.67% for mobile, 500/1440 = 34.72% for desktop
         overflow: 'hidden',
       }}
     >
@@ -26,7 +26,10 @@ export default function PostHero() {
           objectFit: 'contain',
           backgroundImage: `url(${newsBck.src || newsBck})`,
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: {
+            xs: 'right 15% bottom 20%',
+            md: 'center',
+          },
           backgroundRepeat: 'no-repeat',
           '&::before': {
             content: '""',
