@@ -24,6 +24,7 @@ import PostSlider from '../post-slider';
 import PostList from '../post-list';
 import PostSort from '../post-sort';
 import PostSearch from '../post-search';
+import PostSubscribe from '../post-subscribe';
 
 // ----------------------------------------------------------------------
 
@@ -89,36 +90,8 @@ export default function PostListHomeView() {
     <Box sx={{ width: '100%', overflow: 'hidden' }}>
       <PostHero />
       <PostSlider posts={samplePosts} />
-      {/* <Container maxWidth={settings.themeStretch ? false : 'lg'} sx={{ mt: 4 }}> */}
-        {/* <Typography
-        variant="h4"
-        sx={{
-          my: { xs: 3, md: 5 },
-        }}
-      >
-        Blog
-      </Typography> */}
-
-        {/* <Stack
-        spacing={3}
-        justifyContent="space-between"
-        alignItems={{ xs: 'flex-end', sm: 'center' }}
-        direction={{ xs: 'column', sm: 'row' }}
-        sx={{ mb: { xs: 3, md: 5 } }}
-      >
-        <PostSearch
-          query={debouncedQuery}
-          results={searchResults}
-          onSearch={handleSearch}
-          loading={searchLoading}
-          hrefItem={(title) => paths.post.details(title)}
-        />
-
-        <PostSort sort={sortBy} onSort={handleSortBy} sortOptions={POST_SORT_OPTIONS} />
-      </Stack> */}
-
-        <PostList posts={_blogPosts} loading={loading} />
-      {/* </Container> */}
+      <PostList posts={_blogPosts} loading={loading} />
+      <PostSubscribe />
     </Box>
   );
 }

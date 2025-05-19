@@ -10,7 +10,6 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
-  useMediaQuery,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
@@ -20,7 +19,6 @@ import contactWhatsapp from 'src/assets/media/landing/contact_whatsapp.svg';
 
 export default function ContactConsultationForm({ contactUs }) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Box
