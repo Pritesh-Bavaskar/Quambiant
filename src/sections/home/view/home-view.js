@@ -32,10 +32,10 @@ export default function HomeView() {
 
       <IntroSection />
       <HomeHero hero={filteredHomepage?.data?.hero} />
-      <CountUpSection />
+      <CountUpSection statsSection={filteredHomepage?.data?.StatsSection} />
       <SectionAmaranthine />
-      <ConceptToConcreteSection />
-      <HomeStories />
+      <ConceptToConcreteSection conceptToConcreteSection={filteredHomepage?.data?.TimelineSection} />
+      <HomeStories homeStories={filteredHomepage?.data?.HomeStoriesSlider} />
       <UpcomingLaunchesCarousel />
       <AwardsSection />
       <ContactConsultationForm />

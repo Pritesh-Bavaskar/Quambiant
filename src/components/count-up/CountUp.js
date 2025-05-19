@@ -1,22 +1,34 @@
 // CountUp.tsx
 import { Box, Typography, Grid } from '@mui/material';
 import CountUp from 'react-countup';
+import PropTypes from 'prop-types';
 import { useInView } from 'react-intersection-observer';
 
-const stats = [
+// Fallback stats in case statsSection is not provided
+const defaultStats = [
   { value: 20, label: 'Years of experience' },
   { value: 10, label: 'Lac Sq. Ft Build up Area' },
   { value: 666, label: 'Luxury Flats' },
   { value: 3, label: 'Upcoming Luxury Projects' },
 ];
 
-export default function CountUpSection() {
+export default function CountUpSection({ statsSection }) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
+  
+  // Use statsSection data if available, otherwise use default stats
+  const stats = statsSection
+    ? [
+        { value: parseInt(statsSection.statOneNumber, 10), label: statsSection.statOneLabel },
+        { value: parseInt(statsSection.statTwoNumber, 10), label: statsSection.statTwoLabel },
+        { value: parseInt(statsSection.statThreeNumber, 10), label: statsSection.statThreeLabel },
+        { value: parseInt(statsSection.statFourNumber, 10), label: statsSection.statFourLabel },
+      ]
+    : defaultStats;
 
   return (
     <Box ref={ref} sx={{ py: { xs: 6, md: 10 }, bgcolor: '#FDF8F3' }}>
       <Typography variant="h1" align="center" fontFamily="Playfair Display" gutterBottom>
-        A Legacy in Every Detail
+        {statsSection?.heading || 'A Legacy in Every Detail'}
       </Typography>
       <Typography
         align="center"
@@ -29,7 +41,7 @@ export default function CountUpSection() {
           fontFamily: 'Satoshi Variable, sans-serif',
         }}
       >
-        Years of expertise, happy homeowners, and stunning residences—see what makes us stand apart
+        {statsSection?.subtitle || 'Years of expertise, happy homeowners, and stunning residences—see what makes us stand apart'}
       </Typography>
       <Grid
         container
@@ -114,3 +126,7 @@ export default function CountUpSection() {
     </Box>
   );
 }
+
+CountUpSection.propTypes = {
+  statsSection: PropTypes.object,
+};
