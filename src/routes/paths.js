@@ -23,6 +23,7 @@ export const paths = {
   payment: '/payment',
   about: '/about-us',
   ourProject: '/our-project',
+  investorLounge: '/investor-lounge',
   ourProjectUpcoming: '/our-project',
   ourProjectOngoing: '/our-project?tabId=ongoing',
   ourProjectCompleted: '/our-project?tabId=completed',
