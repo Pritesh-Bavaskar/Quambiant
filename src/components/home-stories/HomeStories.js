@@ -94,49 +94,75 @@ const AspectContentSection = styled(StyledContentSection)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const storiesData = [
-  {
-    id: '1',
-    title: 'From the first visit to the final handover, everything was seamless',
-    description:
-      "We were looking for a home that felt modern yet warm, and Quambiant delivered beyond our expectations. The craftsmanship, the materials, and the attention to detail are unmatched. We couldn't be happier.",
-    name: 'Ashwin Pradeep',
-    location: 'Bengaluru',
-    coverUrl: '/assets/images/home/homestories.png',
-  },
-  {
-    id: '2',
-    title: 'Innovation Hub',
-    description:
-      'Explore our state-of-the-art facilities where creativity meets technology. See how we push boundaries and create solutions for tomorrow.',
-    name: 'Sarah Chen',
-    location: 'Mumbai',
-    coverUrl: '/assets/images/home/homestories2.png',
-  },
-  {
-    id: '3',
-    title: 'Team Spirit',
-    description:
-      'Meet the passionate individuals behind our success. Learn about our collaborative culture and the values that drive us forward.',
-    name: 'Rajesh Kumar',
-    location: 'Delhi',
-    coverUrl: '/assets/images/home/homestories.png',
-  },
-];
+// const storiesData = [
+//   {
+//     id: '1',
+//     title: 'From the first visit to the final handover, everything was seamless',
+//     description:
+//       "We were looking for a home that felt modern yet warm, and Quambiant delivered beyond our expectations. The craftsmanship, the materials, and the attention to detail are unmatched. We couldn't be happier.",
+//     name: 'Ashwin Pradeep',
+//     location: 'Bengaluru',
+//     coverUrl: '/assets/images/home/homestories.png',
+//   },
+//   {
+//     id: '2',
+//     title: 'Innovation Hub',
+//     description:
+//       'Explore our state-of-the-art facilities where creativity meets technology. See how we push boundaries and create solutions for tomorrow.',
+//     name: 'Sarah Chen',
+//     location: 'Mumbai',
+//     coverUrl: '/assets/images/home/homestories2.png',
+//   },
+//   {
+//     id: '3',
+//     title: 'Team Spirit',
+//     description:
+//       'Meet the passionate individuals behind our success. Learn about our collaborative culture and the values that drive us forward.',
+//     name: 'Rajesh Kumar',
+//     location: 'Delhi',
+//     coverUrl: '/assets/images/home/homestories.png',
+//   },
+// ];
 
 // ----------------------------------------------------------------------
 
-export default function HomeStories() {
+export default function HomeStories({ homeStories }) {
   const [activeStep, setActiveStep] = React.useState(0);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
+    // Transform homeStories to match the required format
+  const transformedStories = React.useMemo(() => {
+    if (!homeStories || homeStories.length === 0) {
+      return []; // Return empty array if no stories provided
+    }
+    return homeStories.map((story) => ({
+      id: story.id.toString(),
+      title: story.heading,
+      description: story.subheading,
+      name: story.customerName,
+      location: story.state,
+      coverUrl: story.media?.url ? `${process.env.REACT_APP_HOST_API}${story.media.url}` : '',
+    }));
+  }, [homeStories]);
+
+  // If no stories to display, return null or a placeholder
+  if (!transformedStories || transformedStories.length === 0) {
+    return null; // or return a placeholder/loading state if preferred
+  }
+
   const handleNext = () => {
-    setActiveStep((prevStep) => (prevStep + 1) % storiesData.length);
+    if (transformedStories.length > 0) {
+      setActiveStep((prevStep) => (prevStep + 1) % transformedStories.length);
+    }
   };
 
   const handlePrev = () => {
-    setActiveStep((prevStep) => (prevStep - 1 + storiesData.length) % storiesData.length);
+    if (transformedStories.length > 0) {
+      setActiveStep((prevStep) => 
+        (prevStep - 1 + transformedStories.length) % transformedStories.length
+      );
+    }
   };
 
   return (
@@ -179,10 +205,10 @@ export default function HomeStories() {
               }}
             >
               <Typography variant="h1" sx={{ fontWeight: 500, mb: 2, color: '#18191B' }}>
-                {storiesData[activeStep].title}
+                {transformedStories[activeStep].title}
               </Typography>
               <Typography variant="body3" sx={{ color: 'text.secondary', mb: 4 }}>
-                {storiesData[activeStep].description}
+                {transformedStories[activeStep].description}
               </Typography>
               <Typography
                 sx={{
@@ -194,15 +220,15 @@ export default function HomeStories() {
                   mb: 0,
                 }}
               >
-                {storiesData[activeStep].name} – {storiesData[activeStep].location}
+                {transformedStories[activeStep].name} – {transformedStories[activeStep].location}
               </Typography>
             </CardContent>
           </AspectContentSection>
           <AspectImageSection sx={{ width: '100%', mb: 2 }}>
             <Box sx={{ width: '100%', height: '100%', position: 'relative' }}>
               <Image
-                alt={storiesData[activeStep].title}
-                src={storiesData[activeStep].coverUrl}
+                alt={transformedStories[activeStep].title}
+                src={transformedStories[activeStep].coverUrl}
                 ratio={undefined}
                 sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
@@ -252,8 +278,8 @@ export default function HomeStories() {
           <AspectImageSection>
             <Box sx={{ width: '100%', height: '100%', position: 'relative' }}>
               <Image
-                alt={storiesData[activeStep].title}
-                src={storiesData[activeStep].coverUrl}
+                alt={transformedStories[activeStep].title}
+                src={transformedStories[activeStep].coverUrl}
                 ratio={undefined}
                 sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
@@ -262,7 +288,7 @@ export default function HomeStories() {
           <AspectContentSection>
             <CardContent sx={{ height: '100%', position: 'relative', p: { xs: 2, md: 4 } }}>
               <Typography variant="h1" sx={{ fontWeight: 500, mb: 2, color: '#18191B' }}>
-                {storiesData[activeStep].title}
+                {transformedStories[activeStep].title}
               </Typography>
               <Typography
                 sx={{
@@ -272,7 +298,7 @@ export default function HomeStories() {
                   fontWeight: 500,
                 }}
               >
-                {storiesData[activeStep].description}
+                {transformedStories[activeStep].description}
               </Typography>
               <Box
                 sx={{
@@ -296,7 +322,7 @@ export default function HomeStories() {
                     mb: 0,
                   }}
                 >
-                  {storiesData[activeStep].name} – {storiesData[activeStep].location}
+                  {transformedStories[activeStep].name} – {transformedStories[activeStep].location}
                 </Typography>
                 <Stack direction="row" spacing={2}>
                   <IconButton
@@ -342,3 +368,7 @@ export default function HomeStories() {
     </StyledSection>
   );
 }
+
+HomeStories.propTypes = {
+  homeStories: PropTypes.object,
+};

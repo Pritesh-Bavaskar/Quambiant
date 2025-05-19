@@ -79,7 +79,7 @@ function PostCard({ post }) {
                 backgroundColor: 'rgba(255, 255, 255, 0.1)',
                 border: '1px solid rgba(255, 255, 255, 0.2)',
                 color: 'white',
-                fontSize: '12px',
+                fontSize: '14px',
                 fontWeight: 500,
                 borderRadius: '4px',
                 height: '24px',
@@ -116,22 +116,50 @@ function PostCard({ post }) {
         </Stack> */}
         <Stack direction="row" spacing={1} alignItems="center" sx={{ mt: 'auto', mb: 2 }}>
           <Iconify icon="solar:clock-circle-bold" width={16} sx={{ color: 'text.disabled' }} />
-          <Typography variant="caption" color="text.secondary">
+          <Typography
+            sx={{
+              color: '#5C6170',
+              fontFamily: 'Satoshi Variable',
+              fontSize: '14px',
+              fontWeight: 500,
+            }}
+          >
             {readTime} min read
           </Typography>
         </Stack>
 
-        <Typography variant="h6" line={2} sx={{ fontWeight: 600, flexGrow: 1 }}>
+        <Typography
+          sx={{
+            fontFamily: 'Satoshi Variable',
+            fontSize: '20px',
+            fontWeight: 500,
+            color: '#001016',
+          }}
+        >
           {title}
         </Typography>
         <Stack direction="row" spacing={1} alignItems="center" sx={{ mt: 'auto' }}>
-          <Typography variant="caption" color="text.secondary">
+          <Typography
+            sx={{
+              color: '#454954',
+              fontFamily: 'Satoshi Variable',
+              fontSize: '16px',
+              fontWeight: 500,
+            }}
+          >
             {description}
           </Typography>
         </Stack>
 
         <Stack direction="row" spacing={1} alignItems="center" sx={{ mt: 'auto' }}>
-          <Typography variant="caption" color="text.secondary">
+          <Typography
+            sx={{
+              color: '#001016',
+              fontFamily: 'Satoshi Variable',
+              fontSize: '16px',
+              fontWeight: 500,
+            }}
+          >
             Read More
           </Typography>
           <Box component="img" src={readMoreImg} alt="" sx={{ width: 16, height: 16 }} />

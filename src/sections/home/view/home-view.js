@@ -34,13 +34,15 @@ export default function HomeView() {
       <HomeHero hero={filteredHomepage?.data?.hero} />
       <CountUpSection statsSection={filteredHomepage?.data?.StatsSection} />
       <SectionAmaranthine />
-      <ConceptToConcreteSection conceptToConcreteSection={filteredHomepage?.data?.TimelineSection} />
+      <ConceptToConcreteSection
+        conceptToConcreteSection={filteredHomepage?.data?.TimelineSection}
+      />
       <HomeStories homeStories={filteredHomepage?.data?.HomeStoriesSlider} />
       <UpcomingLaunchesCarousel />
       <AwardsSection />
-      <ContactConsultationForm />
+      <ContactConsultationForm contactUs={filteredHomepage?.data?.ContactUs} />
       <BuildGreenSection />
-      <SpotlightCarousel />
+      <SpotlightCarousel spotlight={filteredHomepage?.data?.Spotlight} />
     </>
   );
 }
