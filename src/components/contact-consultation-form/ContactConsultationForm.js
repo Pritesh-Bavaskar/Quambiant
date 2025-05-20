@@ -44,7 +44,7 @@ export default function ContactConsultationForm({ contactUs }) {
         variant="h1"
         sx={{ color: '#FDF8F3', mb: 10, fontWeight: 500, textAlign: 'center' }}
       >
-        {contactUs?.heading}
+        {contactUs?.Heading}
       </Typography>
 
       <Box
@@ -273,7 +273,7 @@ export default function ContactConsultationForm({ contactUs }) {
               '&:hover': { background: '#f5f5f5', borderColor: '#bbb' },
             }}
           >
-            {contactUs?.contactNumber}
+            {contactUs?.ContactNumber}
           </Button>
           <Button
             variant="outlined"
@@ -295,7 +295,7 @@ export default function ContactConsultationForm({ contactUs }) {
               '&:hover': { background: '#f5f5f5', borderColor: '#bbb' },
             }}
           >
-            {contactUs?.whatsAppNumber}
+            {contactUs?.WhatsAppNumber}
           </Button>
         </Box>
       </Box>

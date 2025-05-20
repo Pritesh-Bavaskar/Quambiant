@@ -85,7 +85,7 @@ CustomNextArrow.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function AwardsSection() {
+export default function AwardsSection({ awards }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -147,21 +147,21 @@ export default function AwardsSection() {
                 color: '#18191B',
               }}
             >
-              Recognizing Excellence in Real Estate
+              {awards?.Heading}
             </Typography>
             <Typography
               variant="body1"
               sx={{
                 color: '#5C6170',
                 pt: 1,
-                maxWidth: "90%",
+                maxWidth: '90%',
                 fontFamily: 'Satoshi Variable, sans-serif',
                 fontWeight: 500,
                 fontSize: '14px',
                 textAlign: 'center',
               }}
             >
-              Awards that reflect our passion for crafting timeless and impactful living spaces.
+              {awards?.SubHeading}
             </Typography>
           </Box>
 
@@ -174,12 +174,13 @@ export default function AwardsSection() {
             }}
           >
             <Carousel ref={mobileCarousel.carouselRef} {...mobileCarousel.carouselSettings}>
-              {awardsData.map((award) => (
+              {awards?.AwardsSlider?.data?.map((award) => (
                 <Card
                   key={award.id}
                   sx={{
                     minWidth: 0,
                     width: '100%',
+                    height: '100%',
                     backgroundColor: '#FFFFFF',
                     color: '#FFFFFF',
                     boxShadow: 'none',
@@ -187,26 +188,25 @@ export default function AwardsSection() {
                     borderRadius: '0px',
                     overflow: 'hidden',
                     position: 'relative',
-                    height: 300,
                     // mx: 1,
                     p: 1,
                   }}
                 >
                   <CardMedia
                     component="img"
-                    image={award.image}
+                    image={award?.Image?.url}
                     alt={award.title}
                     sx={{
                       height: '100%',
                       width: '100%',
-                      objectFit: 'cover',
                       opacity: 1,
+                      objectFit: 'contain',
                     }}
                   />
                 </Card>
               ))}
             </Carousel>
-            
+
             <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
               <CustomPrevArrow onClick={mobileCarousel.onPrev} />
               <CustomNextArrow onClick={mobileCarousel.onNext} />
@@ -220,11 +220,11 @@ export default function AwardsSection() {
             px: 4,
             display: 'flex',
             width: '100%',
-            maxWidth: "90%",
+            maxWidth: '90%',
             mx: 'auto',
             alignItems: 'center',
           }}
-        > 
+        >
           {/* Left side: Text content - 50% */}
           <Box
             sx={{
@@ -293,7 +293,7 @@ export default function AwardsSection() {
                     sx={{
                       height: '100%',
                       width: '100%',
-                      objectFit: 'cover',
+                      objectFit: 'contain',
                       opacity: 1,
                     }}
                   />
@@ -306,3 +306,7 @@ export default function AwardsSection() {
     </CarouselContainer>
   );
 }
+
+AwardsSection.propTypes = {
+  awards: PropTypes.array,
+};

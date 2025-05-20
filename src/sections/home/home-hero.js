@@ -148,7 +148,7 @@ export default function HomeHero({ hero }) {
             left: 0,
             width: '100%',
             height: '100%',
-            backgroundImage: `url(${process.env.REACT_APP_HOST_API}${hero?.heroImage?.url})`,
+            backgroundImage: `url(${process.env.REACT_APP_HOST_API}${hero?.HeroImage?.url})`,
             backgroundSize: 'cover',
             backgroundPosition: {
               xs: '20% center', //
@@ -180,12 +180,12 @@ export default function HomeHero({ hero }) {
           }}
         >
           <LandingCard
-            title={hero?.heading}
-            subtitle={hero?.subtitle}
-            buttonText={hero?.buttonText}
+            title={hero?.Heading}
+            subtitle={hero?.SubHeading}
+            buttonText={hero?.ButtonText}
             delayNo={4}
             buttonClick={() => {
-              navigate(hero?.buttonUrl);
+              navigate(hero?.ButtonUrl);
             }}
           />
         </Box>
