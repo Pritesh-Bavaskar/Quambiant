@@ -15,6 +15,7 @@ const Page403 = lazy(() => import('src/pages/403'));
 const Page404 = lazy(() => import('src/pages/404'));
 const FaqsPage = lazy(() => import('src/pages/faqs'));
 const AboutPage = lazy(() => import('src/pages/about-us'));
+const InvestorLoungePage = lazy(() => import('src/pages/investor-lounge'));
 const OurProjectPage = lazy(() => import('src/pages/our-project'));
 const OurProjectDetailsPage = lazy(() => import('src/pages/our-project-details'));
 const ContactPage = lazy(() => import('src/pages/contact-us'));
@@ -43,6 +44,7 @@ export const mainRoutes = [
     ),
     children: [
       { path: 'about-us', element: <AboutPage /> },
+      { path: 'investor-lounge', element: <InvestorLoungePage /> },
       { path: 'our-project', element: <OurProjectPage /> },
       { path: 'our-project/:slug', element: <OurProjectDetailsPage /> },
       { path: 'contact-us', element: <ContactPage /> },

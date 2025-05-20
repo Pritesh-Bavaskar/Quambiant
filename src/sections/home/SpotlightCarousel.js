@@ -91,7 +91,7 @@ CustomNextArrow.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function SpotlightCarousel() {
+export default function SpotlightCarousel({ spotlight }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -133,7 +133,7 @@ export default function SpotlightCarousel() {
               textAlign: { xs: 'center', md: 'left' },
             }}
           >
-            In the Spotlight
+            {spotlight?.heading || 'In the Spotlight'}
           </Typography>
           <Typography
             sx={{
@@ -145,8 +145,8 @@ export default function SpotlightCarousel() {
               textAlign: { xs: 'center', md: 'left' },
             }}
           >
-            Stay updated with the latest news, expert insights, and media highlights about our
-            journey in redefining residential living.
+            {spotlight?.subheading ||
+              'Stay updated with the latest news, expert insights, and media highlights about our journey in redefining residential living.'}
           </Typography>
         </Box>
         {!isMobile && (
@@ -238,3 +238,7 @@ export default function SpotlightCarousel() {
     </CarouselContainer>
   );
 }
+
+SpotlightCarousel.propTypes = {
+  spotlight: PropTypes.array,
+};

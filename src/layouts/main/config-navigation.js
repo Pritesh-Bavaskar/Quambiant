@@ -73,6 +73,6 @@ export const navConfig = [
   {
     title: 'Investors Lounge',
     icon: <Iconify icon="solar:notebook-bold-duotone" />,
-    path: paths.docs,
+    path: paths.investorLounge,
   },
 ];

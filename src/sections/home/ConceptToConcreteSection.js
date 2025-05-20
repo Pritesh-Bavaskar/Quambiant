@@ -102,9 +102,9 @@ const TimelineItem = ({
             md: reverse ? 4 : 0, // Conditional padding on desktop
           },
         },
-      }}
+          }}
       ref={ref}
-    >
+        >
       <Grid
         item
         xs={12}
@@ -322,8 +322,9 @@ MobileProgressBar.propTypes = {
   count: PropTypes.number.isRequired,
 };
 
-export default function ConceptToConcreteSection() {
-  const timelineData = [
+export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
+  // Fallback data in case conceptToConcreteSection is not available
+  const defaultTimelineData = [
     {
       title: 'From Dream to Design',
       content:
@@ -347,6 +348,18 @@ export default function ConceptToConcreteSection() {
     },
   ];
 
+  // Use data from conceptToConcreteSection if available, otherwise use default data
+  const timelineData = conceptToConcreteSection?.Steps
+    ? conceptToConcreteSection.Steps.map((step, index) => ({
+        title: step.StepHeading,
+        content: step.StepSubheading,
+        // Use the medium format image if available, otherwise fall back to the original URL
+        image: `${process.env.REACT_APP_HOST_API}${step.Image?.formats?.medium?.url}`,
+        // Alternate the reverse property for layout
+        reverse: index % 2 !== 0,
+      }))
+    : defaultTimelineData;
+
   const [activeIndex, setActiveIndex] = useState(-1);
   const [parallaxOffsets, setParallaxOffsets] = useState([]);
   const [timelineProgress, setTimelineProgress] = useState(0);
@@ -361,6 +374,7 @@ export default function ConceptToConcreteSection() {
   const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
   const sliderRef = useRef(null);
 
+  // Update refs when timelineData changes
   useEffect(() => {
     // Calculate dot positions here to ensure they're always up-to-date
     // This helps position the timeline bar precisely at the first and last TimelineItem
@@ -556,7 +570,7 @@ export default function ConceptToConcreteSection() {
                 mb: 1,
               }}
             >
-              From Concept to Concrete
+              {conceptToConcreteSection?.Heading}
             </Typography>
             <Typography
               variant="body1"
@@ -569,8 +583,7 @@ export default function ConceptToConcreteSection() {
                 mx: 'auto',
               }}
             >
-              From visionary designs to built realities — our journey is a testament to passion,
-              precision, and progress.
+              {conceptToConcreteSection?.Subheading}
             </Typography>
           </Box>
         </motion.div>
@@ -789,3 +802,7 @@ export default function ConceptToConcreteSection() {
     </LazyMotion>
   );
 }
+
+ConceptToConcreteSection.propTypes = {
+  conceptToConcreteSection: PropTypes.object,
+};

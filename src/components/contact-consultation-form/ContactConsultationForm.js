@@ -10,16 +10,15 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
-  useMediaQuery,
 } from '@mui/material';
+import PropTypes from 'prop-types';
 import { useTheme } from '@mui/material/styles';
 import bgImage from 'src/assets/media/landing/contact_form_bck.png';
 import contactPhone from 'src/assets/media/landing/contact_phone.svg';
 import contactWhatsapp from 'src/assets/media/landing/contact_whatsapp.svg';
 
-export default function ContactConsultationForm() {
+export default function ContactConsultationForm({ contactUs }) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Box
@@ -45,7 +44,7 @@ export default function ContactConsultationForm() {
         variant="h1"
         sx={{ color: '#FDF8F3', mb: 10, fontWeight: 500, textAlign: 'center' }}
       >
-        Let our experts help you find the perfect home
+        {contactUs?.heading}
       </Typography>
 
       <Box
@@ -78,18 +77,18 @@ export default function ContactConsultationForm() {
             variant="standard"
             fullWidth
             required
-            InputProps={{ 
+            InputProps={{
               disableUnderline: false,
-              sx: { 
+              sx: {
                 fontSize: { xs: '14px', md: '16px' },
-                fontWeight: 500
-              }
+                fontWeight: 500,
+              },
             }}
             InputLabelProps={{
-              sx: { 
+              sx: {
                 fontSize: { xs: '14px', md: '16px' },
-                fontWeight: 500
-              }
+                fontWeight: 500,
+              },
             }}
           />
           <TextField
@@ -98,18 +97,18 @@ export default function ContactConsultationForm() {
             fullWidth
             required
             size="small"
-            InputProps={{ 
+            InputProps={{
               disableUnderline: false,
-              sx: { 
+              sx: {
                 fontSize: { xs: '14px', md: '16px' },
-                fontWeight: 500
-              }
+                fontWeight: 500,
+              },
             }}
             InputLabelProps={{
-              sx: { 
+              sx: {
                 fontSize: { xs: '14px', md: '16px' },
-                fontWeight: 500
-              }
+                fontWeight: 500,
+              },
             }}
           />
         </Box>
@@ -128,22 +127,24 @@ export default function ContactConsultationForm() {
             variant="standard"
             fullWidth
             size="small"
-            InputProps={{ 
+            InputProps={{
               disableUnderline: false,
-              sx: { 
+              sx: {
                 fontSize: { xs: '14px', md: '16px' },
-                fontWeight: 500
-              }
+                fontWeight: 500,
+              },
             }}
             InputLabelProps={{
-              sx: { 
+              sx: {
                 fontSize: { xs: '14px', md: '16px' },
-                fontWeight: 500
-              }
+                fontWeight: 500,
+              },
             }}
           />
           <FormControl fullWidth size="small" variant="standard">
-            <InputLabel sx={{ fontSize: { xs: '14px', md: '16px' }, fontWeight: 500 }}>Preferred Location</InputLabel>
+            <InputLabel sx={{ fontSize: { xs: '14px', md: '16px' }, fontWeight: 500 }}>
+              Preferred Location
+            </InputLabel>
             <Select
               label="Preferred Location"
               defaultValue=""
@@ -186,7 +187,10 @@ export default function ContactConsultationForm() {
           <FormControlLabel
             control={<Checkbox sx={{ p: 0, pr: 1.5, borderRadius: 0 }} />}
             label={
-              <Typography sx={{ color: '#232323', fontSize: { xs: '14px', md: '16px' }, fontWeight: 500 }} variant="body3">
+              <Typography
+                sx={{ color: '#232323', fontSize: { xs: '14px', md: '16px' }, fontWeight: 500 }}
+                variant="body3"
+              >
                 Send recent offers and news on whatsapp
               </Typography>
             }
@@ -230,7 +234,7 @@ export default function ContactConsultationForm() {
               color: '#232323',
               whiteSpace: 'nowrap',
               fontSize: { xs: '14px', md: '16px' },
-              fontWeight: 500
+              fontWeight: 500,
             }}
           >
             Reach out to us directly on
@@ -269,7 +273,7 @@ export default function ContactConsultationForm() {
               '&:hover': { background: '#f5f5f5', borderColor: '#bbb' },
             }}
           >
-            +91 79923446465
+            {contactUs?.contactNumber}
           </Button>
           <Button
             variant="outlined"
@@ -291,10 +295,14 @@ export default function ContactConsultationForm() {
               '&:hover': { background: '#f5f5f5', borderColor: '#bbb' },
             }}
           >
-            +91 79923446465
+            {contactUs?.whatsAppNumber}
           </Button>
         </Box>
       </Box>
     </Box>
   );
 }
+
+ContactConsultationForm.propTypes = {
+  contactUs: PropTypes.object,
+};
