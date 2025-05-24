@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { Box, Grid, Typography, Card, CardContent, CardMedia, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { m , useTransform } from 'framer-motion';
+import { m, useTransform } from 'framer-motion';
 import backgroundImage from 'src/assets/media/landing/card/bck-img.png';
 import img1 from 'src/assets/media/landing/card/card-img1.png';
 import img2 from 'src/assets/media/landing/card/card-img2.png';
@@ -185,7 +185,8 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
 
       {isMobile ? (
         <Box sx={{ width: '100%', position: 'relative' }}>
-          <Box
+          <m.div
+            style={{ opacity: titleOpacity }}
             sx={{
               px: { xs: 0, sm: 4 }, // Added horizontal padding for side gaps
               width: '100%',
@@ -206,7 +207,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
                 </m.div>
               ))}
             </Carousel>
-          </Box>
+          </m.div>
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
             <CustomArrow icon="eva:arrow-ios-back-fill" onClick={carousel.onPrev} sx={{ mr: 2 }} />
             <CustomArrow

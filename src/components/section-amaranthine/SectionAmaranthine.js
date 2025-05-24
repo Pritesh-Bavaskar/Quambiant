@@ -8,7 +8,8 @@ export function SectionAmaranthine() {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const containerRef = useRef(null);
-  const [fifthImageProgress, setFifthImageProgress] = useState(0);  const { scrollYProgress } = useScroll({
+  const [fifthImageProgress, setFifthImageProgress] = useState(0);
+  const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
@@ -54,6 +55,17 @@ export function SectionAmaranthine() {
     [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
     [0.2, 0.4, 0.6, 0.8, 1]
   );
+  // Separate scales for mobile view
+  const cardScaleX = useTransform(
+    scrollYProgress,
+    [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
+    [0.9, 0.9, 0.9, 0.9, 1]
+  );
+  const cardScaleY = useTransform(
+    scrollYProgress,
+    [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
+    [0.1, 0.2, 0.3, 0.4, 1]
+  );
 
   // Mobile version animations
   const y1Mobile = useTransform(scrollYProgress, [0, 1], [0, -100]);
@@ -65,8 +77,8 @@ export function SectionAmaranthine() {
   const scale2Mobile = useTransform(scrollYProgress, [0.3, 0.5], [0.9, 1]);
 
   // Adjust card section opacity based on fifth image progress
-  const cardOpacityMobile = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
-  const cardScaleMobile = useTransform(scrollYProgress, [0.6, 0.8], [0, 1]);
+  const cardOpacityMobile = useTransform(scrollYProgress, [0, 0.65, 0.8], [0, 0, 1]);
+  const cardScaleMobile = useTransform(scrollYProgress, [0, 0.6, 0.8], [0, 1, 1]);
 
   if (isDesktop) {
     return (
@@ -154,14 +166,17 @@ export function SectionAmaranthine() {
   }
 
   return (
-    <Box ref={containerRef} sx={{ 
-      position: 'relative', 
-      height: '400vh', 
-      width: '100%', 
-      overflow: 'clip', // Use clip instead of hidden to preserve animations
-      margin: 0,
-      padding: 0,
-    }}>
+    <Box
+      ref={containerRef}
+      sx={{
+        position: 'relative',
+        height: '400vh',
+        width: '100%',
+        overflow: 'clip', // Use clip instead of hidden to preserve animations
+        margin: 0,
+        padding: 0,
+      }}
+    >
       {/* First Section - Intro */}
       <m.div
         style={{
@@ -232,7 +247,9 @@ export function SectionAmaranthine() {
             position: 'sticky',
             top: 0,
             opacity: cardOpacityMobile,
-            scale: cardScaleMobile,
+            scaleX: cardScaleX,
+            scaleY: cardScaleY,
+            transformOrigin: 'center 45%',
             height: '100vh',
             display: 'flex',
             alignItems: 'center',
