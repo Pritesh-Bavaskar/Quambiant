@@ -1,10 +1,11 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
+import PropTypes from 'prop-types';
 import { useScroll, useTransform, m } from 'framer-motion';
 import { useRef, useState } from 'react';
 import AmaranthineGrid from './AmaranthineGrid';
 import AmaranthineCard from './AmaranthineCard';
 
-export function SectionAmaranthine() {
+export function SectionAmaranthine({ projectShowcase }) {
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const containerRef = useRef(null);
@@ -109,7 +110,7 @@ export function SectionAmaranthine() {
             }}
             gutterBottom
           >
-            Landmarks of Excellence in Residential Living
+            {projectShowcase?.Heading}
           </Typography>
 
           <Typography
@@ -118,8 +119,7 @@ export function SectionAmaranthine() {
             fontFamily="Satoshi Variable, sans-serif"
             color="#5C6170"
           >
-            Explore our finest residential projects that redefine luxury, innovation, and
-            craftsmanship— each home built to perfection, each space designed for life.
+            {projectShowcase?.SubHeading}
           </Typography>
         </m.div>
 
@@ -144,7 +144,11 @@ export function SectionAmaranthine() {
               backgroundColor: 'white',
             }}
           >
-            <AmaranthineGrid fifthItemScale={fifthItemScale} fifthItemOpacity={fifthItemOpacity} />
+            <AmaranthineGrid
+              fifthItemScale={fifthItemScale}
+              fifthItemOpacity={fifthItemOpacity}
+              data={projectShowcase}
+            />
           </m.div>
 
           {/* Card Section */}
@@ -158,7 +162,7 @@ export function SectionAmaranthine() {
               height: '100vh',
             }}
           >
-            <AmaranthineCard scrollYProgress={scrollYProgress} />
+            <AmaranthineCard scrollYProgress={scrollYProgress} data={projectShowcase} />
           </m.div>
         </m.div>
       </Box>
@@ -203,7 +207,7 @@ export function SectionAmaranthine() {
           }}
           gutterBottom
         >
-          Landmarks of Excellence in Residential Living
+          {projectShowcase?.Heading}
         </Typography>
 
         <Typography
@@ -212,8 +216,7 @@ export function SectionAmaranthine() {
           fontFamily="Satoshi Variable, sans-serif"
           color="text.secondary"
         >
-          Explore our finest residential projects that redefine luxury, innovation, and
-          craftsmanship— each home built to perfection, each space designed for life.
+          {projectShowcase?.SubHeading}
         </Typography>
       </m.div>
 
@@ -232,7 +235,7 @@ export function SectionAmaranthine() {
           backgroundColor: 'white',
         }}
       >
-        <AmaranthineGrid onFifthImageProgress={setFifthImageProgress} />
+        <AmaranthineGrid onFifthImageProgress={setFifthImageProgress} data={projectShowcase} />
       </m.div>
 
       {/* Third Section - Cards */}
@@ -256,9 +259,13 @@ export function SectionAmaranthine() {
             justifyContent: 'center',
           }}
         >
-          <AmaranthineCard scrollYProgress={scrollYProgress} />
+          <AmaranthineCard scrollYProgress={scrollYProgress} data={projectShowcase} />
         </m.div>
       </m.div>
     </Box>
   );
 }
+
+SectionAmaranthine.propTypes = {
+  projectShowcase: PropTypes.object,
+};

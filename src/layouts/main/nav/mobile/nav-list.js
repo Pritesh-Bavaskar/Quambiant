@@ -1,13 +1,10 @@
 import PropTypes from 'prop-types';
 // @mui
+import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
-import { listClasses } from '@mui/material/List';
-import { listItemTextClasses } from '@mui/material/ListItemText';
-import { listItemButtonClasses } from '@mui/material/ListItemButton';
 // hooks
 import { useBoolean } from 'src/hooks/use-boolean';
 // components
-import { NavSectionVertical } from 'src/components/nav-section';
 import { usePathname } from 'src/routes/hook';
 //
 import NavItem from './nav-item';
@@ -19,8 +16,6 @@ export default function NavList({ item }) {
 
   const { path, children } = item;
 
-  const externalLink = path.includes('http');
-
   const nav = useBoolean();
 
   return (
@@ -30,31 +25,63 @@ export default function NavList({ item }) {
         open={nav.value}
         onClick={nav.onToggle}
         active={pathname === path}
-        externalLink={externalLink}
+        sx={{
+          // Mobile styles (default)
+          // Desktop styles
+          '@media (min-width: 900px)': {
+            my: 3,
+            '&:first-of-type': { mt: 0 },
+            '&:last-child': { mb: 0 },
+          },
+        }}
       />
 
-      {!!children && (
+      {!!children && typeof window !== 'undefined' && window.innerWidth < 900 && (
         <Collapse in={nav.value} unmountOnExit>
-          <NavSectionVertical
-            data={children}
-            sx={{
-              [`& .${listClasses.root}`]: {
-                '&:last-of-type': {
-                  [`& .${listItemButtonClasses.root}`]: {
-                    height: 160,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    bgcolor: 'background.neutral',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundImage: 'url(/assets/illustrations/illustration_dashboard.png)',
-                    [`& .${listItemTextClasses.root}`]: {
-                      display: 'none',
-                    },
-                  },
-                },
-              },
-            }}
-          />
+          <Box sx={{ px: 2, py: 1 }}>
+            {children.map((group) => (
+              <Box key={group.title || 'group'} sx={{ mb: 2 }}>
+                {group.items?.map((i) => (
+                  <Box
+                    key={i.path}
+                    component="a"
+                    href={i.path}
+                    sx={{
+                      display: 'block',
+                      width: '100%',
+                      height: 'auto',
+                      aspectRatio: '353/90', // Adjust this ratio based on your images (e.g., '4/3', '3/2')
+                      mb: 1,
+                      backgroundSize: 'contain',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundImage: i.image ? `url(${i.image})` : 'none',
+                      backgroundColor: 'background.neutral',
+                      position: 'relative',
+                      overflow: 'hidden',
+                      '&:hover': {
+                        opacity: 0.9,
+                      },
+                    }}
+                  >
+                    {/* <Box
+                      sx={{
+                        position: 'absolute',
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        p: 2,
+                        background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%)',
+                        color: 'common.white',
+                      }}
+                    >
+                      {i.title}
+                    </Box> */}
+                  </Box>
+                ))}
+              </Box>
+            ))}
+          </Box>
         </Collapse>
       )}
     </>

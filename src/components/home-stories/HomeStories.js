@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useRef } from 'react';
 
 // @mui
 import { styled, useTheme } from '@mui/material/styles';
@@ -13,6 +13,29 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 // components
 import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
+
+// SVG Icons
+const PlayIcon = () => (
+  <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M19.3906 12.846C19.0371 14.189 17.3667 15.138 14.0257 17.0361C10.796 18.8709 9.1812 19.7884 7.87983 19.4196C7.3418 19.2671 6.85159 18.9776 6.45624 18.5787C5.5 17.6139 5.5 15.7426 5.5 12C5.5 8.2574 5.5 6.3861 6.45624 5.42132C6.85159 5.02245 7.3418 4.73288 7.87983 4.58042C9.1812 4.21165 10.796 5.12907 14.0257 6.96393C17.3667 8.86197 19.0371 9.811 19.3906 11.154C19.5365 11.7084 19.5365 12.2916 19.3906 12.846Z"
+      fill="#FDF8F3"
+    />
+  </svg>
+);
+
+const PauseIcon = () => (
+  <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M9.5 6C9.5 5.44772 9.05228 5 8.5 5C7.94772 5 7.5 5.44772 7.5 6V18C7.5 18.5523 7.94772 19 8.5 19C9.05228 19 9.5 18.5523 9.5 18V6Z"
+      fill="#FDF8F3"
+    />
+    <path
+      d="M17.5 6C17.5 5.44772 17.0523 5 16.5 5C15.9477 5 15.5 5.44772 15.5 6V18C15.5 18.5523 15.9477 19 16.5 19C17.0523 19 17.5 18.5523 17.5 18V6Z"
+      fill="#FDF8F3"
+    />
+  </svg>
+);
 
 // ----------------------------------------------------------------------
 
@@ -31,7 +54,7 @@ const StyledRoot = styled(Box)(({ theme }) => ({
   gap: theme.spacing(3),
   justifyContent: 'center',
   alignItems: 'stretch',
-  maxWidth: "89%",
+  maxWidth: '89%',
   margin: '0 auto',
   [theme.breakpoints.down('md')]: {
     flexDirection: 'column',
@@ -128,10 +151,23 @@ const AspectContentSection = styled(StyledContentSection)(({ theme }) => ({
 
 export default function HomeStories({ homeStories }) {
   const [activeStep, setActiveStep] = React.useState(0);
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const videoRef = useRef(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-    // Transform homeStories to match the required format
+  const togglePlayPause = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  // Transform homeStories to match the required format
   const transformedStories = React.useMemo(() => {
     if (!homeStories || homeStories.length === 0) {
       return []; // Return empty array if no stories provided
@@ -159,8 +195,8 @@ export default function HomeStories({ homeStories }) {
 
   const handlePrev = () => {
     if (transformedStories.length > 0) {
-      setActiveStep((prevStep) => 
-        (prevStep - 1 + transformedStories.length) % transformedStories.length
+      setActiveStep(
+        (prevStep) => (prevStep - 1 + transformedStories.length) % transformedStories.length
       );
     }
   };
@@ -179,7 +215,13 @@ export default function HomeStories({ homeStories }) {
       <Box sx={{ textAlign: 'center', mb: 6 }}>
         <Typography variant="h1">{homeStories?.Heading}</Typography>
         <Typography
-          sx={{ mt: 1, fontWeight: 500, maxWidth: { xs: '90%', md: 900 }, mx: 'auto', fontSize: { xs: 14, md: 20 } }}
+          sx={{
+            mt: 1,
+            fontWeight: 500,
+            maxWidth: { xs: '90%', md: 900 },
+            mx: 'auto',
+            fontSize: { xs: 14, md: 20 },
+          }}
         >
           {homeStories?.SubHeading}
         </Typography>
@@ -224,13 +266,57 @@ export default function HomeStories({ homeStories }) {
             </CardContent>
           </AspectContentSection>
           <AspectImageSection sx={{ width: '100%', mb: 2 }}>
-            <Box sx={{ width: '100%', height: '100%', position: 'relative' }}>
-              <Image
-                alt={transformedStories[activeStep].title}
+            <Box
+              sx={{
+                width: '100%',
+                height: '100%',
+                position: 'relative',
+                cursor: 'pointer',
+                '&:hover .play-button': {
+                  opacity: 1,
+                },
+              }}
+              onClick={togglePlayPause}
+            >
+              <video
+                ref={videoRef}
                 src={transformedStories[activeStep].coverUrl}
-                ratio={undefined}
-                sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+                loop
+                muted
+                playsInline
               />
+              <Box
+                className="play-button"
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: 60,
+                  height: 60,
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  opacity: isPlaying ? 0 : 1,
+                  transition: 'opacity 0.3s ease',
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  },
+                }}
+              >
+                <IconButton
+                  sx={{ color: 'white', width: 30, height: 30, ml: isPlaying ? 0 : '4px' }}
+                >
+                  {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                </IconButton>
+              </Box>
             </Box>
           </AspectImageSection>
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
@@ -275,13 +361,57 @@ export default function HomeStories({ homeStories }) {
       ) : (
         <StyledRoot>
           <AspectImageSection>
-            <Box sx={{ width: '100%', height: '100%', position: 'relative' }}>
-              <Image
-                alt={transformedStories[activeStep].title}
+            <Box
+              sx={{
+                width: '100%',
+                height: '100%',
+                position: 'relative',
+                cursor: 'pointer',
+                '&:hover .play-button': {
+                  opacity: 1,
+                },
+              }}
+              onClick={togglePlayPause}
+            >
+              <video
+                ref={videoRef}
                 src={transformedStories[activeStep].coverUrl}
-                ratio={undefined}
-                sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                }}
+                loop
+                muted
+                playsInline
               />
+              <Box
+                className="play-button"
+                sx={{
+                  position: 'absolute',
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  width: 60,
+                  height: 60,
+                  borderRadius: '50%',
+                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  opacity: isPlaying ? 0 : 1,
+                  transition: 'opacity 0.3s ease',
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                  },
+                }}
+              >
+                <IconButton
+                  sx={{ color: 'white', width: 30, height: 30, ml: isPlaying ? 0 : '4px' }}
+                >
+                  {isPlaying ? <PauseIcon /> : <PlayIcon />}
+                </IconButton>
+              </Box>
             </Box>
           </AspectImageSection>
           <AspectContentSection>

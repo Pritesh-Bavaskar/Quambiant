@@ -131,6 +131,15 @@ export default function HomeHero({ hero }) {
   }, [getScroll]);
 
 
+  const backgroundUrl = hero?.backgroundUrl || (hero?.HeroImage?.url ? `${process.env.REACT_APP_HOST_API}${hero.HeroImage.url}` : '');
+  const isVideo = hero?.backgroundType === 'video' || 
+    (backgroundUrl && (
+      backgroundUrl.endsWith('.mp4') || 
+      backgroundUrl.endsWith('.webm') || 
+      backgroundUrl.endsWith('.ogg') ||
+      hero?.HeroImage?.mime?.startsWith('video/')
+    ));
+
   return (
     <>
       <Box
@@ -141,30 +150,59 @@ export default function HomeHero({ hero }) {
           overflow: 'hidden',
         }}
       >
-        <Box
+        {isVideo ? (
+          <Box
+            component="video"
+            autoPlay
+            loop
+            muted
+            playsInline
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              minWidth: '100%',
+              minHeight: '100%',
+              width: 'auto',
+              height: 'auto',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 0,
+              objectFit: 'cover',
+            }}
+          >
+            <source 
+              src={backgroundUrl} 
+              type={hero?.HeroImage?.mime || 'video/mp4'}
+            />
+            Your browser does not support the video tag.
+          </Box>
+        ) : (
+          <Box
+            sx={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundImage: backgroundUrl ? `url(${backgroundUrl})` : 'none',
+              backgroundSize: 'cover',
+              backgroundPosition: {
+                xs: 'center',
+                md: 'center',
+              },
+              zIndex: 0,
+            }}
+          />
+        )}
+        <Box // Overlay
           sx={{
             position: 'absolute',
             top: 0,
             left: 0,
             width: '100%',
             height: '100%',
-            backgroundImage: `url(${process.env.REACT_APP_HOST_API}${hero?.HeroImage?.url})`,
-            backgroundSize: 'cover',
-            backgroundPosition: {
-              xs: '20% center', //
-              md: 'center', //
-            },
-            zIndex: 0,
-            '&::before': {
-              content: '""',
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              width: '100%',
-              height: '100%',
-              backgroundColor: 'rgba(0, 0, 0, 0.4)', // Darker overlay for better text visibility
-              zIndex: 1,
-            },
+            backgroundColor: 'rgba(0, 0, 0, 0.4)', // Adjust opacity as needed
+            zIndex: 1,
           }}
         />
         <Box

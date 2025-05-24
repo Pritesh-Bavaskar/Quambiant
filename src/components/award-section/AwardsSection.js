@@ -7,33 +7,6 @@ import IconButton from '@mui/material/IconButton';
 import PropTypes from 'prop-types';
 import awardImage from 'src/assets/media/landing/awards.png';
 
-// Sample awards data
-const awardsData = [
-  {
-    id: 1,
-    title: 'Best Residential Development 2022',
-    subtitle: 'Recognized for exceptional architectural design and sustainability',
-    image: awardImage,
-  },
-  {
-    id: 2,
-    title: 'Heritage Conservation Award',
-    subtitle: 'Awarded for preserving cultural architectural elements',
-    image: awardImage,
-  },
-  {
-    id: 3,
-    title: 'Urban Design Excellence',
-    subtitle: 'For innovative integration of modern living spaces',
-    image: awardImage,
-  },
-  {
-    id: 4,
-    title: 'Sustainability Leadership',
-    subtitle: 'Recognizing our commitment to eco-friendly development',
-    image: awardImage,
-  },
-];
 
 const CarouselContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
@@ -174,7 +147,7 @@ export default function AwardsSection({ awards }) {
             }}
           >
             <Carousel ref={mobileCarousel.carouselRef} {...mobileCarousel.carouselSettings}>
-              {awards?.AwardsSlider?.data?.map((award) => (
+              {awards?.AwardsSlider?.map((award) => (
                 <Card
                   key={award.id}
                   sx={{
@@ -194,7 +167,7 @@ export default function AwardsSection({ awards }) {
                 >
                   <CardMedia
                     component="img"
-                    image={award?.Image?.url}
+                    image={`${process.env.REACT_APP_HOST_API}${award?.Image?.url}`}
                     alt={award.title}
                     sx={{
                       height: '100%',
@@ -270,7 +243,7 @@ export default function AwardsSection({ awards }) {
             }}
           >
             <Carousel ref={desktopCarousel.carouselRef} {...desktopCarousel.carouselSettings}>
-              {awardsData.map((award) => (
+            {awards?.AwardsSlider?.map((award) => (
                 <Card
                   key={award.id}
                   sx={{
@@ -288,7 +261,7 @@ export default function AwardsSection({ awards }) {
                 >
                   <CardMedia
                     component="img"
-                    image={award.image}
+                    image={`${process.env.REACT_APP_HOST_API}${award?.Image?.url}`}
                     alt={award.title}
                     sx={{
                       height: '100%',

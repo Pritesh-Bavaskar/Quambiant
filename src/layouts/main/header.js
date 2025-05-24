@@ -26,7 +26,7 @@ import Logo from 'src/components/logo';
 import Label from 'src/components/label';
 //
 import { HEADER } from '../config-layout';
-import { navConfig } from './config-navigation';
+import { navConfigMobile, navConfigDesktop } from './config-navigation';
 import NavMobile from './nav/mobile';
 import NavDesktop from './nav/desktop';
 //
@@ -52,7 +52,7 @@ export default function Header() {
         transition={{
           duration: 0.8,
           ease: 'easeOut',
-          delay
+          delay,
         }}
       >
         <Toolbar
@@ -102,11 +102,11 @@ export default function Header() {
                   width: { xs: '0px', md: '15%' },
                 }}
               >
-                <Logo />
+                <Logo colorWhite />
               </Badge>
             </m.div>
 
-            {mdUp && <NavDesktop offsetTop={offsetTop} data={navConfig} />}
+            {mdUp && <NavDesktop offsetTop={offsetTop} data={navConfigDesktop} />}
 
             <Stack alignItems="center" direction={{ xs: 'row', md: 'row-reverse' }}>
               <m.div
@@ -130,6 +130,7 @@ export default function Header() {
                 >
                   Contact Us
                 </Button>
+                <NavMobile offsetTop={offsetTop} data={navConfigMobile} />
               </m.div>
 
               {mdUp && (
@@ -165,8 +166,6 @@ export default function Header() {
                   </IconButton>
                 </m.div>
               )}
-
-              {!mdUp && <NavMobile offsetTop={offsetTop} data={navConfig} />}
             </Stack>
           </Container>
         </Toolbar>
