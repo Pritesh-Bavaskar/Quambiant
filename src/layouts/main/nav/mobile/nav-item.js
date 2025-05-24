@@ -59,8 +59,16 @@ export default function NavItem({ item, open, active, externalLink, ...other }) 
     );
   }
 
-  // Has child
+  // Has child - for mobile, show dropdown, for desktop, navigate to first child
   if (children) {
+    // For desktop, navigate to first child if it exists
+    if (typeof window !== 'undefined' && window.innerWidth >= 900 && children[0]?.items?.[0]?.path) {
+      return (
+        <Link component={RouterLink} href={children[0].items[0].path} underline="none">
+          {renderContent}
+        </Link>
+      );
+    }
     return renderContent;
   }
 

@@ -16,6 +16,7 @@ import Logo from 'src/components/logo';
 import SvgColor from 'src/components/svg-color';
 import Scrollbar from 'src/components/scrollbar';
 //
+import slideImage from 'src/assets/media/landing/bck_img.png';
 import NavList from './nav-list';
 
 // ----------------------------------------------------------------------
@@ -59,13 +60,14 @@ export default function NavMobile({ offsetTop, data }) {
         }}
       >
         <Scrollbar sx={{ width: '100%', height: '100%' }}>
-          <div
-            style={{
+          <Box
+            sx={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
               width: '100%',
-              padding: '24px 24px 0',
+              p: 3,
+              pb: 1,
             }}
           >
             <Logo sx={{ width: 100, height: 40, my: 0 }} />
@@ -82,6 +84,7 @@ export default function NavMobile({ offsetTop, data }) {
                   '&:hover': {
                     color: '#FFF',
                   },
+                  display: { xs: 'none', md: 'inline-flex' },
                 }}
               >
                 Contact Us
@@ -102,74 +105,115 @@ export default function NavMobile({ offsetTop, data }) {
                 />
               </IconButton>
             </Box>
-          </div>
+          </Box>
           <Box
-            sx={{ display: 'flex', flexDirection: 'column', height: '100%', position: 'relative' }}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100%',
+              position: 'relative',
+              '@media (min-width: 900px)': {
+                flexDirection: 'row',
+                alignItems: 'stretch',
+              },
+            }}
           >
-            <List
-              component="nav"
+            {/* Left Section: Content */}
+            <Box
               sx={{
                 flexGrow: 1,
-                pt: { xs: 5, md: 12 },
-                px: { xs: 1, md: 1.5 },
-                // Desktop styles
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
+                alignItems: 'left',
+                '@media (min-width: 900px)': {
+                  width: '50%',
+                  margin: '0 auto',
+                  justifyContent: 'center',
+                },
+              }}
+            >
+              <List
+                component="nav"
+                sx={{
+                  flexGrow: 1,
+                  pt: { xs: 5, md: 12 },
+                  px: { xs: 1, md: 1.5 },
+                  '@media (min-width: 900px)': {
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    py: 4,
+                    '& > *:not(:last-child)': {
+                      mb: 3,
+                    },
+                  },
+                }}
+                disablePadding
+              >
+                {data.map((link) => (
+                  <NavList key={link.title} item={link} />
+                ))}
+              </List>
+
+              {/* Social Icons - Desktop Only */}
+              <Box
+                sx={{
+                  display: { xs: 'none', md: 'block' },
+                  p: 3,
+                  pt: 2,
+                  mt: 'auto',
+                }}
+              >
+                <Stack direction="row" spacing={2}>
+                  {[
+                    { name: 'Facebook', icon: '/assets/icons/brands/ic_facebook.svg', href: '#' },
+                    { name: 'Twitter', icon: '/assets/icons/brands/ic_x.svg', href: '#' },
+                    { name: 'Instagram', icon: '/assets/icons/brands/ic_insta.svg', href: '#' },
+                  ].map((social) => (
+                    <IconButton
+                      key={social.name}
+                      component="a"
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        color: 'text.primary',
+                        '&:hover': {
+                          bgcolor: 'action.hover',
+                        },
+                      }}
+                    >
+                      <SvgColor src={social.icon} sx={{ width: 33, height: 33 }} />
+                    </IconButton>
+                  ))}
+                </Stack>
+              </Box>
+            </Box>
+
+            {/* Right Section: Image - Desktop Only */}
+            <Box
+              sx={{
+                display: 'none',
                 '@media (min-width: 900px)': {
                   display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'center',
-                  py: 4,
-                  '& > *:not(:last-child)': {
-                    mb: 3,
+                  width: '50%',
+                  height: '100%',
+                  justifyContent: 'flex-end',
+                  '& img': {
+                    maxWidth: 464,
+                    aspectRatio: '464 / 600',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                    marginLeft: 'auto',
+                    pr: 5
                   },
                 },
               }}
-              disablePadding
             >
-              {data.map((link) => (
-                <NavList key={link.title} item={link} />
-              ))}
-            </List>
-
-            {/* Social Icons */}
-            <Box
-              sx={{
-                position: 'relative',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                p: 3,
-                pt: 2,
-                // borderTop: '1px solid rgba(0, 0, 0, 0.12)',
-                display: { xs: 'none', md: 'block' }, // Only show on mobile
-                // backgroundColor: 'background.paper',
-                zIndex: 1,
-              }}
-            >
-              <Stack direction="row" spacing={2}>
-                {[
-                  { name: 'Facebook', icon: '/assets/icons/brands/ic_facebook.svg', href: '#' },
-                  { name: 'Twitter', icon: '/assets/icons/brands/ic_x.svg', href: '#' },
-                  { name: 'Instagram', icon: '/assets/icons/brands/ic_insta.svg', href: '#' },
-                ].map((social) => (
-                  <IconButton
-                    key={social.name}
-                    component="a"
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{
-                      width: 40,
-                      height: 40,
-                      color: 'text.primary',
-                      '&:hover': {
-                        bgcolor: 'action.hover',
-                      },
-                    }}
-                  >
-                    <SvgColor src={social.icon} sx={{ width: 33, height: 33 }} />
-                  </IconButton>
-                ))}
-              </Stack>
+              <img src={slideImage} alt="Navigation background" />
             </Box>
           </Box>
         </Scrollbar>

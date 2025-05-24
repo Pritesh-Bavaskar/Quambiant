@@ -7,83 +7,24 @@ import PropTypes from 'prop-types';
 import upcomingLatestImage from 'src/assets/media/landing/upcoming-latest.png';
 import LaunchCard from './LaunchCard'; // from step above
 
-const launches = [
-  {
-    id: 1,
-    title: 'Quambiant 123',
-    type: '3/4 BHK Luxury Apartments',
-    location: 'Hyderabad, IN',
-    image: upcomingLatestImage,
-    tags: ['Clubhouse & Wellness', 'Sustainable Living'],
-    timeline: [
-      {
-        title: 'Structural Completion',
-        date: '2026 Q4',
-        status: 'ongoing',
-      },
-      {
-        title: 'Interiors & Finishing',
-        date: '2027 Q3',
-        status: 'upcoming',
-      },
-      {
-        title: 'Handover',
-        date: '2028 Q2',
-        status: 'future',
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: 'Quambiant 123',
-    type: '3/4 BHK Luxury Apartments',
-    location: 'Hyderabad, IN',
-    image: upcomingLatestImage,
-    tags: ['Clubhouse & Wellness', 'Sustainable Living'],
-    timeline: [
-      {
-        title: 'Structural Completion',
-        date: '2026 Q4',
-        status: 'ongoing',
-      },
-      {
-        title: 'Interiors & Finishing',
-        date: '2027 Q3',
-        status: 'upcoming',
-      },
-      {
-        title: 'Handover',
-        date: '2028 Q2',
-        status: 'future',
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: 'Quambiant 123',
-    type: '3/4 BHK Luxury Apartments',
-    location: 'Hyderabad, IN',
-    image: upcomingLatestImage,
-    tags: ['Clubhouse & Wellness', 'Sustainable Living'],
-    timeline: [
-      {
-        title: 'Structural Completion',
-        date: '2026 Q4',
-        status: 'ongoing',
-      },
-      {
-        title: 'Interiors & Finishing',
-        date: '2027 Q3',
-        status: 'upcoming',
-      },
-      {
-        title: 'Handover',
-        date: '2028 Q2',
-        status: 'future',
-      },
-    ],
-  },
-];
+// Transform API data to match component's expected format
+const transformProjects = (projects) => {
+  if (!projects || !Array.isArray(projects)) return [];
+  
+  return projects.map(project => ({
+    id: project.id,
+    title: project.Title,
+    type: project.SubTitle,
+    location: project.Location,
+    image: project.Image?.url ? `${process.env.REACT_APP_HOST_API}${project.Image.url}` : upcomingLatestImage,
+    tags: project.Tags?.map(tag => tag.Label) || [],
+    timeline: project.ProjectSteps?.map(step => ({
+      title: step.Title,
+      date: step.Date,
+      status: step.ProjectStatus?.toLowerCase() || 'upcoming'
+    })) || []
+  }));
+};
 
 const CarouselContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
@@ -117,9 +58,11 @@ CustomArrow.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-export default function UpcomingLaunchesCarousel() {
+export default function UpcomingLaunchesCarousel({ upcomingLaunches }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const launches = transformProjects(upcomingLaunches?.Projects || []);
 
   const carousel = useCarousel({
     slidesToShow: 2,
@@ -152,7 +95,7 @@ export default function UpcomingLaunchesCarousel() {
       >
         <Box sx={{ pl: 2, textAlign: { xs: 'center', md: 'left' } }}>
           <Typography variant="h1" sx={{ fontWeight: 500 }}>
-            Upcoming and Latest Launches
+            {upcomingLaunches?.Heading}
           </Typography>
           <Typography
             sx={{
@@ -163,7 +106,7 @@ export default function UpcomingLaunchesCarousel() {
               fontSize: { xs: 14, md: 20 },
             }}
           >
-            Be the first to discover the hottest launches in Hyderabad
+            {upcomingLaunches?.SubHeading}
           </Typography>
         </Box>
         {!isMobile && (
@@ -216,3 +159,7 @@ export default function UpcomingLaunchesCarousel() {
     </CarouselContainer>
   );
 }
+
+UpcomingLaunchesCarousel.propTypes = {
+  upcomingLaunches: PropTypes.object,
+};

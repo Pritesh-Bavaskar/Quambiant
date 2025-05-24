@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import bckImg from 'src/assets/media/landing/bck_img.png';
 import loaderImg from 'src/assets/media/landing/quambiant-loader.svg';
 import loaderImgMob from 'src/assets/media/landing/quambiant-loader-mob.svg';
@@ -9,6 +9,19 @@ export default function IntroSection({ intro }) {
   const [isZoomed, setIsZoomed] = useState(false);
   const [stage, setStage] = useState(0); // 0: dark, 1: white, 2: background
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const videoRef = useRef(null);
+
+  // Determine if the background should be a video
+  const backgroundUrl =
+    intro?.backgroundUrl ||
+    (intro?.HeroImage?.url ? `${process.env.REACT_APP_HOST_API}${intro.HeroImage.url}` : '');
+  const isVideo =
+    intro?.backgroundType === 'video' ||
+    (backgroundUrl &&
+      (backgroundUrl.endsWith('.mp4') ||
+        backgroundUrl.endsWith('.webm') ||
+        backgroundUrl.endsWith('.ogg') ||
+        intro?.HeroImage?.mime?.startsWith('video/')));
 
   useEffect(() => {
     const handleResize = () => {
@@ -64,12 +77,27 @@ export default function IntroSection({ intro }) {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#071317',
-    backgroundImage: stage === 2 ? `url(${process.env.REACT_APP_HOST_API}${intro})` : 'none',
+    backgroundImage: stage === 2 && !isVideo ? `url(${backgroundUrl})` : 'none',
     backgroundSize: 'cover',
     backgroundPosition: isMobile ? '20% center' : 'center',
     transition: 'all 1s ease',
     opacity: isVisible ? 1 : 0,
     pointerEvents: 'auto',
+    overflow: 'hidden',
+  };
+
+  const videoStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    minWidth: '100%',
+    minHeight: '100%',
+    width: 'auto',
+    height: 'auto',
+    transform: 'translate(-50%, -50%)',
+    objectFit: 'cover',
+    opacity: stage > 1 ? 1 : 0,
+    transition: 'opacity 1s ease',
   };
 
   const darkOverlayStyle = {
@@ -107,13 +135,26 @@ export default function IntroSection({ intro }) {
     opacity: isZoomed ? 1 : 1,
     transition: 'all 2.5s ease',
     transform: isZoomed ? 'scale(100)' : 'scale(1)',
-    transformOrigin: isMobile ? 'calc(50% + 5px) center' : 'calc(50% + 20px) center'
+    transformOrigin: isMobile ? 'calc(50% + 5px) center' : 'calc(50% + 20px) center',
   };
+
+  // Mute video when component mounts
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+    }
+  }, []);
 
   if (!isVisible) return null;
 
   return (
     <div style={containerStyle}>
+      {isVideo && stage > 1 && (
+        <video ref={videoRef} autoPlay loop muted playsInline style={videoStyle}>
+          <source src={backgroundUrl} type={intro?.HeroImage?.mime || 'video/mp4'} />
+          Your browser does not support the video tag.
+        </video>
+      )}
       <div style={darkOverlayStyle} />
       <div style={overlayStyle} />
       <img src={isMobile ? loaderImgMob : loaderImg} alt="Quambiant" style={loaderStyle} />

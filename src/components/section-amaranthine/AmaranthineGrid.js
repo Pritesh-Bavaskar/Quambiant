@@ -3,13 +3,13 @@ import { Grid, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
 import { m, useScroll, useTransform, motionValue } from 'framer-motion';
 
-import amaranthineImage1 from 'src/assets/media/landing/grid/grid-img1.png';
-import amaranthineImage2 from 'src/assets/media/landing/grid/grid-img2.png';
-import amaranthineImage3 from 'src/assets/media/landing/grid/grid-img3.png';
-import amaranthineImage4 from 'src/assets/media/landing/grid/grid-img4.png';
-import amaranthineImage6 from 'src/assets/media/landing/grid/grid-img6.png';
+// import amaranthineImage1 from 'src/assets/media/landing/grid/grid-img1.png';
+// import amaranthineImage2 from 'src/assets/media/landing/grid/grid-img2.png';
+// import amaranthineImage3 from 'src/assets/media/landing/grid/grid-img3.png';
+// import amaranthineImage4 from 'src/assets/media/landing/grid/grid-img4.png';
+// import amaranthineImage6 from 'src/assets/media/landing/grid/grid-img6.png';
 
-export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity }) {
+export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const ref = useRef(null);
@@ -20,11 +20,11 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity }) {
   });
 
   const images = [
-    amaranthineImage1,
-    amaranthineImage2,
-    amaranthineImage3,
-    amaranthineImage4,
-    amaranthineImage6, // Note: Skipped index 4 (img5)
+    data?.GallaryImage1?.url,
+    data?.GallaryImage2?.url,
+    data?.GallaryImage3?.url,
+    data?.GallaryImage4?.url,
+    data?.GallaryImage6?.url, // Note: Skipped index 4 (img5)
   ];
 
   // Default animations if not provided through props
@@ -78,10 +78,10 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity }) {
                 }}
               >
                 <Typography fontFamily={`'Playfair Display', serif`} fontSize={38} fontWeight={400}>
-                  AMARANTHINE
+                  {data?.GallaryTextSection5}
                 </Typography>
                 <Typography mt={1} fontSize={12} fontWeight={500}>
-                  2/3 BHK LUXURY APARTMENTS
+                  {data?.GallarySubTextSection5}
                 </Typography>
               </Box>
             </m.div>
@@ -210,7 +210,7 @@ function ImageBox({ src, alt, scrollYProgress }) {
         }}
       >
         <img
-          src={src}
+          src={`${process.env.REACT_APP_HOST_API}${src}`}
           alt={alt}
           style={{
             width: '100%',
@@ -226,6 +226,7 @@ function ImageBox({ src, alt, scrollYProgress }) {
 AmaranthineGrid.propTypes = {
   fifthItemScale: PropTypes.object,
   fifthItemOpacity: PropTypes.object,
+  data: PropTypes.object,
 };
 
 ImageBox.propTypes = {

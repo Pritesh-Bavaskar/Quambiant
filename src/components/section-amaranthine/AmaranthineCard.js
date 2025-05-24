@@ -10,27 +10,6 @@ import Carousel, { useCarousel } from 'src/components/carousel';
 import IconButton from '@mui/material/IconButton';
 import Iconify from 'src/components/iconify';
 
-const cards = [
-  {
-    image: img1,
-    title: 'Prime Location with Seamless Connectivity',
-    description:
-      'Situated in a well-connected neighborhood with easy access to schools, business hubs, and lifestyle destinations.',
-  },
-  {
-    image: img2,
-    title: 'Resort-Style Amenities & Green Living',
-    description:
-      'Experience luxury living with our resort-style amenities while embracing sustainable green living practices.',
-  },
-  {
-    image: img3,
-    title: 'Premium Quality Construction & Design',
-    description:
-      'Built with the finest materials and thoughtful design to ensure lasting quality and timeless aesthetics.',
-  },
-];
-
 // Custom Arrows with improved styling
 const CustomArrow = ({ icon, onClick, sx }) => (
   <IconButton
@@ -57,9 +36,15 @@ CustomArrow.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function AmaranthineHighlightSection({ scrollYProgress }) {
+export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const cards = (data?.StoryCard || []).map(card => ({
+    image: card?.Image?.url ? `${process.env.REACT_APP_HOST_API}${card.Image.url}` : img1, // Fallback to img1 if no image
+    title: card?.Title || '',
+    description: card?.SubTitle || ''
+  }));
 
   // Carousel settings for mobile
   const carousel = useCarousel({
@@ -153,7 +138,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
     <Box
       sx={{
         position: 'relative',
-        backgroundImage: `url(${backgroundImage})`,
+        backgroundImage: `url(${process.env.REACT_APP_HOST_API}${data?.SpotlightImage?.url})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         width: '100%',
@@ -179,7 +164,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
             letterSpacing: '0.05em',
           }}
         >
-          AMARANTHINE
+          {data?.StoryCardSliderHeading}
         </Typography>
       </m.div>
 
@@ -234,4 +219,5 @@ export default function AmaranthineHighlightSection({ scrollYProgress }) {
 
 AmaranthineHighlightSection.propTypes = {
   scrollYProgress: PropTypes.object.isRequired,
+  data: PropTypes.object,
 };

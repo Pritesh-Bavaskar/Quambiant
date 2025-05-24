@@ -36,7 +36,7 @@ export default function NavList({ item }) {
         }}
       />
 
-      {!!children && (
+      {!!children && typeof window !== 'undefined' && window.innerWidth < 900 && (
         <Collapse in={nav.value} unmountOnExit>
           <Box sx={{ px: 2, py: 1 }}>
             {children.map((group) => (

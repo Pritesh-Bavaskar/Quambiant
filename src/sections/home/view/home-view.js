@@ -23,7 +23,7 @@ export default function HomeView() {
   const { scrollYProgress } = useScroll();
   const { filteredHomepage, filteredHomepageLoading, filteredHomepageError } =
     useGetHomepageWithFilter(
-      `populate[Hero][populate]=*&populate[StatsSection]=*&populate[TimelineSection][populate][Steps][populate]=*&populate[HomeStories][populate][HomeStoriesSlider][populate]=*&populate[ContactUs][populate]=*&populate[Spotlight][populate][Card][populate]=*&populate[GreenBuildingStats][populate]=*&populate[Awards][populate][AwardsSlider][populate]=*`
+      `populate[Hero][populate]=*&populate[StatsSection]=*&populate[TimelineSection][populate][Steps][populate]=*&populate[HomeStories][populate][HomeStoriesSlider][populate]=*&populate[ContactUs][populate]=*&populate[Spotlight][populate][Card][populate]=*&populate[GreenBuildingStats][populate]=*&populate[Awards][populate][AwardsSlider][populate]=*&populate[UpcomingLaunches][populate][Projects][populate]=*&populate[ProjectShowcase][populate][GallaryImage1]=true&populate[ProjectShowcase][populate][GallaryImage2]=true&populate[ProjectShowcase][populate][GallaryImage3]=true&populate[ProjectShowcase][populate][GallaryImage4]=true&populate[ProjectShowcase][populate][GallaryImage6]=true&populate[ProjectShowcase][populate][SpotlightImage]=true&populate[ProjectShowcase][populate][StoryCard][populate]=*`
     );
 
   console.log(filteredHomepage);
@@ -32,28 +32,28 @@ export default function HomeView() {
     <>
       <ScrollProgress scrollYProgress={scrollYProgress} />
 
-      <IntroSection intro={filteredHomepage?.data?.Hero?.HeroImage?.url} />
+      <IntroSection intro={filteredHomepage?.data?.Hero} />
 
       <HomeHero hero={filteredHomepage?.data?.Hero} />
 
       <CountUpSection statsSection={filteredHomepage?.data?.StatsSection} />
 
-      <SectionAmaranthine />
+      <SectionAmaranthine projectShowcase={filteredHomepage?.data?.ProjectShowcase} />
 
       <ConceptToConcreteSection
         conceptToConcreteSection={filteredHomepage?.data?.TimelineSection}
       />
 
       <HomeStories homeStories={filteredHomepage?.data?.HomeStories} />
-      
-      <UpcomingLaunchesCarousel />
+
+      <UpcomingLaunchesCarousel upcomingLaunches={filteredHomepage?.data?.UpcomingLaunches}  />
 
       <AwardsSection awards={filteredHomepage?.data?.Awards} />
 
       <ContactConsultationForm contactUs={filteredHomepage?.data?.ContactUs} />
 
       <BuildGreenSection greenBuildingStats={filteredHomepage?.data?.GreenBuildingStats} />
-      
+
       <SpotlightCarousel spotlight={filteredHomepage?.data?.Spotlight} />
     </>
   );
