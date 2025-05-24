@@ -157,7 +157,7 @@ export default function OurProjectDetailsStatsCarousel() {
     }, 3000);
 
     return () => clearInterval(interval); // Clear on unmount
-  }, [thumbnails, isAnimating, handleNext]);
+  }, [handleNext]);
 
   return (
     <>
