@@ -29,14 +29,25 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity }) {
 
   // Default animations if not provided through props
   const defaultScale = useTransform(scrollYProgress, [0.7, 1], [1, 1.2]);
-  
+
   // Use provided scale/opacity for fifth item if available, otherwise use defaults
   const titleBlockScale = fifthItemScale || defaultScale;
   const titleBlockOpacity = fifthItemOpacity || 1;
 
   if (isMobile) {
     return (
-      <Box ref={ref} sx={{ px: 2, width: '100%', pt: 30, display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+      <Box
+        ref={ref}
+        sx={{
+          px: 2,
+          width: '100%',
+          pt: 30,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
+        }}
+      >
         <Grid container spacing={2} sx={{ maxWidth: 'md', justifyContent: 'center' }}>
           <Grid item xs={6}>
             <ImageBox src={images[0]} alt="img1" />
@@ -49,7 +60,7 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity }) {
             <m.div
               style={{
                 opacity: titleBlockOpacity,
-                scale: titleBlockScale
+                scale: titleBlockScale,
               }}
             >
               <Box
@@ -66,12 +77,12 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity }) {
                   px: 2,
                 }}
               >
-              <Typography fontFamily={`'Playfair Display', serif`} fontSize={38} fontWeight={400}>
-                AMARANTHINE
-              </Typography>
-              <Typography mt={1} fontSize={12} fontWeight={500}>
-                2/3 BHK LUXURY APARTMENTS
-              </Typography>
+                <Typography fontFamily={`'Playfair Display', serif`} fontSize={38} fontWeight={400}>
+                  AMARANTHINE
+                </Typography>
+                <Typography mt={1} fontSize={12} fontWeight={500}>
+                  2/3 BHK LUXURY APARTMENTS
+                </Typography>
               </Box>
             </m.div>
           </Grid>
@@ -106,64 +117,64 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity }) {
         sx={{
           maxWidth: 'xl',
           justifyContent: 'center',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
-      <Grid item xs={12} sm={6} md={4}>
-        <ImageBox src={images[0]} alt="Image 1" scrollYProgress={scrollYProgress} />
-      </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <ImageBox src={images[0]} alt="Image 1" scrollYProgress={scrollYProgress} />
+        </Grid>
 
-      <Grid item xs={12} sm={6} md={4}>
-        <ImageBox src={images[1]} alt="Image 2" scrollYProgress={scrollYProgress} />
-      </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <ImageBox src={images[1]} alt="Image 2" scrollYProgress={scrollYProgress} />
+        </Grid>
 
-      <Grid item xs={12} sm={6} md={4}>
-        <ImageBox src={images[2]} alt="Image 3" scrollYProgress={scrollYProgress} />
-      </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <ImageBox src={images[2]} alt="Image 3" scrollYProgress={scrollYProgress} />
+        </Grid>
 
-      <Grid item xs={12} sm={6} md={4}>
-        <ImageBox src={images[3]} alt="Image 4" scrollYProgress={scrollYProgress} />
-      </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <ImageBox src={images[3]} alt="Image 4" scrollYProgress={scrollYProgress} />
+        </Grid>
 
-      {/* ✅ STATIC TITLE BLOCK WITH SPECIAL PARALLAX EFFECT */}
-      <Grid item xs={12} sm={6} md={4} zIndex={1000}>
-        <m.div
-          style={{
-            width: '100%',
-            height: '100%',
-            scale: titleBlockScale,
-            transformOrigin: 'center 75%',
-            opacity: titleBlockOpacity
-          }}
-        >
-          <Box
-            sx={{
-              backgroundColor: '#0A2640',
+        {/* ✅ STATIC TITLE BLOCK WITH SPECIAL PARALLAX EFFECT */}
+        <Grid item xs={12} sm={6} md={4} zIndex={1000}>
+          <m.div
+            style={{
               width: '100%',
-              color: 'white',
-              aspectRatio: '43 / 30',
-              textAlign: 'center',
-              alignItems: 'center',
-              justifyContent: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              py: 6,
-              px: 2,
+              height: '100%',
+              scale: titleBlockScale,
+              transformOrigin: 'center 75%',
+              opacity: titleBlockOpacity,
             }}
           >
-            <Typography fontFamily={`'Playfair Display', serif`} fontSize={38} fontWeight={400}>
-              AMARANTHINE
-            </Typography>
-            <Typography mt={1} fontSize={12} fontWeight={500}>
-              2/3 BHK LUXURY APARTMENTS
-            </Typography>
-          </Box>
-        </m.div>
-      </Grid>
+            <Box
+              sx={{
+                backgroundColor: '#0A2640',
+                width: '100%',
+                color: 'white',
+                aspectRatio: '43 / 30',
+                textAlign: 'center',
+                alignItems: 'center',
+                justifyContent: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                py: 6,
+                px: 2,
+              }}
+            >
+              <Typography fontFamily={`'Playfair Display', serif`} fontSize={38} fontWeight={400}>
+                AMARANTHINE
+              </Typography>
+              <Typography mt={1} fontSize={12} fontWeight={500}>
+                2/3 BHK LUXURY APARTMENTS
+              </Typography>
+            </Box>
+          </m.div>
+        </Grid>
 
-      <Grid item xs={12} sm={6} md={4}>
-        <ImageBox src={images[4]} alt="Image 6" scrollYProgress={scrollYProgress} />
-      </Grid>
+        <Grid item xs={12} sm={6} md={4}>
+          <ImageBox src={images[4]} alt="Image 6" scrollYProgress={scrollYProgress} />
+        </Grid>
       </Grid>
     </Box>
   );
