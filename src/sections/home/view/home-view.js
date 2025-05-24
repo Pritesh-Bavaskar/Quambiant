@@ -23,7 +23,7 @@ export default function HomeView() {
   const { scrollYProgress } = useScroll();
   const { filteredHomepage, filteredHomepageLoading, filteredHomepageError } =
     useGetHomepageWithFilter(
-      `populate[hero][populate]=heroImage&populate[StatsSection]=*&populate[TimelineSection][populate][Steps][populate]=*&populate[HomeStoriesSlider][populate]=*&populate[ContactUs][populate]=*&populate[Spotlight][populate]=*`
+      `populate[Hero][populate]=HeroImage&populate[StatsSection]=*&populate[TimelineSection][populate][Steps][populate]=*&populate[HomeStories][populate][HomeStoriesSlider][populate]=*&populate[ContactUs][populate]=*&populate[Spotlight][populate]=*`
     );
 
   console.log(filteredHomepage);
