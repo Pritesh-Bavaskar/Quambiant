@@ -1,78 +1,75 @@
 // routes
 import { paths } from 'src/routes/paths';
-// config
-import { PATH_AFTER_LOGIN } from 'src/config-global';
 // components
 import Iconify from 'src/components/iconify';
 
 // ----------------------------------------------------------------------
 
-export const navConfig = [
+export const navConfigDesktop = [
   {
     title: 'About Us',
-    icon: <Iconify icon="solar:home-2-bold-duotone" />,
-    path: 'about-us',
+    // icon: <Iconify icon="solar:home-2-bold-duotone" />,
+    path: paths.about,
   },
-  // {
-  //   title: 'Components',
-  //   icon: <Iconify icon="solar:atom-bold-duotone" />,
-  //   path: paths.components,
-  // },
   {
     title: 'Our Projects',
     path: paths.ourProject,
-    icon: <Iconify icon="solar:file-bold-duotone" />,
+    // icon: <Iconify // icon="solar:file-bold-duotone" />,
     children: [
       {
-        // subheader: 'Other',
         items: [
           { title: 'Upcoming', path: paths.ourProjectUpcoming },
           { title: 'Ongoing', path: paths.ourProjectOngoing },
           { title: 'Completed', path: paths.ourProjectCompleted },
         ],
       },
-      // {
-      //   subheader: 'Concepts',
-      //   items: [
-      //     { title: 'Shop', path: paths.product.root },
-      //     { title: 'Product', path: paths.product.demo.details },
-      //     { title: 'Checkout', path: paths.product.checkout },
-      //     { title: 'Posts', path: paths.post.root },
-      //     { title: 'Post', path: paths.post.demo.details },
-      //   ],
-      // },
-      // {
-      //   subheader: 'Auth Demo',
-      //   items: [
-      //     { title: 'Login', path: paths.authDemo.classic.login },
-      //     { title: 'Register', path: paths.authDemo.classic.register },
-      //     { title: 'Forgot password', path: paths.authDemo.classic.forgotPassword },
-      //     { title: 'New password', path: paths.authDemo.classic.newPassword },
-      //     { title: 'Verify', path: paths.authDemo.classic.verify },
-      //     { title: 'Login (modern)', path: paths.authDemo.modern.login },
-      //     { title: 'Register (modern)', path: paths.authDemo.modern.register },
-      //     { title: 'Forgot password (modern)', path: paths.authDemo.modern.forgotPassword },
-      //     { title: 'New password (modern)', path: paths.authDemo.modern.newPassword },
-      //     { title: 'Verify (modern)', path: paths.authDemo.modern.verify },
-      //   ],
-      // },
-      // {
-      //   subheader: 'Error',
-      //   items: [
-      //     { title: 'Page 403', path: paths.page403 },
-      //     { title: 'Page 404', path: paths.page404 },
-      //     { title: 'Page 500', path: paths.page500 },
-      //   ],
-      // },
-      // {
-      //   subheader: 'Dashboard',
-      //   items: [{ title: 'Dashboard', path: PATH_AFTER_LOGIN }],
-      // },
     ],
   },
   {
     title: 'Investors Lounge',
-    icon: <Iconify icon="solar:notebook-bold-duotone" />,
+    // icon: <Iconify // icon="solar:notebook-bold-duotone" />,
+    path: paths.investorLounge,
+  },
+];
+
+export const navConfigMobile = [
+  {
+    title: 'About Us',
+    // icon: <Iconify // icon="solar:home-2-bold-duotone" />,
+    path: paths.about,
+  },
+  {
+    title: 'Our Projects',
+    path: paths.ourProject,
+    // icon: <Iconify // icon="solar:file-bold-duotone" />,
+    children: [
+      {
+        items: [
+          { title: 'Upcoming', path: paths.ourProjectUpcoming, image: '/assets/images/header/upcoming-projects.png' },
+          { title: 'Ongoing', path: paths.ourProjectOngoing, image: '/assets/images/header/ongoing-projects.png' },
+          { title: 'Completed', path: paths.ourProjectCompleted, image: '/assets/images/header/completed-projects.png' },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Investors Lounge',
+    // icon: <Iconify // icon="solar:notebook-bold-duotone" />,
+    path: paths.investorLounge,
+  },
+  {
+    title: 'CSR',
+    // icon: <Iconify // icon="solar:notebook-bold-duotone" />,
+    path: paths.investorLounge,
+  },
+  {
+    title: 'Newsroom',
+    // icon: <Iconify // icon="solar:notebook-bold-duotone" />,
+    path: paths.post,
+  },
+  {
+    title: 'Careers',
+    // icon: <Iconify icon="solar:notebook-bold-duotone" />,
     path: paths.investorLounge,
   },
 ];
