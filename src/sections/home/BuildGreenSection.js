@@ -1,22 +1,22 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box, Typography, Grid, Paper } from '@mui/material';
 
-const stats = [
-  {
-    value: '20%',
-    description: 'From vision to reality, we shape homes that inspire',
-  },
-  {
-    value: '30%',
-    description: 'water savings through rainwater harvesting & efficient plumbing',
-  },
-  {
-    value: '50%',
-    description: 'reduction in construction waste using sustainable materials',
-  },
-];
-
-export default function BuildGreenSection() {
+export default function BuildGreenSection({ greenBuildingStats }) {
+  const stats = [
+    {
+      value: greenBuildingStats?.StatOneValue,
+      description: greenBuildingStats?.StatOneDescription,
+    },
+    {
+      value: greenBuildingStats?.StatTwoValue,
+      description: greenBuildingStats?.StatTwoDescription,
+    },
+    {
+      value: greenBuildingStats?.StatThreeValue,
+      description: greenBuildingStats?.StatThreeDescription,
+    },
+  ];
   return (
     <Box
       sx={{
@@ -30,7 +30,7 @@ export default function BuildGreenSection() {
       {/* Background Video */}
       <Box
         component="video"
-        src="/assets/video/build_green.mp4"
+        src={`${process.env.REACT_APP_HOST_API}${greenBuildingStats?.BackgroundVideo?.url}`}
         autoPlay
         loop
         muted
@@ -83,7 +83,7 @@ export default function BuildGreenSection() {
             textShadow: '0 2px 16px rgba(0,0,0,0.4)',
           }}
         >
-          Building a Greener Tomorrow
+          {greenBuildingStats?.Heading}
         </Typography>
         <Typography
           sx={{
@@ -97,8 +97,7 @@ export default function BuildGreenSection() {
             fontWeight: 500,
           }}
         >
-          Sustainable living starts with conscious building—our commitment to eco-friendly design
-          ensures a better future for all
+          {greenBuildingStats?.SubHeading}
         </Typography>
       </Box>
       {/* Stats at the Bottom */}
@@ -184,3 +183,7 @@ export default function BuildGreenSection() {
     </Box>
   );
 }
+
+BuildGreenSection.propTypes = {
+  greenBuildingStats: PropTypes.object,
+};

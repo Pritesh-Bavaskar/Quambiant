@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import bckImg from 'src/assets/media/landing/bck_img.png';
 import loaderImg from 'src/assets/media/landing/quambiant-loader.svg';
 import loaderImgMob from 'src/assets/media/landing/quambiant-loader-mob.svg';
+import PropTypes from 'prop-types';
 
-export default function IntroSection() {
+export default function IntroSection({ intro }) {
   const [isVisible, setIsVisible] = useState(true);
   const [isZoomed, setIsZoomed] = useState(false);
   const [stage, setStage] = useState(0); // 0: dark, 1: white, 2: background
@@ -63,7 +64,7 @@ export default function IntroSection() {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#071317',
-    backgroundImage: stage === 2 ? `url(${bckImg})` : 'none',
+    backgroundImage: stage === 2 ? `url(${process.env.REACT_APP_HOST_API}${intro})` : 'none',
     backgroundSize: 'cover',
     backgroundPosition: isMobile ? '20% center' : 'center',
     transition: 'all 1s ease',
@@ -119,3 +120,7 @@ export default function IntroSection() {
     </div>
   );
 }
+
+IntroSection.propTypes = {
+  intro: PropTypes.object,
+};

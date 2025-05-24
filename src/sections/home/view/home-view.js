@@ -23,7 +23,7 @@ export default function HomeView() {
   const { scrollYProgress } = useScroll();
   const { filteredHomepage, filteredHomepageLoading, filteredHomepageError } =
     useGetHomepageWithFilter(
-      `populate[Hero][populate]=HeroImage&populate[StatsSection]=*&populate[TimelineSection][populate][Steps][populate]=*&populate[HomeStories][populate][HomeStoriesSlider][populate]=*&populate[ContactUs][populate]=*&populate[Spotlight][populate]=*`
+      `populate[Hero][populate]=*&populate[StatsSection]=*&populate[TimelineSection][populate][Steps][populate]=*&populate[HomeStories][populate][HomeStoriesSlider][populate]=*&populate[ContactUs][populate]=*&populate[Spotlight][populate][Card][populate]=*&populate[GreenBuildingStats][populate]=*&populate[Awards][populate][AwardsSlider][populate]=*`
     );
 
   console.log(filteredHomepage);
@@ -32,18 +32,28 @@ export default function HomeView() {
     <>
       <ScrollProgress scrollYProgress={scrollYProgress} />
 
-      <IntroSection />
-      <HomeHero hero={filteredHomepage?.data?.hero} />
+      <IntroSection intro={filteredHomepage?.data?.Hero?.HeroImage?.url} />
+
+      <HomeHero hero={filteredHomepage?.data?.Hero} />
+
       <CountUpSection statsSection={filteredHomepage?.data?.StatsSection} />
+
       <SectionAmaranthine />
+
       <ConceptToConcreteSection
         conceptToConcreteSection={filteredHomepage?.data?.TimelineSection}
       />
-      <HomeStories homeStories={filteredHomepage?.data?.HomeStoriesSlider} />
+
+      <HomeStories homeStories={filteredHomepage?.data?.HomeStories} />
+      
       <UpcomingLaunchesCarousel />
-      <AwardsSection />
+
+      <AwardsSection awards={filteredHomepage?.data?.Awards} />
+
       <ContactConsultationForm contactUs={filteredHomepage?.data?.ContactUs} />
-      <BuildGreenSection />
+
+      <BuildGreenSection greenBuildingStats={filteredHomepage?.data?.GreenBuildingStats} />
+      
       <SpotlightCarousel spotlight={filteredHomepage?.data?.Spotlight} />
     </>
   );

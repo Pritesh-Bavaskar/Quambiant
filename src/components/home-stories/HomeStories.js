@@ -136,13 +136,13 @@ export default function HomeStories({ homeStories }) {
     if (!homeStories || homeStories.length === 0) {
       return []; // Return empty array if no stories provided
     }
-    return homeStories.map((story) => ({
+    return homeStories?.HomeStoriesSlider?.map((story) => ({
       id: story.id.toString(),
-      title: story.heading,
-      description: story.subheading,
-      name: story.customerName,
-      location: story.state,
-      coverUrl: story.media?.url ? `${process.env.REACT_APP_HOST_API}${story.media.url}` : '',
+      title: story.Heading,
+      description: story.SubHeading,
+      name: story.Name,
+      location: story.State,
+      coverUrl: story.Media?.url ? `${process.env.REACT_APP_HOST_API}${story.Media.url}` : '',
     }));
   }, [homeStories]);
 
@@ -177,12 +177,11 @@ export default function HomeStories({ homeStories }) {
       }}
     >
       <Box sx={{ textAlign: 'center', mb: 6 }}>
-        <Typography variant="h1">Home Stories</Typography>
+        <Typography variant="h1">{homeStories?.Heading}</Typography>
         <Typography
           sx={{ mt: 1, fontWeight: 500, maxWidth: { xs: '90%', md: 900 }, mx: 'auto', fontSize: { xs: 14, md: 20 } }}
         >
-          Every home has a story. Here are the heartfelt experiences of those who now call a
-          Quambiant residence their own
+          {homeStories?.SubHeading}
         </Typography>
       </Box>
       {isMobile ? (

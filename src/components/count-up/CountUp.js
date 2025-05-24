@@ -14,21 +14,21 @@ const defaultStats = [
 
 export default function CountUpSection({ statsSection }) {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
-  
+
   // Use statsSection data if available, otherwise use default stats
   const stats = statsSection
     ? [
-        { value: parseInt(statsSection.statOneNumber, 10), label: statsSection.statOneLabel },
-        { value: parseInt(statsSection.statTwoNumber, 10), label: statsSection.statTwoLabel },
-        { value: parseInt(statsSection.statThreeNumber, 10), label: statsSection.statThreeLabel },
-        { value: parseInt(statsSection.statFourNumber, 10), label: statsSection.statFourLabel },
+        { value: parseInt(statsSection.StatOneNumber, 10), label: statsSection.StatOneLabel },
+        { value: parseInt(statsSection.StatTwoNumber, 10), label: statsSection.StatTwoLabel },
+        { value: parseInt(statsSection.StatThreeNumber, 10), label: statsSection.StatThreeLabel },
+        { value: parseInt(statsSection.StatFourNumber, 10), label: statsSection.StatFourLabel },
       ]
     : defaultStats;
 
   return (
     <Box ref={ref} sx={{ py: { xs: 6, md: 10 }, bgcolor: '#FDF8F3' }}>
       <Typography variant="h1" align="center" fontFamily="Playfair Display" gutterBottom>
-        {statsSection?.heading || 'A Legacy in Every Detail'}
+        {statsSection?.Heading}
       </Typography>
       <Typography
         align="center"
@@ -41,7 +41,7 @@ export default function CountUpSection({ statsSection }) {
           fontFamily: 'Satoshi Variable, sans-serif',
         }}
       >
-        {statsSection?.subtitle || 'Years of expertise, happy homeowners, and stunning residences—see what makes us stand apart'}
+        {statsSection?.SubHeading}
       </Typography>
       <Grid
         container

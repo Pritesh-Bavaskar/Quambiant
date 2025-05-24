@@ -6,40 +6,40 @@ import Carousel, { useCarousel } from 'src/components/carousel';
 import IconButton from '@mui/material/IconButton';
 import PropTypes from 'prop-types';
 
-const spotlightData = [
-  {
-    id: 1,
-    title: 'Sustainable Living: The Future Of Modern Homes',
-    description:
-      'Discover advances in shaping the future of residential living. Observe our eco-friendly practices, from energy-efficient design.',
-    date: '17 FEB, 2016',
-    image: '/assets/images/home/spotlight.png',
-  },
-  {
-    id: 2,
-    title: 'Sustainable Living: The Future Of Modern Homes',
-    description:
-      'Observe architecture in shaping the future of residential living. Discover how our eco-friendly practices, from energy-efficient design.',
-    date: '17 FEB, 2016',
-    image: '/assets/images/home/spotlight.png',
-  },
-  {
-    id: 3,
-    title: 'Sustainable Living: The Future Of Modern Homes',
-    description:
-      'Discover advances in shaping the future of residential living. Observe our eco-friendly practices, from energy-efficient design.',
-    date: '17 FEB, 2016',
-    image: '/assets/images/home/spotlight.png',
-  },
-  {
-    id: 4,
-    title: 'Sustainable Living: The Future Of Modern Homes',
-    description:
-      'Observe architecture in shaping the future of residential living. Discover how our eco-friendly practices, from energy-efficient design.',
-    date: '17 FEB, 2016',
-    image: '/assets/images/home/spotlight.png',
-  },
-];
+// const spotlightData = [
+//   {
+//     id: 1,
+//     title: 'Sustainable Living: The Future Of Modern Homes',
+//     description:
+//       'Discover advances in shaping the future of residential living. Observe our eco-friendly practices, from energy-efficient design.',
+//     date: '17 FEB, 2016',
+//     image: '/assets/images/home/spotlight.png',
+//   },
+//   {
+//     id: 2,
+//     title: 'Sustainable Living: The Future Of Modern Homes',
+//     description:
+//       'Observe architecture in shaping the future of residential living. Discover how our eco-friendly practices, from energy-efficient design.',
+//     date: '17 FEB, 2016',
+//     image: '/assets/images/home/spotlight.png',
+//   },
+//   {
+//     id: 3,
+//     title: 'Sustainable Living: The Future Of Modern Homes',
+//     description:
+//       'Discover advances in shaping the future of residential living. Observe our eco-friendly practices, from energy-efficient design.',
+//     date: '17 FEB, 2016',
+//     image: '/assets/images/home/spotlight.png',
+//   },
+//   {
+//     id: 4,
+//     title: 'Sustainable Living: The Future Of Modern Homes',
+//     description:
+//       'Observe architecture in shaping the future of residential living. Discover how our eco-friendly practices, from energy-efficient design.',
+//     date: '17 FEB, 2016',
+//     image: '/assets/images/home/spotlight.png',
+//   },
+// ];
 
 const CarouselContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
@@ -95,6 +95,42 @@ export default function SpotlightCarousel({ spotlight }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
+  const spotlightData = spotlight?.Card;
+  // [
+  //   {
+  //     id: 1,
+  //     title: 'Sustainable Living: The Future Of Modern Homes',
+  //     description:
+  //       'Discover advances in shaping the future of residential living. Observe our eco-friendly practices, from energy-efficient design.',
+  //     date: '17 FEB, 2016',
+  //     image: '/assets/images/home/spotlight.png',
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Sustainable Living: The Future Of Modern Homes',
+  //     description:
+  //       'Observe architecture in shaping the future of residential living. Discover how our eco-friendly practices, from energy-efficient design.',
+  //     date: '17 FEB, 2016',
+  //     image: '/assets/images/home/spotlight.png',
+  //   },
+  //   {
+  //     id: 3,
+  //     title: 'Sustainable Living: The Future Of Modern Homes',
+  //     description:
+  //       'Discover advances in shaping the future of residential living. Observe our eco-friendly practices, from energy-efficient design.',
+  //     date: '17 FEB, 2016',
+  //     image: '/assets/images/home/spotlight.png',
+  //   },
+  //   {
+  //     id: 4,
+  //     title: 'Sustainable Living: The Future Of Modern Homes',
+  //     description:
+  //       'Observe architecture in shaping the future of residential living. Discover how our eco-friendly practices, from energy-efficient design.',
+  //     date: '17 FEB, 2016',
+  //     image: '/assets/images/home/spotlight.png',
+  //   },
+  // ];
+
   const carousel = useCarousel({
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -124,7 +160,7 @@ export default function SpotlightCarousel({ spotlight }) {
           justifyContent: 'space-between',
         }}
       >
-        <Box>
+        <Box maxWidth={914}>
           <Typography
             variant="h1"
             sx={{
@@ -133,20 +169,18 @@ export default function SpotlightCarousel({ spotlight }) {
               textAlign: { xs: 'center', md: 'left' },
             }}
           >
-            {spotlight?.heading || 'In the Spotlight'}
+            {spotlight?.Heading}
           </Typography>
           <Typography
             sx={{
               color: '#5C6170',
               fontSize: { md: '20px', xs: '14px' },
-              maxWidth: 500,
               fontWeight: 500,
               display: 'flex',
               textAlign: { xs: 'center', md: 'left' },
             }}
           >
-            {spotlight?.subheading ||
-              'Stay updated with the latest news, expert insights, and media highlights about our journey in redefining residential living.'}
+            {spotlight?.SubHeading}
           </Typography>
         </Box>
         {!isMobile && (
@@ -165,7 +199,7 @@ export default function SpotlightCarousel({ spotlight }) {
         }}
       >
         <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
-          {spotlightData.map((item, i) => (
+          {spotlightData?.map((item, i) => (
             <Card
               key={`${item.id}-${i}`}
               sx={{
@@ -186,8 +220,8 @@ export default function SpotlightCarousel({ spotlight }) {
             >
               <CardMedia
                 component="img"
-                image={item.image}
-                alt={item.title}
+                image={`${process.env.REACT_APP_HOST_API}${item.Image?.url}`}
+                alt={item.Title}
                 sx={{ height: 180, objectFit: 'cover' }}
               />
               <CardContent sx={{ padding: '0px', paddingTop: '16px' }}>
@@ -202,7 +236,7 @@ export default function SpotlightCarousel({ spotlight }) {
                     fontSize: { md: '14px', xs: '12px' },
                   }}
                 >
-                  {item.date}
+                  {item.Date}
                 </Typography>
                 <Typography
                   sx={{
@@ -212,7 +246,7 @@ export default function SpotlightCarousel({ spotlight }) {
                     mb: 1,
                   }}
                 >
-                  {item.title}
+                  {item.Title}
                 </Typography>
                 <Typography
                   sx={{
@@ -222,7 +256,7 @@ export default function SpotlightCarousel({ spotlight }) {
                     fontFamily: 'Satoshi, sans-serif',
                   }}
                 >
-                  {item.description}
+                  {item.SubTitle}
                 </Typography>
               </CardContent>
             </Card>
