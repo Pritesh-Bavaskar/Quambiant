@@ -150,7 +150,18 @@ export default function IntroSection({ intro }) {
   return (
     <div style={containerStyle}>
       {isVideo && stage > 1 && (
-        <video ref={videoRef} autoPlay loop muted playsInline style={videoStyle}>
+        <video 
+          ref={videoRef} 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          // eslint-disable-next-line react/no-unknown-property
+          webkit-playsinline="true"
+          preload="auto"
+          disablePictureInPicture
+          style={videoStyle}
+        >
           <source src={backgroundUrl} type={intro?.HeroImage?.mime || 'video/mp4'} />
           Your browser does not support the video tag.
         </video>

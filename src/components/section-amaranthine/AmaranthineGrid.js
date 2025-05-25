@@ -163,10 +163,10 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
               }}
             >
               <Typography fontFamily={`'Playfair Display', serif`} fontSize={38} fontWeight={400}>
-                AMARANTHINE
+                {data?.GallaryTextSection5}
               </Typography>
               <Typography mt={1} fontSize={12} fontWeight={500}>
-                2/3 BHK LUXURY APARTMENTS
+                {data?.GallarySubTextSection5}  
               </Typography>
             </Box>
           </m.div>

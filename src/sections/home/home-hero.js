@@ -157,6 +157,10 @@ export default function HomeHero({ hero }) {
             loop
             muted
             playsInline
+            // eslint-disable-next-line react/no-unknown-property
+            webkit-playsinline="true"
+            preload="auto"
+            disablePictureInPicture
             sx={{
               position: 'absolute',
               top: '50%',
