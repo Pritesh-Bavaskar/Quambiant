@@ -49,7 +49,7 @@ export default function ContactConsultationForm({ contactUs }) {
 
       <Box
         sx={{
-          background: '#FBF8F3',
+          background: `#FBF8F3 url(/assets/background/pattern-contact.png) center/contain no-repeat`,
           borderRadius: 0,
           aspectRatio: { xs: '353 / 681', md: '914 / 489' },
           boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
@@ -164,8 +164,8 @@ export default function ContactConsultationForm({ contactUs }) {
               }}
             >
               <MenuItem value="">Preferred Location</MenuItem>
-              <MenuItem value="Location 1">Location 1</MenuItem>
-              <MenuItem value="Location 2">Location 2</MenuItem>
+              <MenuItem value="Hyderabad">Hyderabad</MenuItem>
+              <MenuItem value="Bangalore">Bangalore</MenuItem>
             </Select>
           </FormControl>
         </Box>
