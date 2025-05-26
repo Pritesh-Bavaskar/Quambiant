@@ -286,9 +286,10 @@ export default function HomeStories({ homeStories }) {
                   objectFit: 'cover',
                 }}
                 loop
-                muted
                 playsInline
-              />
+              >
+                <track src="" kind="captions" srcLang="en" label="No captions available" default />
+              </video>
               <Box
                 className="play-button"
                 sx={{
@@ -383,13 +384,7 @@ export default function HomeStories({ homeStories }) {
                 loop
                 playsInline
               >
-                <track
-                  src=""
-                  kind="captions"
-                  srcLang="en"
-                  label="No captions available"
-                  default
-                />
+                <track src="" kind="captions" srcLang="en" label="No captions available" default />
               </video>
               <Box
                 className="play-button"
