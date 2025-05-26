@@ -21,7 +21,7 @@ import NavList from './nav-list';
 
 // ----------------------------------------------------------------------
 
-export default function NavMobile({ offsetTop, data }) {
+export default function NavMobile({ offsetTop, data, sx }) {
   const pathname = usePathname();
 
   const nav = useBoolean();
@@ -41,11 +41,20 @@ export default function NavMobile({ offsetTop, data }) {
           ml: 2,
           width: { xs: 32, md: 42 },
           height: { xs: 32, md: 42 },
-          color: '#FDF8F3',
+          color: 'inherit',
           padding: 0,
+          transition: 'all 0.3s ease',
+          '&:hover': {
+            color: 'common.white',
+            bgcolor: 'rgba(255, 255, 255, 0.1)',
+          },
+          ...sx,
         }}
       >
-        <SvgColor src="/assets/icons/navbar/ic_logo.svg" sx={{ width: 32, height: 32 }} />
+        <SvgColor
+          src="/assets/icons/navbar/ic_logo.svg"
+          sx={{ width: 32, height: 32, color: 'currentColor' }}
+        />
       </IconButton>
 
       <Drawer
@@ -306,4 +315,5 @@ NavMobile.propTypes = {
     })
   ).isRequired,
   offsetTop: PropTypes.bool,
+  sx: PropTypes.object,
 };

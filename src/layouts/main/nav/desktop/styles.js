@@ -72,20 +72,45 @@ export const ListItem = styled(ListItemButton, {
 
 export const StyledMenu = styled(Paper)(({ theme }) => ({
   ...paper({ theme }),
-  left: 0,
-  right: '10%',
-  margin: 'auto',
   position: 'fixed',
+  left: 0,
+  right: 0,
+  top: HEADER.H_DESKTOP,
+  height: '70%',
   zIndex: theme.zIndex.modal,
-  padding: theme.spacing(2, 1, 1, 3),
-  maxWidth: theme.breakpoints.values.lg,
-  width: '200px',
-  top: HEADER.H_DESKTOP_OFFSET,
-  boxShadow: theme.customShadows.dropdown,
-  borderRadius: theme.shape.borderRadius * 2,
-  background: 'rgba(255, 255, 255, 0.2)', // make it more transparent
-  backdropFilter: 'blur(18px)',
-  WebkitBackdropFilter: 'blur(18px)',
+  overflow: 'hidden',
+  background: '#FDF8F3',
+  display: 'flex',
+  justifyContent: 'center',
+  width: '100vw',
+  margin: 0,
+  padding: 0,borderRadius: 0,  // Add this line
+  '&, & *': {      // This ensures all children also have no border radius
+    borderRadius: '0 !important',
+  },
+  '& > .MuiPaper-root': {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'flex-start',
+    background: 'transparent',
+    boxShadow: 'none',
+    maxWidth: '100%',
+    margin: 0,
+    padding: 0,
+  },
+  '& > *': {
+    width: '100%',
+    maxWidth: '100%',
+    height: '100%',
+    padding: theme.spacing(4, 12), // Increased horizontal padding
+    background: '#FDF8F3',
+    boxShadow: 'none',
+    borderRadius: 0,
+    margin: 0,
+    display: 'flex',
+    justifyContent: 'center',
+  },
 }));
 
 // ----------------------------------------------------------------------

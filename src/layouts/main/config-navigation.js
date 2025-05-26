@@ -17,10 +17,27 @@ export const navConfigDesktop = [
     // icon: <Iconify // icon="solar:file-bold-duotone" />,
     children: [
       {
+        mainTitle: 'Our Projects',
+        mainSubtitle: 'From vision to reality, we shape homes that inspire',
         items: [
-          { title: 'Upcoming', path: paths.ourProjectUpcoming },
-          { title: 'Ongoing', path: paths.ourProjectOngoing },
-          { title: 'Completed', path: paths.ourProjectCompleted },
+          { 
+            title: 'Upcoming Projects', 
+            subtitle: 'Discover our upcoming developments and future plans', 
+            path: paths.ourProjectUpcoming, 
+            image: '/assets/images/header/desktop-upcoming-projects.png' 
+          },
+          { 
+            title: 'Ongoing Projects', 
+            subtitle: 'Explore our current developments in progress', 
+            path: paths.ourProjectOngoing, 
+            image: '/assets/images/header/desktop-ongoing-projects.png'  
+          },
+          { 
+            title: 'Completed Projects', 
+            subtitle: 'View our successfully delivered projects', 
+            path: paths.ourProjectCompleted, 
+            image: '/assets/images/header/desktop-completed-projects.png' 
+          },
         ],
       },
     ],

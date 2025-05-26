@@ -17,8 +17,8 @@ import { ListItem } from './styles';
 // ----------------------------------------------------------------------
 
 export const NavItem = forwardRef(
-  ({ item, open, offsetTop, active, subItem, externalLink, ...other }, ref) => {
-    const { title, path, children } = item;
+  ({ item, open, offsetTop, active, subItem, externalLink, isAnyMenuOpen, ...other }, ref) => {
+    const { title, subtitle, path, children, image } = item;
 
     const renderContent = (
       <ListItem
@@ -28,14 +28,118 @@ export const NavItem = forwardRef(
         subItem={subItem}
         active={active}
         open={open}
-        sx={{ color: 'neutral.lighter' }}
+        sx={{
+          p: 0,
+          position: 'relative',
+          '&:hover': {
+            bgcolor: 'transparent',
+          },
+        }}
         {...other}
       >
-        <Typography variant="body2" sx={{ color: 'neutral.lighter', fontWeight: '500' }}>
-          {title}
-        </Typography>
+        {subItem ? (
+          <Box
+            component={RouterLink}
+            to={path}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%',
+              maxWidth: 320,
+              height: '100%',
+              borderRadius: 0,
+              overflow: 'hidden',
+              bgcolor: 'transparent',
+              boxShadow: 'none',
+              textDecoration: 'none',
+              transition: 'transform 0.2s',
+              '&:hover': {
+                transform: 'translateY(-4px)',
+              },
+            }}
+          >
+            <Box
+              component="img"
+              src={image}
+              alt={title}
+              sx={{
+                width: '100%',
+                height: 160,
+                objectFit: 'cover',
+              }}
+            />
+            <Box sx={{ pt: 2, flexGrow: 1, display: 'flex', flexDirection: 'column' }}>
+              <Typography
+                sx={{
+                  fontFamily: 'Satoshi Variable',
+                  color: '#18191B',
+                  fontWeight: '700',
+                  fontSize: '18px',
+                }}
+              >
+                {title}
+              </Typography>
+              {subtitle && (
+                <Typography
+                  sx={{
+                    fontFamily: 'Satoshi Variable',
+                    color: '#333333',
+                    fontWeight: '400',
+                    fontSize: '14px',
+                    lineHeight: '20px',
+                    mb: 2,
+                    flexGrow: 1,
+                  }}
+                >
+                  {subtitle}
+                </Typography>
+              )}
 
-        {!!children && <Iconify width={16} icon="eva:arrow-ios-downward-fill" sx={{ ml: 1 }} />}
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  color: '#DDAB76',
+                  fontWeight: '700',
+                  fontFamily: 'Satoshi Variable',
+                  fontSize: '14px',
+                  '&:hover': {
+                    textDecoration: 'underline',
+                  },
+                }}
+              >
+                View Details
+                <Iconify icon="eva:arrow-ios-forward-fill" width={16} sx={{ ml: 0.5 }} />
+              </Box>
+            </Box>
+          </Box>
+        ) : (
+          <Box sx={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+            <Typography
+              variant="body2"
+              sx={{
+                color: (open || isAnyMenuOpen) ? '#000000' : '#FDF8F3',
+                fontWeight: '500',
+                flexGrow: 1,
+                transition: 'color 0.2s ease-in-out',
+              }}
+            >
+              {title}
+            </Typography>
+            {!!children && (
+              <Iconify
+                width={16}
+                icon="eva:arrow-ios-downward-fill"
+                sx={{
+                  ml: 1,
+                  color: (open || isAnyMenuOpen) ? '#000000' : '#FDF8F3',
+                  transition: 'transform 0.2s',
+                  ...(open && { transform: 'rotate(180deg)' }),
+                }}
+              />
+            )}
+          </Box>
+        )}
       </ListItem>
     );
 
@@ -65,6 +169,7 @@ export const NavItem = forwardRef(
 NavItem.propTypes = {
   active: PropTypes.bool,
   externalLink: PropTypes.bool,
+  isAnyMenuOpen: PropTypes.bool,
   item: PropTypes.object,
   offsetTop: PropTypes.bool,
   open: PropTypes.bool,
@@ -81,7 +186,7 @@ export function NavItemDashboard({ item, sx, ...other }) {
           py: 5,
           px: 10,
           minHeight: 400,
-          borderRadius: 1.5,
+          borderRadius: 0,
           color: 'text.disabled',
           bgcolor: 'background.neutral',
 
