@@ -11,7 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import useMediaQuery from '@mui/material/useMediaQuery';
 // components
-import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 
 // SVG Icons

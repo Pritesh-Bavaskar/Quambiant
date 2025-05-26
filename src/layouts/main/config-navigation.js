@@ -9,7 +9,7 @@ export const navConfigDesktop = [
   {
     title: 'About Us',
     // icon: <Iconify icon="solar:home-2-bold-duotone" />,
-    path: "/",
+    path: "#",
   },
   {
     title: 'Our Projects',
@@ -36,7 +36,7 @@ export const navConfigMobile = [
   {
     title: 'About Us',
     // icon: <Iconify // icon="solar:home-2-bold-duotone" />,
-    path: "/",
+    path: "#",
   },
   {
     title: 'Our Projects',
