@@ -44,7 +44,7 @@ export default function ContactConsultationForm({ contactUs }) {
         variant="h1"
         sx={{ color: '#FDF8F3', mb: 10, fontWeight: 500, textAlign: 'center' }}
       >
-        {contactUs?.Heading}
+        {contactUs?.Heading || 'Let our experts help you find the perfect home'}
       </Typography>
 
       <Box
@@ -197,7 +197,7 @@ export default function ContactConsultationForm({ contactUs }) {
             sx={{
               m: 0,
               color: '#232323',
-              textAlign: { xs: 'center', sm: 'left' },
+              textAlign: { xs: 'left', sm: 'left' },
             }}
           />
           <Button
@@ -273,7 +273,7 @@ export default function ContactConsultationForm({ contactUs }) {
               '&:hover': { background: '#f5f5f5', borderColor: '#bbb' },
             }}
           >
-            {contactUs?.ContactNumber}
+            {contactUs?.ContactNumber || '917792344646'}
           </Button>
           <Button
             variant="outlined"
@@ -295,7 +295,7 @@ export default function ContactConsultationForm({ contactUs }) {
               '&:hover': { background: '#f5f5f5', borderColor: '#bbb' },
             }}
           >
-            {contactUs?.WhatsAppNumber}
+            {contactUs?.WhatsAppNumber || '917792344646'}
           </Button>
         </Box>
       </Box>

@@ -3,8 +3,8 @@ import { m } from 'framer-motion';
 // @mui
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-//
-import Logo from '../logo';
+// assets
+import logoQ from 'src/assets/media/logo_q.svg';
 
 // ----------------------------------------------------------------------
 
@@ -39,7 +39,7 @@ export default function SplashScreen({ sx, ...other }) {
             repeat: Infinity,
           }}
         >
-          <Logo disabledLink sx={{ width: 64, height: 64 }} />
+          <img src={logoQ} alt="Logo" style={{ width: 64, height: 64 }} />
         </m.div>
 
         <Box

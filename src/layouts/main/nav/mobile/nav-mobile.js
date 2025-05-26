@@ -197,23 +197,97 @@ export default function NavMobile({ offsetTop, data }) {
             <Box
               sx={{
                 display: 'none',
+                position: 'relative',
+                overflow: 'hidden',
                 '@media (min-width: 900px)': {
                   display: 'flex',
                   width: '50%',
                   height: '100%',
                   justifyContent: 'flex-end',
+                  alignItems: 'center',
+                  marginLeft: 'auto',
                   '& img': {
                     maxWidth: 464,
                     aspectRatio: '464 / 600',
                     objectFit: 'cover',
                     objectPosition: 'center',
-                    marginLeft: 'auto',
-                    pr: 5
+                    position: 'relative',
+                    zIndex: 0,
                   },
                 },
+                pr: 5,
               }}
             >
-              <img src={slideImage} alt="Navigation background" />
+              <Box
+                sx={{
+                  position: 'relative',
+                  width: '100%',
+                  height: '100%',
+                  maxWidth: 464,
+                  marginLeft: 'auto',
+                  // Add right padding (40px)
+                }}
+              >
+                <img
+                  src={slideImage}
+                  alt="Navigation background"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                  }}
+                />
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    overflow: 'hidden',
+                    zIndex: 1,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      width: '100%',
+                      animation: 'marquee 20s linear infinite',
+                      '@keyframes marquee': {
+                        '0%': { transform: 'translateX(0)' },
+                        '100%': { transform: 'translateX(-50%)' },
+                      },
+                    }}
+                  >
+                    {/* Repeat the text twice */}
+                    {[1, 2].map((i) => (
+                      <Box
+                        key={i}
+                        sx={{
+                          flexShrink: 0,
+                          display: 'inline-block',
+                          whiteSpace: 'nowrap',
+                          fontSize: '200px',
+                          fontFamily: 'Playfair Display, serif',
+                          fontWeight: 700,
+                          color: 'white',
+                          textTransform: 'uppercase',
+                          letterSpacing: '0.2em',
+                          textShadow: '0 2px 4px rgba(0,0,0,0.5)',
+                          lineHeight: 1,
+                          px: 5,
+                        }}
+                      >
+                        QUAMBIANT&nbsp;QUAMBIANT&nbsp;QUAMBIANT&nbsp;
+                      </Box>
+                    ))}
+                  </Box>
+                </Box>
+              </Box>
             </Box>
           </Box>
         </Scrollbar>

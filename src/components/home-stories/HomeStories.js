@@ -11,7 +11,6 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import useMediaQuery from '@mui/material/useMediaQuery';
 // components
-import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 
 // SVG Icons
@@ -382,9 +381,16 @@ export default function HomeStories({ homeStories }) {
                   objectFit: 'cover',
                 }}
                 loop
-                muted
                 playsInline
-              />
+              >
+                <track
+                  src=""
+                  kind="captions"
+                  srcLang="en"
+                  label="No captions available"
+                  default
+                />
+              </video>
               <Box
                 className="play-button"
                 sx={{

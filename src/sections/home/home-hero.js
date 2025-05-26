@@ -157,6 +157,10 @@ export default function HomeHero({ hero }) {
             loop
             muted
             playsInline
+            // eslint-disable-next-line react/no-unknown-property
+            webkit-playsinline="true"
+            preload="auto"
+            disablePictureInPicture
             sx={{
               position: 'absolute',
               top: '50%',
@@ -223,7 +227,15 @@ export default function HomeHero({ hero }) {
             buttonText={hero?.ButtonText}
             delayNo={4}
             buttonClick={() => {
-              navigate(hero?.ButtonUrl);
+              if (!hero?.ButtonUrl) return;
+              
+              // Check if it's a full URL (starts with http:// or https://)
+              if (/^https?:\/\//.test(hero.ButtonUrl)) {
+                window.open(hero.ButtonUrl, '_blank', 'noopener,noreferrer');
+              } else {
+                // Handle relative paths with the router
+                navigate(hero.ButtonUrl);
+              }
             }}
           />
         </Box>

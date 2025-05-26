@@ -143,9 +143,31 @@ export default function Header() {
                     sx={{
                       ml: { xs: 1, md: -1 },
                       mr: { md: 2 },
+                      backgroundColor: 'transparent',
+                      transition: 'all 0.3s ease',
+                      width: 40,
+                      height: 40,
+                      minWidth: 'auto',
+                      p: 0,
+                      '&:hover': {
+                        backgroundColor: 'white',
+                        borderRadius: 0,
+                        '& img': {
+                          filter: 'invert(0.9) sepia(0) saturate(0) hue-rotate(0deg)',
+                        },
+                      },
                     }}
                   >
-                    <img src={phone_btn} alt="Phone" style={{ width: 40, height: 40 }} />
+                    <img
+                      src={phone_btn}
+                      alt="Phone"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        transition: 'filter 0.3s ease',
+                      }}
+                    />
                   </IconButton>
                 </m.div>
               )}
@@ -159,10 +181,32 @@ export default function Header() {
                   <IconButton
                     sx={{
                       ml: { xs: 1, md: 0 },
-                      mr: { md: 2 },
+                      mr: { md: 3 },
+                      backgroundColor: 'transparent',
+                      transition: 'all 0.3s ease',
+                      width: 40,
+                      height: 40,
+                      minWidth: 'auto',
+                      p: 0,
+                      '&:hover': {
+                        backgroundColor: 'white',
+                        borderRadius: 0,
+                        '& img': {
+                          filter: 'invert(0.9) sepia(0) saturate(0) hue-rotate(0deg)',
+                        },
+                      },
                     }}
                   >
-                    <img src={whatsapp_btn} alt="WhatsApp" style={{ width: 40, height: 40 }} />
+                    <img
+                      src={whatsapp_btn}
+                      alt="WhatsApp"
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        transition: 'filter 0.3s ease',
+                      }}
+                    />
                   </IconButton>
                 </m.div>
               )}
