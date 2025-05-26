@@ -49,7 +49,7 @@ export default function ContactConsultationForm({ contactUs }) {
 
       <Box
         sx={{
-          background: `#FBF8F3 url(/assets/background/pattern-contact.png) center/contain no-repeat`,
+          background: '#FBF8F3 url(/assets/background/pattern-contact.png) center / cover no-repeat',
           borderRadius: 0,
           aspectRatio: { xs: '353 / 681', md: '914 / 489' },
           boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
