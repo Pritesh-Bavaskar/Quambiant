@@ -40,10 +40,10 @@ export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const cards = (data?.StoryCard || []).map(card => ({
+  const cards = (data?.StoryCard || []).map((card) => ({
     image: card?.Image?.url ? `${process.env.REACT_APP_HOST_API}${card.Image.url}` : img1, // Fallback to img1 if no image
     title: card?.Title || '',
-    description: card?.SubTitle || ''
+    description: card?.SubTitle || '',
   }));
 
   // Carousel settings for mobile
@@ -82,54 +82,72 @@ export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
       sx={{
         borderRadius: 0,
         width: '97%',
-        // maxWidth: 350,
-        height: 500,
         mx: 'auto',
         p: 2,
         display: 'flex',
         flexDirection: 'column',
+        height: 'auto',
+        minHeight: '100%',
         backgroundColor: 'rgba(255, 255, 255, 1)',
         boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
       }}
     >
-      <CardMedia
-        component="img"
-        image={card.image}
-        alt={card.title}
-        sx={{
-          width: '100%',
-          height: 256,
-          objectFit: 'cover',
-        }}
-      />
+      <Box sx={{ flex: '0 0 auto' }}>
+        <CardMedia
+          component="img"
+          image={card.image}
+          alt={card.title}
+          sx={{
+            width: '100%',
+            height: 240,
+            objectFit: 'cover',
+          }}
+        />
+      </Box>
       <CardContent
         sx={{
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'center',
-          flexGrow: 1,
+          flex: '1 1 auto',
           p: 0,
+          '&:last-child': {
+            pb: 0,
+          },
         }}
       >
-        <Typography
-          fontFamily="Satoshi Variable, sans-serif"
-          fontSize={{ xs: 20, md: 24 }}
-          fontWeight={700}
-          color="#18191B"
-          sx={{ lineHeight: 1.3 }}
-        >
-          {card.title}
-        </Typography>
-        <Typography
-          fontFamily="Satoshi Variable, sans-serif"
-          fontSize={{ xs: 14, md: 16 }}
-          fontWeight={500}
-          color="#666666"
-          mt={2}
-          sx={{ lineHeight: 1.6 }}
-        >
-          {card.description}
-        </Typography>
+        <Box sx={{ flex: '1 1 auto' }}>
+          <Typography
+            fontFamily="Satoshi Variable, sans-serif"
+            fontSize={{ xs: 20, md: 24 }}
+            fontWeight={700}
+            color="#18191B"
+            sx={{
+              lineHeight: 1.3,
+              wordBreak: 'break-word',
+              m: 0,
+              p: 0,
+              mt: 2,
+            }}
+          >
+            {card.title}
+          </Typography>
+          <Typography
+            fontFamily="Satoshi Variable, sans-serif"
+            fontSize={{ xs: 14, md: 16 }}
+            fontWeight={500}
+            color="#666666"
+            sx={{
+              lineHeight: 1.6,
+              whiteSpace: 'pre-line',
+              wordBreak: 'break-word',
+              m: 0,
+              p: 0,
+              mt: 2,
+            }}
+          >
+            {card.description}
+          </Typography>
+        </Box>
       </CardContent>
     </Card>
   );
@@ -159,7 +177,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
           sx={{
             color: 'white',
             fontWeight: 400,
-            mb: { md: 12, xs: 4 },
+            mb: { md: 8, xs: 4 },
             textShadow: '0px 2px 10px rgba(0,0,0,0.6)',
             letterSpacing: '0.05em',
           }}
@@ -185,10 +203,12 @@ export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
                   key={index}
                   style={{
                     opacity: titleOpacity,
-                    padding: '0 8px', // Additional padding between cards
+                    padding: '0 8px',
                   }}
                 >
-                  {renderCard(card)}
+                  <Box sx={{ height: '100%', minHeight: 500, display: 'flex' }}>
+                    {renderCard(card)}
+                  </Box>
                 </m.div>
               ))}
             </Carousel>
@@ -203,9 +223,15 @@ export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
           </Box>
         </Box>
       ) : (
-        <Grid container spacing={4} justifyContent="center" maxWidth={1300}>
+        <Grid
+          container
+          spacing={4}
+          sx={{ mt: 4, display: 'flex', flexWrap: 'wrap' }}
+          justifyContent="center"
+          maxWidth={1300}
+        >
           {cards.map((card, index) => (
-            <Grid item xs={12} sm={6} md={4} key={index}>
+            <Grid item xs={12} md={4} key={index} sx={{ display: 'flex' }}>
               <m.div style={{ opacity: opacities[index], y: yTransforms[index] }}>
                 {renderCard(card)}
               </m.div>
