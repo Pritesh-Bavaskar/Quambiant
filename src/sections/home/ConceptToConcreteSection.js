@@ -366,6 +366,7 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
   const itemsRefs = useRef([]);
   const timelineBarRef = useRef(null);
   const sectionRef = useRef(null);
+  const mobileSectionRef = useRef(null);
   const scrollTimeoutRef = useRef(null);
   const [isFullyScrolled, setIsFullyScrolled] = useState(false);
   const [isInCenter, setIsInCenter] = useState(false);
@@ -373,6 +374,9 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
   const [dotPositions, setDotPositions] = useState([]);
   const [mobileActiveIndex, setMobileActiveIndex] = useState(0);
   const sliderRef = useRef(null);
+  const lastScrollPosition = useRef(0);
+  const scrollTimeout = useRef(null);
+  const mobileScrollTimeout = useRef(null);
 
   // Update refs when timelineData changes
   useEffect(() => {
@@ -504,6 +508,93 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
     }
   };
 
+  // Reset to first slide when section comes into view
+  const isInView = useInView(mobileSectionRef, { once: false });
+
+  useEffect(() => {
+    if (isInView) {
+      setMobileActiveIndex(0);
+    }
+  }, [isInView]);
+
+  // Handle vertical scroll for mobile slider
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let lastScrollTime = Date.now();
+    let isScrolling = false;
+    
+    const handleVerticalScroll = () => {
+      // Check if we're in mobile view
+      if (window.innerWidth >= 900) return; // 900px is MUI's md breakpoint
+      if (!mobileSectionRef.current || isScrolling) return;
+
+      const sectionRect = mobileSectionRef.current.getBoundingClientRect();
+      const sectionTop = sectionRect.top;
+      const currentScrollY = window.scrollY;
+      const currentTime = Date.now();
+      const scrollDiff = currentScrollY - lastScrollY;
+      const timeDiff = currentTime - lastScrollTime;
+      
+      // Reset to first slide when section is not in view
+      if (sectionTop > window.innerHeight) {
+        setMobileActiveIndex(0);
+        lastScrollY = currentScrollY;
+        return;
+      }
+      
+      // Handle scroll when section is sticky
+      if (sectionTop <= 10) {
+        // Only process if enough time has passed and there's enough scroll movement
+        if (timeDiff > 400 && Math.abs(scrollDiff) > 5) {
+          isScrolling = true;
+          const direction = scrollDiff > 0 ? 1 : -1;
+          
+          if (direction > 0 && mobileActiveIndex < timelineData.length - 1) {
+            setMobileActiveIndex(prev => Math.min(prev + 1, timelineData.length - 1));
+          } else if (direction < 0 && mobileActiveIndex > 0) {
+            setMobileActiveIndex(prev => Math.max(prev - 1, 0));
+          }
+          
+          lastScrollTime = currentTime;
+          
+          // Reset scroll flag after a delay
+          setTimeout(() => {
+            isScrolling = false;
+          }, 300);
+        }
+      }
+      
+      // Allow scrolling past only after reaching the last slide
+      if (mobileActiveIndex === timelineData.length - 1 && sectionTop < -50) {
+        return;
+      }
+      
+      lastScrollY = currentScrollY;
+    };
+
+    // Only add scroll listener if we're in mobile view
+    if (window.innerWidth < 900) { // 900px is MUI's md breakpoint
+      window.addEventListener('scroll', handleVerticalScroll, { passive: true });
+      handleVerticalScroll(); // Initial calculation
+    }
+
+    // Also listen for resize events to add/remove scroll listener
+    const handleResize = () => {
+      if (window.innerWidth >= 900) {
+        window.removeEventListener('scroll', handleVerticalScroll);
+      } else {
+        window.addEventListener('scroll', handleVerticalScroll, { passive: true });
+        handleVerticalScroll();
+      }
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('scroll', handleVerticalScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [mobileActiveIndex, timelineData.length]);
+
   // Timeline progress animation variants
   const progressVariants = {
     initial: { height: 0 },
@@ -555,57 +646,70 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
   return (
     <LazyMotion features={domAnimation}>
       <Container maxWidth="lg" sx={{ py: 16 }}>
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <Box sx={{ mb: 0, textAlign: 'center' }}>
-            <Typography
-              variant="h2"
-              sx={{
-                fontFamily: 'Playfair Display, serif',
-                fontWeight: 500,
-                fontSize: { xs: '28px', md: '42px' },
-                mb: 1,
-              }}
-            >
-              {conceptToConcreteSection?.Heading}
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                color: 'text.secondary',
-                fontSize: { xs: '14px', md: '20px' },
-                fontFamily: 'Satoshi Variable, sans-serif',
-                maxWidth: 900,
-                fontWeight: 500,
-                mx: 'auto',
-              }}
-            >
-              {conceptToConcreteSection?.Subheading}
-            </Typography>
-          </Box>
-        </motion.div>
-
         {/* Mobile slider */}
         <Box
           sx={{
             display: { xs: 'block', md: 'none' },
             width: '100%',
+            minHeight: '150vh', // Constant height for scrolling
+            position: 'relative',
           }}
         >
           <Box
+            ref={mobileSectionRef}
             sx={{
               width: '100%',
-              position: 'relative',
-              height: '70vh',
-              overflow: 'hidden',
+              height: '80vh',
+              position: 'sticky',
+              top: '10vh',
+              zIndex: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              bgcolor: 'background.paper',
             }}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
           >
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Box sx={{ mb: 4, textAlign: 'center' }}>
+                <Typography
+                  variant="h2"
+                  sx={{
+                    fontFamily: 'Playfair Display, serif',
+                    fontWeight: 500,
+                    fontSize: { xs: '28px', md: '42px' },
+                    mb: 1,
+                  }}
+                >
+                  {conceptToConcreteSection?.Heading}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: 'text.secondary',
+                    fontSize: { xs: '14px', md: '20px' },
+                    fontFamily: 'Satoshi Variable, sans-serif',
+                    maxWidth: 900,
+                    fontWeight: 500,
+                    mx: 'auto',
+                  }}
+                >
+                  {conceptToConcreteSection?.Subheading}
+                </Typography>
+              </Box>
+            </motion.div>
+            <Box
+              sx={{
+                flex: 1,
+                position: 'relative',
+                overflow: 'hidden',
+              }}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
             {timelineData.map((item, index) => (
               <Box
                 key={index}
@@ -635,9 +739,11 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
                 />
               </Box>
             ))}
+            </Box>
+            <Box sx={{ mt: 2, mb: 3 }}>
+              <MobileProgressBar progress={mobileActiveIndex} count={timelineData.length} />
+            </Box>
           </Box>
-
-          <MobileProgressBar progress={mobileActiveIndex} count={timelineData.length} />
         </Box>
         {/* Navigation dots */}
         {/* <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
