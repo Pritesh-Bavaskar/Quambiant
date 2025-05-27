@@ -214,10 +214,20 @@ export default function AwardsSection({ awards }) {
                 fontWeight: 500,
                 mb: 1,
                 fontFamily: 'Playfair Display, serif',
-                fontSize: '42px',
                 textAlign: 'left',
                 maxWidth: 500,
                 color: '#18191B',
+                fontSize: {
+                  xs: '24px',
+                  sm: '28px',
+                  md: '42px',
+                },
+                lineHeight: {
+                  xs: '2.4rem',
+                  sm: '2.6rem',
+                  md: '3rem',
+                  lg: '3.4rem',
+                },
               }}
             >
               Recognizing Excellence in Real Estate

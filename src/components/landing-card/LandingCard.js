@@ -87,7 +87,19 @@ export function LandingCard({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Typography variant="h1">{title}</Typography>
+          <Typography
+            variant="h1"
+            sx={{
+              lineHeight: {
+                xs: '2.4rem',
+                sm: '2.8rem',
+                md: '4.2rem',
+                lg: '3rem',
+              },
+            }}
+          >
+            {title}
+          </Typography>
         </m.div>
 
         {subtitle ? (

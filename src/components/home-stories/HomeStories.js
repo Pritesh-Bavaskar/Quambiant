@@ -101,7 +101,6 @@ const AspectImageSection = styled(StyledImageSection)(({ theme }) => ({
 }));
 
 const AspectContentSection = styled(StyledContentSection)(({ theme }) => ({
-  aspectRatio: '780 / 514',
   backgroundColor: '#E5F5FC',
   width: '60%',
   minWidth: 0,
@@ -321,45 +320,46 @@ export default function HomeStories({ homeStories }) {
               </Box>
             </Box>
           </AspectImageSection>
-                {transformedStories.length > 1 && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-            <IconButton
-              onClick={handlePrev}
-              sx={{
-                width: '42px',
-                height: '42px',
-                backgroundColor: 'transparent',
-                border: '1px solid #fff',
-                borderRadius: '2px',
-                color: '#fff',
-                mx: 1,
-                '&:hover': {
-                  color: '#001016',
-                  backgroundColor: '#fff',
-                },
-              }}
-            >
-              <Iconify icon="eva:arrow-ios-back-fill" />
-            </IconButton>
-            <IconButton
-              onClick={handleNext}
-              sx={{
-                width: '42px',
-                height: '42px',
-                backgroundColor: 'transparent',
-                color: '#fff',
-                borderRadius: '2px',
-                border: '1px solid #fff',
-                mx: 1,
-                '&:hover': {
-                  color: '#001016',
-                  backgroundColor: '#fff',
-                },
-              }}
-            >
-              <Iconify icon="eva:arrow-ios-forward-fill" />
-            </IconButton>
-          </Box>)}
+          {transformedStories.length > 1 && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+              <IconButton
+                onClick={handlePrev}
+                sx={{
+                  width: '42px',
+                  height: '42px',
+                  backgroundColor: 'transparent',
+                  border: '1px solid #fff',
+                  borderRadius: '2px',
+                  color: '#fff',
+                  mx: 1,
+                  '&:hover': {
+                    color: '#001016',
+                    backgroundColor: '#fff',
+                  },
+                }}
+              >
+                <Iconify icon="eva:arrow-ios-back-fill" />
+              </IconButton>
+              <IconButton
+                onClick={handleNext}
+                sx={{
+                  width: '42px',
+                  height: '42px',
+                  backgroundColor: 'transparent',
+                  color: '#fff',
+                  borderRadius: '2px',
+                  border: '1px solid #fff',
+                  mx: 1,
+                  '&:hover': {
+                    color: '#001016',
+                    backgroundColor: '#fff',
+                  },
+                }}
+              >
+                <Iconify icon="eva:arrow-ios-forward-fill" />
+              </IconButton>
+            </Box>
+          )}
         </Box>
       ) : (
         <StyledRoot>
@@ -419,50 +419,110 @@ export default function HomeStories({ homeStories }) {
             </Box>
           </AspectImageSection>
           <AspectContentSection>
-            <CardContent sx={{ height: '100%', position: 'relative', p: { xs: 2, md: 4 } }}>
-              <Typography variant="h1" sx={{ fontWeight: 500, mb: 2, color: '#18191B' }}>
+            <CardContent
+              sx={{
+                height: '100%',
+                position: 'relative',
+                p: { xs: 2, sm: 3, md: 4 },
+                maxWidth: 900, // limit content width on larger screens
+                mx: 'auto', // center horizontally
+              }}
+            >
+              {/* Title */}
+              <Typography
+                variant="h1"
+                sx={{
+                  fontWeight: 500,
+                  mb: 2,
+                  color: '#18191B',
+                  lineHeight: {
+                    xs: '2.4rem',
+                    sm: '2.6rem',
+                    md: '3rem',
+                    lg: '3.4rem',
+                  },
+                  fontSize: {
+                    xs: '24px',
+                    sm: '28px',
+                    md: '42px',
+                  },
+                }}
+              >
                 {transformedStories[activeStep].title}
               </Typography>
+
+              {/* Description */}
               <Typography
                 sx={{
                   color: 'text.secondary',
                   mb: 4,
-                  fontSize: { xs: 14, md: 16 },
+                  fontSize: {
+                    xs: '14px',
+                    sm: '14px',
+                    md: '16px',
+                  },
+                  lineHeight: {
+                    xs: '1.6rem',
+                    sm: '1.8rem',
+                    md: '2rem',
+                  },
                   fontWeight: 500,
+                  maxHeight: { xs: 150, sm: 180, md: 200 }, // adjust as needed
+                  overflowY: 'auto',
+                  pr: 1, // add space so text doesn't cut off behind hidden scrollbar
+
+                  // Hide scrollbar across browsers
+                  '&::-webkit-scrollbar': {
+                    display: 'none',
+                  },
+                  scrollbarWidth: 'none', // Firefox
+                  msOverflowStyle: 'none', // IE/Edge
                 }}
               >
                 {transformedStories[activeStep].description}
               </Typography>
+
+              {/* Footer with name/location and nav buttons */}
               <Box
                 sx={{
                   position: 'absolute',
                   right: 24,
-                  bottom: 24,
+                  bottom: { xs: 16, sm: 24, md: 0 },
                   left: 24,
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
+                  flexWrap: 'wrap', // allows stacking if space is tight
+                  gap: 2,
                   zIndex: 2,
                 }}
               >
+                {/* Name & Location */}
                 <Typography
                   sx={{
                     fontFamily: 'Playfair Display',
-                    fontSize: 20,
+                    fontSize: {
+                      xs: 16,
+                      sm: 18,
+                      md: 22,
+                    },
                     fontStyle: 'italic',
                     color: '#18191B',
                     fontWeight: 500,
-                    mb: 0,
+                    lineHeight: 1.6,
+                    flexGrow: 1,
                   }}
                 >
                   {transformedStories[activeStep].name} – {transformedStories[activeStep].location}
                 </Typography>
+
+                {/* Navigation Buttons */}
                 <Stack direction="row" spacing={2}>
                   <IconButton
                     onClick={handlePrev}
                     sx={{
-                      width: '52px',
-                      height: '52px',
+                      width: 52,
+                      height: 52,
                       backgroundColor: 'transparent',
                       border: '1px solid #071317',
                       borderRadius: '2px',
@@ -478,8 +538,8 @@ export default function HomeStories({ homeStories }) {
                   <IconButton
                     onClick={handleNext}
                     sx={{
-                      width: '52px',
-                      height: '52px',
+                      width: 52,
+                      height: 52,
                       backgroundColor: 'transparent',
                       color: '#18191B',
                       borderRadius: '2px',
