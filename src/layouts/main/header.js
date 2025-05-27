@@ -1,3 +1,4 @@
+import React from 'react';
 import whatsapp_btn from 'src/assets/media/landing/whatsapp.svg';
 import phone_btn from 'src/assets/media/landing/call.svg';
 import { m } from 'framer-motion';
@@ -37,6 +38,12 @@ import { SettingsButton, HeaderShadow, LoginButton } from '../_common';
 export default function Header() {
   const theme = useTheme();
   const location = useLocation();
+  const [isNavHovered, setIsNavHovered] = React.useState(false);
+
+  const handleNavHover = React.useCallback((hovered) => {
+    // console.log('Navigation hover state:', hovered);
+    setIsNavHovered(hovered);
+  }, []);
 
   const mdUp = useResponsive('up', 'md');
 
@@ -45,7 +52,15 @@ export default function Header() {
   const delay = location.pathname === '/' ? 4 : 0;
 
   return (
-    <AppBar position="absolute">
+    <AppBar
+      position="absolute"
+      sx={{
+        backgroundColor: isNavHovered ? '#FDF8F3' : 'transparent',
+        color: isNavHovered ? 'text.primary' : 'common.white',
+        transition: 'all 0.3s ease',
+        boxShadow: isNavHovered ? theme.customShadows.z8 : 'none',
+      }}
+    >
       <m.div
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -62,7 +77,7 @@ export default function Header() {
               xs: HEADER.H_MOBILE,
               md: HEADER.H_DESKTOP,
             },
-            transition: theme.transitions.create(['height'], {
+            transition: theme.transitions.create(['height', 'background-color'], {
               easing: theme.transitions.easing.easeInOut,
               duration: theme.transitions.duration.shorter,
             }),
@@ -102,11 +117,17 @@ export default function Header() {
                   width: { xs: '0px', md: '15%' },
                 }}
               >
-                <Logo colorWhite />
+                <Logo colorWhite={!isNavHovered} />
               </Badge>
             </m.div>
 
-            {mdUp && <NavDesktop offsetTop={offsetTop} data={navConfigDesktop} />}
+            {mdUp && (
+              <NavDesktop
+                offsetTop={offsetTop}
+                data={navConfigDesktop}
+                onNavHover={handleNavHover}
+              />
+            )}
 
             <Stack alignItems="center" direction={{ xs: 'row', md: 'row-reverse' }}>
               <m.div
@@ -119,18 +140,24 @@ export default function Header() {
                   sx={{
                     py: '7px',
                     px: '24px',
-                    color: 'black',
-                    bgcolor: 'neutral.lighter',
+                    color: isNavHovered ? 'common.white' : 'text.primary',
+                    bgcolor: isNavHovered ? '#001016' : 'neutral.lighter',
                     borderRadius: 0,
                     fontSize: { md: '16px', xs: '12px' },
+                    transition: 'all 0.3s ease',
                     '&:hover': {
-                      color: 'neutral.lighter',
+                      bgcolor: isNavHovered ? 'primary.dark' : 'neutral.darker',
+                      color: 'common.white',
                     },
                   }}
                 >
                   Contact Us
                 </Button>
-                <NavMobile offsetTop={offsetTop} data={navConfigMobile} />
+                <NavMobile
+                  offsetTop={offsetTop}
+                  data={navConfigMobile}
+                  sx={{ color: isNavHovered ? '#001016' : '#FDF8F3' }}
+                />
               </m.div>
 
               {mdUp && (
@@ -138,6 +165,11 @@ export default function Header() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
+                  style={{
+                    visibility: isNavHovered ? 'hidden' : 'visible',
+                    width: 40,
+                    height: 40,
+                  }}
                 >
                   <IconButton
                     sx={{
@@ -176,12 +208,17 @@ export default function Header() {
                 <m.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.6 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  style={{
+                    visibility: isNavHovered ? 'hidden' : 'visible',
+                    width: 50,
+                    height: 40,
+                  }}
                 >
                   <IconButton
                     sx={{
-                      ml: { xs: 1, md: 0 },
-                      mr: { md: 3 },
+                      ml: { xs: 1, md: -1 },
+                      mr: { md: 2 },
                       backgroundColor: 'transparent',
                       transition: 'all 0.3s ease',
                       width: 40,
