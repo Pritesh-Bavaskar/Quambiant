@@ -93,7 +93,7 @@ export default function NavMobile({ offsetTop, data, sx }) {
                   '&:hover': {
                     color: '#FFF',
                   },
-                  display: { xs: 'none', md: 'inline-flex' },
+                  display: 'inline-flex',
                 }}
               >
                 Contact Us
