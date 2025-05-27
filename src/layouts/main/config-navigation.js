@@ -9,7 +9,7 @@ export const navConfigDesktop = [
   {
     title: 'About Us',
     // icon: <Iconify icon="solar:home-2-bold-duotone" />,
-    path: "#",
+    path: '#',
   },
   {
     title: 'Our Projects',
@@ -20,23 +20,23 @@ export const navConfigDesktop = [
         mainTitle: 'Our Projects',
         mainSubtitle: 'From vision to reality, we shape homes that inspire',
         items: [
-          { 
-            title: 'Upcoming Projects', 
-            subtitle: 'Discover our upcoming developments and future plans', 
-            path: paths.ourProjectUpcoming, 
-            image: '/assets/images/header/desktop-upcoming-projects.png' 
+          {
+            title: 'Upcoming Projects',
+            subtitle: 'Discover our upcoming developments and future plans',
+            path: paths.ourProjectUpcoming,
+            image: '/assets/images/header/desktop-upcoming-projects.png',
           },
-          { 
-            title: 'Ongoing Projects', 
-            subtitle: 'Explore our current developments in progress', 
-            path: paths.ourProjectOngoing, 
-            image: '/assets/images/header/desktop-ongoing-projects.png'  
+          {
+            title: 'Ongoing Projects',
+            subtitle: 'Explore our current developments in progress',
+            path: paths.ourProjectOngoing,
+            image: '/assets/images/header/desktop-ongoing-projects.png',
           },
-          { 
-            title: 'Completed Projects', 
-            subtitle: 'View our successfully delivered projects', 
-            path: paths.ourProjectCompleted, 
-            image: '/assets/images/header/desktop-completed-projects.png' 
+          {
+            title: 'Completed Projects',
+            subtitle: 'View our successfully delivered projects',
+            path: paths.ourProjectCompleted,
+            image: '/assets/images/header/desktop-completed-projects.png',
           },
         ],
       },
@@ -53,7 +53,7 @@ export const navConfigMobile = [
   {
     title: 'About Us',
     // icon: <Iconify // icon="solar:home-2-bold-duotone" />,
-    path: "#",
+    path: '#',
   },
   {
     title: 'Our Projects',
@@ -62,9 +62,21 @@ export const navConfigMobile = [
     children: [
       {
         items: [
-          { title: 'Upcoming', path: paths.ourProjectUpcoming, image: '/assets/images/header/upcoming-projects.png' },
-          { title: 'Ongoing', path: paths.ourProjectOngoing, image: '/assets/images/header/ongoing-projects.png' },
-          { title: 'Completed', path: paths.ourProjectCompleted, image: '/assets/images/header/completed-projects.png' },
+          {
+            title: 'Upcoming',
+            path: paths.ourProjectUpcoming,
+            image: '/assets/images/header/upcoming-projects.png',
+          },
+          {
+            title: 'Ongoing',
+            path: paths.ourProjectOngoing,
+            image: '/assets/images/header/ongoing-projects.png',
+          },
+          {
+            title: 'Completed',
+            path: paths.ourProjectCompleted,
+            image: '/assets/images/header/completed-projects.png',
+          },
         ],
       },
     ],
@@ -77,7 +89,7 @@ export const navConfigMobile = [
   {
     title: 'CSR',
     // icon: <Iconify // icon="solar:notebook-bold-duotone" />,
-    path: paths.investorLounge,
+    path: '#',
   },
   {
     title: 'Newsroom',
@@ -87,6 +99,6 @@ export const navConfigMobile = [
   {
     title: 'Careers',
     // icon: <Iconify icon="solar:notebook-bold-duotone" />,
-    path: paths.investorLounge,
+    path: '#',
   },
 ];

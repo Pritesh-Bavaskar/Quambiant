@@ -6,6 +6,7 @@ import Collapse from '@mui/material/Collapse';
 import { useBoolean } from 'src/hooks/use-boolean';
 // components
 import { usePathname } from 'src/routes/hook';
+import Typography from '@mui/material/Typography';
 //
 import NavItem from './nav-item';
 
@@ -38,7 +39,18 @@ export default function NavList({ item }) {
 
       {!!children && typeof window !== 'undefined' && window.innerWidth < 900 && (
         <Collapse in={nav.value} unmountOnExit>
-          <Box sx={{ px: 2, py: 1 }}>
+          <Box sx={{ px: 2, py: 0 }}>
+            <Typography
+              sx={{
+                color: '#666666',
+                fontFamily: 'Satoshi Variable',
+                fontWeight: 500,
+                fontSize: '14px',
+                paddingBottom: 2,
+              }}
+            >
+              From vision to reality, we shape homes that inspire
+            </Typography>
             {children.map((group) => (
               <Box key={group.title || 'group'} sx={{ mb: 2 }}>
                 {group.items?.map((i) => (

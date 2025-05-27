@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Link from '@mui/material/Link';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import Box from '@mui/material/Box';
 // routes
 import { RouterLink } from 'src/routes/components';
 // components
@@ -40,12 +41,26 @@ export default function NavItem({ item, open, active, externalLink, ...other }) 
         primary={title}
       />
 
-      {!!children && (
+      {children ? (
+        <Box
+          sx={{
+            fontSize: 24,
+            fontWeight: 'bold',
+            lineHeight: 1,
+            ml: 1,
+            '@media (min-width: 900px)': {
+              display: 'none',
+            },
+          }}
+        >
+          {open ? '-' : '+'}
+        </Box>
+      ) : (
         <Iconify
           width={16}
-          icon={open ? 'eva:arrow-ios-downward-fill' : 'eva:arrow-ios-forward-fill'}
+          icon="eva:arrow-ios-forward-fill"
           sx={{
-            ml: 0,
+            ml: 1,
             '@media (min-width: 900px)': {
               display: 'none',
             },
@@ -67,7 +82,11 @@ export default function NavItem({ item, open, active, externalLink, ...other }) 
   // Has child - for mobile, show dropdown, for desktop, navigate to first child
   if (children) {
     // For desktop, navigate to first child if it exists
-    if (typeof window !== 'undefined' && window.innerWidth >= 900 && children[0]?.items?.[0]?.path) {
+    if (
+      typeof window !== 'undefined' &&
+      window.innerWidth >= 900 &&
+      children[0]?.items?.[0]?.path
+    ) {
       return (
         <Link component={RouterLink} href={children[0].items[0].path} underline="none">
           {renderContent}
