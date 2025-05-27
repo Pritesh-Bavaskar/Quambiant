@@ -51,8 +51,8 @@ export default function ContactConsultationForm({ contactUs }) {
         sx={{
           background: '#FBF8F3 url(/assets/background/pattern-contact.png) center / cover no-repeat',
           borderRadius: 0,
-          aspectRatio: { xs: '353 / 681', md: '914 / 489' },
-          boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
+          // aspectRatio: { xs: '353 / 681', md: '914 / 489' },
+          boxShadow: '0 4px 24px rgba(7, 1, 1, 0.08)',
           p: { xs: 3, sm: 8 },
           width: '100%',
           maxWidth: 914,
