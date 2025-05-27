@@ -20,10 +20,10 @@ export default function BuildGreenSection({ greenBuildingStats }) {
   return (
     <Box
       sx={{
-        aspectRatio: { xs: '393 / 950', md: '1440   / 800' },
+        aspectRatio: { xs: '393 / 950', lg: '1440 / 800' },
         position: 'relative',
         width: '100%',
-        minHeight: { xs: 800, md: 800 },
+        minHeight: { xs: 800, lg: 800 },
         overflow: 'hidden',
       }}
     >
@@ -45,8 +45,8 @@ export default function BuildGreenSection({ greenBuildingStats }) {
           zIndex: 1,
         }}
       />
+
       {/* Overlay */}
-      {/* Gradient Overlay */}
       <Box
         sx={{
           position: 'absolute',
@@ -59,14 +59,14 @@ export default function BuildGreenSection({ greenBuildingStats }) {
         }}
       />
 
-      {/* Title and Subtitle at the Top */}
+      {/* Title and Subtitle */}
       <Box
         sx={{
           position: 'relative',
           zIndex: 3,
           width: '100%',
-          pt: { xs: 6, md: 10 },
-          pb: { xs: 4, md: 6 },
+          pt: { xs: 6, lg: 10 },
+          pb: { xs: 4, lg: 6 },
           px: 2,
           display: 'flex',
           flexDirection: 'column',
@@ -100,7 +100,8 @@ export default function BuildGreenSection({ greenBuildingStats }) {
           {greenBuildingStats?.SubHeading}
         </Typography>
       </Box>
-      {/* Stats at the Bottom */}
+
+      {/* Stats Section */}
       <Box
         sx={{
           position: 'absolute',
@@ -108,30 +109,30 @@ export default function BuildGreenSection({ greenBuildingStats }) {
           bottom: 0,
           width: '100%',
           zIndex: 4,
-          pb: { xs: 3, md: 5 },
-          px: { xs: 2, md: 6 }, // reduced padding on xs
-          pt: { xs: 16, md: 2 },
+          pb: { xs: 3, lg: 5 },
+          px: { xs: 2, lg: 6 },
+          pt: { xs: 16, lg: 2 },
         }}
       >
         <Grid container spacing={3} justifyContent="center">
           {stats.map((stat, idx) => (
             <Grid
+              key={idx}
               item
               xs={12}
-              sm={4}
-              key={idx}
+              sm={idx === 2 ? 12 : 6} // For iPad: first 2 = half width, last one full
+              md={4} // Desktop: all 3 = 1/3
               sx={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
                 py: 2,
-                aspectRatio: { xs: '320 / 136', md: '420 / 178' },
               }}
             >
               <Box
                 sx={{
-                  width: { xs: '100%', sm: 420 },
-                  aspectRatio: { xs: '320 / 136', md: '420 / 178' },
+                  width: { xs: '100%', sm: 320, md: 420 },
+                  aspectRatio: { xs: '320 / 136', lg: '420 / 178' },
                   backgroundImage: 'url(/assets/images/home/Subtract.png)',
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
@@ -147,16 +148,16 @@ export default function BuildGreenSection({ greenBuildingStats }) {
                   sx={{
                     fontFamily: 'Satoshi Variable',
                     fontWeight: 700,
-                    fontSize: { xs: '32px', md: '42px' },
-                    width: { xs: '99px', md: '130px' },
-                    height: { xs: '99px', md: '130px' },
+                    fontSize: { xs: '32px', lg: '42px' },
+                    width: { xs: '99px', lg: '130px' },
+                    height: { xs: '99px', lg: '130px' },
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
                     mr: 2,
                     background: 'transparent',
                     color: '#fff',
-                    ml: { xs: '40px', md: '45px' },
+                    ml: { xs: '40px', lg: '45px' },
                   }}
                 >
                   {stat.value}
@@ -168,7 +169,7 @@ export default function BuildGreenSection({ greenBuildingStats }) {
                   sx={{
                     color: 'rgba(255,255,255,0.92)',
                     fontWeight: 500,
-                    fontSize: { xs: '16px', md: '20px' },
+                    fontSize: { xs: '16px', lg: '20px' },
                     marginLeft: '20px',
                     padding: '10px',
                   }}
