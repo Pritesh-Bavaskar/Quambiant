@@ -147,8 +147,7 @@ export default function ContactConsultationForm({ contactUs }) {
               Preferred Location
             </InputLabel>
             <Select
-              label="Preferred Location"
-              defaultValue=""
+              displayEmpty
               disableUnderline={false}
               sx={{
                 fontSize: { xs: '14px', md: '16px' },
@@ -162,9 +161,32 @@ export default function ContactConsultationForm({ contactUs }) {
                 '&.Mui-focused:after': {
                   borderBottom: '2px solid #18191B',
                 },
+                '& .MuiSelect-select': {
+                  backgroundColor: 'transparent !important',
+                  color: 'rgba(0, 0, 0, 0.6)',
+                  '&[aria-expanded="true"]': {
+                    color: 'inherit',
+                  },
+                },
+                '& .MuiMenuItem-root': {
+                  '&.Mui-selected': {
+                    backgroundColor: 'transparent',
+                  },
+                  '&:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                  },
+                  '&.Mui-selected:hover': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                  },
+                },
+              }}
+              renderValue={(selected) => {
+                if (!selected) {
+                  return '';
+                }
+                return selected;
               }}
             >
-              <MenuItem value="">Preferred Location</MenuItem>
               <MenuItem value="Hyderabad">Hyderabad</MenuItem>
               <MenuItem value="Bangalore">Bangalore</MenuItem>
             </Select>

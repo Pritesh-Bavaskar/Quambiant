@@ -321,45 +321,46 @@ export default function HomeStories({ homeStories }) {
               </Box>
             </Box>
           </AspectImageSection>
-                {transformedStories.length > 1 && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-            <IconButton
-              onClick={handlePrev}
-              sx={{
-                width: '42px',
-                height: '42px',
-                backgroundColor: 'transparent',
-                border: '1px solid #fff',
-                borderRadius: '2px',
-                color: '#fff',
-                mx: 1,
-                '&:hover': {
-                  color: '#001016',
-                  backgroundColor: '#fff',
-                },
-              }}
-            >
-              <Iconify icon="eva:arrow-ios-back-fill" />
-            </IconButton>
-            <IconButton
-              onClick={handleNext}
-              sx={{
-                width: '42px',
-                height: '42px',
-                backgroundColor: 'transparent',
-                color: '#fff',
-                borderRadius: '2px',
-                border: '1px solid #fff',
-                mx: 1,
-                '&:hover': {
-                  color: '#001016',
-                  backgroundColor: '#fff',
-                },
-              }}
-            >
-              <Iconify icon="eva:arrow-ios-forward-fill" />
-            </IconButton>
-          </Box>)}
+          {transformedStories.length > 1 && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+              <IconButton
+                onClick={handlePrev}
+                sx={{
+                  width: '42px',
+                  height: '42px',
+                  backgroundColor: 'transparent',
+                  border: '1px solid #fff',
+                  borderRadius: '2px',
+                  color: '#fff',
+                  mx: 1,
+                  '&:hover': {
+                    color: '#001016',
+                    backgroundColor: '#fff',
+                  },
+                }}
+              >
+                <Iconify icon="eva:arrow-ios-back-fill" />
+              </IconButton>
+              <IconButton
+                onClick={handleNext}
+                sx={{
+                  width: '42px',
+                  height: '42px',
+                  backgroundColor: 'transparent',
+                  color: '#fff',
+                  borderRadius: '2px',
+                  border: '1px solid #fff',
+                  mx: 1,
+                  '&:hover': {
+                    color: '#001016',
+                    backgroundColor: '#fff',
+                  },
+                }}
+              >
+                <Iconify icon="eva:arrow-ios-forward-fill" />
+              </IconButton>
+            </Box>
+          )}
         </Box>
       ) : (
         <StyledRoot>
@@ -457,42 +458,44 @@ export default function HomeStories({ homeStories }) {
                 >
                   {transformedStories[activeStep].name} – {transformedStories[activeStep].location}
                 </Typography>
-                <Stack direction="row" spacing={2}>
-                  <IconButton
-                    onClick={handlePrev}
-                    sx={{
-                      width: '52px',
-                      height: '52px',
-                      backgroundColor: 'transparent',
-                      border: '1px solid #071317',
-                      borderRadius: '2px',
-                      color: '#18191B',
-                      '&:hover': {
-                        color: '#fff',
-                        backgroundColor: '#18191B',
-                      },
-                    }}
-                  >
-                    <Iconify icon="eva:arrow-ios-back-fill" />
-                  </IconButton>
-                  <IconButton
-                    onClick={handleNext}
-                    sx={{
-                      width: '52px',
-                      height: '52px',
-                      backgroundColor: 'transparent',
-                      color: '#18191B',
-                      borderRadius: '2px',
-                      border: '1px solid #10181f',
-                      '&:hover': {
-                        color: '#fff',
-                        backgroundColor: '#18191B',
-                      },
-                    }}
-                  >
-                    <Iconify icon="eva:arrow-ios-forward-fill" />
-                  </IconButton>
-                </Stack>
+                {transformedStories.length > 1 && (
+                  <Stack direction="row" spacing={2}>
+                    <IconButton
+                      onClick={handlePrev}
+                      sx={{
+                        width: '52px',
+                        height: '52px',
+                        backgroundColor: 'transparent',
+                        border: '1px solid #071317',
+                        borderRadius: '2px',
+                        color: '#18191B',
+                        '&:hover': {
+                          color: '#fff',
+                          backgroundColor: '#18191B',
+                        },
+                      }}
+                    >
+                      <Iconify icon="eva:arrow-ios-back-fill" />
+                    </IconButton>
+                    <IconButton
+                      onClick={handleNext}
+                      sx={{
+                        width: '52px',
+                        height: '52px',
+                        backgroundColor: 'transparent',
+                        color: '#18191B',
+                        borderRadius: '2px',
+                        border: '1px solid #10181f',
+                        '&:hover': {
+                          color: '#fff',
+                          backgroundColor: '#18191B',
+                        },
+                      }}
+                    >
+                      <Iconify icon="eva:arrow-ios-forward-fill" />
+                    </IconButton>
+                  </Stack>
+                )}
               </Box>
             </CardContent>
           </AspectContentSection>
