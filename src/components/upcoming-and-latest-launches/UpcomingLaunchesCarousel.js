@@ -70,7 +70,7 @@ export default function UpcomingLaunchesCarousel({ upcomingLaunches }) {
   const carousel = useCarousel({
     slidesToShow: 2,
     slidesToScroll: 1,
-    infinite: false,
+    infinite: true,
     speed: 500,
     arrows: false,
     responsive: [
@@ -79,7 +79,7 @@ export default function UpcomingLaunchesCarousel({ upcomingLaunches }) {
         settings: {
           slidesToShow: 1,
           centerMode: true,
-          centerPadding: '16px',
+          centerPadding: '8px',
         },
       },
     ],

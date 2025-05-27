@@ -515,44 +515,44 @@ export default function HomeStories({ homeStories }) {
                 >
                   {transformedStories[activeStep].name} – {transformedStories[activeStep].location}
                 </Typography>
-
-                {/* Navigation Buttons */}
-                <Stack direction="row" spacing={2}>
-                  <IconButton
-                    onClick={handlePrev}
-                    sx={{
-                      width: 52,
-                      height: 52,
-                      backgroundColor: 'transparent',
-                      border: '1px solid #071317',
-                      borderRadius: '2px',
-                      color: '#18191B',
-                      '&:hover': {
-                        color: '#fff',
-                        backgroundColor: '#18191B',
-                      },
-                    }}
-                  >
-                    <Iconify icon="eva:arrow-ios-back-fill" />
-                  </IconButton>
-                  <IconButton
-                    onClick={handleNext}
-                    sx={{
-                      width: 52,
-                      height: 52,
-                      backgroundColor: 'transparent',
-                      color: '#18191B',
-                      borderRadius: '2px',
-                      border: '1px solid #10181f',
-                      '&:hover': {
-                        color: '#fff',
-                        backgroundColor: '#18191B',
-                      },
-                    }}
-                  >
-                    <Iconify icon="eva:arrow-ios-forward-fill" />
-                  </IconButton>
-                </Stack>
+                {transformedStories.length > 1 && (
+                  <Stack direction="row" spacing={2}>
+                    <IconButton
+                      onClick={handlePrev}
+                      sx={{
+                        width: '52px',
+                        height: '52px',
+                        backgroundColor: 'transparent',
+                        border: '1px solid #071317',
+                        borderRadius: '2px',
+                        color: '#18191B',
+                        '&:hover': {
+                          color: '#fff',
+                          backgroundColor: '#18191B',
+                        },
+                      }}
+                    >
+                      <Iconify icon="eva:arrow-ios-back-fill" />
+                    </IconButton>
+                    <IconButton
+                      onClick={handleNext}
+                      sx={{
+                        width: '52px',
+                        height: '52px',
+                        backgroundColor: 'transparent',
+                        color: '#18191B',
+                        borderRadius: '2px',
+                        border: '1px solid #10181f',
+                        '&:hover': {
+                          color: '#fff',
+                          backgroundColor: '#18191B',
+                        },
+                      }}
+                    >
+                      <Iconify icon="eva:arrow-ios-forward-fill" />
+                    </IconButton>
+                  </Stack>
+                )}
               </Box>
             </CardContent>
           </AspectContentSection>
