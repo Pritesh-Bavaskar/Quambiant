@@ -53,19 +53,30 @@ export default function NavItem({ item, open, active, externalLink, ...other }) 
             },
           }}
         >
-          {open ? '-' : '+'}
+          {open ? (
+            <Iconify width={16}>
+              {' '}
+              <img src="/assets/icons/navbar/ic_minus.svg" alt="" />{' '}
+            </Iconify>
+          ) : (
+            <Iconify width={16}>
+              {' '}
+              <img src="/assets/icons/navbar/ic_add.svg" alt="" />{' '}
+            </Iconify>
+          )}
         </Box>
       ) : (
         <Iconify
           width={16}
-          icon="eva:arrow-ios-forward-fill"
           sx={{
             ml: 1,
             '@media (min-width: 900px)': {
               display: 'none',
             },
           }}
-        />
+        >
+          <img src="/assets/icons/navbar/ic_forwardarrow.svg" alt="" />{' '}
+        </Iconify>
       )}
     </ListItem>
   );

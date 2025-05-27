@@ -80,7 +80,7 @@ export default function NavMobile({ offsetTop, data, sx }) {
             }}
           >
             <Logo sx={{ width: 100, height: 40, my: 0 }} />
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: "18px" }}>
               <Button
                 variant="contained"
                 sx={{

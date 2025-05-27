@@ -27,15 +27,22 @@ export default function CountUpSection({ statsSection }) {
 
   return (
     <Box ref={ref} sx={{ py: { xs: 6, md: 10 }, bgcolor: '#FDF8F3' }}>
-      <Typography variant="h1" align="center" fontFamily="Playfair Display" gutterBottom>
+      <Typography
+        variant="h1"
+        align="center"
+        fontFamily="Playfair Display"
+        color="#18191B"
+        gutterBottom
+      >
         {statsSection?.Heading}
       </Typography>
       <Typography
         align="center"
         sx={{
-          color: 'text.secondary',
+          color: '#5C6170',
           fontSize: { xs: 14, md: 20 },
           fontWeight: 500,
+          lineHeight: 1.5,
           mb: { xs: 5, md: 8 },
           pt: 1,
           fontFamily: 'Satoshi Variable, sans-serif',
@@ -48,9 +55,11 @@ export default function CountUpSection({ statsSection }) {
         spacing={0}
         justifyContent="center"
         sx={{
-          border: '1px solid #9B7A56',
+          borderTop: '1px solid #AF9469',
+          borderBottom: '1px solid #AF9469',
           borderRadius: 0,
           overflow: 'hidden',
+          aspectRatio: { xs: '1', md: 'auto' },
           bgcolor: 'transparent',
         }}
       >
@@ -59,16 +68,20 @@ export default function CountUpSection({ statsSection }) {
             item
             xs={6}
             md={3}
+            className={`counter-item ${idx === 0 ? 'first-item' : ''} ${
+              idx === stats.length - 1 ? 'last-item' : ''
+            }`}
             key={stat.label}
             sx={{
               borderRight: {
-                xs: idx % 2 === 0 ? '1px solid #9B7A56' : 'none',
-                md: idx !== stats.length - 1 ? '1px solid #9B7A56' : 'none',
+                xs: idx % 2 === 0 ? '1px solid #AF9469' : 'none',
+                md: idx !== stats.length - 1 ? '1px solid #AF9469' : 'none',
               },
               borderBottom: {
-                xs: idx < 2 ? '1px solid #9B7A56' : 'none',
+                xs: idx < 2 ? '1px solid #AF9469' : 'none',
                 md: 'none',
               },
+              borderLeft: 'none',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -82,7 +95,7 @@ export default function CountUpSection({ statsSection }) {
               <Typography
                 component="span"
                 sx={{
-                  color: '#9B7A56',
+                  color: '#AF9469',
                   fontWeight: 500,
                   fontFamily: 'Satoshi Variable, sans-serif',
                   fontSize: { xs: 48, md: 96 },
@@ -95,12 +108,12 @@ export default function CountUpSection({ statsSection }) {
               <Typography
                 component="span"
                 sx={{
-                  color: '#9B7A56',
-                  fontWeight: 500,
+                  color: '#AF9469',
+                  fontWeight: 200,
                   fontFamily: 'Satoshi Variable, sans-serif',
-                  fontSize: { xs: 32, md: 56 },
+                  fontSize: { xs: 24, md: 48 },
                   lineHeight: 1,
-                  ml: 0.5,
+                  ml: 0,
                   position: 'relative',
                   bottom: { xs: 2, md: 8 },
                 }}

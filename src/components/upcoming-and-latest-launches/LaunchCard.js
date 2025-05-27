@@ -225,7 +225,7 @@ export default function LaunchCard({ project }) {
             minWidth: 120,
             borderRadius: 0,
             display: { xs: 'inline-block', sm: 'inline-block' },
-            mt: { xs: 1, sm: 1 },
+            mt: { xs: 2, sm: 1 },
             position: { xs: 'static', sm: 'absolute' },
             right: { sm: 0 },
             top: { sm: 0 },

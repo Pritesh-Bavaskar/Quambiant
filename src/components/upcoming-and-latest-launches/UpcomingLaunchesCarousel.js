@@ -10,19 +10,22 @@ import LaunchCard from './LaunchCard'; // from step above
 // Transform API data to match component's expected format
 const transformProjects = (projects) => {
   if (!projects || !Array.isArray(projects)) return [];
-  
-  return projects.map(project => ({
+
+  return projects.map((project) => ({
     id: project.id,
     title: project.Title,
     type: project.SubTitle,
     location: project.Location,
-    image: project.Image?.url ? `${process.env.REACT_APP_HOST_API}${project.Image.url}` : upcomingLatestImage,
-    tags: project.Tags?.map(tag => tag.Label) || [],
-    timeline: project.ProjectSteps?.map(step => ({
-      title: step.Title,
-      date: step.Date,
-      status: step.ProjectStatus?.toLowerCase() || 'upcoming'
-    })) || []
+    image: project.Image?.url
+      ? `${process.env.REACT_APP_HOST_API}${project.Image.url}`
+      : upcomingLatestImage,
+    tags: project.Tags?.map((tag) => tag.Label) || [],
+    timeline:
+      project.ProjectSteps?.map((step) => ({
+        title: step.Title,
+        date: step.Date,
+        status: step.ProjectStatus?.toLowerCase() || 'upcoming',
+      })) || [],
   }));
 };
 
@@ -93,17 +96,18 @@ export default function UpcomingLaunchesCarousel({ upcomingLaunches }) {
           justifyContent: 'space-between',
         }}
       >
-        <Box sx={{ pl: 2, textAlign: { xs: 'center', md: 'left' } }}>
-          <Typography variant="h1" sx={{ fontWeight: 500 }}>
+        <Box sx={{ pl: { xs: 0, md: 2 }, textAlign: { xs: 'center', md: 'left' } }}>
+          <Typography variant="h1" sx={{ fontWeight: 500, color: '#18191B', lineHeight: '1.2' }}>
             {upcomingLaunches?.Heading}
           </Typography>
           <Typography
             sx={{
-              pt: 1,
+              pt: 2,
               fontFamily: 'Satoshi Variable, sans-serif',
               fontWeight: 500,
               color: '#5C6170',
               fontSize: { xs: 14, md: 20 },
+              lineHeight: '1.2',
             }}
           >
             {upcomingLaunches?.SubHeading}
@@ -149,12 +153,13 @@ export default function UpcomingLaunchesCarousel({ upcomingLaunches }) {
           ))}
         </Carousel>
 
-        {isMobile && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
-            <CustomArrow direction="back" onClick={carousel.onPrev} />
-            <CustomArrow direction="forward" onClick={carousel.onNext} />
-          </Box>
-        )}
+        {isMobile &&
+          launches.length > 1 && (
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
+              <CustomArrow direction="back" onClick={carousel.onPrev} />
+              <CustomArrow direction="forward" onClick={carousel.onNext} />
+            </Box>
+          )}
       </Box>
     </CarouselContainer>
   );

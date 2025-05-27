@@ -107,6 +107,7 @@ export function SectionAmaranthine({ projectShowcase }) {
               fontSize: { xs: 28, md: 42 },
               fontWeight: 500,
               fontFamily: `'Playfair Display', serif`,
+              color: '#18191B',
             }}
             gutterBottom
           >
@@ -117,7 +118,7 @@ export function SectionAmaranthine({ projectShowcase }) {
             sx={{ fontSize: { xs: 14, md: 20 }, fontWeight: 500, pt: 1 }}
             maxWidth={{ xs: '90%', md: '914px' }}
             fontFamily="Satoshi Variable, sans-serif"
-            color="#5C6170"
+            color="#5C6170 !important"
           >
             {projectShowcase?.SubHeading}
           </Typography>
@@ -204,6 +205,8 @@ export function SectionAmaranthine({ projectShowcase }) {
             fontSize: { xs: 28, md: 42 },
             fontWeight: 500,
             fontFamily: `'Playfair Display', serif`,
+            lineHeight: '2.5rem',
+            color: '#18191B',
           }}
           gutterBottom
         >
@@ -213,8 +216,9 @@ export function SectionAmaranthine({ projectShowcase }) {
         <Typography
           sx={{ fontSize: 14, fontWeight: 500, pt: 1 }}
           maxWidth="90%"
+          lineHeight="1.4"
           fontFamily="Satoshi Variable, sans-serif"
-          color="text.secondary"
+          color="#5C6170"
         >
           {projectShowcase?.SubHeading}
         </Typography>

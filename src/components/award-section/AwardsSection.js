@@ -7,7 +7,6 @@ import IconButton from '@mui/material/IconButton';
 import PropTypes from 'prop-types';
 import awardImage from 'src/assets/media/landing/awards.png';
 
-
 const CarouselContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
   width: '100%',
@@ -117,6 +116,7 @@ export default function AwardsSection({ awards }) {
                 fontFamily: 'Playfair Display, serif',
                 fontSize: '28px',
                 textAlign: 'center',
+                lineHeight: 1.5,
                 color: '#18191B',
               }}
             >
@@ -132,6 +132,7 @@ export default function AwardsSection({ awards }) {
                 fontWeight: 500,
                 fontSize: '14px',
                 textAlign: 'center',
+                lineHeight: 1.5,
               }}
             >
               {awards?.SubHeading}
@@ -180,10 +181,12 @@ export default function AwardsSection({ awards }) {
               ))}
             </Carousel>
 
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
-              <CustomPrevArrow onClick={mobileCarousel.onPrev} />
-              <CustomNextArrow onClick={mobileCarousel.onNext} />
-            </Box>
+            {awards?.AwardsSlider?.length > 1 && (
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                <CustomPrevArrow onClick={mobileCarousel.onPrev} />
+                <CustomNextArrow onClick={mobileCarousel.onNext} />
+              </Box>
+            )}
           </Box>
         </>
       ) : (
@@ -243,7 +246,7 @@ export default function AwardsSection({ awards }) {
             }}
           >
             <Carousel ref={desktopCarousel.carouselRef} {...desktopCarousel.carouselSettings}>
-            {awards?.AwardsSlider?.map((award) => (
+              {awards?.AwardsSlider?.map((award) => (
                 <Card
                   key={award.id}
                   sx={{

@@ -95,7 +95,7 @@ const AspectImageSection = styled(StyledImageSection)(({ theme }) => ({
   display: 'flex',
   alignItems: 'stretch',
   [theme.breakpoints.down('md')]: {
-    width: '95%',
+    width: '90%',
     aspectRatio: 'auto',
   },
 }));
@@ -109,7 +109,7 @@ const AspectContentSection = styled(StyledContentSection)(({ theme }) => ({
   flexDirection: 'column',
   justifyContent: 'center',
   [theme.breakpoints.down('md')]: {
-    width: '95%',
+    width: '90%',
     aspectRatio: 'auto',
   },
 }));
@@ -238,7 +238,7 @@ export default function HomeStories({ homeStories }) {
             <CardContent
               sx={{
                 height: '100%',
-                p: { xs: 2, md: 4 },
+                p: { xs: '20px', md: 4 },
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
@@ -247,7 +247,7 @@ export default function HomeStories({ homeStories }) {
               <Typography variant="h1" sx={{ fontWeight: 500, mb: 2, color: '#18191B' }}>
                 {transformedStories[activeStep].title}
               </Typography>
-              <Typography variant="body3" sx={{ color: 'text.secondary', mb: 4 }}>
+              <Typography variant="body3" sx={{ color: '#5C6170', mb: 4, fontWeight: '500' }}>
                 {transformedStories[activeStep].description}
               </Typography>
               <Typography
@@ -270,6 +270,7 @@ export default function HomeStories({ homeStories }) {
                 width: '100%',
                 height: '100%',
                 position: 'relative',
+                mt: 0.5,
                 cursor: 'pointer',
                 '&:hover .play-button': {
                   opacity: 1,
@@ -300,25 +301,27 @@ export default function HomeStories({ homeStories }) {
                   width: 60,
                   height: 60,
                   borderRadius: '50%',
-                  backgroundColor: 'rgba(0, 0, 0, 0.6)',
+                  backgroundColor: 'rgba(0, 0, 0, 0.1)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                   opacity: isPlaying ? 0 : 1,
                   transition: 'opacity 0.3s ease',
+                  backdropFilter: 'blur(18px)',
                   '&:hover': {
-                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
                   },
                 }}
               >
                 <IconButton
-                  sx={{ color: 'white', width: 30, height: 30, ml: isPlaying ? 0 : '4px' }}
+                  sx={{ color: 'white', width: 50, height: 50, ml: isPlaying ? 0 : '4px' }}
                 >
                   {isPlaying ? <PauseIcon /> : <PlayIcon />}
                 </IconButton>
               </Box>
             </Box>
           </AspectImageSection>
+                {transformedStories.length > 1 && (
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 2 }}>
             <IconButton
               onClick={handlePrev}
@@ -356,7 +359,7 @@ export default function HomeStories({ homeStories }) {
             >
               <Iconify icon="eva:arrow-ios-forward-fill" />
             </IconButton>
-          </Box>
+          </Box>)}
         </Box>
       ) : (
         <StyledRoot>
