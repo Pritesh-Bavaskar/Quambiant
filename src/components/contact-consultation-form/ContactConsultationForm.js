@@ -29,12 +29,12 @@ export default function ContactConsultationForm({ contactUs }) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+
         justifyContent: 'center',
         py: 8,
         px: { xs: 2, md: 8 },
         mx: 'auto',
         [theme.breakpoints.down('md')]: {
-          aspectRatio: 'auto',
           minHeight: '100vh',
           maxWidth: '100%',
         },
@@ -49,7 +49,8 @@ export default function ContactConsultationForm({ contactUs }) {
 
       <Box
         sx={{
-          background: '#FBF8F3 url(/assets/background/pattern-contact.png) center / cover no-repeat',
+          background:
+            '#FBF8F3 url(/assets/background/pattern-contact.png) center / cover no-repeat',
           borderRadius: 0,
           // aspectRatio: { xs: '353 / 681', md: '914 / 489' },
           boxShadow: '0 4px 24px rgba(7, 1, 1, 0.08)',
@@ -180,7 +181,7 @@ export default function ContactConsultationForm({ contactUs }) {
             width: '100%',
             mt: 1,
             mb: 1,
-            gap: { xs: 2, sm: 0 },
+            gap: { xs: 4, sm: 0 },
             textAlign: 'center',
           }}
         >
@@ -201,10 +202,11 @@ export default function ContactConsultationForm({ contactUs }) {
             }}
           />
           <Button
-            variant="contained"
+            // variant="contained"
             sx={{
               background: '#001016',
               color: '#fff',
+              fontSize: '18px',
               borderRadius: 0,
               px: 4,
               py: 1.2,
@@ -224,7 +226,7 @@ export default function ContactConsultationForm({ contactUs }) {
             display: 'flex',
             alignItems: 'center',
             width: '100%',
-            mt: 2,
+            mt: 0,
           }}
         >
           <Box sx={{ flex: 1, height: '0.75px', backgroundColor: '#D9CBBA' }} />
@@ -267,13 +269,14 @@ export default function ContactConsultationForm({ contactUs }) {
               color: '#5B432A',
               borderRadius: 0,
               px: 2.5,
-              fontWeight: 400,
+              fontWeight: '500 !important',
+              fontSize: { xs: '15px', md: '16px' },
               width: '100%',
               maxWidth: { xs: 'none', sm: 220 },
               '&:hover': { background: '#f5f5f5', borderColor: '#bbb' },
             }}
           >
-            {contactUs?.ContactNumber || '917792344646'}
+            {`+${contactUs?.ContactNumber || '917792344646'}`}
           </Button>
           <Button
             variant="outlined"
@@ -289,13 +292,14 @@ export default function ContactConsultationForm({ contactUs }) {
               color: '#5B432A',
               borderRadius: 0,
               px: 2.5,
-              fontWeight: 400,
+              fontWeight: '500 !important',
+              fontSize: { xs: '15px', md: '16px' },
               width: '100%',
               maxWidth: { xs: 'none', sm: 220 },
               '&:hover': { background: '#f5f5f5', borderColor: '#bbb' },
             }}
           >
-            {contactUs?.WhatsAppNumber || '917792344646'}
+            {`+${contactUs?.WhatsAppNumber || '917792344646'}`}
           </Button>
         </Box>
       </Box>

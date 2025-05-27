@@ -680,6 +680,8 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
                     fontFamily: 'Playfair Display, serif',
                     fontWeight: 500,
                     fontSize: { xs: '28px', md: '42px' },
+                    color: '#18191B',
+                    lineHeight: '1.2',
                     mb: 1,
                   }}
                 >
@@ -688,10 +690,12 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
                 <Typography
                   variant="body1"
                   sx={{
-                    color: 'text.secondary',
+                    color: '#5C6170',
                     fontSize: { xs: '14px', md: '20px' },
                     fontFamily: 'Satoshi Variable, sans-serif',
+                    lineHeight: '1.2',
                     maxWidth: 900,
+                    mt: 2,
                     fontWeight: 500,
                     mx: 'auto',
                   }}
@@ -710,35 +714,35 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
             >
-            {timelineData.map((item, index) => (
-              <Box
-                key={index}
-                sx={{
-                  width: '100%',
-                  height: '100%',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  opacity: index === mobileActiveIndex ? 1 : 0,
-                  transition: 'opacity 0.3s ease',
-                  px: 0,
-                  py: 4,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                }}
-              >
-                <TimelineItem
-                  title={item.title}
-                  content={item.content}
-                  image={item.image}
-                  index={index}
-                  isActive={index === mobileActiveIndex}
-                  parallaxOffset={0}
-                  isDotAtCenter={false}
-                />
-              </Box>
-            ))}
+              {timelineData.map((item, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    width: '100%',
+                    height: '100%',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    opacity: index === mobileActiveIndex ? 1 : 0,
+                    transition: 'opacity 0.3s ease',
+                    px: 0,
+                    py: 4,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                  }}
+                >
+                  <TimelineItem
+                    title={item.title}
+                    content={item.content}
+                    image={item.image}
+                    index={index}
+                    isActive={index === mobileActiveIndex}
+                    parallaxOffset={0}
+                    isDotAtCenter={false}
+                  />
+                </Box>
+              ))}
             </Box>
             <Box sx={{ mt: 2, mb: 3 }}>
               <MobileProgressBar progress={mobileActiveIndex} count={timelineData.length} />

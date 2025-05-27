@@ -131,6 +131,16 @@ export default function SpotlightCarousel({ spotlight }) {
   //   },
   // ];
 
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const month = months[date.getMonth()];
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
   const carousel = useCarousel({
     slidesToShow: 3,
     slidesToScroll: 1,
@@ -165,7 +175,9 @@ export default function SpotlightCarousel({ spotlight }) {
             variant="h1"
             sx={{
               fontWeight: 500,
-              mb: 1,
+              mb: '10px',
+              lineHeight: '1.2',
+              color: '#18191B',
               textAlign: { xs: 'center', md: 'left' },
             }}
           >
@@ -176,6 +188,7 @@ export default function SpotlightCarousel({ spotlight }) {
               color: '#5C6170',
               fontSize: { md: '20px', xs: '14px' },
               fontWeight: 500,
+              lineHeight: '1.4',
               display: 'flex',
               textAlign: { xs: 'center', md: 'left' },
             }}
@@ -228,7 +241,7 @@ export default function SpotlightCarousel({ spotlight }) {
                 <Typography
                   variant="caption"
                   sx={{
-                    color: '#DDAB76',
+                    color: '#F5E6D6',
                     mb: 0.5,
                     display: 'block',
                     fontFamily: 'Satoshi, sans-serif',
@@ -236,7 +249,7 @@ export default function SpotlightCarousel({ spotlight }) {
                     fontSize: { md: '14px', xs: '12px' },
                   }}
                 >
-                  {item.Date}
+                  {formatDate(item.Date)}
                 </Typography>
                 <Typography
                   sx={{
@@ -254,6 +267,7 @@ export default function SpotlightCarousel({ spotlight }) {
                     color: '#333333',
                     fontSize: '14px',
                     fontFamily: 'Satoshi, sans-serif',
+                    lineHeight: '1.4',
                   }}
                 >
                   {item.SubTitle}

@@ -54,7 +54,7 @@ export default function BuildGreenSection({ greenBuildingStats }) {
           left: 0,
           width: '100%',
           height: '100%',
-          background: 'linear-gradient(to bottom, #071317 0%, #071317D1 50%, #07131700 100%)',
+          background: 'linear-gradient(to bottom, #071317 0%, #071317D1 20%, #07131700 100%)',
           zIndex: 2,
         }}
       />
@@ -78,6 +78,7 @@ export default function BuildGreenSection({ greenBuildingStats }) {
           sx={{
             color: '#FDF8F3',
             fontWeight: 500,
+            lineHeight: 1.2,
             mb: 2,
             textAlign: 'center',
             textShadow: '0 2px 16px rgba(0,0,0,0.4)',
@@ -93,7 +94,8 @@ export default function BuildGreenSection({ greenBuildingStats }) {
             textAlign: 'center',
             textShadow: '0 2px 16px rgba(0,0,0,0.4)',
             fontFamily: 'Satoshi Variable',
-            fontSize: '20px',
+            fontSize: { xs: '14px', md: '20px' },
+            lineHeight: 1.2,
             fontWeight: 500,
           }}
         >
