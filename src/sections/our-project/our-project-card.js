@@ -142,7 +142,7 @@ export default function OurProjectCard({ project }) {
       {/* Content */}
       <Box
         sx={{
-          px: { xs: 0, md: 3 },
+          px: { xs: 1, md: 3 },
           py: { xs: 4, md: 3 },
         }}
       >
@@ -254,7 +254,15 @@ export default function OurProjectCard({ project }) {
                 <img
                   src={item.icon}
                   alt={item.text}
-                  style={{ width: 18, height: 18, marginRight: 8 }}
+                  style={{
+                    width: 18,
+                    height: 18,
+                    marginRight: 8,
+                    lineHeight: {
+                      xs: '1rem',
+                      md: 'inherit',
+                    },
+                  }}
                 />
                 {item.text}
               </Box>

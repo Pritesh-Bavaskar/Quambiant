@@ -70,7 +70,7 @@ const _projectsList = [
   {
     id: 2,
     status: 'ongoing',
-    slug:'uptown-east',
+    slug: 'uptown-east',
     location: 'Uptown East',
     title: 'Skyline Residences',
     description:
@@ -111,7 +111,7 @@ const _projectsList = [
   {
     id: 3,
     status: 'completed',
-    slug:'west-bay-area',
+    slug: 'west-bay-area',
     location: 'West Bay Area',
     title: 'Oceanview Towers',
     description:
@@ -218,7 +218,10 @@ export default function OurProjectTabs() {
       </Tabs>
       <Box
         sx={{
-          padding: '10px 32px 64px 32px',
+          padding: {
+            xs: '10px 15px 64px 15px',
+            sm: '10px 32px 64px 32px',
+          },
           backgroundColor: '#FDF8F3',
         }}
       >
