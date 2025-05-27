@@ -24,7 +24,6 @@ export default function ContactConsultationForm({ contactUs }) {
     <Box
       sx={{
         width: '100%',
-        aspectRatio: { xs: '393 / 867', md: '1440 / 716' },
         background: `#071317 url(${bgImage}) center/contain no-repeat`,
         display: 'flex',
         flexDirection: 'column',
@@ -42,7 +41,23 @@ export default function ContactConsultationForm({ contactUs }) {
     >
       <Typography
         variant="h1"
-        sx={{ color: '#FDF8F3', mb: 10, fontWeight: 500, textAlign: 'center' }}
+        sx={{
+          color: '#FDF8F3',
+          mb: 10,
+          fontWeight: 500,
+          textAlign: 'center',
+          fontSize: {
+            xs: '24px',
+            sm: '28px',
+            md: '42px',
+          },
+          lineHeight: {
+            xs: '2.4rem',
+            sm: '2.6rem',
+            md: '3rem',
+            lg: '3.4rem',
+          },
+        }}
       >
         {contactUs?.Heading || 'Let our experts help you find the perfect home'}
       </Typography>

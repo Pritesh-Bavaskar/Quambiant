@@ -98,7 +98,7 @@ export default function LaunchCard({ project }) {
                   position: 'relative',
                   width: '100%',
                   maxWidth: 300,
-                  minHeight: 75,
+                  minHeight: 70,
                 }}
               >
                 {/* Vertical progress line */}

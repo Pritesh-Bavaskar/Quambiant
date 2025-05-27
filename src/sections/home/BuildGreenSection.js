@@ -20,7 +20,6 @@ export default function BuildGreenSection({ greenBuildingStats }) {
   return (
     <Box
       sx={{
-        aspectRatio: { xs: '393 / 950', lg: '1440 / 800' },
         position: 'relative',
         width: '100%',
         minHeight: { xs: 800, lg: 800 },
