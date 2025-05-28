@@ -11,7 +11,7 @@ import { m, useScroll, useTransform, motionValue } from 'framer-motion';
 
 export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data }) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md')); // Changed from 'sm' to 'md' to include tablets
   const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({

@@ -177,6 +177,9 @@ export default function HomeStories({ homeStories }) {
       name: story.Name,
       location: story.State,
       coverUrl: story.Media?.url ? `${process.env.REACT_APP_HOST_API}${story.Media.url}` : '',
+      posterUrl: story.ThumbnaiImage?.url
+        ? `${process.env.REACT_APP_HOST_API}${story.ThumbnaiImage.url}`
+        : '',
     }));
   }, [homeStories]);
 
@@ -280,6 +283,7 @@ export default function HomeStories({ homeStories }) {
               <video
                 ref={videoRef}
                 src={transformedStories[activeStep].coverUrl}
+                poster={transformedStories[activeStep].posterUrl}
                 style={{
                   width: '100%',
                   height: '100%',
@@ -379,6 +383,7 @@ export default function HomeStories({ homeStories }) {
               <video
                 ref={videoRef}
                 src={transformedStories[activeStep].coverUrl}
+                poster={transformedStories[activeStep].posterUrl}
                 style={{
                   width: '100%',
                   height: '100%',
