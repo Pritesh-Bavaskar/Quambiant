@@ -129,7 +129,7 @@ export function SectionAmaranthine({ projectShowcase }) {
           style={{
             position: 'sticky',
             top: 0,
-            height: '100vh',
+            height: '120vh',
             width: '100%',
             overflow: 'hidden',
           }}
@@ -155,15 +155,24 @@ export function SectionAmaranthine({ projectShowcase }) {
           {/* Card Section */}
           <m.div
             style={{
-              opacity: cardOpacity,
-              scale: cardScale,
-              transformOrigin: 'center 80%',
-              position: 'sticky',
-              width: '100%',
-              height: '100vh',
+              position: 'relative',
+              height: '200vh',
             }}
           >
-            <AmaranthineCard scrollYProgress={scrollYProgress} data={projectShowcase} />
+            <m.div
+              style={{
+                position: 'sticky',
+                top: 0,
+                opacity: cardOpacity,
+                scale: cardScale,
+                transformOrigin: 'center 80%',
+                width: '100%',
+                minHeight: '100vh',
+                height: 'auto',
+              }}
+            >
+              <AmaranthineCard scrollYProgress={scrollYProgress} data={projectShowcase} />
+            </m.div>
           </m.div>
         </m.div>
       </Box>

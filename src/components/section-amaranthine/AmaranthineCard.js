@@ -241,20 +241,26 @@ export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
           justifyContent="center"
         >
           {cards.map((card, index) => (
-            <Grid 
-              item 
-              xs={12} 
-              sm={6} 
-              md={4} 
-              key={index} 
-              sx={{ 
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              key={index}
+              sx={{
                 display: 'flex',
-                padding: isTablet ? '8px' : '16px',
+                justifyContent: 'center',
+                padding: isTablet ? '8px 8px 8px 0' : '16px 16px 16px 0',
+                '&.MuiGrid-item': {
+                  padding: 0,
+                  paddingRight: '20px',
+                  paddingTop: '20px',
+                },
               }}
             >
-              <m.div 
-                style={{ 
-                  opacity: opacities[index], 
+              <m.div
+                style={{
+                  opacity: opacities[index],
                   y: yTransforms[index],
                   width: '100%',
                 }}
