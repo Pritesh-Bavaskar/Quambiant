@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import bckImg from 'src/assets/media/landing/bck_img.png';
 import loaderImg from 'src/assets/media/landing/quambiant-loader.svg';
+import loaderImgTab from 'src/assets/media/landing/quambiant-loader-tab.svg';
 import loaderImgMob from 'src/assets/media/landing/quambiant-loader-mob.svg';
 import PropTypes from 'prop-types';
 
@@ -9,6 +10,7 @@ export default function IntroSection({ intro }) {
   const [isZoomed, setIsZoomed] = useState(false);
   const [stage, setStage] = useState(0); // 0: dark, 1: white, 2: background
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [isTablet, setIsTablet] = useState(window.innerWidth <= 1024 && window.innerWidth > 768);
   const videoRef = useRef(null);
 
   // Determine if the background should be a video
@@ -26,6 +28,7 @@ export default function IntroSection({ intro }) {
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
+      setIsTablet(window.innerWidth <= 1024 && window.innerWidth > 768);
     };
 
     window.addEventListener('resize', handleResize);
@@ -122,6 +125,13 @@ export default function IntroSection({ intro }) {
     zIndex: 1,
   };
 
+  // Helper function to determine transform origin
+  const getTransformOrigin = () => {
+    if (isMobile) return 'calc(50% + 5px) center';
+    if (isTablet) return 'calc(50% + 15px) center';
+    return 'calc(50% + 20px) center';
+  };
+
   const loaderStyle = {
     position: 'absolute',
     top: 0,
@@ -135,7 +145,14 @@ export default function IntroSection({ intro }) {
     opacity: isZoomed ? 1 : 1,
     transition: 'all 2.5s ease',
     transform: isZoomed ? 'scale(100)' : 'scale(1)',
-    transformOrigin: isMobile ? 'calc(50% + 5px) center' : 'calc(50% + 20px) center',
+    transformOrigin: getTransformOrigin(),
+  };
+
+  // Helper function to determine the loader image source
+  const getLoaderImage = () => {
+    if (isMobile) return loaderImgMob;
+    if (isTablet) return loaderImgTab;
+    return loaderImg;
   };
 
   // Mute video when component mounts
@@ -150,12 +167,12 @@ export default function IntroSection({ intro }) {
   return (
     <div style={containerStyle}>
       {isVideo && stage > 1 && (
-        <video 
-          ref={videoRef} 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
           // eslint-disable-next-line react/no-unknown-property
           webkit-playsinline="true"
           preload="auto"
@@ -168,7 +185,7 @@ export default function IntroSection({ intro }) {
       )}
       <div style={darkOverlayStyle} />
       <div style={overlayStyle} />
-      <img src={isMobile ? loaderImgMob : loaderImg} alt="Quambiant" style={loaderStyle} />
+      <img src={getLoaderImage()} alt="Quambiant" style={loaderStyle} />
     </div>
   );
 }
