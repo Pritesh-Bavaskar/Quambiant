@@ -39,7 +39,7 @@ export default function SplashScreen({ sx, ...other }) {
             repeat: Infinity,
           }}
         >
-          <img src={logoQ} alt="Logo" style={{ width: 64, height: 64 }} />
+          {/* <img src={logoQ} alt="Logo" style={{ width: 64, height: 64 }} /> */}
         </m.div>
 
         <Box
