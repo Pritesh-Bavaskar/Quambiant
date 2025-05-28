@@ -508,8 +508,8 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
     let isScrolling = false;
     let lastScrollY = window.scrollY;
     let scrollTimer;
-    const SCROLL_DEBOUNCE_TIME = 100;
-    const MIN_SCROLL_DELTA = 5;
+    const SCROLL_DEBOUNCE_TIME = 200; // slows response to scroll
+    const MIN_SCROLL_DELTA = 820; // needs a bigger scroll to change slide
     const STICKY_OFFSET = 10;
 
     const handleScroll = () => {
@@ -647,7 +647,7 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
           sx={{
             display: { xs: 'block', md: 'none' },
             width: '100%',
-            height: `${timelineData.length * 50}vh`, // Add extra space to prevent jumping
+            height: `${timelineData.length * 100}vh`, // Add extra space to prevent jumping
             position: 'relative',
             // overflow: 'hidden',
           }}
