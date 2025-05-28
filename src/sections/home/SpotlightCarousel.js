@@ -157,7 +157,7 @@ export default function SpotlightCarousel({ spotlight }) {
         },
       },
       {
-        breakpoint: theme.breakpoints.values.xs,
+        breakpoint: theme.breakpoints.values.sm,
         settings: {
           slidesToShow: 1,
           centerMode: true,
