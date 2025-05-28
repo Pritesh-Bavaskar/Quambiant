@@ -66,17 +66,16 @@ export default function NavItem({ item, open, active, externalLink, ...other }) 
           )}
         </Box>
       ) : (
-        <Iconify
-          width={16}
+        <Box
+          component="img"
+          src="/assets/icons/navbar/ic_forwardarrow.svg"
+          alt="forward arrow"
+          width={25}
           sx={{
             ml: 1,
-            '@media (min-width: 900px)': {
-              display: 'none',
-            },
+            display: { xs: 'block', md: 'none' },
           }}
-        >
-          <img src="/assets/icons/navbar/ic_forwardarrow.svg" alt="" />{' '}
-        </Iconify>
+        />
       )}
     </ListItem>
   );
