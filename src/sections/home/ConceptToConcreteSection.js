@@ -102,9 +102,9 @@ const TimelineItem = ({
             md: reverse ? 4 : 0, // Conditional padding on desktop
           },
         },
-          }}
+      }}
       ref={ref}
-        >
+    >
       <Grid
         item
         xs={12}
@@ -228,7 +228,13 @@ const TimelineItem = ({
               return 'inactive';
             }}
           >
-            <Box sx={{ pl: reverse ? 0 : { md: 4 }, pr: reverse ? { md: 4 } : 0 }}>
+            <Box
+              sx={{
+                pl: reverse ? 0 : { sm: 5, md: 4 },
+                pr: reverse ? { sm: 5, md: 4 } : 0,
+                pt: reverse ? 0 : { sm: 5, md: 0 },
+              }}
+            >
               <Typography
                 // variant="h3"
                 sx={{
@@ -495,8 +501,76 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
     };
   }, [isFullyScrolled]);
 
+  // Handle vertical scroll for mobile slider
+  useEffect(() => {
+    if (window.innerWidth >= 900) return () => {};
+
+    let isScrolling = false;
+    let lastScrollY = window.scrollY;
+    let scrollTimer;
+    const SCROLL_DEBOUNCE_TIME = 100;
+    const MIN_SCROLL_DELTA = 5;
+    const STICKY_OFFSET = 10;
+
+    const handleScroll = () => {
+      if (!mobileSectionRef.current || isScrolling) {
+        return;
+      }
+
+      const sectionRect = mobileSectionRef.current.getBoundingClientRect();
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollY;
+
+      // Clear any existing timeout
+      clearTimeout(scrollTimer);
+
+      // Only process if we have significant vertical movement
+      if (Math.abs(scrollDelta) < MIN_SCROLL_DELTA) {
+        return;
+      }
+
+      // Set scrolling flag to prevent multiple updates
+      isScrolling = true;
+
+      // Determine scroll direction (1 = down, -1 = up)
+      const direction = scrollDelta > 0 ? 1 : -1;
+
+      // Calculate new index based on direction
+      setMobileActiveIndex((prevIndex) => {
+        let newIndex = prevIndex;
+
+        // Only update index if we're at the top of the section or scrolling up from below
+        if (sectionRect.top <= STICKY_OFFSET || direction === -1) {
+          newIndex = Math.max(0, Math.min(timelineData.length - 1, prevIndex + direction));
+        }
+
+        return newIndex;
+      });
+
+      // Reset scrolling flag after animation frame
+      window.requestAnimationFrame(() => {
+        scrollTimer = setTimeout(() => {
+          isScrolling = false;
+        }, SCROLL_DEBOUNCE_TIME);
+      });
+
+      lastScrollY = currentScrollY;
+    };
+
+    // Add scroll event listener with passive: true for better performance
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimer);
+    };
+  }, [timelineData.length]);
+
   const handleMobileScroll = (e) => {
-    if (!sliderRef.current) return;
+    if (!sliderRef.current) {
+      return;
+    }
 
     const slider = sliderRef.current;
     const scrollPosition = slider.scrollLeft;
@@ -516,84 +590,6 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
       setMobileActiveIndex(0);
     }
   }, [isInView]);
-
-  // Handle vertical scroll for mobile slider
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-    let lastScrollTime = Date.now();
-    let isScrolling = false;
-    
-    const handleVerticalScroll = () => {
-      // Check if we're in mobile view
-      if (window.innerWidth >= 900) return; // 900px is MUI's md breakpoint
-      if (!mobileSectionRef.current || isScrolling) return;
-
-      const sectionRect = mobileSectionRef.current.getBoundingClientRect();
-      const sectionTop = sectionRect.top;
-      const currentScrollY = window.scrollY;
-      const currentTime = Date.now();
-      const scrollDiff = currentScrollY - lastScrollY;
-      const timeDiff = currentTime - lastScrollTime;
-      
-      // Reset to first slide when section is not in view
-      if (sectionTop > window.innerHeight) {
-        setMobileActiveIndex(0);
-        lastScrollY = currentScrollY;
-        return;
-      }
-      
-      // Handle scroll when section is sticky
-      if (sectionTop <= 10) {
-        // Only process if enough time has passed and there's enough scroll movement
-        if (timeDiff > 400 && Math.abs(scrollDiff) > 5) {
-          isScrolling = true;
-          const direction = scrollDiff > 0 ? 1 : -1;
-          
-          if (direction > 0 && mobileActiveIndex < timelineData.length - 1) {
-            setMobileActiveIndex(prev => Math.min(prev + 1, timelineData.length - 1));
-          } else if (direction < 0 && mobileActiveIndex > 0) {
-            setMobileActiveIndex(prev => Math.max(prev - 1, 0));
-          }
-          
-          lastScrollTime = currentTime;
-          
-          // Reset scroll flag after a delay
-          setTimeout(() => {
-            isScrolling = false;
-          }, 300);
-        }
-      }
-      
-      // Allow scrolling past only after reaching the last slide
-      if (mobileActiveIndex === timelineData.length - 1 && sectionTop < -50) {
-        return;
-      }
-      
-      lastScrollY = currentScrollY;
-    };
-
-    // Only add scroll listener if we're in mobile view
-    if (window.innerWidth < 900) { // 900px is MUI's md breakpoint
-      window.addEventListener('scroll', handleVerticalScroll, { passive: true });
-      handleVerticalScroll(); // Initial calculation
-    }
-
-    // Also listen for resize events to add/remove scroll listener
-    const handleResize = () => {
-      if (window.innerWidth >= 900) {
-        window.removeEventListener('scroll', handleVerticalScroll);
-      } else {
-        window.addEventListener('scroll', handleVerticalScroll, { passive: true });
-        handleVerticalScroll();
-      }
-    };
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('scroll', handleVerticalScroll);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [mobileActiveIndex, timelineData.length]);
 
   // Timeline progress animation variants
   const progressVariants = {
@@ -651,21 +647,24 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
           sx={{
             display: { xs: 'block', md: 'none' },
             width: '100%',
-            minHeight: '150vh', // Constant height for scrolling
+            height: `${timelineData.length * 50}vh`, // Add extra space to prevent jumping
             position: 'relative',
+            // overflow: 'hidden',
           }}
         >
           <Box
             ref={mobileSectionRef}
             sx={{
               width: '100%',
-              height: '80vh',
+              height: '90vh',
               position: 'sticky',
-              top: '10vh',
+              top: 0,
+              left: 0,
+              right: 0,
               zIndex: 1,
               display: 'flex',
               flexDirection: 'column',
-              bgcolor: 'background.paper',
+              // overflow: 'hidden',
             }}
           >
             <motion.div
@@ -785,6 +784,42 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
             }}
           >
             {/* Vertical progress line with dynamic fill */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Box sx={{ mb: 4, textAlign: 'center' }}>
+                <Typography
+                  variant="h2"
+                  sx={{
+                    fontFamily: 'Playfair Display, serif',
+                    fontWeight: 500,
+                    fontSize: { xs: '28px', md: '42px' },
+                    color: '#18191B',
+                    lineHeight: '1.2',
+                    mb: 1,
+                  }}
+                >
+                  {conceptToConcreteSection?.Heading}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: '#5C6170',
+                    fontSize: { xs: '14px', md: '20px' },
+                    fontFamily: 'Satoshi Variable, sans-serif',
+                    lineHeight: '1.2',
+                    maxWidth: 900,
+                    mt: 2,
+                    fontWeight: 500,
+                    mx: 'auto',
+                  }}
+                >
+                  {conceptToConcreteSection?.Subheading}
+                </Typography>
+              </Box>
+            </motion.div>
             <Box
               ref={timelineBarRef}
               sx={{
