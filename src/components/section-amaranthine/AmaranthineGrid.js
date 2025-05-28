@@ -67,7 +67,7 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
                 sx={{
                   backgroundColor: '#0A2640',
                   color: 'white',
-                  aspectRatio: '35 / 26',
+                  aspectRatio: { xs: '35 / 26', sm: '35 / 20', md: '35 / 26' },
                   textAlign: 'center',
                   alignItems: 'center',
                   justifyContent: 'center',
