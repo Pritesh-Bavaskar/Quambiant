@@ -38,7 +38,9 @@ CustomArrow.propTypes = {
 
 export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
 
   const cards = (data?.StoryCard || []).map((card) => ({
     image: card?.Image?.url ? `${process.env.REACT_APP_HOST_API}${card.Image.url}` : img1, // Fallback to img1 if no image
@@ -187,6 +189,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
       </m.div>
 
       {isMobile ? (
+        // Mobile View (Carousel)
         <Box sx={{ width: '100%', position: 'relative' }}>
           <m.div
             style={{ opacity: titleOpacity }}
@@ -223,16 +226,39 @@ export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
           </Box>
         </Box>
       ) : (
+        // Tablet and Desktop View (Grid)
         <Grid
           container
-          spacing={4}
-          sx={{ mt: 4, display: 'flex', flexWrap: 'wrap' }}
+          spacing={isTablet ? 2 : 4}
+          sx={{
+            mt: 4,
+            display: 'flex',
+            flexWrap: 'wrap',
+            px: isTablet ? 2 : 0,
+            maxWidth: isTablet ? 800 : 1300,
+            mx: 'auto',
+          }}
           justifyContent="center"
-          maxWidth={1300}
         >
           {cards.map((card, index) => (
-            <Grid item xs={12} md={4} key={index} sx={{ display: 'flex' }}>
-              <m.div style={{ opacity: opacities[index], y: yTransforms[index] }}>
+            <Grid 
+              item 
+              xs={12} 
+              sm={6} 
+              md={4} 
+              key={index} 
+              sx={{ 
+                display: 'flex',
+                padding: isTablet ? '8px' : '16px',
+              }}
+            >
+              <m.div 
+                style={{ 
+                  opacity: opacities[index], 
+                  y: yTransforms[index],
+                  width: '100%',
+                }}
+              >
                 {renderCard(card)}
               </m.div>
             </Grid>

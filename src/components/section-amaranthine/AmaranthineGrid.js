@@ -166,7 +166,7 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
                 {data?.GallaryTextSection5}
               </Typography>
               <Typography mt={1} fontSize={12} fontWeight={500}>
-                {data?.GallarySubTextSection5}  
+                {data?.GallarySubTextSection5}
               </Typography>
             </Box>
           </m.div>
