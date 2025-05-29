@@ -920,7 +920,7 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
                   }}
                   sx={{
                     scrollSnapAlign: 'start',
-                    minHeight: { xs: '70vh', md: '80vh' },
+                    minHeight: { xs: '70vh', md: '50vh' },
                     display: 'flex',
                     alignItems: 'center',
                     position: 'relative',
