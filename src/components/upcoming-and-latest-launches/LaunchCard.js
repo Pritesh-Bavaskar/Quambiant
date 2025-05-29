@@ -86,7 +86,7 @@ export default function LaunchCard({ project }) {
           }}
         >
           {project.timeline.map((stage, index) => {
-            const isCompleted = stage.status === 'ongoing';
+            const isCompleted = stage.status === 'ongoing' || stage.status === 'completed';
             const isLastItem = index === project.timeline.length - 1;
 
             return (
@@ -201,18 +201,42 @@ export default function LaunchCard({ project }) {
         >
           {project.title}
         </Typography>
-        <Typography
-          sx={{
-            mt: { xs: 1, sm: 1 },
-            fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
-            fontWeight: 500,
-            fontSize: { xs: 12, sm: 14 },
-            textTransform: 'uppercase',
-            color: '#5C6170',
-          }}
-        >
-          {project.type} &bull; {project.location}
-        </Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: { xs: 1, sm: 1 } }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+            <img
+              src="/assets/icons/upcoming-launches/building.svg"
+              alt="Building"
+            />
+            <Typography
+              sx={{
+                fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
+                fontWeight: 500,
+                fontSize: { xs: 12, sm: 14 },
+                textTransform: 'uppercase',
+                color: '#5C6170',
+              }}
+            >
+              {project.type}
+            </Typography>
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+            <img
+              src="/assets/icons/upcoming-launches/location.svg"
+              alt="Location"
+            />
+            <Typography
+              sx={{
+                fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
+                fontWeight: 500,
+                fontSize: { xs: 12, sm: 14 },
+                textTransform: 'uppercase',
+                color: '#5C6170',
+              }}
+            >
+              {project.location}
+            </Typography>
+          </Box>
+        </Box>
         <Button
           variant="contained"
           size="small"

@@ -113,7 +113,7 @@ export default function UpcomingLaunchesCarousel({ upcomingLaunches }) {
             {upcomingLaunches?.SubHeading}
           </Typography>
         </Box>
-        {!isMobile && (
+        {launches.length > 2 && !isMobile && (
           <Box sx={{ pr: 2 }}>
             <CustomArrow direction="back" onClick={carousel.onPrev} />
             <CustomArrow direction="forward" onClick={carousel.onNext} />

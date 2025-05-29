@@ -249,7 +249,7 @@ export default function SpotlightCarousel({ spotlight }) {
                 <Typography
                   variant="caption"
                   sx={{
-                    color: '#F5E6D6',
+                    color: '#DDAB76',
                     mb: 0.5,
                     display: 'block',
                     fontFamily: 'Satoshi, sans-serif',
