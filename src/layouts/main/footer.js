@@ -73,7 +73,16 @@ export default function Footer() {
           textAlign: { xs: 'center', md: 'center' },
         }}
       >
-        <Divider sx={{ bgcolor: 'rgba(255,255,255,0.2)', mb: { xs: 3, md: 5 } }} />
+        <Divider
+          sx={{
+            bgcolor: 'rgba(255,255,255,0.2)',
+            mb: { xs: 3, md: 5 },
+            position: 'absolute',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '90vw',
+          }}
+        />
         <Box
           sx={{
             position: 'relative',
@@ -89,6 +98,7 @@ export default function Footer() {
               ...styles.quambiant,
               position: 'relative',
               cursor: 'pointer ',
+              pt: { xs: 3, md: 5 },
             }}
           >
             Quambiant
@@ -230,13 +240,19 @@ export default function Footer() {
             </>
           )}
         </Box>
-
         <Divider
-          sx={{ bgcolor: 'rgba(255,255,255,0.2)', mt: { xs: 3, md: 5 }, mb: { xs: 3, md: 5 } }}
+          sx={{
+            bgcolor: 'rgba(255,255,255,0.2)',
+            mt: { xs: 1, md: 2 },
+            mb: { xs: 3, md: 5 },
+            position: 'absolute',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            width: '90vw',
+          }}
         />
-
         {/* Responsive Footer Content */}
-        <Box sx={{ width: '100%', mb: 2 }}>
+        <Box sx={{ width: '100%', mb: 2, mt: { xs: 5, md: 6 } }}>
           {/* Mobile Layout */}
           <Box sx={{ display: { xs: 'block', md: 'none' } }}>
             {/* Navigation Links in two rows */}
