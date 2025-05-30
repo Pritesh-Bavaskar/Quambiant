@@ -49,7 +49,19 @@ export default function EmiCalculatorSection() {
         }}
       >
         {/* Left Column: Price List */}
-        <Grid item xs={12} md={5}>
+        <Grid
+          item
+          xs={12}
+          md={5}
+          sx={{
+            pl: { xs: 0, md: 3 },
+            pr: { xs: 0, md: 3 },
+            '&.MuiGrid-item': {
+              paddingLeft: { xs: 0, md: '24px' },
+              paddingRight: { xs: 0, md: '24px' },
+            },
+          }}
+        >
           <Typography variant="h1" color="#000000" pb={4} gutterBottom>
             Price
           </Typography>
@@ -125,7 +137,19 @@ export default function EmiCalculatorSection() {
         </Grid>
 
         {/* Right Column: EMI Calculator */}
-        <Grid item xs={12} md={6}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          sx={{
+            pl: { xs: 0, md: 3 },
+            pr: { xs: 0, md: 3 },
+            '&.MuiGrid-item': {
+              paddingLeft: { xs: 0, md: '24px' },
+              paddingRight: { xs: 0, md: '24px' },
+            },
+          }}
+        >
           <Card sx={{ boxShadow: 3, borderRadius: 1, bgcolor: '#FFFFFF' }}>
             <CardContent>
               <Typography variant="h2" color="#09090B" gutterBottom>

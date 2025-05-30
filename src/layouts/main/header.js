@@ -17,6 +17,7 @@ import Badge, { badgeClasses } from '@mui/material/Badge';
 // hooks
 import { useOffSetTop } from 'src/hooks/use-off-set-top';
 import { useResponsive } from 'src/hooks/use-responsive';
+import { useGetHomepageWithFilter } from 'src/api/home';
 // theme
 import { bgBlur } from 'src/theme/css';
 // routes
@@ -39,6 +40,10 @@ export default function Header() {
   const theme = useTheme();
   const location = useLocation();
   const [isNavHovered, setIsNavHovered] = React.useState(false);
+
+  const { filteredHomepage } = useGetHomepageWithFilter(`populate[ContactUs][populate]=*`);
+
+  console.log(filteredHomepage);
 
   const handleNavHover = React.useCallback((hovered) => {
     // console.log('Navigation hover state:', hovered);
@@ -216,6 +221,10 @@ export default function Header() {
                   }}
                 >
                   <IconButton
+                    component="a"
+                    href={`https://api.whatsapp.com/send?phone=${filteredHomepage?.data?.ContactUs?.WhatsAppNumber}&text=Hi,%20I%20want%20to%20know%20more%20about%20Quambiant%20Amaranthine`}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     sx={{
                       ml: { xs: 1, md: -1 },
                       mr: { md: 2 },

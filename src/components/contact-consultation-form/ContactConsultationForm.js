@@ -317,7 +317,11 @@ export default function ContactConsultationForm({ contactUs }) {
           </Button>
           <Button
             variant="outlined"
-            href="tel:+919792344646"
+            href={`https://api.whatsapp.com/send?phone=${
+              contactUs?.WhatsAppNumber || '917792344646'
+            }&text=Hi,%20I%20want%20to%20know%20more%20about%20Quambiant%20Amaranthine`}
+            target="_blank"
+            rel="noopener noreferrer"
             startIcon={
               <img src={contactWhatsapp} alt="whatsapp Icon" style={{ width: 20, height: 20 }} />
             }
@@ -325,7 +329,6 @@ export default function ContactConsultationForm({ contactUs }) {
               background: 'transparent',
               borderColor: '#5B432A',
               aspectRatio: { xs: '322 / 50.25', md: '224.25 / 50.25' },
-
               color: '#5B432A',
               borderRadius: 0,
               px: 2.5,
