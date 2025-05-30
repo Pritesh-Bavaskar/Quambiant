@@ -132,8 +132,12 @@ const PostSlider = ({ posts = [] }) => {
           <AspectImageSection sx={{ width: '100%', mb: 2 }}>
             <Box sx={{ width: '100%', height: '100%', position: 'relative', padding: 2 }}>
               <Image
-                alt={currentPost.title}
-                src={currentPost.cover}
+                alt={currentPost.Heading}
+                src={
+                  currentPost.Image?.url
+                    ? `${process.env.REACT_APP_HOST_API}${currentPost.Image?.url}`
+                    : ''
+                }
                 ratio="16/9"
                 sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
@@ -155,10 +159,10 @@ const PostSlider = ({ posts = [] }) => {
                   WebkitOverflowScrolling: 'touch',
                 }}
               >
-                {currentPost.categories?.map((category) => (
+                {currentPost.Tags?.map((tag) => (
                   <Chip
-                    key={category}
-                    label={category}
+                    key={tag?.id}
+                    label={tag?.Label}
                     size="small"
                     sx={{
                       backdropFilter: 'blur(6px)',
@@ -203,11 +207,11 @@ const PostSlider = ({ posts = [] }) => {
               <Typography
                 sx={{ fontFamily: 'Satoshi Variable', fontWeight: 500, color: '#5C6170', mb: 3 }}
               >
-                {currentPost.readTime}
+                {currentPost?.ReadTime}
               </Typography>
               <Box sx={{ mb: 2 }}>
                 <Typography variant="h1" sx={{ fontWeight: 500, color: '#000000' }}>
-                  {currentPost.title}
+                  {currentPost?.Heading}
                 </Typography>
               </Box>
               <Typography
@@ -225,7 +229,7 @@ const PostSlider = ({ posts = [] }) => {
                     fontWeight: 500,
                   }}
                 >
-                  Read More
+                  {currentPost?.ButtonText}
                 </Typography>
                 <Box component="img" src={readMoreImg} alt="" sx={{ width: 16, height: 16 }} />
               </Stack>
@@ -347,12 +351,12 @@ const PostSlider = ({ posts = [] }) => {
                     fontWeight: 500,
                   }}
                 >
-                  {currentPost.readTime}
+                  {currentPost.ReadTime}
                 </Typography>
               </Box>
               <Box sx={{ mb: 3 }}>
                 <Typography variant="h1" sx={{ fontWeight: 500 }}>
-                  {currentPost.title}
+                  {currentPost.Heading}
                 </Typography>
               </Box>
               <Typography
@@ -363,7 +367,7 @@ const PostSlider = ({ posts = [] }) => {
                   fontWeight: 500,
                 }}
               >
-                {currentPost.description}
+                {currentPost?.SubHeading}
               </Typography>
               <Box
                 sx={{
@@ -384,7 +388,7 @@ const PostSlider = ({ posts = [] }) => {
                       color: '#001016',
                     }}
                   >
-                    Read More
+                    {currentPost.ButtonText}
                   </Typography>
                   <Box component="img" src={readMoreImg} alt="" sx={{ width: 16, height: 16 }} />
                 </Stack>

@@ -76,11 +76,42 @@ export default function PostList({ posts = [], loading }) {
   const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
+  // Add this function inside your PostList component
+  const scrollToTop = () => {
+    if (listRef.current) {
+      listRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
+  // Update the handlePageChange function
   const handlePageChange = (event, page) => {
     setCurrentPage(page);
-    // Scroll the list container to top smoothly
-    if (listRef.current) {
-      listRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToTop();
+  };
+
+  // Update the arrow button handlers
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prev) => {
+        const nextPage = prev + 1;
+        // Use setTimeout to ensure state is updated before scrolling
+        setTimeout(scrollToTop, 0);
+        return nextPage;
+      });
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prev) => {
+        const prevPage = prev - 1;
+        // Use setTimeout to ensure state is updated before scrolling
+        setTimeout(scrollToTop, 0);
+        return prevPage;
+      });
     }
   };
 
@@ -128,10 +159,10 @@ export default function PostList({ posts = [], loading }) {
       </Box>
 
       <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-        <Grid 
-          container 
+        <Grid
+          container
           spacing={{ xs: 0, sm: 3 }}
-          sx={{ 
+          sx={{
             width: '100%',
             maxWidth: { xs: '100%', md: 'calc(100% - 32px)' },
             justifyContent: { xs: 'flex-start', md: 'center' },
@@ -142,15 +173,20 @@ export default function PostList({ posts = [], loading }) {
               paddingLeft: { xs: 0, sm: '24px !important' },
               paddingTop: { xs: 2, sm: '0 !important' },
               display: 'flex',
-              justifyContent: 'center'
-            }
+              justifyContent: 'center',
+            },
           }}
         >
           {loading
             ? // Loading skeleton - 3 items for 3 columns
               [...Array(3)].map((_, index) => (
                 <Grid key={index} item xs={12} sm={6} md={4}>
-                  <Skeleton variant="rectangular" width="100%" height={320} sx={{ maxWidth: 416 }} />
+                  <Skeleton
+                    variant="rectangular"
+                    width="100%"
+                    height={320}
+                    sx={{ maxWidth: 416 }}
+                  />
                 </Grid>
               ))
             : currentPosts.map((post) => (
@@ -163,7 +199,7 @@ export default function PostList({ posts = [], loading }) {
 
       <Stack direction="row" justifyContent="center" alignItems="center" spacing={1} sx={{ mt: 8 }}>
         <IconButton
-          onClick={() => handlePageChange(null, currentPage - 1)}
+          onClick={handlePrevPage}
           disabled={currentPage === 1}
           sx={{
             width: 52,
@@ -222,7 +258,7 @@ export default function PostList({ posts = [], loading }) {
         />
 
         <IconButton
-          onClick={() => handlePageChange(null, currentPage + 1)}
+          onClick={handleNextPage}
           disabled={currentPage === totalPages}
           sx={{
             width: 52,

@@ -1,11 +1,11 @@
-import { Box, Container, Typography } from '@mui/material';
-import { m } from 'framer-motion';
+import PropTypes from 'prop-types';
+import { Box } from '@mui/material';
 import newsBck from 'src/assets/media/news/news-bck.jpg';
 import { LandingCard } from '../../components/landing-card/LandingCard';
 
 // ----------------------------------------------------------------------
 
-export default function PostHero() {
+export default function PostHero({ hero }) {
   return (
     <Box
       sx={{
@@ -24,7 +24,7 @@ export default function PostHero() {
           width: '100%',
           height: '100%',
           objectFit: 'contain',
-          backgroundImage: `url(${newsBck.src || newsBck})`,
+          backgroundImage: hero?.Image?.url ? `url(${process.env.REACT_APP_HOST_API}${hero?.Image?.url})` : `url(${newsBck.src})`,
           backgroundSize: 'cover',
           backgroundPosition: {
             xs: 'right 15% bottom 20%',
@@ -55,8 +55,8 @@ export default function PostHero() {
           }}
         >
           <LandingCard
-            title="Quambiant Newsroom"
-            subtitle="Stay informed about our latest developments, corporate announcements, and industry insights."
+            title={hero?.Heading}
+            subtitle={hero?.SubHeading}
             // buttonText="Explore Articles"
             // buttonClick={() => {}}
             delayNo={0.3}
@@ -71,3 +71,14 @@ export default function PostHero() {
     </Box>
   );
 }
+
+PostHero.propTypes = {
+  hero: PropTypes.shape({
+    Heading: PropTypes.string,
+    SubHeading: PropTypes.string,
+    Image: PropTypes.shape({
+      url: PropTypes.string,
+    }),
+  }),
+};
+

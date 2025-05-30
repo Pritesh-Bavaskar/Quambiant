@@ -94,7 +94,7 @@ export const navConfigMobile = [
   {
     title: 'Newsroom',
     // icon: <Iconify // icon="solar:notebook-bold-duotone" />,
-    path: paths.post,
+    path: '/post',
   },
   {
     title: 'Careers',

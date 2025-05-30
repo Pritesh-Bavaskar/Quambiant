@@ -12,7 +12,7 @@ import { useDebounce } from 'src/hooks/use-debounce';
 // _mock
 import { POST_SORT_OPTIONS } from 'src/_mock';
 // api
-import { useGetPosts, useSearchPosts } from 'src/api/blog';
+import { useGetPosts, useSearchPosts, useGetPostsByFilter } from 'src/api/blog';
 // components
 import { useSettingsContext } from 'src/components/settings';
 import postSliderImg from 'src/assets/media/news/post-slider-img.jpg';
@@ -29,68 +29,17 @@ import PostSubscribe from '../post-subscribe';
 // ----------------------------------------------------------------------
 
 export default function PostListHomeView() {
-  const settings = useSettingsContext();
+  const { filteredPosts } = useGetPostsByFilter(
+    `populate[HeroSection][populate]=*&populate[NewsRoomSlider][populate][Tags][populate]=*`
+  );
 
-  const [sortBy, setSortBy] = useState('latest');
-
-  const [searchQuery, setSearchQuery] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  const debouncedQuery = useDebounce(searchQuery);
-
-  const { posts, postsLoading } = useGetPosts();
-
-  const { searchResults, searchLoading } = useSearchPosts(debouncedQuery);
-
-  const dataFiltered = applyFilter({
-    inputData: posts,
-    sortBy,
-  });
-
-  const handleSortBy = useCallback((newValue) => {
-    setSortBy(newValue);
-  }, []);
-
-  const handleSearch = useCallback((inputValue) => {
-    setSearchQuery(inputValue);
-  }, []);
-
-  // Sample blog posts data
-  const samplePosts = [
-    {
-      id: '1',
-      title: 'The Future of Sustainable Architecture',
-      description:
-        'Exploring innovative materials and designs that are shaping the future of sustainable architecture and urban development.',
-      cover: postSliderImg,
-      categories: ['Awards'],
-      readTime: '5 min read',
-    },
-    {
-      id: '2',
-      title: 'Modern Interior Design Trends 2025',
-      description:
-        'Discover the latest trends in interior design that are transforming living spaces this year.',
-      cover: postSliderImg,
-      categories: ['Awards'],
-      readTime: '5 min read',
-    },
-    {
-      id: '3',
-      title: 'Smart Home Integration',
-      description:
-        'How smart home technology is being seamlessly integrated into modern architectural designs.',
-      cover: postSliderImg,
-      categories: ['Awards'],
-      readTime: '5 min read',
-    },
-  ];
+  console.log('filteredPosts', filteredPosts);
 
   return (
     <Box sx={{ width: '100%', overflow: 'hidden' }}>
-      <PostHero />
-      <PostSlider posts={samplePosts} />
-      <PostList posts={_blogPosts} loading={loading} />
+      <PostHero hero={filteredPosts?.data?.HeroSection} />
+      <PostSlider posts={filteredPosts?.data?.NewsRoomSlider} />
+      <PostList posts={_blogPosts} />
       <PostSubscribe />
     </Box>
   );

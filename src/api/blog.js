@@ -87,3 +87,28 @@ export function useSearchPosts(query) {
 
   return memoizedValue;
 }
+
+// -----------------------------------------------------------------------
+
+export function useGetPostsByFilter(filter) {
+  let URL;
+  if (filter) {
+    URL = endpoints.post.filterList(filter);
+  }
+
+  const { data, isLoading, error, isValidating, mutate } = useSWR(URL, fetcher);
+
+  const refreshFilterPosts = () => {
+    // Use the `mutate` function to trigger a revalidation
+    mutate();
+  };
+
+  return {
+    filteredPosts: data || [],
+    filteredPostsLoading: isLoading,
+    filteredPostsError: error,
+    filteredPostsValidating: isValidating,
+    filteredPostsEmpty: !isLoading && !data?.length,
+    refreshFilterPosts,
+  };
+}

@@ -21,7 +21,7 @@ import { SectionAmaranthine } from '../../../components/section-amaranthine/Sect
 
 export default function HomeView() {
   const { scrollYProgress } = useScroll();
-  const { filteredHomepage, filteredHomepageLoading, filteredHomepageError } =
+  const { filteredHomepage } =
     useGetHomepageWithFilter(
       `populate[Hero][populate]=*&populate[StatsSection]=*&populate[TimelineSection][populate][Steps][populate]=*&populate[HomeStories][populate][HomeStoriesSlider][populate]=*&populate[ContactUs][populate]=*&populate[Spotlight][populate][Card][populate]=*&populate[GreenBuildingStats][populate]=*&populate[Awards][populate][AwardsSlider][populate]=*&populate[UpcomingLaunches][populate][Projects][populate]=*&populate[ProjectShowcase][populate][GallaryImage1]=true&populate[ProjectShowcase][populate][GallaryImage2]=true&populate[ProjectShowcase][populate][GallaryImage3]=true&populate[ProjectShowcase][populate][GallaryImage4]=true&populate[ProjectShowcase][populate][GallaryImage6]=true&populate[ProjectShowcase][populate][SpotlightImage]=true&populate[ProjectShowcase][populate][StoryCard][populate]=*`
     );

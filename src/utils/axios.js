@@ -40,10 +40,11 @@ export const endpoints = {
     labels: '/api/mail/labels',
   },
   post: {
-    list: '/api/post/list',
-    details: '/api/post/details',
-    latest: '/api/post/latest',
-    search: '/api/post/search',
+    list: '/api/news-room',
+    // details: '/api/post/details',
+    // latest: '/api/post/latest',
+    // search: '/api/post/search',
+    filterList: (filter) => `/api/news-room?${filter}`,
   },
   product: {
     list: '/api/product/list',

@@ -19,7 +19,7 @@ export default function LaunchCard({ project }) {
       }}
     >
       {/* Top Image + Tags */}
-      <Box sx={{ position: 'relative', height: { xs: 350, md: 'auto' } }}>
+      <Box sx={{ position: 'relative', height: { xs: 400, md: 500 } }}>
         <Image
           src={project.image}
           alt={project.title}
@@ -83,6 +83,21 @@ export default function LaunchCard({ project }) {
             py: 1,
             px: 1,
             borderRadius: 1,
+            maxHeight: 350, // Set a fixed maximum height
+            overflowY: 'auto', // Enable vertical scrolling
+            '&::-webkit-scrollbar': {
+              width: '0px',
+            },
+            '&::-webkit-scrollbar-track': {
+              background: 'rgba(255,255,255,0.1)',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              background: 'rgba(255,255,255,0.3)',
+              borderRadius: '4px',
+            },
+            '&::-webkit-scrollbar-thumb:hover': {
+              background: 'rgba(255,255,255,0.5)',
+            },
           }}
         >
           {project.timeline.map((stage, index) => {
@@ -203,10 +218,7 @@ export default function LaunchCard({ project }) {
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: { xs: 1, sm: 1 } }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-            <img
-              src="/assets/icons/upcoming-launches/building.svg"
-              alt="Building"
-            />
+            <img src="/assets/icons/upcoming-launches/building.svg" alt="Building" />
             <Typography
               sx={{
                 fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
@@ -220,10 +232,7 @@ export default function LaunchCard({ project }) {
             </Typography>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-            <img
-              src="/assets/icons/upcoming-launches/location.svg"
-              alt="Location"
-            />
+            <img src="/assets/icons/upcoming-launches/location.svg" alt="Location" />
             <Typography
               sx={{
                 fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
