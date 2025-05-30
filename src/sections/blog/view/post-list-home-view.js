@@ -30,10 +30,8 @@ import PostSubscribe from '../post-subscribe';
 
 export default function PostListHomeView() {
   const { filteredPosts } = useGetPostsByFilter(
-    `populate[HeroSection][populate]=*&populate[NewsRoomSlider][populate][Tags][populate]=*`
+    `populate[HeroSection][populate]=*&populate[NewsRoomSlider][populate]=*`
   );
-
-  console.log('filteredPosts', filteredPosts);
 
   return (
     <Box sx={{ width: '100%', overflow: 'hidden' }}>

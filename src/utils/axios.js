@@ -41,9 +41,6 @@ export const endpoints = {
   },
   post: {
     list: '/api/news-room',
-    // details: '/api/post/details',
-    // latest: '/api/post/latest',
-    // search: '/api/post/search',
     filterList: (filter) => `/api/news-room?${filter}`,
   },
   product: {
@@ -51,9 +48,12 @@ export const endpoints = {
     details: '/api/product/details',
     search: '/api/product/search',
   },
+  tags: {
+    list: '/api/tags',
+    filterList: (filter) => `/api/tags?${filter}`,
+  },
   homepage: {
     list: '/api/homepage',
-    // filterList: '/api/homepage/filter',
     filterList: (filter) => `/api/homepage?${filter}`,
   },
 };

@@ -43,8 +43,6 @@ export default function Header() {
 
   const { filteredHomepage } = useGetHomepageWithFilter(`populate[ContactUs][populate]=*`);
 
-  console.log(filteredHomepage);
-
   const handleNavHover = React.useCallback((hovered) => {
     // console.log('Navigation hover state:', hovered);
     setIsNavHovered(hovered);

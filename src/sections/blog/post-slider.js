@@ -282,8 +282,12 @@ const PostSlider = ({ posts = [] }) => {
           <AspectImageSection>
             <Box sx={{ width: '100%', height: '100%', position: 'relative' }}>
               <Image
-                alt={currentPost.title}
-                src={currentPost.cover}
+                alt={currentPost.Heading}
+                src={
+                  currentPost.Image?.url
+                    ? `${process.env.REACT_APP_HOST_API}${currentPost.Image?.url}`
+                    : ''
+                }
                 ratio="16/9"
                 sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />

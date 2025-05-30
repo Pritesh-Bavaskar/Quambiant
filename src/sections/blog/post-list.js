@@ -18,8 +18,8 @@ import {
 } from '@mui/material';
 // components
 import Iconify from 'src/components/iconify';
+import { useGetTagsByFilter } from 'src/api/tags';
 import PostCard from './post-card';
-
 // ----------------------------------------------------------------------
 
 const StyledToggleButton = styled(ToggleButton)(({ theme }) => ({
@@ -59,6 +59,8 @@ export default function PostList({ posts = [], loading }) {
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = isMobile ? 3 : 9; // 3 for mobile, 9 for desktop
   const listRef = useRef(null);
+
+  const { filteredTags } = useGetTagsByFilter();
 
   const handleFilterChange = (event, newFilter) => {
     if (newFilter !== null) {
@@ -115,7 +117,7 @@ export default function PostList({ posts = [], loading }) {
     }
   };
 
-  const categories = ['all', 'design', 'development', 'marketing', 'product'];
+  const categories = ['all', ...(filteredTags?.data?.map((tag) => tag.Name) || [])];
 
   return (
     <Box ref={listRef} sx={{ py: 8 }}>
