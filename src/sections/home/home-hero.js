@@ -198,7 +198,7 @@ export default function HomeHero({ hero }) {
             }}
           />
         )}
-        <Box // Overlay
+        {/* <Box // Overlay
           sx={{
             position: 'absolute',
             top: 0,
@@ -208,7 +208,7 @@ export default function HomeHero({ hero }) {
             backgroundColor: 'rgba(0, 0, 0, 0.4)', // Adjust opacity as needed
             zIndex: 1,
           }}
-        />
+        /> */}
         <Box
           sx={{
             position: 'relative', // changed from absolute to relative

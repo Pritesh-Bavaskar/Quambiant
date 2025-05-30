@@ -438,7 +438,7 @@ export default function HomeStories({ homeStories }) {
                 variant="h1"
                 sx={{
                   fontWeight: 500,
-                  mb: 2,
+                  mb: 4,
                   color: '#18191B',
                   lineHeight: {
                     xs: '2.4rem',

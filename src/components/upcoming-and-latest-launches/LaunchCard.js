@@ -19,7 +19,7 @@ export default function LaunchCard({ project }) {
       }}
     >
       {/* Top Image + Tags */}
-      <Box sx={{ position: 'relative', height: { xs: 400, md: 500 } }}>
+      <Box sx={{ position: 'relative', height: { xs: 400, md: 400 } }}>
         <Image
           src={project.image}
           alt={project.title}
@@ -83,7 +83,7 @@ export default function LaunchCard({ project }) {
             py: 1,
             px: 1,
             borderRadius: 1,
-            maxHeight: 350, // Set a fixed maximum height
+            maxHeight: 300, // Set a fixed maximum height
             overflowY: 'auto', // Enable vertical scrolling
             '&::-webkit-scrollbar': {
               width: '0px',
