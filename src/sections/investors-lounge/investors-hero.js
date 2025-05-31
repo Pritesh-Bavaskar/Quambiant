@@ -49,24 +49,24 @@ export default function InvestorsHero() {
       >
         <Box
           sx={{
-             position: 'relative', // changed from absolute to relative
+            position: 'relative', // changed from absolute to relative
             zIndex: 2,
             display: 'flex',
-             justifyContent: { xs: 'center', md: 'flex-start' },
-             alignItems: { xs: 'flex-end', md: 'flex-end' },
+            justifyContent: { xs: 'center', md: 'flex-start' },
+            alignItems: { xs: 'flex-end', md: 'flex-end' },
             height: '100%',
-             px: { xs: 2, md: 8 },
-             pb: { xs: 4, md: 8 },
+            px: { xs: 2, md: 8 },
+            pb: { xs: 4, md: 8 },
           }}
         >
           <LandingCard
             title="Investor Lounge"
-             subtitle="Discover investment opportunities and be a part of Quambiant’s visionary journey"
-             // buttonText="Explore Articles"
-             // buttonClick={() => {}}
+            subtitle="Discover investment opportunities and be a part of Quambiant’s visionary journey"
+            // buttonText="Explore Articles"
+            // buttonClick={() => {}}
             delayNo={0.3}
             sx={{
-               maxWidth: { xs: '100%', md: '600px' },
+              maxWidth: { xs: '100%', md: '600px' },
             }}
             location=""
             completionDate=""
