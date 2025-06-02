@@ -12,7 +12,11 @@ export default function PostHero({ hero }) {
         position: 'relative',
         width: '100%',
         height: 0,
-        paddingTop: { xs: '152.67%', md: '34.72%' }, // 600/393 = 1.5267 or 152.67% for mobile, 500/1440 = 34.72% for desktop
+        paddingTop: {
+          xs: '152.67%',
+          sm: '80%',
+          md: '34.72%',
+        },
         overflow: 'hidden',
       }}
     >
@@ -24,11 +28,14 @@ export default function PostHero({ hero }) {
           width: '100%',
           height: '100%',
           objectFit: 'contain',
-          backgroundImage: hero?.Image?.url ? `url(${process.env.REACT_APP_HOST_API}${hero?.Image?.url})` : `url(${newsBck.src})`,
+          backgroundImage: hero?.Image?.url
+            ? `url(${process.env.REACT_APP_HOST_API}${hero?.Image?.url})`
+            : `url(${newsBck.src})`,
           backgroundSize: 'cover',
           backgroundPosition: {
-            xs: 'right 15% bottom 20%',
-            md: 'center',
+            xs: 'right 30% bottom 20%',
+            sm: 'center 30% bottom 20%',
+            md: 'center top',
           },
           backgroundRepeat: 'no-repeat',
           '&::before': {

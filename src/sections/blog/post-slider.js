@@ -82,7 +82,6 @@ const AspectImageSection = styled(StyledImageSection)(({ theme }) => ({
 }));
 
 const AspectContentSection = styled(StyledContentSection)(({ theme }) => ({
-  aspectRatio: '657/570',
   backgroundColor: 'transparent',
   boxShadow: 'none',
   width: '50%',
@@ -92,7 +91,6 @@ const AspectContentSection = styled(StyledContentSection)(({ theme }) => ({
   justifyContent: 'center',
   [theme.breakpoints.down('md')]: {
     width: '100%',
-    aspectRatio: 'auto',
     height: 'auto',
   },
 }));
@@ -288,7 +286,6 @@ const PostSlider = ({ posts = [] }) => {
                     ? `${process.env.REACT_APP_HOST_API}${currentPost.Image?.url}`
                     : ''
                 }
-                ratio="16/9"
                 sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
               <Box
@@ -341,9 +338,13 @@ const PostSlider = ({ posts = [] }) => {
             <CardContent
               sx={{
                 height: '100%',
-                minHeight: '570px',
+                minHeight: 'auto',
                 position: 'relative',
-                p: { xs: 2, md: 4 },
+                sx: {
+                  p: 0,
+                },
+                // py: 0,
+                // p: { xs: 2, md: 4 },
               }}
             >
               <Box sx={{ mb: 3 }}>
@@ -359,7 +360,23 @@ const PostSlider = ({ posts = [] }) => {
                 </Typography>
               </Box>
               <Box sx={{ mb: 3 }}>
-                <Typography variant="h1" sx={{ fontWeight: 500 }}>
+                <Typography
+                  variant="h1"
+                  sx={{
+                    fontWeight: 500,
+                    lineHeight: {
+                      xs: '2.4rem',
+                      sm: '2.6rem',
+                      md: '3rem',
+                      lg: '3.4rem',
+                    },
+                    fontSize: {
+                      xs: '24px',
+                      sm: '28px',
+                      md: '42px',
+                    },
+                  }}
+                >
                   {currentPost.Heading}
                 </Typography>
               </Box>
