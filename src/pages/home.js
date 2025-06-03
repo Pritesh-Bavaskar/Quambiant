@@ -8,7 +8,7 @@ export default function HomePage() {
   return (
     <>
       <Helmet>
-        <title> Quambiant: The starting point for your next project</title>
+        <title> Quambiant - Quality & Ambiance</title>
       </Helmet>
 
       <HomeView />
