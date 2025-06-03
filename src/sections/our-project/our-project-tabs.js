@@ -221,13 +221,28 @@ export default function OurProjectTabs() {
           padding: {
             xs: '10px 15px 64px 15px',
             sm: '10px 32px 64px 32px',
+            md: '15px 40px 64px 40px',
+            lg: '20px 48px 64px 48px',
+            xl: '25px 56px 64px 56px',
           },
           backgroundColor: '#FDF8F3',
         }}
       >
-        <Grid container gap={{ xs: 2, md: 0 }}>
+        <Grid 
+          container 
+          spacing={{ xs: 2, sm: 2, md: 3, lg: 4, xl: 5 }}
+          columns={{ xs: 12, sm: 12, md: 12, lg: 12, xl: 12 }}
+        >
           {filteredProjects.map((project) => (
-            <Grid key={project.id} item xs={12} md={6}>
+            <Grid 
+              key={project.id} 
+              item 
+              xs={12}
+              sm={12}
+              md={6}
+              lg={6}
+              xl={6}
+            >
               <OurProjectCard project={project} />
             </Grid>
           ))}
