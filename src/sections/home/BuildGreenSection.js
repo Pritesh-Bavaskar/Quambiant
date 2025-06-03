@@ -158,7 +158,12 @@ export default function BuildGreenSection({ greenBuildingStats }) {
                     mr: 2,
                     background: 'transparent',
                     color: '#fff',
-                    ml: { xs: '40px', lg: '45px' },
+                    ml: {
+                      xs: '40px',    // Mobile
+                      md: '36px',    // iPad
+                      lg: '35px',    // Mac-sized desktop
+                      xl: '45px',    // Very large screens (1440px+)
+                    }
                   }}
                 >
                   {stat.value}
