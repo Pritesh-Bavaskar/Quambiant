@@ -129,7 +129,25 @@ export default function PostSubscribe({ sx, ...other }) {
           }}
         >
           <Box sx={{ maxWidth: 678, mx: 'auto' }}>
-            <Typography variant="h1" sx={{ color: '#FDF8F3', mb: 1, fontWeight: '500' }}>
+            <Typography
+              variant="h1"
+              sx={{
+                color: '#FDF8F3',
+                mb: 1,
+                fontWeight: '500',
+                fontSize: {
+                  xs: '24px',
+                  sm: '32px',
+                  md: '42px',
+                },
+                lineHeight: {
+                  xs: '1.6rem',
+                  sm: '1.8rem',
+                  md: '2rem',
+                },
+                pb: 2,
+              }}
+            >
               Stay Updated with Quambiant News
             </Typography>
             <Typography
@@ -139,7 +157,8 @@ export default function PostSubscribe({ sx, ...other }) {
                 fontSize: { xs: '14px', md: '16px' },
               }}
             >
-              Subscribe to our newsletter to receive the latest news and updates about our real estate developments.
+              Subscribe to our newsletter to receive the latest news and updates about our real
+              estate developments.
             </Typography>
           </Box>
 
