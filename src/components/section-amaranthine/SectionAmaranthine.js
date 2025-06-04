@@ -1,9 +1,43 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useScroll, useTransform, m } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useScroll, useTransform, m, useMotionValue } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
 import AmaranthineGrid from './AmaranthineGrid';
 import AmaranthineCard from './AmaranthineCard';
+
+// Separate component for animated words to properly use hooks
+const AnimatedWord = ({ word, index, totalWords }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'start center'], // when the word enters and exits the viewport
+  });
+
+  const start = index / totalWords;
+  const end = (index + 1) / totalWords;
+
+  const opacity = useTransform(scrollYProgress, [start, end], [0.5, 1]);
+
+  return (
+    <m.span
+      ref={ref}
+      style={{
+        opacity,
+        marginRight: '0.25em',
+        whiteSpace: 'pre-wrap',
+        display: 'inline-block',
+      }}
+    >
+      {word}
+    </m.span>
+  );
+};
+
+AnimatedWord.propTypes = {
+  word: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  totalWords: PropTypes.number.isRequired,
+};
 
 export function SectionAmaranthine({ projectShowcase }) {
   const theme = useTheme();
@@ -16,13 +50,11 @@ export function SectionAmaranthine({ projectShowcase }) {
   });
 
   // Desktop version animations
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]);
-  const opacity1 = useTransform(scrollYProgress, [0, 0.2, 0.4], [1, 1, 0]);
-  const scale1 = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  // Removed animations for the first section
 
   // Grid section animations
-  const gridOpacity = useTransform(scrollYProgress, [0.2, 0.5, 0.6], [0, 1, 1]);
-  const gridScale = useTransform(scrollYProgress, [0.2, 0.5], [0.9, 1]);
+  const gridOpacity = useTransform(scrollYProgress, [0, 0.3, 0.4], [1, 1, 1]);
+  const gridScale = useTransform(scrollYProgress, [0, 0.3, 0.4], [1, 1, 1]);
 
   // Fifth grid item and card synchronized animations
   const transition = {
@@ -81,38 +113,45 @@ export function SectionAmaranthine({ projectShowcase }) {
   const cardOpacityMobile = useTransform(scrollYProgress, [0, 0.65, 0.8], [0, 0, 1]);
   const cardScaleMobile = useTransform(scrollYProgress, [0, 0.6, 0.8], [0, 1, 1]);
 
+  const headingWords = projectShowcase?.Heading?.split(' ') || [];
+
   if (isDesktop) {
     return (
-      <Box ref={containerRef} sx={{ position: 'relative', height: '400vh' }}>
-        {/* First Section - Intro */}
-        <m.div
-          style={{
-            position: 'sticky',
-            top: 0,
-            height: '100vh',
-            y: y1,
-            opacity: opacity1,
-            scale: scale1,
+      <Box sx={{ position: 'relative' }}>
+        {/* First Section - Intro - No Animation */}
+        <Box
+          sx={{
+            minHeight: '50vh',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#FDF8F3',
+            // backgroundColor: '#FDF8F3',
             padding: 2,
             textAlign: 'center',
           }}
         >
-          <Typography
-            sx={{
-              fontSize: { xs: 28, md: 42 },
-              fontWeight: 500,
-              fontFamily: `'Playfair Display', serif`,
-              color: '#18191B',
-            }}
-            gutterBottom
-          >
-            {projectShowcase?.Heading}
-          </Typography>
+          <Box sx={{ textAlign: 'center' }}>
+            <Typography
+              component="div"
+              sx={{
+                fontSize: { xs: 28, md: 42 },
+                fontWeight: 500,
+                fontFamily: `'Playfair Display', serif`,
+                color: '#18191B',
+                display: 'inline-block',
+                '& > span': {
+                  display: 'inline-block',
+                  whiteSpace: 'pre-wrap',
+                },
+              }}
+              gutterBottom
+            >
+              {headingWords.map((word, i) => (
+                <AnimatedWord key={i} word={word} index={i} totalWords={headingWords.length} />
+              ))}
+            </Typography>
+          </Box>
 
           <Typography
             sx={{ fontSize: { xs: 14, md: 20 }, fontWeight: 500, pt: 1 }}
@@ -122,59 +161,61 @@ export function SectionAmaranthine({ projectShowcase }) {
           >
             {projectShowcase?.SubHeading}
           </Typography>
-        </m.div>
+        </Box>
 
         {/* Grid and Card Transition Section */}
-        <m.div
-          style={{
-            position: 'sticky',
-            top: 0,
-            height: '120vh',
-            width: '100%',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Grid Section */}
+        <Box ref={containerRef} sx={{ position: 'relative', height: '320vh' }}>
           <m.div
             style={{
-              opacity: gridOpacity,
-              scale: gridScale,
-              position: 'absolute',
+              position: 'sticky',
+              top: 0,
+              height: '120vh',
               width: '100%',
-              height: '100%',
-              backgroundColor: 'white',
+              overflow: 'hidden',
             }}
           >
-            <AmaranthineGrid
-              fifthItemScale={fifthItemScale}
-              fifthItemOpacity={fifthItemOpacity}
-              data={projectShowcase}
-            />
-          </m.div>
-
-          {/* Card Section */}
-          <m.div
-            style={{
-              position: 'relative',
-              height: '200vh',
-            }}
-          >
+            {/* Grid Section */}
             <m.div
               style={{
-                position: 'sticky',
-                top: 0,
-                opacity: cardOpacity,
-                scale: cardScale,
-                transformOrigin: 'center 80%',
+                opacity: gridOpacity,
+                scale: gridScale,
+                position: 'absolute',
                 width: '100%',
-                minHeight: '100vh',
-                height: 'auto',
+                height: '100%',
+                backgroundColor: 'white',
               }}
             >
-              <AmaranthineCard scrollYProgress={scrollYProgress} data={projectShowcase} />
+              <AmaranthineGrid
+                fifthItemScale={fifthItemScale}
+                fifthItemOpacity={fifthItemOpacity}
+                data={projectShowcase}
+              />
+            </m.div>
+
+            {/* Card Section */}
+            <m.div
+              style={{
+                position: 'relative',
+                height: '200vh',
+              }}
+            >
+              <m.div
+                style={{
+                  position: 'sticky',
+                  top: 0,
+                  opacity: cardOpacity,
+                  scale: cardScale,
+                  transformOrigin: 'center 80%',
+                  width: '100%',
+                  minHeight: '100vh',
+                  height: 'auto',
+                }}
+              >
+                <AmaranthineCard scrollYProgress={scrollYProgress} data={projectShowcase} />
+              </m.div>
             </m.div>
           </m.div>
-        </m.div>
+        </Box>
       </Box>
     );
   }

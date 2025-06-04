@@ -1,17 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, forwardRef } from 'react';
 import { Grid, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
 import { m, useScroll, useTransform, motionValue } from 'framer-motion';
 
-// import amaranthineImage1 from 'src/assets/media/landing/grid/grid-img1.png';
-// import amaranthineImage2 from 'src/assets/media/landing/grid/grid-img2.png';
-// import amaranthineImage3 from 'src/assets/media/landing/grid/grid-img3.png';
-// import amaranthineImage4 from 'src/assets/media/landing/grid/grid-img4.png';
-// import amaranthineImage6 from 'src/assets/media/landing/grid/grid-img6.png';
-
 export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data }) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md')); // Changed from 'sm' to 'md' to include tablets
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const ref = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -24,13 +18,13 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
     data?.GallaryImage2?.url,
     data?.GallaryImage3?.url,
     data?.GallaryImage4?.url,
-    data?.GallaryImage6?.url, // Note: Skipped index 4 (img5)
+    data?.GallaryImage6?.url,
   ];
 
-  // Default animations if not provided through props
   const defaultScale = useTransform(scrollYProgress, [0.7, 1], [1, 1.2]);
-
-  // Use provided scale/opacity for fifth item if available, otherwise use defaults
+  const spacingAnimation = useTransform(scrollYProgress, [0, 1], [0, 18]);
+  const paddingAnimation = useTransform(scrollYProgress, [0, 1], [0, 4]);
+  const gridOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
   const titleBlockScale = fifthItemScale || defaultScale;
   const titleBlockOpacity = fifthItemOpacity || 1;
 
@@ -99,86 +93,128 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
   }
 
   return (
-    <Box
-      ref={ref}
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        minHeight: '100vh',
-        width: '100%',
-        px: 4,
-      }}
-    >
-      <Grid
-        container
-        rowSpacing={2}
-        columnSpacing={2}
+    <>
+      <Box
+        ref={ref}
         sx={{
-          maxWidth: 'xl',
+          display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          minHeight: '100vh',
+          width: '100%',
         }}
       >
-        <Grid item xs={12} sm={6} md={4}>
-          <ImageBox src={images[0]} alt="Image 1" scrollYProgress={scrollYProgress} />
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={4}>
-          <ImageBox src={images[1]} alt="Image 2" scrollYProgress={scrollYProgress} />
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={4}>
-          <ImageBox src={images[2]} alt="Image 3" scrollYProgress={scrollYProgress} />
-        </Grid>
-
-        <Grid item xs={12} sm={6} md={4}>
-          <ImageBox src={images[3]} alt="Image 4" scrollYProgress={scrollYProgress} />
-        </Grid>
-
-        {/* ✅ STATIC TITLE BLOCK WITH SPECIAL PARALLAX EFFECT */}
-        <Grid item xs={12} sm={6} md={4} zIndex={1000}>
-          <m.div
-            style={{
-              width: '100%',
-              height: '100%',
-              scale: titleBlockScale,
-              transformOrigin: 'center 75%',
-              opacity: titleBlockOpacity,
+        <m.div
+          style={{
+            width: '100%',
+            maxWidth: 'xl',
+            paddingLeft: paddingAnimation,
+            paddingRight: paddingAnimation,
+            opacity: gridOpacity,
+          }}
+        >
+          <Grid
+            container
+            sx={{
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
-            <Box
-              sx={{
-                backgroundColor: '#0A2640',
+            <m.div
+              style={{
                 width: '100%',
-                color: 'white',
-                aspectRatio: '43 / 30',
-                textAlign: 'center',
-                alignItems: 'center',
-                justifyContent: 'center',
                 display: 'flex',
-                flexDirection: 'column',
-                py: 6,
-                px: 2,
+                flexWrap: 'wrap',
+                margin: spacingAnimation,
+                columnGap: spacingAnimation,
+                rowGap: spacingAnimation,
               }}
             >
-              <Typography fontFamily={`'Playfair Display', serif`} fontSize={38} fontWeight={400}>
-                {data?.GallaryTextSection5}
-              </Typography>
-              <Typography mt={1} fontSize={12} fontWeight={500}>
-                {data?.GallarySubTextSection5}
-              </Typography>
-            </Box>
-          </m.div>
-        </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <m.div style={{ margin: spacingAnimation }}>
+                  <ImageBox src={images[0]} alt="Image 1" scrollYProgress={scrollYProgress} />
+                </m.div>
+              </Grid>
 
-        <Grid item xs={12} sm={6} md={4}>
-          <ImageBox src={images[4]} alt="Image 6" scrollYProgress={scrollYProgress} />
-        </Grid>
-      </Grid>
-    </Box>
+              <Grid item xs={12} sm={6} md={4}>
+                <m.div style={{ margin: spacingAnimation }}>
+                  <ImageBox src={images[1]} alt="Image 2" scrollYProgress={scrollYProgress} />
+                </m.div>
+              </Grid>
+
+              <Grid item xs={12} sm={6} md={4}>
+                <m.div style={{ margin: spacingAnimation }}>
+                  <ImageBox src={images[2]} alt="Image 3" scrollYProgress={scrollYProgress} />
+                </m.div>
+              </Grid>
+
+              <Grid item xs={12} sm={6} md={4}>
+                <m.div style={{ margin: spacingAnimation }}>
+                  <ImageBox src={images[3]} alt="Image 4" scrollYProgress={scrollYProgress} />
+                </m.div>
+              </Grid>
+
+              {/* ✅ STATIC TITLE BLOCK WITH SPECIAL PARALLAX EFFECT */}
+              <Grid item xs={12} sm={6} md={4} zIndex={1000}>
+                <m.div
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    scale: titleBlockScale,
+                    transformOrigin: 'center 75%',
+                    opacity: titleBlockOpacity,
+                  }}
+                >
+                  <m.div style={{ margin: spacingAnimation }}>
+                    <Box
+                      sx={{
+                        backgroundColor: '#0A2640',
+                        width: '100%',
+                        color: 'white',
+                        aspectRatio: '43 / 30',
+                        textAlign: 'center',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        py: 6,
+                        px: 2,
+                      }}
+                    >
+                      <Typography
+                        fontFamily={`'Playfair Display', serif`}
+                        fontSize={38}
+                        fontWeight={400}
+                      >
+                        {data?.GallaryTextSection5}
+                      </Typography>
+                      <Typography mt={1} fontSize={12} fontWeight={500}>
+                        {data?.GallarySubTextSection5}
+                      </Typography>
+                    </Box>
+                  </m.div>
+                </m.div>
+              </Grid>
+
+              <Grid item xs={12} sm={6} md={4}>
+                <m.div style={{ margin: spacingAnimation }}>
+                  <ImageBox src={images[4]} alt="Image 6" scrollYProgress={scrollYProgress} />
+                </m.div>
+              </Grid>
+            </m.div>
+          </Grid>
+        </m.div>
+      </Box>
+      {/* Removed the duplicate image box as it was causing issues */}
+    </>
   );
 }
+
+AmaranthineGrid.propTypes = {
+  fifthItemScale: PropTypes.object,
+  fifthItemOpacity: PropTypes.object,
+  data: PropTypes.object,
+};
 
 function ImageBox({ src, alt, scrollYProgress }) {
   const ref = useRef(null);
@@ -223,11 +259,7 @@ function ImageBox({ src, alt, scrollYProgress }) {
   );
 }
 
-AmaranthineGrid.propTypes = {
-  fifthItemScale: PropTypes.object,
-  fifthItemOpacity: PropTypes.object,
-  data: PropTypes.object,
-};
+ImageBox.displayName = 'ImageBox';
 
 ImageBox.propTypes = {
   src: PropTypes.string.isRequired,
