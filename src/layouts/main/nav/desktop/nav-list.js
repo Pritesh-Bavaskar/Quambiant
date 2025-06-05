@@ -174,7 +174,7 @@ function NavSubList({ items, isDashboard, subheader, onClose, mainTitle, mainSub
               mb: 4,
               color: '#000000',
               fontWeight: '500',
-              fontFamily: 'Playfair Display',
+              fontFamily: 'Satoshi Variable',
               fontSize: '42px',
             }}
           >

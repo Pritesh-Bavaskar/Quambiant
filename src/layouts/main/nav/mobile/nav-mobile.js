@@ -80,7 +80,7 @@ export default function NavMobile({ offsetTop, data, sx }) {
             }}
           >
             <Logo sx={{ width: 100, height: 40, my: 0 }} />
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: "18px" }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
               <Button
                 variant="contained"
                 sx={{
@@ -281,7 +281,7 @@ export default function NavMobile({ offsetTop, data, sx }) {
                           display: 'inline-block',
                           whiteSpace: 'nowrap',
                           fontSize: '200px',
-                          fontFamily: 'Playfair Display, serif',
+                          fontFamily: 'Satoshi Variable',
                           fontWeight: 700,
                           color: 'white',
                           textTransform: 'uppercase',

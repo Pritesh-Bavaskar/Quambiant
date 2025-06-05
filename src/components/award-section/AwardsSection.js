@@ -113,7 +113,7 @@ export default function AwardsSection({ awards }) {
               sx={{
                 fontWeight: 500,
                 mb: 1,
-                fontFamily: 'Playfair Display, serif',
+                fontFamily: 'Satoshi Variable',
                 fontSize: '28px',
                 textAlign: 'center',
                 lineHeight: 1.5,
@@ -128,7 +128,7 @@ export default function AwardsSection({ awards }) {
                 color: '#5C6170',
                 pt: 1,
                 maxWidth: '90%',
-                fontFamily: 'Satoshi Variable, sans-serif',
+                fontFamily: 'Satoshi Variable',
                 fontWeight: 500,
                 fontSize: '14px',
                 textAlign: 'center',
@@ -213,7 +213,7 @@ export default function AwardsSection({ awards }) {
               sx={{
                 fontWeight: 500,
                 mb: 1,
-                fontFamily: 'Playfair Display, serif',
+                fontFamily: 'Satoshi Variable',
                 textAlign: 'left',
                 maxWidth: 500,
                 color: '#18191B',
@@ -237,7 +237,7 @@ export default function AwardsSection({ awards }) {
               sx={{
                 pt: 1,
                 color: '#5C6170',
-                fontFamily: 'Satoshi Variable, sans-serif',
+                fontFamily: 'Satoshi Variable',
                 fontWeight: 500,
                 maxWidth: 500,
                 fontSize: '20px',

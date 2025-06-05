@@ -119,7 +119,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
       >
         <Box sx={{ flex: '1 1 auto' }}>
           <Typography
-            fontFamily="Satoshi Variable, sans-serif"
+            fontFamily="Satoshi Variable"
             fontSize={{ xs: 20, md: 24 }}
             fontWeight={700}
             color="#18191B"
@@ -134,7 +134,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
             {card.title}
           </Typography>
           <Typography
-            fontFamily="Satoshi Variable, sans-serif"
+            fontFamily="Satoshi Variable"
             fontSize={{ xs: 14, md: 16 }}
             fontWeight={500}
             color="#666666"
@@ -174,7 +174,7 @@ export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
       <m.div style={{ opacity: titleOpacity }}>
         <Typography
           align="center"
-          fontFamily={`'Playfair Display', serif`}
+          fontFamily="Satoshi Variable"
           fontSize={{ xs: 38, md: 64 }}
           sx={{
             color: 'white',

@@ -59,7 +59,7 @@ export default function LaunchCard({ project }) {
               label={tag}
               // size="small"
               sx={{
-                fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
+                fontFamily: 'Satoshi Variable',
                 bgcolor: 'rgba(255,255,255,0.2)',
                 color: 'white',
                 backdropFilter: 'blur(8px)',
@@ -173,7 +173,7 @@ export default function LaunchCard({ project }) {
                       lineHeight: 1.4,
                       mb: 0.5,
                       fontSize: { xs: 12, md: 14 },
-                      fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                     }}
                   >
                     {stage.title}
@@ -185,7 +185,7 @@ export default function LaunchCard({ project }) {
                       lineHeight: 1.4,
                       fontSize: { xs: 12, md: 14 },
                       fontWeight: 500,
-                      fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                     }}
                   >
                     - {stage.date} {`(${stage.status})`}
@@ -221,7 +221,7 @@ export default function LaunchCard({ project }) {
             <img src="/assets/icons/upcoming-launches/building.svg" alt="Building" />
             <Typography
               sx={{
-                fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
+                fontFamily: 'Satoshi Variable',
                 fontWeight: 500,
                 fontSize: { xs: 12, sm: 14 },
                 textTransform: 'uppercase',
@@ -235,7 +235,7 @@ export default function LaunchCard({ project }) {
             <img src="/assets/icons/upcoming-launches/location.svg" alt="Location" />
             <Typography
               sx={{
-                fontFamily: 'Satoshi-Variable, Satoshi, sans-serif',
+                fontFamily: 'Satoshi Variable',
                 fontWeight: 500,
                 fontSize: { xs: 12, sm: 14 },
                 textTransform: 'uppercase',

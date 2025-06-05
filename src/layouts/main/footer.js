@@ -32,10 +32,10 @@ const styles = {
   root: {
     bgcolor: '#071317',
     color: '#fff',
-    fontFamily: 'Satoshi, sans-serif',
+    fontFamily: 'Satoshi Variable',
   },
   quambiant: {
-    fontFamily: '"Playfair Display", serif',
+    fontFamily: 'Satoshi Variable',
     fontWeight: 700,
     fontSize: { xs: '65px', md: '200px' },
     textAlign: { xs: 'center', md: 'center' },
@@ -43,7 +43,7 @@ const styles = {
     mb: { xs: 3, md: 5 },
   },
   otherText: {
-    fontFamily: 'Satoshi, sans-serif',
+    fontFamily: 'Satoshi Variable',
     fontWeight: 500,
     fontSize: '16px',
   },
@@ -142,7 +142,7 @@ export default function Footer() {
                     sx={{
                       mx: 1,
                       color: '#071317',
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: '14px',
                     }}
@@ -154,7 +154,7 @@ export default function Footer() {
                     sx={{
                       mx: 1,
                       color: '#071317',
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: '14px',
                     }}
@@ -166,7 +166,7 @@ export default function Footer() {
                     sx={{
                       mx: 1,
                       color: '#071317',
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: '14px',
                     }}
@@ -178,7 +178,7 @@ export default function Footer() {
                     sx={{
                       mx: 1,
                       color: '#071317',
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: '14px',
                     }}
@@ -190,7 +190,7 @@ export default function Footer() {
                     sx={{
                       mx: 1,
                       color: '#071317',
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: '14px',
                     }}
@@ -202,7 +202,7 @@ export default function Footer() {
                     sx={{
                       mx: 1,
                       color: '#071317',
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: '14px',
                     }}
@@ -214,7 +214,7 @@ export default function Footer() {
                     sx={{
                       mx: 1,
                       color: '#071317',
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: '14px',
                     }}

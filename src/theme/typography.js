@@ -23,7 +23,7 @@ export function responsiveFontSizes({ sm, md, lg }) {
 }
 
 // const primaryFont = 'Public Sans, sans-serif'; // Google Font
-const primaryFont = 'Playfair Display';
+const primaryFont = 'Satoshi Variable';
 // const secondaryFont = 'CircularStd, sans-serif'; // Local Font
 
 // ----------------------------------------------------------------------
@@ -41,28 +41,28 @@ export const typography = {
     ...responsiveFontSizes({ sm: 28, md: 58, lg: 42 }),
   },
   h2: {
-    fontFamily: 'Playfair Display, sans-serif',
+    fontFamily: 'Satoshi Variable',
     fontWeight: 500,
     lineHeight: pxToRem(57),
     fontSize: pxToRem(38),
     ...responsiveFontSizes({ sm: 28, md: 38, lg: 38 }),
   },
   h3: {
-    fontFamily: 'Playfair Display, sans-serif',
+    fontFamily: 'Satoshi Variable',
     fontWeight: 500,
     lineHeight: pxToRem(48),
     fontSize: pxToRem(32),
     ...responsiveFontSizes({ sm: 26, md: 30, lg: 32 }),
   },
   h4: {
-    fontFamily: 'Playfair Display, sans-serif',
+    fontFamily: 'Satoshi Variable',
     fontWeight: 700,
     lineHeight: pxToRem(39),
     fontSize: pxToRem(26),
     ...responsiveFontSizes({ sm: 20, md: 24, lg: 24 }),
   },
   h5: {
-    fontFamily: 'Playfair Display, sans-serif',
+    fontFamily: 'Satoshi Variable',
     fontWeight: 700,
     lineHeight: pxToRem(33),
     fontSize: pxToRem(22),
@@ -100,12 +100,12 @@ export const typography = {
     fontSize: pxToRem(14),
   },
   body4: {
-    fontFamily: 'Satoshi Variable, sans-serif',
+    fontFamily: 'Satoshi Variable',
     lineHeight: pxToRem(18),
     fontSize: pxToRem(12),
   },
   body5: {
-    fontFamily: 'Satoshi Variable, sans-serif',
+    fontFamily: 'Satoshi Variable',
     lineHeight: pxToRem(15),
     fontSize: pxToRem(10),
   },
@@ -120,7 +120,7 @@ export const typography = {
     textTransform: 'uppercase',
   },
   button: {
-    fontFamily: 'Satoshi Variable, sans-serif',
+    fontFamily: 'Satoshi Variable',
     fontWeight: 500,
     lineHeight: 24 / 14,
     fontSize: pxToRem(14),

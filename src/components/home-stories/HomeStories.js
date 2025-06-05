@@ -254,7 +254,7 @@ export default function HomeStories({ homeStories }) {
               </Typography>
               <Typography
                 sx={{
-                  fontFamily: 'Playfair Display',
+                  fontFamily: 'Satoshi Variable',
                   fontSize: 18,
                   fontStyle: 'italic',
                   color: '#18191B',
@@ -505,7 +505,7 @@ export default function HomeStories({ homeStories }) {
                 {/* Name & Location */}
                 <Typography
                   sx={{
-                    fontFamily: 'Playfair Display',
+                    fontFamily: 'Satoshi Variable',
                     fontSize: {
                       xs: 16,
                       sm: 18,

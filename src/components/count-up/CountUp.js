@@ -41,7 +41,7 @@ export default function CountUpSection({ statsSection }) {
         <Typography
           variant="h1"
           align="center"
-          fontFamily="Playfair Display"
+          fontFamily="Satoshi Variable"
           color="#18191B"
           gutterBottom
         >
@@ -56,7 +56,7 @@ export default function CountUpSection({ statsSection }) {
             lineHeight: 1.5,
             mb: { xs: 5, md: 8 },
             pt: 1,
-            fontFamily: 'Satoshi Variable, sans-serif',
+            fontFamily: 'Satoshi Variable',
           }}
         >
           {statsSection?.SubHeading}
@@ -110,7 +110,7 @@ export default function CountUpSection({ statsSection }) {
                   sx={{
                     color: '#AF9469',
                     fontWeight: 500,
-                    fontFamily: 'Satoshi Variable, sans-serif',
+                    fontFamily: 'Satoshi Variable',
                     fontSize: { xs: 48, md: 96 },
                     lineHeight: 1,
                     letterSpacing: 0,
@@ -123,7 +123,7 @@ export default function CountUpSection({ statsSection }) {
                   sx={{
                     color: '#AF9469',
                     fontWeight: 200,
-                    fontFamily: 'Satoshi Variable, sans-serif',
+                    fontFamily: 'Satoshi Variable',
                     fontSize: { xs: 24, md: 48 },
                     lineHeight: 1,
                     ml: 0,
@@ -138,7 +138,7 @@ export default function CountUpSection({ statsSection }) {
                 align="center"
                 sx={{
                   color: '#5C6170',
-                  fontFamily: 'Satoshi Variable, sans-serif',
+                  fontFamily: 'Satoshi Variable',
                   fontWeight: 500,
                   fontSize: { xs: 14, md: 20 },
                   letterSpacing: 0,

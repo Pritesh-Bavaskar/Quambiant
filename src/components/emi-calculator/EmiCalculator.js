@@ -74,7 +74,7 @@ export default function EmiCalculatorSection() {
                     {/* <ApartmentIcon fontSize="small" /> */}
                     <Typography
                       sx={{
-                        fontFamily: 'Satoshi Variable, sans-serif',
+                        fontFamily: 'Satoshi Variable',
                         fontWeight: 500,
                         fontSize: { xs: '18px', sm: '20px' },
                       }}
@@ -85,7 +85,7 @@ export default function EmiCalculatorSection() {
 
                   <Typography
                     sx={{
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 700,
                       fontSize: { xs: '18px', sm: '20px' },
                       textAlign: 'right',
@@ -163,7 +163,7 @@ export default function EmiCalculatorSection() {
                     <Grid item xs={6}>
                       <Typography
                         sx={{
-                          fontFamily: 'Satoshi Variable, sans-serif',
+                          fontFamily: 'Satoshi Variable',
                           fontWeight: 500,
                           fontSize: { xs: '18px', sm: '20px' },
                           textAlign: 'left',
@@ -190,7 +190,7 @@ export default function EmiCalculatorSection() {
                           fontSize: '0.875rem', // matches `size="small"` TextField
                           color: '#5C5C70',
                           WebkitTextFillColor: '#5C5C70 !important',
-                          fontFamily: 'Satoshi Variable, sans-serif',
+                          fontFamily: 'Satoshi Variable',
                           lineHeight: 1.43,
                           cursor: 'default',
                           textAlign: 'right',
@@ -235,7 +235,7 @@ export default function EmiCalculatorSection() {
                     <Grid item xs={6}>
                       <Typography
                         sx={{
-                          fontFamily: 'Satoshi Variable, sans-serif',
+                          fontFamily: 'Satoshi Variable',
                           fontWeight: 500,
                           fontSize: { xs: '18px', sm: '20px' },
                           textAlign: 'left',
@@ -262,7 +262,7 @@ export default function EmiCalculatorSection() {
                           fontSize: '0.875rem', // matches `size="small"` TextField
                           color: '#5C5C70',
                           WebkitTextFillColor: '#5C5C70 !important',
-                          fontFamily: 'Satoshi Variable, sans-serif',
+                          fontFamily: 'Satoshi Variable',
                           lineHeight: 1.43,
                           cursor: 'default',
                           textAlign: 'right',
@@ -307,7 +307,7 @@ export default function EmiCalculatorSection() {
                     <Grid item xs={6}>
                       <Typography
                         sx={{
-                          fontFamily: 'Satoshi Variable, sans-serif',
+                          fontFamily: 'Satoshi Variable',
                           fontWeight: 500,
                           fontSize: { xs: '18px', sm: '20px' },
                           textAlign: 'left',
@@ -334,7 +334,7 @@ export default function EmiCalculatorSection() {
                           fontSize: '0.875rem', // matches `size="small"` TextField
                           color: '#5C5C70',
                           WebkitTextFillColor: '#5C5C70 !important',
-                          fontFamily: 'Satoshi Variable, sans-serif',
+                          fontFamily: 'Satoshi Variable',
                           lineHeight: 1.43,
                           cursor: 'default',
                           textAlign: 'right',
@@ -388,7 +388,7 @@ export default function EmiCalculatorSection() {
                       variant="body1"
                       color="#000"
                       sx={{
-                        fontFamily: 'Satoshi Variable, sans-serif',
+                        fontFamily: 'Satoshi Variable',
                         fontWeight: 500,
                         fontSize: { xs: '18px', sm: '20px' },
                         textAlign: { xs: 'left', sm: 'left' },
@@ -400,7 +400,7 @@ export default function EmiCalculatorSection() {
                   <Grid item xs={12} sm={6}>
                     <Typography
                       sx={{
-                        fontFamily: 'Satoshi Variable, sans-serif',
+                        fontFamily: 'Satoshi Variable',
                         fontWeight: 500,
                         color: '#936F4A',
                         fontSize: '32px',

@@ -238,7 +238,7 @@ const TimelineItem = ({
               <Typography
                 // variant="h3"
                 sx={{
-                  fontFamily: 'Satoshi Variable, sans-serif',
+                  fontFamily: 'Satoshi Variable',
                   fontWeight: 700,
                   fontSize: { xs: '18px', md: '32px' },
                   mb: 2,
@@ -254,7 +254,7 @@ const TimelineItem = ({
                   color: 'text.secondary',
                   // lineHeight: 1.8,
                   fontWeight: 500,
-                  fontFamily: 'Satoshi Variable, sans-serif',
+                  fontFamily: 'Satoshi Variable',
                   fontSize: { xs: '14px', md: '20px' },
                 }}
               >
@@ -676,7 +676,7 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
                 <Typography
                   variant="h2"
                   sx={{
-                    fontFamily: 'Playfair Display, serif',
+                    fontFamily: 'Satoshi Variable',
                     fontWeight: 500,
                     fontSize: { xs: '28px', md: '42px' },
                     color: '#18191B',
@@ -691,7 +691,7 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
                   sx={{
                     color: '#5C6170',
                     fontSize: { xs: '14px', md: '20px' },
-                    fontFamily: 'Satoshi Variable, sans-serif',
+                    fontFamily: 'Satoshi Variable',
                     lineHeight: '1.2',
                     maxWidth: 900,
                     mt: 2,
@@ -793,7 +793,7 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
                 <Typography
                   variant="h2"
                   sx={{
-                    fontFamily: 'Playfair Display, serif',
+                    fontFamily: 'Satoshi Variable',
                     fontWeight: 500,
                     fontSize: { xs: '28px', md: '42px' },
                     color: '#18191B',
@@ -808,7 +808,7 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
                   sx={{
                     color: '#5C6170',
                     fontSize: { xs: '14px', md: '20px' },
-                    fontFamily: 'Satoshi Variable, sans-serif',
+                    fontFamily: 'Satoshi Variable',
                     lineHeight: '1.2',
                     maxWidth: 900,
                     mt: 2,

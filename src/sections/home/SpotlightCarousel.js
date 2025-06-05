@@ -252,7 +252,7 @@ export default function SpotlightCarousel({ spotlight }) {
                     color: '#DDAB76',
                     mb: 0.5,
                     display: 'block',
-                    fontFamily: 'Satoshi, sans-serif',
+                    fontFamily: 'Satoshi Variable',
                     fontWeight: 700,
                     fontSize: { md: '14px', xs: '12px' },
                   }}
@@ -263,7 +263,7 @@ export default function SpotlightCarousel({ spotlight }) {
                   sx={{
                     fontWeight: 700,
                     fontSize: { md: '20px', xs: '18px' },
-                    fontFamily: 'Satoshi, sans-serif',
+                    fontFamily: 'Satoshi Variable',
                     mb: 1,
                   }}
                 >
@@ -274,7 +274,7 @@ export default function SpotlightCarousel({ spotlight }) {
                     fontWeight: 400,
                     color: '#333333',
                     fontSize: '14px',
-                    fontFamily: 'Satoshi, sans-serif',
+                    fontFamily: 'Satoshi Variable',
                     lineHeight: '1.4',
                   }}
                 >

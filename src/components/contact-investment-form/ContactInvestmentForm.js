@@ -32,7 +32,7 @@ export default function ContactInvestmentForm() {
           mb: 1,
           textAlign: 'center',
           fontSize: { xs: 28, md: 42 },
-          fontFamily: 'Playfair Display',
+          fontFamily: 'Satoshi Variable',
           color: '#18191B',
         }}
       >
@@ -43,7 +43,7 @@ export default function ContactInvestmentForm() {
           textAlign: 'center',
           mb: 6,
           color: '#5C6170',
-          fontFamily: 'Satoshi Variable, sans-serif',
+          fontFamily: 'Satoshi Variable',
           fontWeight: 500,
           fontSize: { xs: 14, md: 20 },
         }}
@@ -59,7 +59,7 @@ export default function ContactInvestmentForm() {
             sx={{
               mb: 3,
               display: { xs: 'none', md: 'block' },
-              fontFamily: 'Playfair Display',
+              fontFamily: 'Satoshi Variable',
               fontWeight: 500,
               fontSize: 32,
               color: '#18191B',
@@ -82,12 +82,12 @@ export default function ContactInvestmentForm() {
                       borderBottomColor: '#D9CBBA',
                     },
                     '& input': {
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: { xs: '14px', md: '16px' },
                     },
                     '& .MuiInputLabel-root': {
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: { xs: '14px', md: '16px' },
                     },
@@ -109,12 +109,12 @@ export default function ContactInvestmentForm() {
                       borderBottomColor: '#D9CBBA',
                     },
                     '& input': {
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: { xs: '14px', md: '16px' },
                     },
                     '& .MuiInputLabel-root': {
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: { xs: '14px', md: '16px' },
                     },
@@ -136,12 +136,12 @@ export default function ContactInvestmentForm() {
                       borderBottomColor: '#D9CBBA',
                     },
                     '& input': {
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: { xs: '14px', md: '16px' },
                     },
                     '& .MuiInputLabel-root': {
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: { xs: '14px', md: '16px' },
                     },
@@ -163,12 +163,12 @@ export default function ContactInvestmentForm() {
                       borderBottomColor: '#D9CBBA',
                     },
                     '& input': {
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: { xs: '14px', md: '16px' },
                     },
                     '& .MuiInputLabel-root': {
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: { xs: '14px', md: '16px' },
                     },
@@ -192,12 +192,12 @@ export default function ContactInvestmentForm() {
                       borderBottomColor: '#D9CBBA',
                     },
                     '& textarea': {
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: { xs: '14px', md: '16px' },
                     },
                     '& .MuiInputLabel-root': {
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: { xs: '14px', md: '16px' },
                     },
@@ -222,12 +222,12 @@ export default function ContactInvestmentForm() {
                       borderBottomColor: '#D9CBBA',
                     },
                     '& .MuiInputBase-input': {
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: { xs: '14px', md: '16px' },
                     },
                     '& .MuiInputLabel-root': {
-                      fontFamily: 'Satoshi Variable, sans-serif',
+                      fontFamily: 'Satoshi Variable',
                       fontWeight: 500,
                       fontSize: { xs: '14px', md: '16px' },
                     },
@@ -263,10 +263,15 @@ export default function ContactInvestmentForm() {
         </Grid>
 
         {/* Right Side: Info */}
-        <Grid item xs={12} md={5} sx={{ 
-          textAlign: { xs: 'center', md: 'left' },
-          px: { xs: 0, md: 2 },
-        }}>
+        <Grid
+          item
+          xs={12}
+          md={5}
+          sx={{
+            textAlign: { xs: 'center', md: 'left' },
+            px: { xs: 0, md: 2 },
+          }}
+        >
           <Box
             sx={{
               backgroundColor: '#fff',
@@ -281,7 +286,7 @@ export default function ContactInvestmentForm() {
             <Typography
               variant="h5"
               sx={{
-                fontFamily: 'Satoshi Variable, sans-serif',
+                fontFamily: 'Satoshi Variable',
                 fontWeight: 500,
                 fontSize: '20px',
                 color: '#000',
@@ -299,7 +304,7 @@ export default function ContactInvestmentForm() {
                     color: '#5C6170',
                     fontWeight: 500,
                     fontSize: '14px',
-                    fontFamily: 'Satoshi Variable, sans-serif',
+                    fontFamily: 'Satoshi Variable',
                   }}
                 >
                   Email
@@ -309,7 +314,7 @@ export default function ContactInvestmentForm() {
                     color: '#231609',
                     fontWeight: 500,
                     fontSize: '16px',
-                    fontFamily: 'Satoshi Variable, sans-serif',
+                    fontFamily: 'Satoshi Variable',
                   }}
                 >
                   investors@yourambient.com
@@ -326,7 +331,7 @@ export default function ContactInvestmentForm() {
                     color: '#5C6170',
                     fontWeight: 500,
                     fontSize: '14px',
-                    fontFamily: 'Satoshi Variable, sans-serif',
+                    fontFamily: 'Satoshi Variable',
                   }}
                 >
                   Phone
@@ -336,7 +341,7 @@ export default function ContactInvestmentForm() {
                     color: '#231609',
                     fontWeight: 500,
                     fontSize: '16px',
-                    fontFamily: 'Satoshi Variable, sans-serif',
+                    fontFamily: 'Satoshi Variable',
                   }}
                 >
                   +1(958) 123-4567
@@ -353,7 +358,7 @@ export default function ContactInvestmentForm() {
                     color: '#5C6170',
                     fontWeight: 500,
                     fontSize: '14px',
-                    fontFamily: 'Satoshi Variable, sans-serif',
+                    fontFamily: 'Satoshi Variable',
                   }}
                 >
                   Office
@@ -363,7 +368,7 @@ export default function ContactInvestmentForm() {
                     color: '#231609',
                     fontWeight: 500,
                     fontSize: '16px',
-                    fontFamily: 'Satoshi Variable, sans-serif',
+                    fontFamily: 'Satoshi Variable',
                   }}
                 >
                   123 Investment Ave, Suite 600
@@ -384,7 +389,7 @@ export default function ContactInvestmentForm() {
             >
               <Typography
                 sx={{
-                  fontFamily: 'Satoshi Variable, sans-serif',
+                  fontFamily: 'Satoshi Variable',
                   fontWeight: 500,
                   fontSize: { xs: '18px', md: '20px' },
                   color: '#FDF8F3',
@@ -395,7 +400,7 @@ export default function ContactInvestmentForm() {
               {/* <br /> */}
               <Typography
                 sx={{
-                  fontFamily: 'Satoshi Variable, sans-serif',
+                  fontFamily: 'Satoshi Variable',
                   fontWeight: 500,
                   fontSize: { xs: '16px', md: '14px' },
                   color: '#C7C9D1',

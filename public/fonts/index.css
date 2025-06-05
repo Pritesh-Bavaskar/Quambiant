@@ -18,13 +18,13 @@
   font-style: normal;
   src: local('CircularStd'), url('CircularStd-Bold.otf') format('opentype');
 }
-
+/* 
 @font-face {
   font-family: 'Playfair Display';
   src: url('PlayfairDisplay-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
-}
+} */
 
 @font-face {
   font-family: 'Satoshi Variable';

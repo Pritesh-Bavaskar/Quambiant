@@ -32,7 +32,7 @@ export default function NavItem({ item, open, active, externalLink, ...other }) 
 
       <ListItemText
         sx={{
-          fontFamily: 'Playfair Display',
+          fontFamily: 'Satoshi Variable',
           fontWeight: '500',
           fontSize: { xs: '22px', md: '44px' },
           color: '#000000',

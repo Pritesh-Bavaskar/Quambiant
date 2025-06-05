@@ -103,7 +103,7 @@ export default function UpcomingLaunchesCarousel({ upcomingLaunches }) {
           <Typography
             sx={{
               pt: 2,
-              fontFamily: 'Satoshi Variable, sans-serif',
+              fontFamily: 'Satoshi Variable',
               fontWeight: 500,
               color: '#5C6170',
               fontSize: { xs: 14, md: 20 },

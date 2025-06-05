@@ -123,7 +123,7 @@ export default function FaqsView() {
                 <Typography
                   variant="h1"
                   sx={{
-                    // fontFamily: 'Playfair Display',
+                    // fontFamily: 'Satoshi Variable',
                     paddingTop: { xs: '15%', md: '8%' },
                     color: '#FAFAFA',
                     // fontWeight: 500,
