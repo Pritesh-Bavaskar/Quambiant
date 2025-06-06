@@ -97,14 +97,14 @@ export default function Footer() {
             sx={{
               ...styles.quambiant,
               position: 'relative',
-              cursor: 'pointer ',
+              cursor: 'default',
               pt: { xs: 3, md: 5 },
             }}
           >
             Quambiant
           </Typography>
 
-          {isHovering && (
+          {/* {isHovering && (
             <>
               <Box
                 sx={{
@@ -224,7 +224,6 @@ export default function Footer() {
                 </Box>
               </Box>
 
-              {/* Inject keyframes */}
               <style>
                 {`
               @keyframes scrollText {
@@ -238,7 +237,7 @@ export default function Footer() {
             `}
               </style>
             </>
-          )}
+          )} */}
         </Box>
         <Divider
           sx={{

@@ -209,7 +209,7 @@ export default function LaunchCard({ project }) {
           sx={{
             fontWeight: 500,
             fontSize: { xs: 24, sm: 32 },
-            fontFamily: 'playfair display',
+            fontFamily: 'Satoshi Variable',
             color: '#18191B',
             mb: { xs: 1, sm: 0 },
           }}
