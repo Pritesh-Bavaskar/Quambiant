@@ -2,7 +2,7 @@ import React, { useRef, forwardRef } from 'react';
 import { Grid, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
 import { m, useScroll, useTransform, motionValue } from 'framer-motion';
-import ImageBox from './ImageBox'
+import ImageBox from './ImageBox';
 
 export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data }) {
   const theme = useTheme();
@@ -30,7 +30,7 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
   const imageOpacity1 = useTransform(scrollYProgress, [0.15, 0.25], [0, 1]);
   const imageOpacity2 = useTransform(scrollYProgress, [0.0, 0.1], [0, 1]);
   const imageOpacity3 = useTransform(scrollYProgress, [0.2, 0.3], [0, 1]);
-  const imageOpacity4 = useTransform(scrollYProgress, [0.3, 0.4], [0, 1]); // used later
+  const imageOpacity4 = useTransform(scrollYProgress, [0.3, 0.4], [0, 1]);
 
   const titleBlockScale = fifthItemScale || defaultScale;
   const fallbackTitleBlockOpacity = useTransform(scrollYProgress, [0.4, 0.5], [0, 1]);
@@ -169,8 +169,8 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
                 zIndex: 20,
                 margin: spacingAnimation,
                 scale: titleBlockScale,
-                opacity: titleBlockOpacity,
-                transformOrigin: 'center 75%',
+                opacity: fifthItemOpacity,
+                transformOrigin: 'center 50%', // Changed from 75% to 65% to be slightly more centered
                 willChange: 'transform, opacity',
               }}
             >

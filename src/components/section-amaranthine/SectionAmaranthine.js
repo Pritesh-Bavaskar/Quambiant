@@ -1,11 +1,9 @@
 import { Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
-import { useScroll, useTransform, m, useMotionValue } from 'framer-motion';
+import { useScroll, useTransform, m } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import AmaranthineGrid from './AmaranthineGrid';
 import AmaranthineCard from './AmaranthineCard';
-import FirstGridLine from './FirstGridLine';
-import SecondGridLine from './SecondGridLine';
 
 // Separate component for animated words to properly use hooks
 const AnimatedWord = ({ word, index, totalWords }) => {
@@ -64,56 +62,81 @@ export function SectionAmaranthine({ projectShowcase }) {
     mid1: 0.6,
     mid2: 0.65,
     mid3: 0.7,
-    end: 0.8,
+    end: 0.95, // Push the end transition much later
   };
 
-  // Fifth grid item animations
   const fifthItemScale = useTransform(
-    scrollYProgress,
-    [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
-    [1, 1.2, 1.4, 1.6, 1.8]
-  );
-  const fifthItemScaleY = useTransform(
     scrollYProgress,
     [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
     [1, 1.1, 1.2, 1.3, 1.4]
   );
+
   const fifthItemOpacity = useTransform(
     scrollYProgress,
     [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
-    [1, 0.6, 0.4, 0.2, 0]
+    [1, 0.9, 0.6, 0.4, 0]
+  );
+
+  const fifthItemDivScale = useTransform(
+    scrollYProgress,
+    [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
+    [1, 1.1, 1.2, 1.3, 1.4]
+  );
+
+  const fifthItemDivOpacity = useTransform(
+    scrollYProgress,
+    [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
+    [1, 0.9, 0.6, 0.4, 0]
   );
 
   // Card animations - zoom out from fifth item to full screen
   const cardOpacity = useTransform(
     scrollYProgress,
-    [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
-    [0, 0.3, 0.7, 0.9, 1]
+    [transition.mid1, transition.mid1, transition.mid2, transition.mid3, transition.end],
+    [0, 0, 0.2, 0.8, 1] // No fade out at transition.end
   );
 
-  // Scale from small (behind grid) to full screen
-  const cardScaleX = useTransform(
+  const cardScale = useTransform(
     scrollYProgress,
-    [transition.start, transition.mid1, transition.mid2, transition.end],
-    [0.2, 0.4, 0.8, 1] // Scale X from 20% to 120%
-  );
-
-  const cardScaleY = useTransform(
-    scrollYProgress,
-    [transition.start, transition.mid1, transition.mid2, transition.end],
-    [0.2, 0.4, 0.8, 1] // Scale Y from 20% to 120%
-  );
-
-  // Position transform - start from center of fifth grid item
-  const cardTransform = useTransform(
-    scrollYProgress,
-    [transition.start, transition.mid1, transition.mid2, transition.end],
     [
-      'translate(-50%, -50%) scale(0.2)', // Start small
-      'translate(-50%, -50%) scale(0.4)', // Grow slightly
-      'translate(-50%, -50%) scale(1)', // Reach normal size
-      'translate(-50%, -50%) scale(1.2)', // Slightly larger than viewport
-    ]
+      transition.mid1,
+      transition.mid1,
+      transition.mid2,
+      // transition.mid2,
+      transition.mid3,
+      // transition.mid3,
+      transition.end,
+      // transition.end,
+    ],
+    [
+      0.1, 0.2, 0.3,
+      //  0.4,
+      0.5,
+      //  0.7,
+      // 0.8,
+      1,
+    ] // Maintain full scale
+  );
+
+  // Position transform - animate from center of fifth grid item to top
+  const cardTranslateY = useTransform(
+    scrollYProgress,
+    [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
+    ['-20%', '-10%', '0%', '0%', '0%'] // No movement at the end
+  );
+
+  // Position transform - animate from center of fifth grid item to top
+  const cardTranslateX = useTransform(
+    scrollYProgress,
+    [transition.start, transition.mid1, transition.mid2, transition.mid3, transition.end],
+    ['-20%', '-10%', '0%', '0%', '0%'] // No movement at the end
+  );
+  // Track if we've passed the transition point
+  const hasCompletedTransition = useTransform(
+    scrollYProgress,
+    [transition.end, transition.end + 0.01],
+    [0, 1],
+    { clamp: false }
   );
 
   // For mobile view (unchanged)
@@ -168,6 +191,11 @@ export function SectionAmaranthine({ projectShowcase }) {
   const cardScaleMobile = useTransform(scrollYProgress, [0, 0.6, 0.8], [0, 1, 1]);
 
   const headingWords = projectShowcase?.Heading?.split(' ') || [];
+  const cardClipPath = useTransform(
+    scrollYProgress,
+    [transition.mid1, transition.end],
+    ['inset(40% 40% 40% 40%)', 'inset(0% 0% 0% 0%)']
+  );
 
   if (isDesktop) {
     return (
@@ -175,7 +203,7 @@ export function SectionAmaranthine({ projectShowcase }) {
         {/* First Section - Intro */}
         <Box
           sx={{
-            height: '100vh',
+            height: '50vh',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
@@ -218,27 +246,25 @@ export function SectionAmaranthine({ projectShowcase }) {
             {projectShowcase?.SubHeading}
           </Typography>
         </Box>
-
         {/* Sticky Grid Container */}
         <Box
           sx={{
             position: 'sticky',
-            top: '-27vh',
-            height: '60vh',
+            top: '-30vh',
+            height: '100vh',
             zIndex: 0,
           }}
         >
           <m.div style={{ opacity: gridOpacity, scale: gridScale }}>
-            <FirstGridLine data={projectShowcase} />
-            {/* <AmaranthineGrid
+            <AmaranthineGrid
               fifthItemScale={fifthItemScale}
-              fifthItemScaleY={fifthItemScaleY}
               fifthItemOpacity={fifthItemOpacity}
               data={projectShowcase}
-            /> */}
+            />
+            {/* <FirstGridLine data={projectShowcase} /> */}
           </m.div>
         </Box>
-        <Box
+        {/* <Box
           sx={{
             position: 'sticky',
             top: '25vh',
@@ -249,36 +275,37 @@ export function SectionAmaranthine({ projectShowcase }) {
           <m.div style={{ opacity: gridOpacity, scale: gridScale }}>
             <SecondGridLine fifthItemScale={fifthItemScale} data={projectShowcase} />
           </m.div>
-        </Box>
-
+        </Box> */}
         {/* Spacer to ensure scroll */}
-        <Box sx={{ height: '100vh' }} />
-
+        <Box sx={{ height: '200vh' }} />
         {/* Parallax Card Section */}
         <Box
           sx={{
-            position: 'absolute',
-            top: '100vh',
+            position: 'sticky',
+            top: 0,
             left: 0,
             width: '100%',
-            minHeight: '100vh',
-            height: 'auto',
+            height: '100vh',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             pointerEvents: 'none',
             zIndex: 15,
+            marginTop: '-100vh',
+            overflow: 'hidden',
           }}
         >
+          {/* Wrapper that initially clips to the fifth grid area */}
           <m.div
             style={{
-              width: '100%',
-              height: '100%',
               opacity: cardOpacity,
-              scaleX: cardScaleX,
-              scaleY: cardScaleY,
+              scale: cardScale,
+              clipPath: cardClipPath,
               transformOrigin: 'center center',
-              position: 'relative',
+              position: 'absolute',
+              width: '100%',
+              height: '100vh',
+              willChange: 'transform, opacity, clip-path',
             }}
           >
             <div ref={cardRef} style={{ width: '100%', height: '100%' }}>
@@ -374,8 +401,7 @@ export function SectionAmaranthine({ projectShowcase }) {
             position: 'sticky',
             top: 0,
             opacity: cardOpacityMobile,
-            scaleX: cardScaleX,
-            scaleY: cardScaleY,
+            scale: mobileCardScaleX, // Using mobileCardScaleX for both X and Y scaling
             transformOrigin: 'center 45%',
             height: '100vh',
             display: 'flex',
