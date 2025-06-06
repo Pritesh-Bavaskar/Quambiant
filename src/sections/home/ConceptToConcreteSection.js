@@ -509,7 +509,7 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
     let lastScrollY = window.scrollY;
     let scrollTimer;
     const SCROLL_DEBOUNCE_TIME = 200; // slows response to scroll
-    const MIN_SCROLL_DELTA = 820; // needs a bigger scroll to change slide
+    const MIN_SCROLL_DELTA = 420; // needs a bigger scroll to change slide
     const STICKY_OFFSET = 10;
 
     const handleScroll = () => {
@@ -861,7 +861,7 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
                   borderRadius: 1,
                   minHeight: '4px',
                   zIndex: 3,
-                  transition: 'height 0.5s cubic-bezier(0.25, 0.1, 0.25, 1.0)',
+                  transition: 'height 1s cubic-bezier(0.25, 0.1, 0.25, 1.0)',
                   boxShadow: '0 1px 3px rgba(0,0,0,0.0)',
                 }}
               />
