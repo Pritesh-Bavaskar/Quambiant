@@ -251,11 +251,11 @@ export function SectionAmaranthine({ projectShowcase }) {
           sx={{
             position: 'sticky',
             top: { xs: '-30vh', lg: '-50vh' }, // -30vh for screens up to 1280px, -50vh for larger screens
-            height: '100vh',
+            height: '150vh',
             zIndex: 0,
             '@media (min-width: 1280px) and (max-width: 1440px)': {
-              top: '-30vh' // Specific adjustment for 1280x720 screens
-            }
+              top: '-30vh', // Specific adjustment for 1280x720 screens
+            },
           }}
         >
           <m.div style={{ opacity: gridOpacity, scale: gridScale }}>
@@ -280,7 +280,7 @@ export function SectionAmaranthine({ projectShowcase }) {
           </m.div>
         </Box> */}
         {/* Spacer to ensure scroll */}
-        <Box sx={{ height: '200vh' }} />
+        {/* <Box sx={{ height: '200vh' }} /> */}
         {/* Parallax Card Section */}
         <Box
           sx={{
@@ -294,8 +294,8 @@ export function SectionAmaranthine({ projectShowcase }) {
             justifyContent: 'center',
             pointerEvents: 'none',
             zIndex: 15,
-            marginTop: '-100vh',
-            overflow: 'hidden',
+            // marginTop: '-100vh',
+            // overflow: 'hidden',
           }}
         >
           {/* Wrapper that initially clips to the fifth grid area */}
