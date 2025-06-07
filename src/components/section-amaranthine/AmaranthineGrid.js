@@ -1,10 +1,10 @@
 import React, { useRef, forwardRef } from 'react';
 import { Grid, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
-import { m, useScroll, useTransform, motionValue } from 'framer-motion';
+import { m, useScroll, useTransform } from 'framer-motion';
 import ImageBox from './ImageBox';
 
-export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data }) {
+export default function AmaranthineGrid({ data }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const ref = useRef(null);
@@ -34,7 +34,7 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
   const imageOpacity3 = useTransform(scrollYProgress, [0.3, 0.4], [0, 1]);
   const imageOpacity4 = useTransform(scrollYProgress, [0.3, 0.4], [0, 1]);
 
-  const titleBlockScale = fifthItemScale || defaultScale;
+  const titleBlockScale = defaultScale;
   const fallbackTitleBlockOpacity = useTransform(scrollYProgress, [0.4, 0.5], [0, 1]);
   const titleBlockOpacity = fallbackTitleBlockOpacity;
 
@@ -171,7 +171,7 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
                 zIndex: 20,
                 margin: spacingAnimation2,
                 scale: titleBlockScale,
-                opacity: fifthItemOpacity,
+                opacity: 1,
                 transformOrigin: 'center 50%', // Changed from 75% to 65% to be slightly more centered
                 willChange: 'transform, opacity',
               }}
@@ -214,7 +214,5 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
 }
 
 AmaranthineGrid.propTypes = {
-  fifthItemScale: PropTypes.object,
-  fifthItemOpacity: PropTypes.object,
   data: PropTypes.object,
 };

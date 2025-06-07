@@ -199,7 +199,7 @@ export function SectionAmaranthine({ projectShowcase }) {
 
   if (isDesktop) {
     return (
-      <Box ref={containerRef} sx={{ position: 'relative', height: '500vh' }}>
+      <Box ref={containerRef} sx={{ position: 'relative', height: '50vh' }}>
         {/* First Section - Intro */}
         <Box
           sx={{
@@ -259,11 +259,11 @@ export function SectionAmaranthine({ projectShowcase }) {
           }}
         >
           <m.div style={{ opacity: gridOpacity, scale: gridScale }}>
-            <AmaranthineGrid
+            {/* <AmaranthineGrid
               fifthItemScale={fifthItemScale}
               fifthItemOpacity={fifthItemOpacity}
               data={projectShowcase}
-            />
+            /> */}
             {/* <FirstGridLine data={projectShowcase} /> */}
           </m.div>
         </Box>
@@ -312,7 +312,7 @@ export function SectionAmaranthine({ projectShowcase }) {
             }}
           >
             <div ref={cardRef} style={{ width: '100%', height: '100%' }}>
-              <AmaranthineCard scrollYProgress={scrollYProgress} data={projectShowcase} />
+              {/* <AmaranthineCard scrollYProgress={scrollYProgress} data={projectShowcase} /> */}
             </div>
           </m.div>
         </Box>

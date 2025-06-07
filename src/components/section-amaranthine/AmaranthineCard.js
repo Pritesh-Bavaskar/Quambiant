@@ -1,7 +1,8 @@
+import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Grid, Typography, Card, CardContent, CardMedia, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { m, useTransform } from 'framer-motion';
+import { m, useTransform, useScroll } from 'framer-motion';
 import backgroundImage from 'src/assets/media/landing/card/bck-img.png';
 import img1 from 'src/assets/media/landing/card/card-img1.png';
 import img2 from 'src/assets/media/landing/card/card-img2.png';
@@ -36,11 +37,17 @@ CustomArrow.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function AmaranthineHighlightSection({ scrollYProgress, data }) {
+export default function AmaranthineHighlightSection({ data }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const containerRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
 
   const cards = (data?.StoryCard || []).map((card) => ({
     image: card?.Image?.url ? `${process.env.REACT_APP_HOST_API}${card.Image.url}` : img1, // Fallback to img1 if no image

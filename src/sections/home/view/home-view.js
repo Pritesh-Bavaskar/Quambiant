@@ -3,6 +3,7 @@ import { useScroll } from 'framer-motion';
 import ScrollProgress from 'src/components/scroll-progress';
 //
 import HomeStories from 'src/components/home-stories/HomeStories';
+import AmaranthineGrid from 'src/components/section-amaranthine/AmaranthineGrid';
 import SpotlightCarousel from 'src/sections/home/SpotlightCarousel';
 import BuildGreenSection from 'src/sections/home/BuildGreenSection';
 import AwardsSection from 'src/components/award-section/AwardsSection';
@@ -37,6 +38,8 @@ export default function HomeView() {
       <CountUpSection statsSection={filteredHomepage?.data?.StatsSection} />
 
       <SectionAmaranthine projectShowcase={filteredHomepage?.data?.ProjectShowcase} />
+
+      <AmaranthineGrid data={filteredHomepage?.data?.ProjectShowcase} />
 
       <ConceptToConcreteSection
         conceptToConcreteSection={filteredHomepage?.data?.TimelineSection}
