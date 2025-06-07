@@ -23,13 +23,15 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
   ];
 
   const defaultScale = useTransform(scrollYProgress, [0.7, 1], [1, 1.2]);
-  const spacingAnimation = useTransform(scrollYProgress, [0.4, 0.8], [8, 24]);
+  const spacingAnimation = useTransform(scrollYProgress, [0.2, 0.6], [1, 20]);
+  const spacingAnimation2 = useTransform(scrollYProgress, [0.4, 0.6], [1, 20]);
   const paddingAnimation = useTransform(scrollYProgress, [0.4, 0.8], [0, 8]);
+  const paddingAnimation2 = useTransform(scrollYProgress, [0.6, 0.8], [0, 8]);
   const gridOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
   const imageOpacity0 = useTransform(scrollYProgress, [0.0, 0.1], [0, 1]);
   const imageOpacity1 = useTransform(scrollYProgress, [0.15, 0.25], [0, 1]);
   const imageOpacity2 = useTransform(scrollYProgress, [0.0, 0.1], [0, 1]);
-  const imageOpacity3 = useTransform(scrollYProgress, [0.2, 0.3], [0, 1]);
+  const imageOpacity3 = useTransform(scrollYProgress, [0.3, 0.4], [0, 1]);
   const imageOpacity4 = useTransform(scrollYProgress, [0.3, 0.4], [0, 1]);
 
   const titleBlockScale = fifthItemScale || defaultScale;
@@ -147,7 +149,7 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
           </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <m.div style={{ margin: spacingAnimation, opacity: imageOpacity3 }}>
+            <m.div style={{ margin: spacingAnimation2, opacity: imageOpacity3 }}>
               <ImageBox src={images[3]} alt="Image 4" scrollYProgress={scrollYProgress} />
             </m.div>
           </Grid>
@@ -167,7 +169,7 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
               style={{
                 position: 'relative',
                 zIndex: 20,
-                margin: spacingAnimation,
+                margin: spacingAnimation2,
                 scale: titleBlockScale,
                 opacity: fifthItemOpacity,
                 transformOrigin: 'center 50%', // Changed from 75% to 65% to be slightly more centered
@@ -201,7 +203,7 @@ export default function AmaranthineGrid({ fifthItemScale, fifthItemOpacity, data
 
           {/* Last image (image[4]) */}
           <Grid item xs={12} sm={6} md={4}>
-            <m.div style={{ margin: spacingAnimation, opacity: imageOpacity4 }}>
+            <m.div style={{ margin: spacingAnimation2, opacity: imageOpacity4 }}>
               <ImageBox src={images[4]} alt="Image 6" scrollYProgress={scrollYProgress} />
             </m.div>
           </Grid>

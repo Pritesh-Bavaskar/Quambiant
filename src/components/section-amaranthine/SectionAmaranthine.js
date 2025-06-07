@@ -250,9 +250,12 @@ export function SectionAmaranthine({ projectShowcase }) {
         <Box
           sx={{
             position: 'sticky',
-            top: '-30vh',
+            top: { xs: '-30vh', lg: '-50vh' }, // -30vh for screens up to 1280px, -50vh for larger screens
             height: '100vh',
             zIndex: 0,
+            '@media (min-width: 1280px) and (max-width: 1440px)': {
+              top: '-30vh' // Specific adjustment for 1280x720 screens
+            }
           }}
         >
           <m.div style={{ opacity: gridOpacity, scale: gridScale }}>
@@ -300,7 +303,7 @@ export function SectionAmaranthine({ projectShowcase }) {
             style={{
               opacity: cardOpacity,
               scale: cardScale,
-              clipPath: cardClipPath,
+              // clipPath: cardClipPath,
               transformOrigin: 'center center',
               position: 'absolute',
               width: '100%',
