@@ -14,6 +14,7 @@ import IntroSection from 'src/sections/home/IntroSection';
 
 // api
 import { useGetHomepageWithFilter } from 'src/api/home';
+import Box from '@mui/material/Box';
 
 import HomeHero from '../home-hero';
 import CountUpSection from '../../../components/count-up/CountUp';
@@ -22,10 +23,9 @@ import { SectionAmaranthine } from '../../../components/section-amaranthine/Sect
 
 export default function HomeView() {
   const { scrollYProgress } = useScroll();
-  const { filteredHomepage } =
-    useGetHomepageWithFilter(
-      `populate[Hero][populate]=*&populate[StatsSection]=*&populate[TimelineSection][populate][Steps][populate]=*&populate[HomeStories][populate][HomeStoriesSlider][populate]=*&populate[ContactUs][populate]=*&populate[Spotlight][populate][Card][populate]=*&populate[GreenBuildingStats][populate]=*&populate[Awards][populate][AwardsSlider][populate]=*&populate[UpcomingLaunches][populate][Projects][populate]=*&populate[ProjectShowcase][populate][GallaryImage1]=true&populate[ProjectShowcase][populate][GallaryImage2]=true&populate[ProjectShowcase][populate][GallaryImage3]=true&populate[ProjectShowcase][populate][GallaryImage4]=true&populate[ProjectShowcase][populate][GallaryImage6]=true&populate[ProjectShowcase][populate][SpotlightImage]=true&populate[ProjectShowcase][populate][StoryCard][populate]=*`
-    );
+  const { filteredHomepage } = useGetHomepageWithFilter(
+    `populate[Hero][populate]=*&populate[StatsSection]=*&populate[TimelineSection][populate][Steps][populate]=*&populate[HomeStories][populate][HomeStoriesSlider][populate]=*&populate[ContactUs][populate]=*&populate[Spotlight][populate][Card][populate]=*&populate[GreenBuildingStats][populate]=*&populate[Awards][populate][AwardsSlider][populate]=*&populate[UpcomingLaunches][populate][Projects][populate]=*&populate[ProjectShowcase][populate][GallaryImage1]=true&populate[ProjectShowcase][populate][GallaryImage2]=true&populate[ProjectShowcase][populate][GallaryImage3]=true&populate[ProjectShowcase][populate][GallaryImage4]=true&populate[ProjectShowcase][populate][GallaryImage6]=true&populate[ProjectShowcase][populate][SpotlightImage]=true&populate[ProjectShowcase][populate][StoryCard][populate]=*`
+  );
 
   return (
     <>
@@ -38,8 +38,9 @@ export default function HomeView() {
       <CountUpSection statsSection={filteredHomepage?.data?.StatsSection} />
 
       <SectionAmaranthine projectShowcase={filteredHomepage?.data?.ProjectShowcase} />
-
-      <AmaranthineGrid data={filteredHomepage?.data?.ProjectShowcase} />
+      <Box sx={{ mb: { xs: 30, sm: 40 } }}>
+        <AmaranthineGrid data={filteredHomepage?.data?.ProjectShowcase} />
+      </Box>
 
       <ConceptToConcreteSection
         conceptToConcreteSection={filteredHomepage?.data?.TimelineSection}
@@ -47,7 +48,7 @@ export default function HomeView() {
 
       <HomeStories homeStories={filteredHomepage?.data?.HomeStories} />
 
-      <UpcomingLaunchesCarousel upcomingLaunches={filteredHomepage?.data?.UpcomingLaunches}  />
+      <UpcomingLaunchesCarousel upcomingLaunches={filteredHomepage?.data?.UpcomingLaunches} />
 
       <AwardsSection awards={filteredHomepage?.data?.Awards} />
 
