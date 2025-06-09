@@ -3,6 +3,7 @@ import { Grid, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
 import { m, useScroll, useTransform, useSpring } from 'framer-motion';
 import ImageBox from './ImageBox';
+import AmaranthineCard from './AmaranthineCard';
 
 export default function AmaranthineGrid({ data, setSharedScroll }) {
   const images = [
@@ -17,7 +18,7 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const ref = useRef(null);
 
-  const [screenAspectRatio, setScreenAspectRatio] = useState(1); // default fallback
+  const [screenAspectRatio, setScreenAspectRatio] = useState(1);
 
   useEffect(() => {
     const updateAspectRatio = () => {
@@ -75,6 +76,7 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
     mid6: 0.85,
     mid7: 0.9,
     end: 0.95,
+    end2: 1,
   };
   // From 1 (35/35 = 1) to screenAspectRatio slowly
   const animatedAspectRatio = useTransform(
@@ -128,6 +130,8 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
   const titleBlockScale = fifthItemScale || defaultScale;
   const fallbackTitleBlockOpacity = useTransform(scrollYProgress, [0.4, 0.5], [0, 1]);
   const titleBlockOpacity = fallbackTitleBlockOpacity;
+
+  const highlightSectionProgress = useTransform(scrollYProgress, [0.9, 0.95], [0, 1]);
 
   if (isMobile) {
     return (
@@ -195,179 +199,204 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
 
   // Desktop view only
   return (
-    <Box
-      ref={containerRef}
-      sx={{
-        position: 'relative',
-        height: '350vh', // Increased height to allow more scroll space
-        width: '100%',
-      }}
-    >
-      {/* Your Sticky Box remains the same */}
+    <>
       <Box
-        ref={ref}
+        ref={containerRef}
         sx={{
-          position: 'sticky',
-          top: { xs: '-30vh', lg: '-50vh' },
-          '@media (min-width: 1280px) and (max-width: 1440px)': {
-            top: '-30vh',
-          },
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'start',
-          willChange: 'transform',
+          position: 'relative',
+          height: '350vh', // Increased height to allow more scroll space
           width: '100%',
         }}
       >
-        <m.div
-          style={{
+        {/* Your Sticky Box remains the same */}
+
+        <Box
+          ref={ref}
+          sx={{
+            position: 'sticky',
+            top: { xs: '-30vh', lg: '-50vh' },
+            '@media (min-width: 1280px) and (max-width: 1440px)': {
+              top: '-30vh',
+            },
+            height: '100vh',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'start',
+            willChange: 'transform',
             width: '100%',
-            maxWidth: 'xl',
-            paddingLeft: paddingAnimation,
-            paddingRight: paddingAnimation,
-            opacity: gridOpacity,
           }}
         >
-          <Grid
-            container
-            sx={{
-              justifyContent: 'center',
-              alignItems: 'center',
+          <m.div
+            style={{
+              width: '100%',
+              maxWidth: 'xl',
+              paddingLeft: paddingAnimation,
+              paddingRight: paddingAnimation,
+              opacity: gridOpacity,
             }}
           >
-            <Grid item xs={12} sm={6} md={4}>
-              <m.div style={{ margin: spacingAnimation, opacity: imageOpacity0 }}>
-                <ImageBox src={images[0]} alt="Image 1" scrollYProgress={scrollYProgress} />
-              </m.div>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <m.div style={{ margin: spacingAnimation, opacity: imageOpacity1 }}>
-                <ImageBox src={images[1]} alt="Image 2" scrollYProgress={scrollYProgress} />
-              </m.div>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <m.div style={{ margin: spacingAnimation, opacity: imageOpacity2 }}>
-                <ImageBox src={images[2]} alt="Image 3" scrollYProgress={scrollYProgress} />
-              </m.div>
-            </Grid>
-
-            <Grid item xs={12} sm={6} md={4}>
-              <m.div style={{ margin: spacingAnimation2, opacity: imageOpacity3 }}>
-                <ImageBox src={images[3]} alt="Image 4" scrollYProgress={scrollYProgress} />
-              </m.div>
-            </Grid>
-
-            {/* Title Grid */}
             <Grid
-              item
-              xs={12}
-              sm={6}
-              md={4}
+              container
               sx={{
-                position: 'relative',
-                zIndex: 20, // Place on top of AmaranthineCard
+                justifyContent: 'center',
+                alignItems: 'center',
               }}
             >
-              <m.div
-                style={{
+              <Grid item xs={12} sm={6} md={4}>
+                <m.div style={{ margin: spacingAnimation, opacity: imageOpacity0 }}>
+                  <ImageBox src={images[0]} alt="Image 1" scrollYProgress={scrollYProgress} />
+                </m.div>
+              </Grid>
+
+              <Grid item xs={12} sm={6} md={4}>
+                <m.div style={{ margin: spacingAnimation, opacity: imageOpacity1 }}>
+                  <ImageBox src={images[1]} alt="Image 2" scrollYProgress={scrollYProgress} />
+                </m.div>
+              </Grid>
+
+              <Grid item xs={12} sm={6} md={4}>
+                <m.div style={{ margin: spacingAnimation, opacity: imageOpacity2 }}>
+                  <ImageBox src={images[2]} alt="Image 3" scrollYProgress={scrollYProgress} />
+                </m.div>
+              </Grid>
+
+              <Grid item xs={12} sm={6} md={4}>
+                <m.div style={{ margin: spacingAnimation2, opacity: imageOpacity3 }}>
+                  <ImageBox src={images[3]} alt="Image 4" scrollYProgress={scrollYProgress} />
+                </m.div>
+              </Grid>
+
+              {/* Title Grid */}
+
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                sx={{
                   position: 'relative',
                   zIndex: 20,
-                  margin: spacingAnimation2,
-                  scale: titleBlockScale,
-                  opacity: titleBlockOpacity,
-                  transformOrigin: 'center 50%', // Changed from 75% to 65% to be slightly more centered
-                  willChange: 'transform, opacity',
                 }}
               >
-                <Box
-                  sx={{
-                    width: '100%',
-                    color: 'white',
-                    // aspectRatio: '35 / 35',
-                    textAlign: 'center',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    py: 6,
-                    px: 2,
-                    position: 'relative',
-                    overflow: 'hidden',
-                  }}
-                  component={m.div}
+                <m.div
                   style={{
-                    aspectRatio: animatedAspectRatio,
+                    position: 'relative',
+                    zIndex: 20,
+                    margin: spacingAnimation2,
+                    scale: titleBlockScale,
+                    opacity: titleBlockOpacity,
+                    transformOrigin: 'center 50%',
+                    willChange: 'transform, opacity',
                   }}
                 >
-                  {/* Background Image Layer */}
-                  <m.div
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      backgroundImage, // ✅ shorthand
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                      opacity: backgroundImageOpacity,
-                      zIndex: 1,
-                    }}
-                  />
-
-                  {/* Color Overlay Layer */}
-                  <m.div
-                    style={{
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%',
-                      backgroundColor: '#0A2640',
-                      opacity: backgroundColorOpacity,
-                      zIndex: 2,
-                    }}
-                  />
-
-                  {/* Text Layer */}
                   <Box
                     sx={{
-                      position: 'relative',
-                      zIndex: 3,
+                      width: '100%',
+                      color: 'white',
                       textAlign: 'center',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      py: 6,
+                      px: 2,
+                      position: 'relative',
+                      overflow: 'hidden',
+                    }}
+                    component={m.div}
+                    style={{
+                      aspectRatio: animatedAspectRatio,
                     }}
                   >
-                    <m.div style={{ opacity: backgroundColorOpacity }}>
-                      <Typography
-                        fontFamily="Satoshi Variable"
-                        fontSize={38}
-                        fontWeight={400}
-                        color="white"
-                      >
-                        {data?.GallaryTextSection5}
-                      </Typography>
-                      <Typography mt={1} fontSize={12} fontWeight={500} color="white">
-                        {data?.GallarySubTextSection5}
-                      </Typography>
-                    </m.div>
+                    {/* Keep the existing background layers */}
+                    <m.div
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        backgroundImage,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        opacity: backgroundImageOpacity,
+                        zIndex: 1,
+                      }}
+                    />
+                    <m.div
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: '#0A2640',
+                        opacity: backgroundColorOpacity,
+                        zIndex: 2,
+                      }}
+                    />
+                    {/* Keep the existing text content */}
+                    <Box sx={{ position: 'relative', zIndex: 3 }}>
+                      <m.div style={{ opacity: backgroundColorOpacity }}>
+                        <Typography
+                          fontFamily="Satoshi Variable"
+                          fontSize={38}
+                          fontWeight={400}
+                          color="white"
+                        >
+                          {data?.GallaryTextSection5}
+                        </Typography>
+                        <Typography mt={1} fontSize={12} fontWeight={500} color="white">
+                          {data?.GallarySubTextSection5}
+                        </Typography>
+                      </m.div>
+                    </Box>
+                    {/* <m.div
+                      style={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: '100%',
+                        zIndex: 4,
+                        opacity: showHighlightSection,
+                      }}
+                    >
+                      <AmaranthineCard data={data} scrollYProgress={scrollYProgress} />
+                    </m.div> */}
                   </Box>
-                </Box>
-              </m.div>
-            </Grid>
+                </m.div>
+              </Grid>
 
-            {/* Last image (image[4]) */}
-            <Grid item xs={12} sm={6} md={4}>
-              <m.div style={{ margin: spacingAnimation2, opacity: imageOpacity4 }}>
-                <ImageBox src={images[4]} alt="Image 6" scrollYProgress={scrollYProgress} />
-              </m.div>
+              {/* Last image (image[4]) */}
+              <Grid item xs={12} sm={6} md={4}>
+                <m.div style={{ margin: spacingAnimation2, opacity: imageOpacity4 }}>
+                  <ImageBox src={images[4]} alt="Image 6" scrollYProgress={scrollYProgress} />
+                </m.div>
+              </Grid>
             </Grid>
-          </Grid>
+          </m.div>
+        </Box>
+
+        <m.div
+          style={{
+            position: 'sticky',
+            bottom: 0,
+            width: '100%',
+            minHeight: '350vh',
+            overflow: 'hidden',
+            zIndex: 10,
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'end',
+            willChange: 'transform',
+            opacity: highlightSectionProgress
+          }}
+        >
+          <AmaranthineCard data={data} scrollYProgress={scrollYProgress} />
         </m.div>
       </Box>
-    </Box>
+    </>
   );
 }
 

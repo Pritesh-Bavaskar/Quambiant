@@ -49,12 +49,12 @@ export default function AmaranthineHighlightSection({ data, scrollYProgress }) {
   const validProgress = scrollYProgress || motionValue(0);
 
   // Fixed version:
-  const cardContainerScale = useSpring(
-    useTransform(safeScroll, [0.7, 0.8, 0.9, 1], [0.3, 0.6, 0.85, 1]),
-    { stiffness: 100, damping: 20 }
-  );
+  // const cardContainerScale = useSpring(
+  //   useTransform(safeScroll, [0.7, 0.8, 0.9, 1], [0.3, 0.6, 0.85, 1]),
+  //   { stiffness: 100, damping: 20 }
+  // );
 
-  const sectionOpacity = useTransform(safeScroll, [0.7, 0.8, 0.9, 1], [0, 0.5, 0.8, 1]);
+  // const sectionOpacity = useTransform(safeScroll, [0.7, 0.8, 0.9, 1], [0, 0.5, 0.8, 1]);
 
   // const sectionOpacity = useTransform(scrollYProgress || 0, [0.92, 1], [0, 1]);
 
@@ -89,13 +89,13 @@ export default function AmaranthineHighlightSection({ data, scrollYProgress }) {
   });
 
   // Animation values
-  const titleOpacity = useTransform(safeScroll, [0.75, 0.9], [0, 1]);
-  const card1Opacity = useTransform(safeScroll, [0.8, 0.9], [0, 1]);
-  const card1Y = useTransform(safeScroll, [0.8, 0.9], [30, 0]);
-  const card2Opacity = useTransform(safeScroll, [0.85, 0.95], [0, 1]);
-  const card2Y = useTransform(safeScroll, [0.85, 0.95], [30, 0]);
-  const card3Opacity = useTransform(safeScroll, [0.9, 1.0], [0, 1]);
-  const card3Y = useTransform(safeScroll, [0.9, 1.0], [30, 0]);
+  const titleOpacity = useTransform(safeScroll, [0.95, 1], [0, 1]);
+  const card1Opacity = useTransform(safeScroll, [0.95, 1], [0, 1]);
+  const card1Y = useTransform(safeScroll, [0.95, 1], [30, 0]);
+  const card2Opacity = useTransform(safeScroll, [0.975, 1], [0, 1]);
+  const card2Y = useTransform(safeScroll, [0.975, 1], [30, 0]);
+  const card3Opacity = useTransform(safeScroll, [0.985, 1], [0, 1]);
+  const card3Y = useTransform(safeScroll, [0.985, 1], [30, 0]);
 
   const opacities = [card1Opacity, card2Opacity, card3Opacity];
   const yTransforms = [card1Y, card2Y, card3Y];
@@ -178,8 +178,8 @@ export default function AmaranthineHighlightSection({ data, scrollYProgress }) {
   return (
     <m.div
       style={{
-        scale: cardContainerScale,
-        opacity: sectionOpacity,
+        // scale: cardContainerScale,
+        // opacity: sectionOpacity,
         originY: 0.5,
         originX: 0.5,
       }}
@@ -187,11 +187,11 @@ export default function AmaranthineHighlightSection({ data, scrollYProgress }) {
       <Box
         sx={{
           position: 'relative',
+          width: '100%',
+          minHeight: '100vh',
           backgroundImage: `url(${process.env.REACT_APP_HOST_API}${data?.SpotlightImage?.url})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          width: '100%',
-          minHeight: '100vh',
           py: 10,
           px: { xs: 0, md: 4 },
           display: 'flex',
