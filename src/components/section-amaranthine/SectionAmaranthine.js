@@ -100,7 +100,7 @@ export function SectionAmaranthine({ projectShowcase }) {
             {projectShowcase?.SubHeading}
           </Typography>
         </Box>
-        <Box
+        {/* <Box
           ref={containerRef}
           sx={{
             position: 'relative',
@@ -115,13 +115,14 @@ export function SectionAmaranthine({ projectShowcase }) {
             sx={{
               position: 'sticky',
               height: '100vh',
+              // top: 0,
               zIndex: 0,
             }}
           >
-            <AmaranthineGrid data={projectShowcase} setSharedScroll={setSharedScrollY} />
-            <AmaranthineCard data={projectShowcase} scrollYProgress={sharedScrollY} />
-          </Box>
-        </Box>
+            <AmaranthineGrid data={projectShowcase} setSharedScroll={setSharedScrollY} /> */}
+            {/* <AmaranthineCard data={projectShowcase} scrollYProgress={sharedScrollY} /> */}
+          {/* </Box> */}
+        {/* // </Box> */}
       </>
     );
   }

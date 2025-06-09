@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Grid, Box, Typography, useMediaQuery, useTheme } from '@mui/material';
 import PropTypes from 'prop-types';
 import { m, useScroll, useTransform, useSpring } from 'framer-motion';
@@ -17,10 +17,16 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const ref = useRef(null);
 
-  const { scrollYProgresss } = useScroll({
-    target: ref,
-    offset: ['start end', 'end start'],
-  });
+  const [screenAspectRatio, setScreenAspectRatio] = useState(1); // default fallback
+
+  useEffect(() => {
+    const updateAspectRatio = () => {
+      setScreenAspectRatio(window.innerWidth / window.innerHeight);
+    };
+    updateAspectRatio();
+    window.addEventListener('resize', updateAspectRatio);
+    return () => window.removeEventListener('resize', updateAspectRatio);
+  }, []);
 
   // Add this ref for outer container
   const containerRef = useRef(null);
@@ -70,6 +76,12 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
     mid7: 0.9,
     end: 0.95,
   };
+  // From 1 (35/35 = 1) to screenAspectRatio slowly
+  const animatedAspectRatio = useTransform(
+    scrollYProgress,
+    [transition.mid4, transition.end],
+    [1, screenAspectRatio]
+  );
 
   const fifthItemScale = useTransform(
     scrollYProgress,
@@ -84,7 +96,7 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
       transition.mid7,
       transition.end,
     ],
-    [0.7, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7]
+    [0.7, 1, 1.5, 2, 2.5, 2.75, 3, 3.5, 3.5]
   );
 
   const backgroundColorOpacity = useTransform(
@@ -184,10 +196,10 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
   // Desktop view only
   return (
     <Box
-      ref={containerRef} // 🟢 use this for scroll tracking
+      ref={containerRef}
       sx={{
         position: 'relative',
-        height: '150vh',
+        height: '350vh', // Increased height to allow more scroll space
         width: '100%',
       }}
     >
@@ -196,14 +208,15 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
         ref={ref}
         sx={{
           position: 'sticky',
-          // top: { xs: '-30vh', lg: '-50vh' },
-          // '@media (min-width: 1280px) and (max-width: 1440px)': {
-          //   top: '-30vh',
-          // },
+          top: { xs: '-30vh', lg: '-50vh' },
+          '@media (min-width: 1280px) and (max-width: 1440px)': {
+            top: '-30vh',
+          },
           height: '100vh',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'start',
+          willChange: 'transform',
           width: '100%',
         }}
       >
@@ -273,7 +286,7 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
                   sx={{
                     width: '100%',
                     color: 'white',
-                    aspectRatio: '35 / 35',
+                    // aspectRatio: '35 / 35',
                     textAlign: 'center',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -283,6 +296,10 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
                     px: 2,
                     position: 'relative',
                     overflow: 'hidden',
+                  }}
+                  component={m.div}
+                  style={{
+                    aspectRatio: animatedAspectRatio,
                   }}
                 >
                   {/* Background Image Layer */}
