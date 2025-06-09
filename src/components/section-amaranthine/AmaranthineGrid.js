@@ -98,7 +98,7 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
       transition.mid7,
       transition.end,
     ],
-    [0.7, 1, 1.5, 2, 2.5, 2.75, 3, 3.5, 3.5]
+    [0.7, 1, 1.5, 2, 2.5, 2.75, 3, 3, 3]
   );
 
   const backgroundColorOpacity = useTransform(
@@ -199,8 +199,7 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
 
   // Desktop view only
   return (
-    <>
-      <Box
+    <Box
         ref={containerRef}
         sx={{
           position: 'relative',
@@ -382,7 +381,6 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
           style={{
             position: 'sticky',
             bottom: 0,
-            width: '100vw',
             minHeight: '350vh',
             overflow: 'hidden',
             zIndex: 10,
@@ -396,7 +394,6 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
           <AmaranthineCard data={data} scrollYProgress={scrollYProgress} />
         </m.div>
       </Box>
-    </>
   );
 }
 

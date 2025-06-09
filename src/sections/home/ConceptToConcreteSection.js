@@ -357,13 +357,13 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
   // Use data from conceptToConcreteSection if available, otherwise use default data
   const timelineData = conceptToConcreteSection?.Steps
     ? conceptToConcreteSection.Steps.map((step, index) => ({
-        title: step.StepHeading,
-        content: step.StepSubheading,
-        // Use the medium format image if available, otherwise fall back to the original URL
-        image: `${process.env.REACT_APP_HOST_API}${step.Image?.formats?.medium?.url}`,
-        // Alternate the reverse property for layout
-        reverse: index % 2 !== 0,
-      }))
+      title: step.StepHeading,
+      content: step.StepSubheading,
+      // Use the medium format image if available, otherwise fall back to the original URL
+      image: `${process.env.REACT_APP_HOST_API}${step.Image?.formats?.medium?.url}`,
+      // Alternate the reverse property for layout
+      reverse: index % 2 !== 0,
+    }))
     : defaultTimelineData;
 
   const [activeIndex, setActiveIndex] = useState(-1);
@@ -503,7 +503,7 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
 
   // Handle vertical scroll for mobile slider
   useEffect(() => {
-    if (window.innerWidth >= 900) return () => {};
+    if (window.innerWidth >= 900) return () => { };
 
     let isScrolling = false;
     let lastScrollY = window.scrollY;
@@ -641,9 +641,9 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
 
   return (
     <LazyMotion features={domAnimation}>
-      <Container maxWidth="lg" sx={{ py: 16 }}>
+      <Container maxWidth="lg" sx={{ padding: '800px 0px 128px 0px' }} >
         {/* Mobile slider */}
-        <Box
+        < Box
           sx={{
             display: { xs: 'block', md: 'none' },
             width: '100%',
@@ -944,7 +944,7 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
           </Box>
         </Box>
       </Container>
-    </LazyMotion>
+    </LazyMotion >
   );
 }
 
