@@ -13,7 +13,7 @@ export default function ImageBox({ src, alt, scrollYProgress }) {
     <Box
       sx={{
         width: '100%',
-        aspectRatio: { xs: '17 / 19', md: '35 / 35' },
+        aspectRatio: { xs: '17 / 19', sm: '30 / 24', md: '35 / 35' },
         overflow: 'hidden',
         boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
         position: 'relative',

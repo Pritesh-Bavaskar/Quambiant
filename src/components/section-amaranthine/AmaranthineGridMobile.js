@@ -5,19 +5,23 @@ import PropTypes from 'prop-types';
 import ImageBox from './ImageBox';
 import AmaranthineCard from './AmaranthineCard';
 
-const AmaranthineGridMobile = ({ data, scrollYProgress: parentScrollYProgress, containerRef: parentContainerRef }) => {
+const AmaranthineGridMobile = ({
+  data,
+  scrollYProgress: parentScrollYProgress,
+  containerRef: parentContainerRef,
+}) => {
   const ref = useRef(null);
   const localContainerRef = useRef(null);
-  
+
   // Always create a local scrollYProgress
   const localScrollYProgress = useScroll({
     target: localContainerRef,
     offset: ['start end', 'end center'],
   }).scrollYProgress;
-  
+
   // Use parent's scrollYProgress if provided, otherwise use local one
   const scrollYProgress = parentScrollYProgress || localScrollYProgress;
-  
+
   // Use parent's containerRef if provided, otherwise use local one
   const containerRef = parentContainerRef || localContainerRef;
   const images = [
@@ -46,15 +50,34 @@ const AmaranthineGridMobile = ({ data, scrollYProgress: parentScrollYProgress, c
     end2: 1,
   };
 
-  const [screenAspectRatioMobile, setScreenAspectRatioMobile] = useState(353 / 240);
+  const [screenAspectRatioMobile, setScreenAspectRatioMobile] = useState(1);
+
+  const [isTablet, setIsTablet] = useState(false);
 
   useEffect(() => {
+    const checkIfTablet = () => {
+      const tablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+      setIsTablet(tablet);
+    };
+
     const updateAspectRatio = () => {
       setScreenAspectRatioMobile(window.innerWidth / window.innerHeight);
     };
+
+    checkIfTablet();
     updateAspectRatio();
-    window.addEventListener('resize', updateAspectRatio);
-    return () => window.removeEventListener('resize', updateAspectRatio);
+
+    window.addEventListener('resize', () => {
+      checkIfTablet();
+      updateAspectRatio();
+    });
+
+    return () => {
+      window.removeEventListener('resize', () => {
+        checkIfTablet();
+        updateAspectRatio();
+      });
+    };
   }, []);
 
   const backgroundImageOpacity = useTransform(
@@ -92,10 +115,12 @@ const AmaranthineGridMobile = ({ data, scrollYProgress: parentScrollYProgress, c
     damping: 20,
   });
 
+  const setDefaultAspectRatio = isTablet ? 2 : 1.2;
+
   const animatedAspectRatioMobile = useTransform(
     scrollYProgress,
     [transition.mid4, transition.end],
-    [1, screenAspectRatioMobile]
+    [setDefaultAspectRatio, screenAspectRatioMobile]
   );
 
   const fifthItemScaleMobile = useTransform(
@@ -111,7 +136,7 @@ const AmaranthineGridMobile = ({ data, scrollYProgress: parentScrollYProgress, c
       transition.mid7,
       transition.end,
     ],
-    [0.7, 1, 1.01, 1.02, 1.03, 1.04, 1.05, 1.06, 1.07]
+    [0.7, 1, 1.01, 1.02, 1.03, 1.04, 1.04, 1.04, 1.04]
   );
 
   const titleBlockScaleMobile = fifthItemScaleMobile || defaultScaleMobile;
@@ -132,7 +157,7 @@ const AmaranthineGridMobile = ({ data, scrollYProgress: parentScrollYProgress, c
       ref={containerRef}
       sx={{
         position: 'relative',
-        height: '350vh',
+        height: '250vh',
         width: '100%',
       }}
     >
@@ -155,155 +180,162 @@ const AmaranthineGridMobile = ({ data, scrollYProgress: parentScrollYProgress, c
             opacity: useTransform(scrollYProgress, [0, 0.3], [0, 1]),
           }}
         >
-          <Grid container sx={{ maxWidth: 'md', justifyContent: 'center' }}>
-          <Grid item xs={6}>
-            <m.div
-              style={{
-                margin: spacingAnimationMobile,
-                opacity: imageOpacityMobile0,
-                position: 'relative',
-              }}
-            >
-              <ImageBox src={images[0]} alt="img1" />
-            </m.div>
-          </Grid>
-          <Grid item xs={6}>
-            <m.div
-              style={{
-                margin: spacingAnimationMobile,
-                opacity: imageOpacityMobile0,
-                position: 'relative',
-              }}
-            >
-              <ImageBox src={images[1]} alt="img2" />
-            </m.div>
-          </Grid>
-
-          <Grid item xs={12}>
-            <m.div
-              style={{
-                position: 'relative',
-                opacity: titleBlockOpacityMobile,
-                scale: titleBlockScaleMobile,
-                margin: spacingAnimationMobile2,
-                zIndex: 1,
-                transformOrigin: 'center center',
-                transformBox: 'fill-box',
-                willChange: 'transform',
-              }}
-            >
-              <Box
-                sx={{
-                  width: '100%',
-                  color: 'white',
-                  textAlign: 'center',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  position: 'relative',
-                  overflow: 'hidden',
-                }}
-                component={m.div}
+          <Grid
+            container
+            sx={{
+              maxWidth: 'md',
+              justifyContent: 'center',
+              margin: '0 auto',
+            }}
+          >
+            <Grid item xs={6}>
+              <m.div
                 style={{
-                  aspectRatio: animatedAspectRatioMobile,
+                  margin: spacingAnimationMobile,
+                  opacity: imageOpacityMobile0,
+                  position: 'relative',
                 }}
               >
-                <m.div
-                  style={{
-                    position: 'absolute',
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    backgroundImage,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    opacity: backgroundImageOpacity,
-                    zIndex: 1,
-                  }}
-                />
-                <m.div
-                  style={{
-                    position: 'absolute',
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    backgroundColor: '#0A2640',
-                    opacity: backgroundColorOpacity,
-                    zIndex: 2,
-                  }}
-                />
+                <ImageBox src={images[0]} alt="img1" />
+              </m.div>
+            </Grid>
+            <Grid item xs={6}>
+              <m.div
+                style={{
+                  margin: spacingAnimationMobile,
+                  opacity: imageOpacityMobile0,
+                  position: 'relative',
+                }}
+              >
+                <ImageBox src={images[1]} alt="img2" />
+              </m.div>
+            </Grid>
+
+            <Grid item xs={12}>
+              <m.div
+                style={{
+                  position: 'relative',
+                  opacity: titleBlockOpacityMobile,
+                  scale: titleBlockScaleMobile,
+                  margin: spacingAnimationMobile2,
+                  zIndex: 1,
+                  transformOrigin: 'center center',
+                  transformBox: 'fill-box',
+                  willChange: 'transform',
+                }}
+              >
                 <Box
                   sx={{
+                    width: '100%',
                     color: 'white',
                     textAlign: 'center',
                     alignItems: 'center',
                     justifyContent: 'center',
                     display: 'flex',
                     flexDirection: 'column',
-                    zIndex: 3,
-                    py: 6,
-                    px: 2,
+                    position: 'relative',
+                    overflow: 'hidden',
+                  }}
+                  component={m.div}
+                  style={{
+                    aspectRatio: animatedAspectRatioMobile,
                   }}
                 >
-                  <m.div style={{ opacity: backgroundColorOpacity }}>
-                    <Typography fontFamily="Satoshi Variable" fontSize={38} fontWeight={400}>
-                      {data?.GallaryTextSection5}
-                    </Typography>
-                    <Typography mt={1} fontSize={12} fontWeight={500}>
-                      {data?.GallarySubTextSection5}
-                    </Typography>
-                  </m.div>
+                  <m.div
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      backgroundImage,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      opacity: backgroundImageOpacity,
+                      zIndex: 1,
+                    }}
+                  />
+                  <m.div
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      backgroundColor: '#0A2640',
+                      opacity: backgroundColorOpacity,
+                      zIndex: 2,
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      color: 'white',
+                      textAlign: 'center',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      zIndex: 3,
+                      py: 6,
+                      px: 2,
+                    }}
+                  >
+                    <m.div style={{ opacity: backgroundColorOpacity }}>
+                      <Typography fontFamily="Satoshi Variable" fontSize={38} fontWeight={400}>
+                        {data?.GallaryTextSection5}
+                      </Typography>
+                      <Typography mt={1} fontSize={12} fontWeight={500}>
+                        {data?.GallarySubTextSection5}
+                      </Typography>
+                    </m.div>
+                  </Box>
                 </Box>
-              </Box>
-            </m.div>
-          </Grid>
-
-          <Grid item xs={6}>
-            <m.div
-              style={{
-                margin: spacingAnimationMobile3,
-                opacity: imageOpacityMobile1,
-                position: 'relative',
-              }}
-            >
-              <ImageBox src={images[2]} alt="img3" />
-            </m.div>
-          </Grid>
-          <Grid item xs={6}>
-            <m.div
-              style={{
-                margin: spacingAnimationMobile3,
-                opacity: imageOpacityMobile1,
-                position: 'relative',
-              }}
-            >
-              <ImageBox src={images[3]} alt="img4" />
-            </m.div>
-              </Grid>
+              </m.div>
             </Grid>
-          </m.div>
-        </Box>
 
-        <m.div
-          style={{
-            position: 'sticky',
-            bottom: 0,
-            minHeight: '350vh',
-            overflow: 'hidden',
-            zIndex: 10,
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'end',
-            willChange: 'transform',
-            opacity: highlightSectionProgress,
-          }}
-        >
-          <AmaranthineCard data={data} scrollYProgress={scrollYProgress} />
+            <Grid item xs={6}>
+              <m.div
+                style={{
+                  margin: spacingAnimationMobile3,
+                  opacity: imageOpacityMobile1,
+                  position: 'relative',
+                }}
+              >
+                <ImageBox src={images[2]} alt="img3" />
+              </m.div>
+            </Grid>
+            <Grid item xs={6}>
+              <m.div
+                style={{
+                  margin: spacingAnimationMobile3,
+                  opacity: imageOpacityMobile1,
+                  position: 'relative',
+                }}
+              >
+                <ImageBox src={images[3]} alt="img4" />
+              </m.div>
+            </Grid>
+          </Grid>
         </m.div>
       </Box>
-    );
-  };
+
+      <m.div
+        style={{
+          position: 'sticky',
+          bottom: 0,
+          minHeight: '250vh',
+          overflow: 'hidden',
+          zIndex: 10,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'end',
+          willChange: 'transform',
+          opacity: highlightSectionProgress,
+        }}
+      >
+        <AmaranthineCard data={data} scrollYProgress={scrollYProgress} />
+      </m.div>
+    </Box>
+  );
+};
 
 AmaranthineGridMobile.propTypes = {
   data: PropTypes.object.isRequired,
