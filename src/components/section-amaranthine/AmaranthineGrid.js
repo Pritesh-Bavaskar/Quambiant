@@ -382,7 +382,7 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
           style={{
             position: 'sticky',
             bottom: 0,
-            width: '100%',
+            width: '100vw',
             minHeight: '350vh',
             overflow: 'hidden',
             zIndex: 10,
