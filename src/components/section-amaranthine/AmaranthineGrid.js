@@ -98,7 +98,7 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
       transition.mid7,
       transition.end,
     ],
-    [0.7, 1, 1.5, 2, 2.5, 2.75, 3, 3, 3]
+    [0.7, 1, 1.5, 2, 2.5, 2.75, 3.28, 3.28, 3.28]
   );
 
   const backgroundColorOpacity = useTransform(
