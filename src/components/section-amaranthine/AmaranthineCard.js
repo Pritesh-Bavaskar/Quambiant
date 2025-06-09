@@ -1,8 +1,8 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Grid, Typography, Card, CardContent, CardMedia, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import { m, useTransform, useScroll } from 'framer-motion';
+import { m, useTransform, useScroll, useSpring, motionValue } from 'framer-motion';
 import backgroundImage from 'src/assets/media/landing/card/bck-img.png';
 import img1 from 'src/assets/media/landing/card/card-img1.png';
 import img2 from 'src/assets/media/landing/card/card-img2.png';
@@ -37,17 +37,31 @@ CustomArrow.propTypes = {
   sx: PropTypes.object,
 };
 
-export default function AmaranthineHighlightSection({ data }) {
+export default function AmaranthineHighlightSection({ data, scrollYProgress }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const containerRef = useRef(null);
+  // Ensure scrollYProgress is always a valid MotionValue
+  const safeScroll = scrollYProgress || motionValue(0);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
+  const validProgress = scrollYProgress || motionValue(0);
+
+  // Fixed version:
+  const cardContainerScale = useSpring(
+    useTransform(safeScroll, [0.7, 0.8, 0.9, 1], [0.3, 0.6, 0.85, 1]),
+    { stiffness: 100, damping: 20 }
+  );
+
+  const sectionOpacity = useTransform(safeScroll, [0.7, 0.8, 0.9, 1], [0, 0.5, 0.8, 1]);
+
+  // const sectionOpacity = useTransform(scrollYProgress || 0, [0.92, 1], [0, 1]);
+
+  // const { scrollYProgress } = useScroll({
+  //   target: containerRef,
+  //   offset: ['start start', 'end end'],
+  // });
 
   const cards = (data?.StoryCard || []).map((card) => ({
     image: card?.Image?.url ? `${process.env.REACT_APP_HOST_API}${card.Image.url}` : img1, // Fallback to img1 if no image
@@ -75,13 +89,13 @@ export default function AmaranthineHighlightSection({ data }) {
   });
 
   // Animation values
-  const titleOpacity = useTransform(scrollYProgress, [0.75, 0.9], [0, 1]);
-  const card1Opacity = useTransform(scrollYProgress, [0.8, 0.9], [0, 1]);
-  const card1Y = useTransform(scrollYProgress, [0.8, 0.9], [30, 0]);
-  const card2Opacity = useTransform(scrollYProgress, [0.85, 0.95], [0, 1]);
-  const card2Y = useTransform(scrollYProgress, [0.85, 0.95], [30, 0]);
-  const card3Opacity = useTransform(scrollYProgress, [0.9, 1.0], [0, 1]);
-  const card3Y = useTransform(scrollYProgress, [0.9, 1.0], [30, 0]);
+  const titleOpacity = useTransform(safeScroll, [0.75, 0.9], [0, 1]);
+  const card1Opacity = useTransform(safeScroll, [0.8, 0.9], [0, 1]);
+  const card1Y = useTransform(safeScroll, [0.8, 0.9], [30, 0]);
+  const card2Opacity = useTransform(safeScroll, [0.85, 0.95], [0, 1]);
+  const card2Y = useTransform(safeScroll, [0.85, 0.95], [30, 0]);
+  const card3Opacity = useTransform(safeScroll, [0.9, 1.0], [0, 1]);
+  const card3Y = useTransform(safeScroll, [0.9, 1.0], [30, 0]);
 
   const opacities = [card1Opacity, card2Opacity, card3Opacity];
   const yTransforms = [card1Y, card2Y, card3Y];
@@ -162,123 +176,136 @@ export default function AmaranthineHighlightSection({ data }) {
   );
 
   return (
-    <Box
-      sx={{
-        position: 'relative',
-        backgroundImage: `url(${process.env.REACT_APP_HOST_API}${data?.SpotlightImage?.url})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        width: '100%',
-        minHeight: '100vh',
-        py: 10,
-        px: { xs: 0, md: 4 },
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
+    <m.div
+      style={{
+        scale: cardContainerScale,
+        opacity: sectionOpacity,
+        originY: 0.5,
+        originX: 0.5,
       }}
     >
-      <m.div style={{ opacity: titleOpacity }}>
-        <Typography
-          align="center"
-          fontFamily="Satoshi Variable"
-          fontSize={{ xs: 38, md: 64 }}
-          sx={{
-            color: 'white',
-            fontWeight: 400,
-            mb: { md: 8, xs: 4 },
-            textShadow: '0px 2px 10px rgba(0,0,0,0.6)',
-            letterSpacing: '0.05em',
-          }}
-        >
-          {data?.StoryCardSliderHeading}
-        </Typography>
-      </m.div>
-
-      {isMobile ? (
-        // Mobile View (Carousel)
-        <Box sx={{ width: '100%', position: 'relative' }}>
-          <m.div
-            style={{ opacity: titleOpacity }}
+      <Box
+        sx={{
+          position: 'relative',
+          backgroundImage: `url(${process.env.REACT_APP_HOST_API}${data?.SpotlightImage?.url})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          width: '100%',
+          minHeight: '100vh',
+          py: 10,
+          px: { xs: 0, md: 4 },
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <m.div style={{ opacity: titleOpacity }}>
+          <Typography
+            align="center"
+            fontFamily="Satoshi Variable"
+            fontSize={{ xs: 38, md: 64 }}
             sx={{
-              px: { xs: 0, sm: 4 }, // Added horizontal padding for side gaps
-              width: '100%',
-              maxWidth: 1200,
-              mx: 'auto',
+              color: 'white',
+              fontWeight: 400,
+              mb: { md: 8, xs: 4 },
+              textShadow: '0px 2px 10px rgba(0,0,0,0.6)',
+              letterSpacing: '0.05em',
             }}
           >
-            <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
-              {cards.map((card, index) => (
-                <m.div
-                  key={index}
-                  style={{
-                    opacity: titleOpacity,
-                    padding: '0 8px',
-                  }}
-                >
-                  <Box sx={{ height: '100%', minHeight: 500, display: 'flex' }}>
-                    {renderCard(card)}
-                  </Box>
-                </m.div>
-              ))}
-            </Carousel>
-          </m.div>
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-            <CustomArrow icon="eva:arrow-ios-back-fill" onClick={carousel.onPrev} sx={{ mr: 2 }} />
-            <CustomArrow
-              icon="eva:arrow-ios-forward-fill"
-              onClick={carousel.onNext}
-              sx={{ ml: 2 }}
-            />
-          </Box>
-        </Box>
-      ) : (
-        // Tablet and Desktop View (Grid)
-        <Grid
-          container
-          spacing={isTablet ? 2 : 4}
-          sx={{
-            mt: 4,
-            display: 'flex',
-            flexWrap: 'wrap',
-            px: isTablet ? 2 : 0,
-            maxWidth: isTablet ? 800 : 1300,
-            mx: 'auto',
-          }}
-          justifyContent="center"
-        >
-          {cards.map((card, index) => (
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              md={4}
-              key={index}
+            {data?.StoryCardSliderHeading}
+          </Typography>
+        </m.div>
+
+        {isMobile ? (
+          // Mobile View (Carousel)
+          <Box sx={{ width: '100%', position: 'relative' }}>
+            <m.div
+              style={{ opacity: titleOpacity }}
               sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                padding: isTablet ? '8px 8px 8px 0' : '16px 16px 16px 0',
-                '&.MuiGrid-item': {
-                  padding: 0,
-                  paddingRight: '20px',
-                  paddingTop: '20px',
-                },
+                px: { xs: 0, sm: 4 }, // Added horizontal padding for side gaps
+                width: '100%',
+                maxWidth: 1200,
+                mx: 'auto',
               }}
             >
-              <m.div
-                style={{
-                  opacity: opacities[index],
-                  y: yTransforms[index],
-                  width: '100%',
+              <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
+                {cards.map((card, index) => (
+                  <m.div
+                    key={index}
+                    style={{
+                      opacity: titleOpacity,
+                      padding: '0 8px',
+                    }}
+                  >
+                    <Box sx={{ height: '100%', minHeight: 500, display: 'flex' }}>
+                      {renderCard(card)}
+                    </Box>
+                  </m.div>
+                ))}
+              </Carousel>
+            </m.div>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+              <CustomArrow
+                icon="eva:arrow-ios-back-fill"
+                onClick={carousel.onPrev}
+                sx={{ mr: 2 }}
+              />
+              <CustomArrow
+                icon="eva:arrow-ios-forward-fill"
+                onClick={carousel.onNext}
+                sx={{ ml: 2 }}
+              />
+            </Box>
+          </Box>
+        ) : (
+          // Tablet and Desktop View (Grid)
+          <Grid
+            container
+            spacing={isTablet ? 2 : 4}
+            sx={{
+              mt: 4,
+              display: 'flex',
+              flexWrap: 'wrap',
+              px: isTablet ? 2 : 0,
+              maxWidth: isTablet ? 800 : 1300,
+              mx: 'auto',
+            }}
+            justifyContent="center"
+          >
+            {cards.map((card, index) => (
+              <Grid
+                item
+                xs={12}
+                sm={6}
+                md={4}
+                key={index}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  padding: isTablet ? '8px 8px 8px 0' : '16px 16px 16px 0',
+                  '&.MuiGrid-item': {
+                    padding: 0,
+                    paddingRight: '20px',
+                    paddingTop: '20px',
+                  },
                 }}
               >
-                {renderCard(card)}
-              </m.div>
-            </Grid>
-          ))}
-        </Grid>
-      )}
-    </Box>
+                <m.div
+                  style={{
+                    opacity: opacities[index],
+                    y: yTransforms[index],
+                    width: '100%',
+                  }}
+                >
+                  {renderCard(card)}
+                </m.div>
+              </Grid>
+            ))}
+          </Grid>
+        )}
+      </Box>
+    </m.div>
   );
 }
 

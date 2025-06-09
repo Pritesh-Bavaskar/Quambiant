@@ -39,7 +39,7 @@ export default function HomeView() {
 
       <SectionAmaranthine projectShowcase={filteredHomepage?.data?.ProjectShowcase} />
 
-      <AmaranthineGrid data={filteredHomepage?.data?.ProjectShowcase} />
+      {/* <AmaranthineGrid data={filteredHomepage?.data?.ProjectShowcase} /> */}
 
       <ConceptToConcreteSection
         conceptToConcreteSection={filteredHomepage?.data?.TimelineSection}

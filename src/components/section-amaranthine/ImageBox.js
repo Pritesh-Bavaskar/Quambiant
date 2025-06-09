@@ -6,8 +6,8 @@ import { m, useScroll, useTransform, motionValue } from 'framer-motion';
 
 export default function ImageBox({ src, alt, scrollYProgress }) {
   const ref = useRef(null);
-  const validScrollYProgress = scrollYProgress || motionValue(0);
-  const scale = useTransform(validScrollYProgress, [0, 1], [1.4, 1]);
+  // const validScrollYProgress = scrollYProgress || motionValue(0);
+  // const scale = useTransform(validScrollYProgress, [0, 1], [1.4, 1]);
 
   return (
     <Box
@@ -29,7 +29,7 @@ export default function ImageBox({ src, alt, scrollYProgress }) {
           width: '100%',
           height: '100%',
           overflow: 'hidden',
-          scale,
+          // scale,
           transformOrigin: 'center center',
         }}
       >
