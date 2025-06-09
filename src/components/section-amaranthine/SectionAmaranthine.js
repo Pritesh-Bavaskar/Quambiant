@@ -52,7 +52,7 @@ export function SectionAmaranthine({ projectShowcase }) {
 
   const [sharedScrollY, setSharedScrollY] = useState(null);
 
-  if (isDesktop) {
+  // if (isDesktop) {
     return (
       <>
         <Box
@@ -100,32 +100,9 @@ export function SectionAmaranthine({ projectShowcase }) {
             {projectShowcase?.SubHeading}
           </Typography>
         </Box>
-        {/* <Box
-          ref={containerRef}
-          sx={{
-            position: 'relative',
-            height: '300vh',
-            width: '100%',
-            overflow: 'clip', // Use clip instead of hidden to preserve animations
-            margin: 0,
-            padding: 0,
-          }}
-        >
-          <Box
-            sx={{
-              position: 'sticky',
-              height: '100vh',
-              // top: 0,
-              zIndex: 0,
-            }}
-          >
-            <AmaranthineGrid data={projectShowcase} setSharedScroll={setSharedScrollY} /> */}
-            {/* <AmaranthineCard data={projectShowcase} scrollYProgress={sharedScrollY} /> */}
-          {/* </Box> */}
-        {/* // </Box> */}
       </>
     );
-  }
+  // }
 
   // return (
   //   <Box
