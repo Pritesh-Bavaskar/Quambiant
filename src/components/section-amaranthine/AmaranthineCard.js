@@ -188,7 +188,7 @@ export default function AmaranthineHighlightSection({ data, scrollYProgress }) {
         sx={{
           position: 'relative',
           width: '100vw',
-          minHeight: '100vh',
+          minHeight: '103vh',
           backgroundImage: `url(${process.env.REACT_APP_HOST_API}${data?.SpotlightImage?.url})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
