@@ -140,6 +140,7 @@ export default function Header() {
               >
                 <Button
                   variant="contained"
+                  href='contact-us'
                   sx={{
                     py: '7px',
                     px: '24px',

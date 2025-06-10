@@ -13,6 +13,25 @@ import Iconify from 'src/components/iconify';
 import { MapControl, MapMarker, MapPopup } from 'src/components/map';
 
 // ----------------------------------------------------------------------
+const dummyContacts = [
+  {
+    address: 'Empire State Building, NYC',
+    phoneNumber: '+1 212-736-3100',
+    latlng: [40.748817, -73.985428],
+  },
+  {
+    address: 'Eiffel Tower, Paris',
+    phoneNumber: '+33 892 70 12 39',
+    latlng: [48.858372, 2.294481],
+  },
+  {
+    address: 'Burj Khalifa, Dubai',
+    phoneNumber: '+971 4 888 8888',
+    latlng: [25.197197, 55.274376],
+  },
+];
+
+<ContactMap contacts={dummyContacts} />
 
 const StyledRoot = styled('div')(({ theme }) => ({
   zIndex: 0,
@@ -39,9 +58,9 @@ export default function ContactMap({ contacts }) {
       <StyledRoot>
         <Map
           initialViewState={{
-            latitude: 12,
-            longitude: 42,
-            zoom: 2,
+            latitude: 30,
+            longitude: 10,
+            zoom: 1.5,
           }}
           mapStyle={`mapbox://styles/mapbox/${isLight ? 'light' : 'dark'}-v10`}
           mapboxAccessToken={MAPBOX_API}
