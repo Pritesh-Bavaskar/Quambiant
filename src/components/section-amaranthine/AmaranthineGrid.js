@@ -20,7 +20,7 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
   const ref = useRef(null);
 
   const [screenAspectRatio, setScreenAspectRatio] = useState(1);
-  const [screenAspectRatioMobile, setScreenAspectRatioMobile] = useState(353 / 240);
+  const [screenAspectRatioMobile, setScreenAspectRatioMobile] = useState(1);
 
   useEffect(() => {
     const updateAspectRatio = () => {
@@ -84,7 +84,7 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
   // From 1 (35/35 = 1) to screenAspectRatio slowly
   const animatedAspectRatio = useTransform(
     scrollYProgress,
-    [transition.mid4, transition.end],
+    [transition.mid4, transition.mid7],
     [1, screenAspectRatio]
   );
 
