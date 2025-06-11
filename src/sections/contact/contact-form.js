@@ -71,7 +71,7 @@ export default function ContactForm({ contactUs }) {
   return (
     <Box
       sx={{
-        background: '#FBF8F3 url(/assets/background/pattern-contact.png) center / cover no-repeat',
+        background: '#FBF8F3 url(/assets/background/contactus form.png) center / cover no-repeat',
         borderRadius: 0,
         // aspectRatio: { xs: '353 / 681', md: '914 / 489' },
         boxShadow: '0 4px 24px rgba(7, 1, 1, 0.08)',
@@ -107,21 +107,37 @@ export default function ContactForm({ contactUs }) {
         </Typography>
       </Box>
       <Box
+        // sx={{
+        //   display: 'flex',
+        //   gap: { xs: 2, sm: 2 },
+        //   flexDirection: { xs: 'column', sm: 'row' },
+        //   width: '100%',
+        // }}
         sx={{
-          display: 'flex',
-          gap: { xs: 2, sm: 2 },
-          flexDirection: { xs: 'column', sm: 'row' },
-          width: '100%',
-        }}
+    display: 'flex',
+    flexDirection: { xs: 'column', sm: 'row' },
+    alignItems: { xs: 'flex-start', sm: 'center' }, // Align left on mobile
+    justifyContent: { xs: 'flex-start', sm: 'space-between' }, // Align left on mobile
+    width: '100%',
+    mt: 1,
+    mb: 1,
+    gap: { xs: 4, sm: 0 },
+    textAlign: 'left', // Ensure text aligns left when wrapped
+    fontFamily: 'Satoshi',
+    fontWeight: 500,
+    fontSize: '14px',
+    lineHeight: '100%',
+    letterSpacing: '0%',
+  }}
       >
         <Typography
           sx={{
-            fontFamily: 'Playfair Display',
+            fontFamily: 'Satoshi',
             fontWeight: 500,
-            fontSize: '42px',
+            fontSize: { xs: '28px', md: '42px' },
             lineHeight: '100%',
             letterSpacing: '0%',
-            textAlign: 'center',
+            textAlign: 'left',
             verticalAlign: 'bottom',
           }}
           variant="body3"
@@ -257,7 +273,7 @@ export default function ContactForm({ contactUs }) {
       </Box>
 
       {/* Checkbox and Button */}
-      <Box
+      {/* <Box
         sx={{
           display: 'flex',
           flexDirection: { xs: 'column', sm: 'row' },
@@ -286,6 +302,68 @@ export default function ContactForm({ contactUs }) {
             textAlign: { xs: 'left', sm: 'left' },
           }}
         />
+      </Box> */}
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          alignItems: { xs: 'flex-start', sm: 'center' }, // Align to start on mobile
+          justifyContent: { xs: 'flex-start', sm: 'space-between' }, // Align left on mobile, spaced on desktop
+          width: '100%',
+          mt: 1,
+          mb: 1,
+          gap: { xs: 2, sm: 0 },
+          textAlign: 'left',
+        }}
+      >
+        <FormControlLabel
+          control={<Checkbox sx={{ p: 0, pr: 1.5, borderRadius: 0 }} />}
+          label={
+            <Typography
+              sx={{
+                color: '#232323',
+                fontSize: { xs: '14px', md: '16px' },
+                fontWeight: 500,
+                textAlign: 'left', // ensure label text is left-aligned
+                lineHeight: 1.4, // improve wrapping
+              }}
+              variant="body3"
+            >
+              Send recent offers and news on WhatsApp
+            </Typography>
+          }
+          sx={{
+            m: 0,
+            color: '#232323',
+            alignItems: 'flex-start', // make label align properly on mobile
+          }}
+        />
+      </Box>
+
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          alignItems: { xs: 'flex-start', sm: 'center' },
+          justifyContent: { xs: 'flex-start', sm: 'space-between' },
+          width: '100%',
+          mt: 1,
+          mb: 1,
+          gap: { xs: 4, sm: 0 },
+          textAlign: 'left',
+          fontFamily: 'Satoshi',
+          fontWeight: 500,
+          fontSize: '14px',
+          lineHeight: '100%',
+          letterSpacing: '0%',
+        }}
+      >
+        <Typography
+          sx={{ color: '#707070', fontSize: { xs: '14px', md: '16px' }, fontWeight: 500 ,}}
+          variant="body3"
+        >
+          By clicking on submit you agree to the terms and conditions of Quambiant
+        </Typography>
       </Box>
       <Box
         sx={{
@@ -305,16 +383,7 @@ export default function ContactForm({ contactUs }) {
           letterSpacing: '0%',
         }}
       >
-        <Typography
-          sx={{ color: '#707070', fontSize: { xs: '14px', md: '16px' }, fontWeight: 500 }}
-          variant="body3"
-        >
-          By clicking on submit you agree to the terms and conditions of Quambiant
-        </Typography>
-      </Box>
-      <Box>
         <Button
-          // variant="contained"
           sx={{
             background: '#001016',
             color: '#fff',
@@ -323,8 +392,8 @@ export default function ContactForm({ contactUs }) {
             px: 4,
             py: 1.2,
             fontWeight: 500,
-            maxWidth: { xs: '100%', sm: 220 },
-            alignSelf: { xs: 'center', sm: 'auto' }, // Center on mobile
+            width: { xs: '100%', sm: 'auto' }, // Full width on mobile
+            alignSelf: { xs: 'flex-start', sm: 'auto' }, // Align left on mobile
             '&:hover': { background: '#222' },
           }}
         >

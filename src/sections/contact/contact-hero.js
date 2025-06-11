@@ -153,9 +153,9 @@ export default function ContactHero() {
       <Container>
           <Typography
             sx={{
-              fontFamily: 'Playfair Display',
+              fontFamily: 'Satoshi',
               fontWeight: 500,
-              fontSize: '100px',
+              fontSize:{xs:'48px' ,sm: '60px', md: '80px', lg: '128px'},
               lineHeight: '100%',
               color: 'common.white',
             }}
