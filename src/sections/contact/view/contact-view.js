@@ -7,6 +7,7 @@ import { _mapContact } from 'src/_mock';
 import ContactMap from '../contact-map';
 import ContactHero from '../contact-hero';
 import ContactForm from '../contact-form';
+import ContactStrip from '../contact-strip';
 
 // ----------------------------------------------------------------------
 
@@ -39,6 +40,9 @@ export default function ContactView() {
           </Box>
         </Box>
       </Container>
+      <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+        <ContactStrip />
+      </Box>
     </>
   );
 }
