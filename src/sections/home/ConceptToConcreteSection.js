@@ -641,7 +641,7 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
 
   return (
     <LazyMotion features={domAnimation}>
-      <Container maxWidth="lg" sx={{ padding: '800px 16px 128px 16px' }} >
+      <Container maxWidth="lg">
         {/* Mobile slider */}
         < Box
           sx={{
