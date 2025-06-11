@@ -80,11 +80,12 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
     mid7: 0.9,
     end: 0.95,
     end2: 1,
+    end3: 1.1,
   };
   // From 1 (35/35 = 1) to screenAspectRatio slowly
   const animatedAspectRatio = useTransform(
     scrollYProgress,
-    [transition.mid4, transition.mid7],
+    [transition.mid4, transition.end3],
     [1, screenAspectRatio]
   );
 
