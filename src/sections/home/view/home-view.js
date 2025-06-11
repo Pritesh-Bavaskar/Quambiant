@@ -38,7 +38,7 @@ export default function HomeView() {
       <CountUpSection statsSection={filteredHomepage?.data?.StatsSection} />
 
       <SectionAmaranthine projectShowcase={filteredHomepage?.data?.ProjectShowcase} />
-      <Box sx={{ mb: { xs: 22, sm: 55, md: '130vh' } }}>
+      <Box sx={{ mb: { xs: 22, sm: 55, md: '110vh' } }}>
         <AmaranthineGrid data={filteredHomepage?.data?.ProjectShowcase} />
       </Box>
 
