@@ -89,7 +89,7 @@ export const navConfigMobile = [
   {
     title: 'CSR',
     // icon: <Iconify // icon="solar:notebook-bold-duotone" />,
-    path: '#',
+    path: paths.csr,
   },
   {
     title: 'Newsroom',

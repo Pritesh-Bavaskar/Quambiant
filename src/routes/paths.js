@@ -27,6 +27,7 @@ export const paths = {
   ourProjectUpcoming: '/our-project',
   ourProjectOngoing: '/our-project?tabId=ongoing',
   ourProjectCompleted: '/our-project?tabId=completed',
+  csr: '/csr',
   contact: '/contact-us',
   faqs: '/faqs',
   page403: '/403',

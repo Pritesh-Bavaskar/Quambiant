@@ -19,6 +19,7 @@ const InvestorLoungePage = lazy(() => import('src/pages/investor-lounge'));
 const OurProjectPage = lazy(() => import('src/pages/our-project'));
 const OurProjectDetailsPage = lazy(() => import('src/pages/our-project-details'));
 const ContactPage = lazy(() => import('src/pages/contact-us'));
+const CSRPage = lazy(() => import('src/pages/csr'));
 const PricingPage = lazy(() => import('src/pages/pricing'));
 const PaymentPage = lazy(() => import('src/pages/payment'));
 const ComingSoonPage = lazy(() => import('src/pages/coming-soon'));
@@ -47,6 +48,7 @@ export const mainRoutes = [
       { path: 'investor-lounge', element: <InvestorLoungePage /> },
       { path: 'our-project', element: <OurProjectPage /> },
       { path: 'our-project/:slug', element: <OurProjectDetailsPage /> },
+      { path: 'csr', element: <CSRPage /> },
       { path: 'contact-us', element: <ContactPage /> },
       { path: 'faqs', element: <FaqsPage /> },
       {
