@@ -6,6 +6,8 @@ import CSRHero from '../csr-hero';
 import CsrEvents from '../csr-events';
 import CSRInitiatives from '../csr-initiatives';
 import CSRResources from '../csr-resources';
+import CSRJoining from '../csr-joining';
+import CSRPhilosophy from '../csr-philosophy';
 // ----------------------------------------------------------------------
 
 export default function CSRView() {
@@ -14,9 +16,11 @@ export default function CSRView() {
   return (
     <>
       <CSRHero />
+      <CSRPhilosophy />
       <CsrEvents />
       <CSRInitiatives />
       <CSRResources />
+      <CSRJoining />
     </>
   );
 }
