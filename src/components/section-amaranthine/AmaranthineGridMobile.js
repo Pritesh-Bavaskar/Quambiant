@@ -150,7 +150,7 @@ const AmaranthineGridMobile = ({
     [0.6, 0.7, 0.8, 0.9],
     [1, 0.7, 0.3, 0]
   );
-  const highlightSectionProgress = useTransform(scrollYProgress, [0.9, 0.95], [0, 1]);
+  const highlightSectionProgress = useTransform(scrollYProgress, [0.95, 0.96], [0, 1]);
 
   return (
     <Box

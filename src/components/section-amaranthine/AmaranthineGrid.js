@@ -135,7 +135,7 @@ export default function AmaranthineGrid({ data, setSharedScroll }) {
   const fallbackTitleBlockOpacity = useTransform(scrollYProgress, [0.4, 0.5], [0, 1]);
   const titleBlockOpacity = fallbackTitleBlockOpacity;
 
-  const highlightSectionProgress = useTransform(scrollYProgress, [0.9, 0.95], [0, 1]);
+  const highlightSectionProgress = useTransform(scrollYProgress, [0.94, 0.95], [0, 1]);
 
   // Mobile-specific animations have been moved to AmaranthineGridMobile component
 
