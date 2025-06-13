@@ -19,6 +19,7 @@ import Box from '@mui/material/Box';
 import HomeHero from '../home-hero';
 import CountUpSection from '../../../components/count-up/CountUp';
 import { SectionAmaranthine } from '../../../components/section-amaranthine/SectionAmaranthine';
+import AmaranthineAnimation from '../../../components/section-amaranthine/AmaranthineAnimation';
 // ----------------------------------------------------------------------
 
 export default function HomeView() {
@@ -38,9 +39,10 @@ export default function HomeView() {
       <CountUpSection statsSection={filteredHomepage?.data?.StatsSection} />
 
       <SectionAmaranthine projectShowcase={filteredHomepage?.data?.ProjectShowcase} />
-      <Box sx={{ mb: { xs: 22, sm: 55, md: '110vh' } }}>
+      {/* <Box sx={{ mb: { xs: 22, sm: 55, md: '110vh' } }}>
         <AmaranthineGrid data={filteredHomepage?.data?.ProjectShowcase} />
-      </Box>
+      </Box> */}
+      <AmaranthineAnimation data={filteredHomepage?.data?.ProjectShowcase} />
 
       <ConceptToConcreteSection
         conceptToConcreteSection={filteredHomepage?.data?.TimelineSection}
