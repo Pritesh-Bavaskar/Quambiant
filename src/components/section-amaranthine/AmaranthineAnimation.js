@@ -124,40 +124,55 @@ const AmaranthineAnimation = ({ data }) => {
   const animationRef = useRef(null);
 
   useEffect(() => {
-    if (!colorBoxRef.current || !containerRef.current) return;
+    if (!colorBoxRef.current || !containerRef.current) return () => {};
 
     const box = colorBoxRef.current;
+    const container = containerRef.current;
     const rect = box.getBoundingClientRect();
 
     const targetWidth = window.innerWidth;
-    const targetHeight = window.innerHeight;
+    const targetHeight = window.innerHeight + 10;
 
     const deltaX = (targetWidth - rect.width) / 2;
+    const deltaY = (targetHeight - rect.height) / 2;
 
+    // First, set up the ScrollTrigger for the sticky container
+    ScrollTrigger.create({
+      trigger: container,
+      start: "bottom bottom",
+      end: "+=200%",
+      pin: true,
+      pinSpacing: false,
+      markers: true,
+      id: "container-pin"
+    });
+
+    // Then create the animation timeline for the color box
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: box,
-        start: 'center center',
-        end: '+=100%',
+        trigger: container,
+        start: "bottom bottom",
+        end: "+=100%",
         scrub: true,
-        pin: containerRef.current,
         markers: true,
-      },
+        id: "box-animation"
+      }
     });
+
     tl.to(box, {
       width: targetWidth,
-      height: targetHeight,
+      height: targetHeight + 10,
       x: -deltaX,
-      y: 0, // ✅ Don't shift upward — this is what causes the image to overflow top
+      y: -deltaY,
       ease: 'power2.inOut',
     });
 
     gsap.to(box.querySelector('.bg-image'), {
       opacity: 1,
       scrollTrigger: {
-        trigger: box,
-        start: 'center center',
-        end: '+=100%',
+        trigger: container,
+        start: "bottom bottom",
+        end: "+=100%",
         scrub: true,
       },
     });
@@ -165,24 +180,21 @@ const AmaranthineAnimation = ({ data }) => {
     gsap.to(box.querySelector('.content'), {
       opacity: 0,
       scrollTrigger: {
-        trigger: box,
-        start: 'center center',
-        end: '+=100%',
+        trigger: container,
+        start: "bottom bottom",
+        end: "+=100%",
         scrub: true,
       },
     });
 
-    // eslint-disable-next-line consistent-return
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      tl.kill();
     };
   }, []);
 
   const backgroundImage = data?.SpotlightImage?.url
     ? `url(${process.env.REACT_APP_HOST_API}${data.SpotlightImage.url})`
     : '';
-  console.log(backgroundImage);
 
   return (
     <StickyContainer>
