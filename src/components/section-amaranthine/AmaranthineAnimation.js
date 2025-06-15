@@ -159,6 +159,7 @@ const renderCard = (card) => (
       display: 'flex',
       flexDirection: 'column',
       height: 'auto',
+      minHeight: '520px',
       backgroundColor: 'rgba(255, 255, 255, 1)',
       boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
     }}
@@ -171,7 +172,7 @@ const renderCard = (card) => (
         sx={{ width: '100%', height: 240, objectFit: 'cover' }}
       />
     </Box>
-    <CardContent sx={{ flex: '1 1 auto', p: 0, '&:last-child': { pb: 0 } }}>
+    <CardContent sx={{ flex: '1 1 auto', p: 0, '&:last-child': { pb: 0 }, textAlign: 'left' }}>
       <Typography
         fontFamily="Satoshi Variable"
         fontSize={{ xs: 20, md: 24 }}
@@ -186,7 +187,15 @@ const renderCard = (card) => (
         fontSize={{ xs: 14, md: 16 }}
         fontWeight={500}
         color="#666666"
-        sx={{ mt: 2 }}
+        sx={{
+          mt: 2,
+          overflow: 'auto',
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+          msOverflowStyle: 'none' /* IE and Edge */,
+          scrollbarWidth: 'none' /* Firefox */,
+        }}
       >
         {card.description}
       </Typography>
@@ -217,49 +226,49 @@ const AmaranthineAnimation = ({ data }) => {
   const cardsContainerRef = useRef(null);
   const colorBoxContentRef = useRef(null);
 
-  useEffect(() => {
-    if (!cardsContainerRef.current) return;
+  // useEffect(() => {
+  //   if (!cardsContainerRef.current) return;
 
-    const heading = cardsContainerRef.current.querySelector('.amaranthine-heading');
-    const cardEls = cardsContainerRef.current.querySelectorAll('.amaranthine-card');
+  //   const heading = cardsContainerRef.current.querySelector('.amaranthine-heading');
+  //   const cardEls = cardsContainerRef.current.querySelectorAll('.amaranthine-card');
 
-    // SAFETY: Only include heading if it exists
-    const targets = [...cardEls];
-    if (heading) targets.unshift(heading);
+  //   // SAFETY: Only include heading if it exists
+  //   const targets = [...cardEls];
+  //   if (heading) targets.unshift(heading);
 
-    gsap.set(targets, { opacity: 0, y: 30 });
+  //   gsap.set(targets, { opacity: 0, y: 30 });
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: cardsContainerRef.current,
-        start: 'top 80%',
-        end: 'bottom bottom',
-        scrub: true,
-      },
-    });
+  //   const tl = gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: cardsContainerRef.current,
+  //       start: 'top 80%',
+  //       end: 'bottom bottom',
+  //       scrub: true,
+  //     },
+  //   });
 
-    if (heading) {
-      tl.to(heading, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: 'power2.out',
-      });
-    }
+  //   if (heading) {
+  //     tl.to(heading, {
+  //       opacity: 1,
+  //       y: 0,
+  //       duration: 0.6,
+  //       ease: 'power2.out',
+  //     });
+  //   }
 
-    cardEls.forEach((card, i) => {
-      tl.to(
-        card,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-        },
-        `+=${i === 0 ? 0.2 : 0.15}`
-      );
-    });
-  }, []);
+  //   cardEls.forEach((card, i) => {
+  //     tl.to(
+  //       card,
+  //       {
+  //         opacity: 1,
+  //         y: 0,
+  //         duration: 0.5,
+  //         ease: 'power2.out',
+  //       },
+  //       `+=${i === 0 ? 0.2 : 0.15}`
+  //     );
+  //   });
+  // }, []);
 
   useEffect(() => {
     if (!colorBoxRef.current || !containerRef.current) return () => {};
@@ -281,22 +290,21 @@ const AmaranthineAnimation = ({ data }) => {
       end: '+=250%',
       pin: true,
       pinSpacing: false,
-      markers: true,
       id: 'container-pin',
     });
 
-    // Then create the animation timeline for the color box
+    // Create the main animation timeline for the color box
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
         start: 'bottom bottom',
         end: '+=200%',
         scrub: true,
-        markers: true,
         id: 'box-animation',
       },
     });
 
+    // Scale the box to full screen
     tl.to(box, {
       width: targetWidth,
       height: targetHeight + 10,
@@ -305,53 +313,56 @@ const AmaranthineAnimation = ({ data }) => {
       ease: 'power2.inOut',
     });
 
-    gsap.to(box.querySelector('.bg-image'), {
-      opacity: 1,
-      scrollTrigger: {
-        trigger: container,
-        start: 'bottom bottom',
-        end: '+=200%',
-        scrub: true,
-      },
-    });
-
-    // Fade out the heading and subheading as the box scales
-    gsap.to(box.querySelector('.heading-container'), {
-      opacity: 0,
-      y: -50,
-      scrollTrigger: {
-        trigger: container,
-        start: 'bottom bottom',
-        end: '+=50%',  // Changed from 200% to 100% to make it fade earlier
-        scrub: true,
-      },
-    });
-
-    // After ColorBox scale is complete
+    // Fade in the background image
     tl.to(
-      colorBoxContentRef.current.querySelector('.amaranthine-heading'),
+      box.querySelector('.bg-image'),
       {
         opacity: 1,
-        y: 0,
-        duration: 0.5,
-        ease: 'power2.out',
+        ease: 'power2.inOut',
       },
-      '+=0.2'
+      '<'
     );
 
-    const cardsEls = colorBoxContentRef.current.querySelectorAll('.amaranthine-card');
+    // Fade out the heading and subheading
+    tl.to(
+      box.querySelector('.heading-container'),
+      {
+        opacity: 0,
+        y: -50,
+        ease: 'power2.inOut',
+      },
+      '<'
+    );
 
-    cardsEls.forEach((card, i) => {
-      tl.to(
-        card,
-        {
+    // Only after the box is fully scaled, animate the content
+    tl.to(colorBoxContentRef.current, {
+      opacity: 1,
+      onStart: () => {
+        // Create a separate timeline for the cards animation
+        const contentTl = gsap.timeline();
+
+        // Animate the heading
+        contentTl.to(colorBoxContentRef.current.querySelector('.amaranthine-heading'), {
           opacity: 1,
           y: 0,
-          duration: 0.4,
+          duration: 0.5,
           ease: 'power2.out',
-        },
-        `+=${i === 0 ? 0.2 : 0.1}`
-      );
+        });
+
+        // Animate each card with proper stagger
+        const cardsEls = colorBoxContentRef.current.querySelectorAll('.amaranthine-card');
+        contentTl.to(
+          cardsEls,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: 'power2.out',
+            stagger: 0.1,
+          },
+          '+=0.2'
+        );
+      },
     });
 
     return () => {
@@ -560,7 +571,7 @@ const AmaranthineAnimation = ({ data }) => {
                 spacing={3}
                 justifyContent="center"
                 className="amaranthine-cards"
-                style={{ position: 'relative', zIndex: 10, minHeight: '200px' }}
+                style={{ position: 'relative', zIndex: 10, minHeight: '200px', opacity: 1 }}
               >
                 {cards.map((card, index) => (
                   <Grid item xs={12} sm={6} md={4} key={index}>
@@ -568,7 +579,7 @@ const AmaranthineAnimation = ({ data }) => {
                       className="amaranthine-card"
                       sx={{
                         opacity: 0,
-                        transform: 'translateY(30px)',
+                        // transform: 'translateY(30px)',
                       }}
                     >
                       {renderCard(card)}
