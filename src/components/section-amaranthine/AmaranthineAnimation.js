@@ -121,7 +121,7 @@ const ColorBox = styled(Box, {
     zIndex: 3,
   },
   '& .heading-container': {
-    position: 'absolute',
+    position: 'fixed', // Changed from absolute to fixed
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
@@ -130,7 +130,8 @@ const ColorBox = styled(Box, {
     padding: '0 20px',
     zIndex: 3,
     opacity: 1,
-    transition: 'opacity 0.5s ease, transform 0.5s ease',
+    transition: 'opacity 0.5s ease',
+    willChange: 'opacity', // Added for performance
   },
 
   '& .bg-image': {
@@ -272,17 +273,17 @@ const AmaranthineAnimation = ({ data }) => {
 
   useEffect(() => {
     if (!colorBoxRef.current || !containerRef.current) return () => {};
-
+  
     const box = colorBoxRef.current;
     const container = containerRef.current;
     const rect = box.getBoundingClientRect();
-
+  
     const targetWidth = window.innerWidth;
     const targetHeight = window.innerHeight + 10;
-
+  
     const deltaX = (targetWidth - rect.width) / 2;
     const deltaY = (targetHeight - rect.height) / 2.4;
-
+  
     // First, set up the ScrollTrigger for the sticky container
     ScrollTrigger.create({
       trigger: container,
@@ -292,7 +293,7 @@ const AmaranthineAnimation = ({ data }) => {
       pinSpacing: false,
       id: 'container-pin',
     });
-
+  
     // Create the main animation timeline for the color box
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -303,7 +304,7 @@ const AmaranthineAnimation = ({ data }) => {
         id: 'box-animation',
       },
     });
-
+  
     // Scale the box to full screen
     tl.to(box, {
       width: targetWidth,
@@ -312,7 +313,7 @@ const AmaranthineAnimation = ({ data }) => {
       y: -deltaY,
       ease: 'power2.inOut',
     });
-
+  
     // Fade in the background image
     tl.to(
       box.querySelector('.bg-image'),
@@ -322,25 +323,39 @@ const AmaranthineAnimation = ({ data }) => {
       },
       '<'
     );
-
-    // Fade out the heading and subheading
+  
+    // Fade out the heading and subheading (without moving them)
     tl.to(
       box.querySelector('.heading-container'),
       {
         opacity: 0,
-        y: -50,
         ease: 'power2.inOut',
       },
       '<'
     );
-
+  
+    // Rest of your animation code remains the same...
     // Only after the box is fully scaled, animate the content
     tl.to(colorBoxContentRef.current, {
       opacity: 1,
       onStart: () => {
-        // Create a separate timeline for the cards animation
-        const contentTl = gsap.timeline();
-
+        // Create a separate timeline for the cards animation with scrub
+        const contentTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: colorBoxContentRef.current,
+            start: 'top center',
+            end: 'bottom center',
+            scrub: true,
+            id: 'cards-animation',
+          }
+        });
+  
+        // Get all card elements
+        const cardsEls = colorBoxContentRef.current.querySelectorAll('.amaranthine-card');
+        
+        // Set initial state for cards (hidden)
+        gsap.set(cardsEls, { opacity: 0, y: 30 });
+  
         // Animate the heading
         contentTl.to(colorBoxContentRef.current.querySelector('.amaranthine-heading'), {
           opacity: 1,
@@ -348,9 +363,8 @@ const AmaranthineAnimation = ({ data }) => {
           duration: 0.5,
           ease: 'power2.out',
         });
-
-        // Animate each card with proper stagger
-        const cardsEls = colorBoxContentRef.current.querySelectorAll('.amaranthine-card');
+  
+        // Animate cards in when scrolling down
         contentTl.to(
           cardsEls,
           {
@@ -364,7 +378,7 @@ const AmaranthineAnimation = ({ data }) => {
         );
       },
     });
-
+  
     return () => {
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
