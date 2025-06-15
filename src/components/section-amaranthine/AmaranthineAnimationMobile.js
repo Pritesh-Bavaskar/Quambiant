@@ -20,8 +20,8 @@ const StyledContainer = styled(Box)({
   width: '100%',
   height: '100vh',
   display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
   padding: '16px',
   boxSizing: 'border-box',
 });
@@ -29,14 +29,25 @@ const StyledContainer = styled(Box)({
 const GridContainer = styled(Box)({
   display: 'grid',
   gridTemplateColumns: '1fr 1fr',
-  gridTemplateRows: '1fr 1fr',
   gap: '8px',
   width: '100%',
   maxWidth: '500px',
-  height: '100vw',
-  maxHeight: '500px',
   position: 'relative',
   margin: '0 auto',
+});
+
+const TopRow = styled(Box)({
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+  gap: '8px',
+  marginBottom: '16px',
+});
+
+const BottomRow = styled(Box)({
+  display: 'grid',
+  gridTemplateColumns: '1fr 1fr',
+  gap: '8px',
+  marginTop: '16px',
 });
 
 const GridItem = styled(Box)({
@@ -68,10 +79,10 @@ const ColorBox = styled(Box, {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 'calc(100% - 32px)',
-  height: 'calc(100% - 32px)',
+  width: '353px',
+  height: '260px',
   zIndex: 2,
-  padding: '1rem',
+  padding: '1.5rem',
   textAlign: 'center',
   '& .title': {
     fontSize: '1.8rem',
@@ -139,7 +150,7 @@ const AmaranthineAnimationMobile = ({ data }) => {
     ScrollTrigger.create({
       trigger: container,
       start: 'top top',
-      end: '+=300%',
+      end: '+=200%',
       pin: true,
       pinSpacing: false,
       markers: true,
@@ -151,17 +162,28 @@ const AmaranthineAnimationMobile = ({ data }) => {
       scrollTrigger: {
         trigger: container,
         start: 'bottom bottom',
-        end: '+=200%',
+        end: '+=100%',
         scrub: true,
         markers: true,
         id: 'mobile-box-animation',
       },
     });
 
+    // Set initial scale to fit 353x260 box
+    gsap.set(box, {
+      width: '353px',
+      height: '260px',
+      // x: '-50%',
+      // y: '-50%',
+      transformOrigin: 'center center'
+    });
+
     tl.to(box, {
       width: '100vw',
       height: '100vh',
       borderRadius: 0,
+      x: 0,
+      y: 0,
       ease: 'power2.inOut',
     });
 
@@ -171,7 +193,7 @@ const AmaranthineAnimationMobile = ({ data }) => {
       scrollTrigger: {
         trigger: container,
         start: 'bottom bottom',
-        end: '+=200%',
+        end: '+=100%',
         scrub: true,
       },
     });
@@ -200,7 +222,7 @@ const AmaranthineAnimationMobile = ({ data }) => {
   return (
     <StickyContainer>
       <StyledContainer ref={containerRef}>
-        <GridContainer>
+        <TopRow>
           <GridItem>
             <StyledImage
               src={`${process.env.REACT_APP_HOST_API}${images[0]}`}
@@ -213,6 +235,20 @@ const AmaranthineAnimationMobile = ({ data }) => {
               alt="Amaranthine 2"
             />
           </GridItem>
+        </TopRow>
+        <ColorBox ref={colorBoxRef} backgroundImage={backgroundImage}>
+          <Box className="bg-image" />
+          <Box className="content">
+            <Typography variant="h2" className="title">
+              AMARANTHINE
+            </Typography>
+            <Box className="divider" />
+            <Typography variant="subtitle1" className="subtitle">
+              3/4 BHK LUXURY APARTMENTS
+            </Typography>
+          </Box>
+        </ColorBox>
+        <BottomRow>
           <GridItem>
             <StyledImage
               src={`${process.env.REACT_APP_HOST_API}${images[2]}`}
@@ -225,19 +261,7 @@ const AmaranthineAnimationMobile = ({ data }) => {
               alt="Amaranthine 4"
             />
           </GridItem>
-          <ColorBox ref={colorBoxRef} backgroundImage={backgroundImage}>
-            <Box className="bg-image" />
-            <Box className="content">
-              <Typography variant="h2" className="title">
-                AMARANTHINE
-              </Typography>
-              <Box className="divider" />
-              <Typography variant="subtitle1" className="subtitle">
-                3/4 BHK LUXURY APARTMENTS
-              </Typography>
-            </Box>
-          </ColorBox>
-        </GridContainer>
+        </BottomRow>
       </StyledContainer>
     </StickyContainer>
   );
