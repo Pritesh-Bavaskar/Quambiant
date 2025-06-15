@@ -90,9 +90,9 @@ const ColorBox = styled(Box, {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  // width: '353px',
-  // height: '260px',
-  aspectRatio: '353/260',
+  width: '96%',
+  height: '260px',
+  // aspectRatio: '353/260',
   zIndex: 2,
   padding: '1.5rem',
   textAlign: 'center',
@@ -164,6 +164,26 @@ const AmaranthineAnimationMobile = ({ data }) => {
     arrows: false,
     centerMode: true,
     centerPadding: '18px',
+    responsive: [
+      {
+        breakpoint: 900, // Tablet breakpoint
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          centerMode: false,
+          centerPadding: '0',
+        }
+      },
+      {
+        breakpoint: 600, // Mobile breakpoint
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          centerMode: true,
+          centerPadding: '18px',
+        }
+      }
+    ]
   });
 
   const CustomArrow = ({ icon, onClick, sx }) => (
@@ -202,7 +222,7 @@ const AmaranthineAnimationMobile = ({ data }) => {
       sx={{
         borderRadius: 0,
         width: '97%',
-        height: '450px',
+        height: { xs: '450px', sm: '550px' }, // Increased height for tablet view
         minHeight: '100%',
         mx: 'auto',
         p: 2,
@@ -312,7 +332,7 @@ const AmaranthineAnimationMobile = ({ data }) => {
       end: '+=200%',
       pin: true,
       pinSpacing: false,
-      markers: true,
+      markers: false,
       id: 'mobile-container-pin',
     });
 
@@ -326,7 +346,7 @@ const AmaranthineAnimationMobile = ({ data }) => {
         start: 'bottom bottom',
         end: '+=100%',
         scrub: true,
-        markers: true,
+        markers: false,
         id: 'mobile-box-animation',
         onUpdate: (self) => {
           // Handle heading and carousel opacity based on scroll progress
@@ -357,7 +377,7 @@ const AmaranthineAnimationMobile = ({ data }) => {
 
     // Set initial scale to fit 353x260 box
     gsap.set(box, {
-      width: '353px',
+      width: '96%',
       height: '260px',
       transformOrigin: 'center center',
     });
