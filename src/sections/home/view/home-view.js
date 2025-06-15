@@ -1,4 +1,5 @@
 import { useScroll } from 'framer-motion';
+import { useResponsive } from 'src/hooks/use-responsive';
 // components
 import ScrollProgress from 'src/components/scroll-progress';
 //
@@ -20,6 +21,7 @@ import HomeHero from '../home-hero';
 import CountUpSection from '../../../components/count-up/CountUp';
 import { SectionAmaranthine } from '../../../components/section-amaranthine/SectionAmaranthine';
 import AmaranthineAnimation from '../../../components/section-amaranthine/AmaranthineAnimation';
+import AmaranthineAnimationMobile from '../../../components/section-amaranthine/AmaranthineAnimationMobile';
 // ----------------------------------------------------------------------
 
 export default function HomeView() {
@@ -27,6 +29,7 @@ export default function HomeView() {
   const { filteredHomepage } = useGetHomepageWithFilter(
     `populate[Hero][populate]=*&populate[StatsSection]=*&populate[TimelineSection][populate][Steps][populate]=*&populate[HomeStories][populate][HomeStoriesSlider][populate]=*&populate[ContactUs][populate]=*&populate[Spotlight][populate][Card][populate]=*&populate[GreenBuildingStats][populate]=*&populate[Awards][populate][AwardsSlider][populate]=*&populate[UpcomingLaunches][populate][Projects][populate]=*&populate[ProjectShowcase][populate][GallaryImage1]=true&populate[ProjectShowcase][populate][GallaryImage2]=true&populate[ProjectShowcase][populate][GallaryImage3]=true&populate[ProjectShowcase][populate][GallaryImage4]=true&populate[ProjectShowcase][populate][GallaryImage6]=true&populate[ProjectShowcase][populate][SpotlightImage]=true&populate[ProjectShowcase][populate][StoryCard][populate]=*`
   );
+  const mdUp = useResponsive('up', 'md');
 
   return (
     <>
@@ -42,7 +45,11 @@ export default function HomeView() {
       {/* <Box sx={{ mb: { xs: 22, sm: 55, md: '110vh' } }}>
         <AmaranthineGrid data={filteredHomepage?.data?.ProjectShowcase} />
       </Box> */}
-      <AmaranthineAnimation data={filteredHomepage?.data?.ProjectShowcase} />
+      {mdUp ? (
+        <AmaranthineAnimation data={filteredHomepage?.data?.ProjectShowcase} />
+      ) : (
+        <AmaranthineAnimationMobile data={filteredHomepage?.data?.ProjectShowcase} />
+      )}
 
       <ConceptToConcreteSection
         conceptToConcreteSection={filteredHomepage?.data?.TimelineSection}
