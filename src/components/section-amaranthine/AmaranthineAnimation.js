@@ -61,7 +61,7 @@ const StyledImage = styled('img')({
 
 const ColorBox = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'backgroundImage',
-})(({ backgroundImage }) => ({
+})(({ backgroundImage, theme }) => ({
   backgroundColor: '#0F2F50',
   display: 'flex',
   alignItems: 'center',
@@ -70,7 +70,6 @@ const ColorBox = styled(Box, {
   position: 'relative',
   width: '100%',
   aspectRatio: '1 / 1',
-  // height: '100%', // constrained by parent unless fullscreen
   transformOrigin: 'center center',
   willChange: 'width, height, transform',
   zIndex: 2,
@@ -83,10 +82,55 @@ const ColorBox = styled(Box, {
     height: '100vh',
     transform: 'translate(0, 0)',
     zIndex: 100,
-    overflowY: 'auto', // ✅ important
+    overflowY: 'auto',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center', // you can switch this to 'start' if needed
+    justifyContent: 'center',
+  },
+  '& .title': {
+    fontSize: '42px',
+    fontWeight: 400,
+    fontFamily: 'Satoshi Variable',
+    marginBottom: '0.5rem',
+    lineHeight: 1.1,
+    color: 'white',
+    position: 'relative',
+    zIndex: 3,
+    [theme.breakpoints.down('md')]: {
+      fontSize: '2.5rem',
+    },
+  },
+  '& .subtitle': {
+    fontSize: '12px',
+    fontWeight: 500,
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase',
+    color: '#E6E6E6',
+    position: 'relative',
+    zIndex: 3,
+    [theme.breakpoints.down('md')]: {
+      fontSize: '0.9rem',
+    },
+  },
+  '& .divider': {
+    width: '60px',
+    height: '1px',
+    backgroundColor: 'white',
+    margin: '1.2rem auto',
+    position: 'relative',
+    zIndex: 3,
+  },
+  '& .heading-container': {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    textAlign: 'center',
+    width: '100%',
+    padding: '0 20px',
+    zIndex: 3,
+    opacity: 1,
+    transition: 'opacity 0.5s ease, transform 0.5s ease',
   },
 
   '& .bg-image': {
@@ -228,13 +272,13 @@ const AmaranthineAnimation = ({ data }) => {
     const targetHeight = window.innerHeight + 10;
 
     const deltaX = (targetWidth - rect.width) / 2;
-    const deltaY = (targetHeight - rect.height) / 2.5;
+    const deltaY = (targetHeight - rect.height) / 2.4;
 
     // First, set up the ScrollTrigger for the sticky container
     ScrollTrigger.create({
       trigger: container,
       start: 'bottom bottom',
-      end: '+=200%',
+      end: '+=250%',
       pin: true,
       pinSpacing: false,
       markers: true,
@@ -246,7 +290,7 @@ const AmaranthineAnimation = ({ data }) => {
       scrollTrigger: {
         trigger: container,
         start: 'bottom bottom',
-        end: '+=100%',
+        end: '+=200%',
         scrub: true,
         markers: true,
         id: 'box-animation',
@@ -266,17 +310,19 @@ const AmaranthineAnimation = ({ data }) => {
       scrollTrigger: {
         trigger: container,
         start: 'bottom bottom',
-        end: '+=100%',
+        end: '+=200%',
         scrub: true,
       },
     });
 
-    gsap.to(box.querySelector('.content'), {
+    // Fade out the heading and subheading as the box scales
+    gsap.to(box.querySelector('.heading-container'), {
       opacity: 0,
+      y: -50,
       scrollTrigger: {
         trigger: container,
         start: 'bottom bottom',
-        end: '+=100%',
+        end: '+=50%',  // Changed from 200% to 100% to make it fade earlier
         scrub: true,
       },
     });
@@ -290,7 +336,7 @@ const AmaranthineAnimation = ({ data }) => {
         duration: 0.5,
         ease: 'power2.out',
       },
-      '+=0.3'
+      '+=0.2'
     );
 
     const cardsEls = colorBoxContentRef.current.querySelectorAll('.amaranthine-card');
@@ -468,6 +514,10 @@ const AmaranthineAnimation = ({ data }) => {
             backgroundImage={backgroundImage}
           >
             <Box className="bg-image" />
+            <Box className="heading-container">
+              <Typography className="title">AMARANTHINE</Typography>
+              <Typography className="subtitle">3/4 BHK Luxury Apartments</Typography>
+            </Box>
             <Box
               className="colorbox-content"
               ref={colorBoxContentRef}
@@ -481,6 +531,13 @@ const AmaranthineAnimation = ({ data }) => {
                 textAlign: 'center',
                 overflowY: 'auto',
                 maxHeight: '100vh',
+                // Hide scrollbar for Chrome, Safari and Opera
+                '&::-webkit-scrollbar': {
+                  display: 'none',
+                },
+                // Hide scrollbar for IE, Edge and Firefox
+                msOverflowStyle: 'none', // IE and Edge
+                scrollbarWidth: 'none', // Firefox
               }}
             >
               <Typography
