@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Box, styled } from '@mui/material';
+import { Typography, Card, CardContent, CardMedia, Grid, Box, styled } from '@mui/material';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,10 +69,25 @@ const ColorBox = styled(Box, {
   overflow: 'hidden',
   position: 'relative',
   width: '100%',
-  height: '100%',
+  aspectRatio: '1 / 1',
+  // height: '100%', // constrained by parent unless fullscreen
   transformOrigin: 'center center',
   willChange: 'width, height, transform',
   zIndex: 2,
+
+  '&.fullscreen': {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100vw',
+    height: '100vh',
+    transform: 'translate(0, 0)',
+    zIndex: 100,
+    overflowY: 'auto', // ✅ important
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center', // you can switch this to 'start' if needed
+  },
 
   '& .bg-image': {
     position: 'absolute',
@@ -88,27 +103,52 @@ const ColorBox = styled(Box, {
     transition: 'opacity 0.5s ease',
     zIndex: 1,
   },
-
-  '& .content': {
-    position: 'relative',
-    zIndex: 2,
-    color: 'white',
-    fontSize: '1.2rem',
-    fontWeight: 'bold',
-    transition: 'opacity 0.5s ease',
-  },
-
-  '&.fullscreen': {
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '100vw',
-    height: '100vh',
-    aspectRatio: 'unset',
-    zIndex: 100,
-  },
 }));
+
+const renderCard = (card) => (
+  <Card
+    sx={{
+      borderRadius: 0,
+      width: '97%',
+      mx: 'auto',
+      p: 2,
+      display: 'flex',
+      flexDirection: 'column',
+      height: 'auto',
+      backgroundColor: 'rgba(255, 255, 255, 1)',
+      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+    }}
+  >
+    <Box sx={{ flex: '0 0 auto' }}>
+      <CardMedia
+        component="img"
+        image={card.image}
+        alt={card.title}
+        sx={{ width: '100%', height: 240, objectFit: 'cover' }}
+      />
+    </Box>
+    <CardContent sx={{ flex: '1 1 auto', p: 0, '&:last-child': { pb: 0 } }}>
+      <Typography
+        fontFamily="Satoshi Variable"
+        fontSize={{ xs: 20, md: 24 }}
+        fontWeight={700}
+        color="#18191B"
+        sx={{ mt: 2 }}
+      >
+        {card.title}
+      </Typography>
+      <Typography
+        fontFamily="Satoshi Variable"
+        fontSize={{ xs: 14, md: 16 }}
+        fontWeight={500}
+        color="#666666"
+        sx={{ mt: 2 }}
+      >
+        {card.description}
+      </Typography>
+    </CardContent>
+  </Card>
+);
 
 const AmaranthineAnimation = ({ data }) => {
   const images = [
@@ -119,11 +159,64 @@ const AmaranthineAnimation = ({ data }) => {
     data?.GallaryImage6?.url,
   ];
 
+  const cards = (data?.StoryCard || []).map((card) => ({
+    image: card?.Image?.url ? `${process.env.REACT_APP_HOST_API}${card.Image.url}` : '',
+    title: card?.Title || '',
+    description: card?.SubTitle || '',
+  }));
+
   const containerRef = useRef(null);
   const colorBoxRef = useRef(null);
   const animationRef = useRef(null);
   const firstRowRefs = useRef([]);
   const secondRowRefs = useRef([]);
+  const cardsContainerRef = useRef(null);
+  const colorBoxContentRef = useRef(null);
+
+  useEffect(() => {
+    if (!cardsContainerRef.current) return;
+
+    const heading = cardsContainerRef.current.querySelector('.amaranthine-heading');
+    const cardEls = cardsContainerRef.current.querySelectorAll('.amaranthine-card');
+
+    // SAFETY: Only include heading if it exists
+    const targets = [...cardEls];
+    if (heading) targets.unshift(heading);
+
+    gsap.set(targets, { opacity: 0, y: 30 });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: cardsContainerRef.current,
+        start: 'top 80%',
+        end: 'bottom bottom',
+        scrub: true,
+      },
+    });
+
+    if (heading) {
+      tl.to(heading, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: 'power2.out',
+      });
+    }
+
+    cardEls.forEach((card, i) => {
+      tl.to(
+        card,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: 'power2.out',
+        },
+        `+=${i === 0 ? 0.2 : 0.15}`
+      );
+    });
+  }, []);
+
 
   useEffect(() => {
     if (!colorBoxRef.current || !containerRef.current) return () => {};
@@ -187,6 +280,33 @@ const AmaranthineAnimation = ({ data }) => {
         end: '+=100%',
         scrub: true,
       },
+    });
+
+    // After ColorBox scale is complete
+    tl.to(
+      colorBoxContentRef.current.querySelector('.amaranthine-heading'),
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power2.out',
+      },
+      '+=0.3'
+    );
+
+    const cardsEls = colorBoxContentRef.current.querySelectorAll('.amaranthine-card');
+
+    cardsEls.forEach((card, i) => {
+      tl.to(
+        card,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.4,
+          ease: 'power2.out',
+        },
+        `+=${i === 0 ? 0.2 : 0.1}`
+      );
     });
 
     return () => {
@@ -349,7 +469,58 @@ const AmaranthineAnimation = ({ data }) => {
             backgroundImage={backgroundImage}
           >
             <Box className="bg-image" />
-            <Box className="content">Your Content Here</Box>
+            <Box
+              className="colorbox-content"
+              ref={colorBoxContentRef}
+              sx={{
+                position: 'relative',
+                zIndex: 2,
+                width: '100%',
+                maxWidth: '1200px',
+                margin: '0 auto',
+                padding: '2rem 1rem',
+                textAlign: 'center',
+                overflowY: 'auto',
+                maxHeight: '100vh',
+              }}
+            >
+              <Typography
+                variant="h2"
+                className="amaranthine-heading"
+                sx={{
+                  color: 'white',
+                  fontWeight: 400,
+                  fontSize: { xs: 32, md: 64 },
+                  mb: 4,
+                  opacity: 0,
+                  transform: 'translateY(30px)',
+                }}
+              >
+                {data?.StoryCardSliderHeading}
+              </Typography>
+
+              <Grid
+                container
+                spacing={3}
+                justifyContent="center"
+                className="amaranthine-cards"
+                style={{ position: 'relative', zIndex: 10, minHeight: '200px' }}
+              >
+                {cards.map((card, index) => (
+                  <Grid item xs={12} sm={6} md={4} key={index}>
+                    <Box
+                      className="amaranthine-card"
+                      sx={{
+                        opacity: 0,
+                        transform: 'translateY(30px)',
+                      }}
+                    >
+                      {renderCard(card)}
+                    </Box>
+                  </Grid>
+                ))}
+              </Grid>
+            </Box>
           </ColorBox>
 
           <GridItem ref={addToSecondRowRefs}>
