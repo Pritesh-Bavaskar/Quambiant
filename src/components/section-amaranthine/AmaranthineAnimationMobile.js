@@ -90,15 +90,16 @@ const ColorBox = styled(Box, {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: '353px',
-  height: '260px',
+  // width: '353px',
+  // height: '260px',
+  aspectRatio: '353/260',
   zIndex: 2,
   padding: '1.5rem',
   textAlign: 'center',
   '& .title': {
     fontSize: '1.8rem',
     fontWeight: 400,
-    fontFamily: '"Playfair Display", serif',
+    fontFamily: 'Satoshi Variable',
     marginBottom: '0.5rem',
     lineHeight: 1.1,
   },
@@ -201,7 +202,8 @@ const AmaranthineAnimationMobile = ({ data }) => {
       sx={{
         borderRadius: 0,
         width: '97%',
-        height: '500px', // Set a fixed height for all cards
+        height: '450px',
+        minHeight: '100%',
         mx: 'auto',
         p: 2,
         display: 'flex',
@@ -229,6 +231,7 @@ const AmaranthineAnimationMobile = ({ data }) => {
           display: 'flex',
           flexDirection: 'column',
           flex: '1 1 auto',
+          overflow: 'auto',
           p: 0,
           '&:last-child': {
             pb: 0,
@@ -268,12 +271,17 @@ const AmaranthineAnimationMobile = ({ data }) => {
               m: 0,
               p: 0,
               mt: 2,
-              overflow: 'hidden',
+              overflow: 'auto',
               textOverflow: 'ellipsis',
               display: '-webkit-box',
               WebkitLineClamp: 5,
               WebkitBoxOrient: 'vertical',
               flex: '1 1 auto',
+              '&::-webkit-scrollbar': {
+                display: 'none',
+              },
+              msOverflowStyle: 'none',  /* IE and Edge */
+              scrollbarWidth: 'none',  /* Firefox */
             }}
           >
             {card.description}
@@ -415,10 +423,26 @@ const AmaranthineAnimationMobile = ({ data }) => {
         <ColorBox ref={colorBoxRef} backgroundImage={backgroundImage}>
           <Box className="bg-image" />
           <Box className="content">
-            <Typography variant="h2" className="title" color="white">
+            <Typography
+              className="title"
+              sx={{
+                color: '#FFFFFF',
+                fontSize: '38px',
+                fontWeight: 400,
+                fontFamily: 'Satoshi Variable',
+              }}
+            >
               AMARANTHINE
             </Typography>
-            <Typography variant="subtitle1" className="subtitle" color="white">
+            <Typography
+              className="subtitle"
+              sx={{
+                color: '#E6E6E6',
+                fontSize: '12px',
+                fontWeight: 500,
+                fontFamily: 'Satoshi Variable',
+              }}
+            >
               3/4 BHK LUXURY APARTMENTS
             </Typography>
           </Box>
@@ -441,20 +465,12 @@ const AmaranthineAnimationMobile = ({ data }) => {
                 color: 'white',
                 fontWeight: 400,
                 fontSize: '2rem',
-                mb: 2,
-                fontFamily: '"Playfair Display", serif',
+                mb: 1,
+                fontFamily: 'Satoshi Variable',
               }}
             >
               {data?.StoryCardSliderHeading || 'AMARANTHINE'}
             </Typography>
-            <Box
-              sx={{
-                width: '40px',
-                height: '1px',
-                backgroundColor: 'white',
-                margin: '0 auto 1.5rem',
-              }}
-            />
           </Box>
 
           {cards.length > 0 && (
@@ -462,7 +478,7 @@ const AmaranthineAnimationMobile = ({ data }) => {
               ref={carouselRef}
               sx={{
                 position: 'absolute',
-                top: '25%',
+                top: '20%',
                 left: 0,
                 right: 0,
                 width: '100%',
