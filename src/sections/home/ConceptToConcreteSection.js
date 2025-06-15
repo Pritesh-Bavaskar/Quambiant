@@ -682,6 +682,7 @@ export default function ConceptToConcreteSection({ conceptToConcreteSection }) {
                     color: '#18191B',
                     lineHeight: '1.2',
                     mb: 1,
+                    pt: 10,
                   }}
                 >
                   {conceptToConcreteSection?.Heading}

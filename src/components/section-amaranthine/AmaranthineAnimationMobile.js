@@ -1,8 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Box, styled, Typography } from '@mui/material';
+import {
+  Box,
+  styled,
+  Typography,
+  Card,
+  CardContent,
+  CardMedia,
+  IconButton,
+  useTheme,
+} from '@mui/material';
+import { Icon } from '@iconify/react';
+import Carousel, { useCarousel } from 'src/components/carousel';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -137,8 +148,148 @@ const AmaranthineAnimationMobile = ({ data }) => {
     data?.GallaryImage4?.url,
   ];
 
+  const theme = useTheme();
+  const [currentSlide, setCurrentSlide] = useState(0);
   const containerRef = useRef(null);
   const colorBoxRef = useRef(null);
+  const headingRef = useRef(null);
+  const carouselRef = useRef(null);
+
+  const carousel = useCarousel({
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    infinite: true,
+    speed: 500,
+    arrows: false,
+    centerMode: true,
+    centerPadding: '18px',
+  });
+
+  const CustomArrow = ({ icon, onClick, sx }) => (
+    <IconButton
+      onClick={onClick}
+      sx={{
+        border: '1px solid white',
+        borderRadius: '0%',
+        color: 'white',
+        bgcolor: 'transparent',
+        mx: 1,
+        '&:hover': { bgcolor: '#071317', color: '#E2EBF6', border: '1px solid #071317' },
+        width: 40,
+        height: 40,
+        ...sx,
+      }}
+    >
+      <Icon icon={icon} width={20} />
+    </IconButton>
+  );
+
+  CustomArrow.propTypes = {
+    icon: PropTypes.string.isRequired,
+    onClick: PropTypes.func.isRequired,
+    sx: PropTypes.object,
+  };
+
+  const cards = (data?.StoryCard || []).map((card) => ({
+    image: card?.Image?.url ? `${process.env.REACT_APP_HOST_API}${card.Image.url}` : '',
+    title: card?.Title || '',
+    description: card?.SubTitle || '',
+  }));
+
+  const renderCard = (card) => (
+    <Card
+      sx={{
+        borderRadius: 0,
+        width: '97%',
+        height: '500px', // Set a fixed height for all cards
+        mx: 'auto',
+        p: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: 'rgba(255, 255, 255, 1)',
+        boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)',
+        overflow: 'hidden', // Ensure content doesn't overflow
+      }}
+    >
+      <Box sx={{ flex: '0 0 auto', height: '240px' }}>
+        <CardMedia
+          component="img"
+          image={card.image}
+          alt={card.title}
+          sx={{
+            width: '100%',
+            height: 240,
+            objectFit: 'cover',
+          }}
+        />
+      </Box>
+      <CardContent
+        sx={{
+          textAlign: 'left',
+          display: 'flex',
+          flexDirection: 'column',
+          flex: '1 1 auto',
+          p: 0,
+          '&:last-child': {
+            pb: 0,
+          },
+        }}
+      >
+        <Box sx={{ flex: '1 1 auto' }}>
+          <Typography
+            fontFamily="Satoshi Variable"
+            fontSize={{ xs: 20, md: 24 }}
+            fontWeight={700}
+            color="#18191B"
+            sx={{
+              lineHeight: 1.3,
+              wordBreak: 'break-word',
+              m: 0,
+              p: 0,
+              mt: 2,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+            }}
+          >
+            {card.title}
+          </Typography>
+          <Typography
+            fontFamily="Satoshi Variable"
+            fontSize={{ xs: 14, md: 16 }}
+            fontWeight={500}
+            color="#666666"
+            sx={{
+              lineHeight: 1.6,
+              whiteSpace: 'pre-line',
+              wordBreak: 'break-word',
+              m: 0,
+              p: 0,
+              mt: 2,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              display: '-webkit-box',
+              WebkitLineClamp: 5,
+              WebkitBoxOrient: 'vertical',
+              flex: '1 1 auto',
+            }}
+          >
+            {card.description}
+          </Typography>
+        </Box>
+      </CardContent>
+    </Card>
+  );
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === cards.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? cards.length - 1 : prev - 1));
+  };
 
   useEffect(() => {
     if (!colorBoxRef.current || !containerRef.current) return () => {};
@@ -157,6 +308,9 @@ const AmaranthineAnimationMobile = ({ data }) => {
       id: 'mobile-container-pin',
     });
 
+    // Hide heading and carousel initially
+    gsap.set([headingRef.current, carouselRef.current], { opacity: 0 });
+
     // Animation for the color box
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -166,6 +320,30 @@ const AmaranthineAnimationMobile = ({ data }) => {
         scrub: true,
         markers: true,
         id: 'mobile-box-animation',
+        onUpdate: (self) => {
+          // Handle heading and carousel opacity based on scroll progress
+          if (headingRef.current) {
+            const headingProgress = Math.max(0, (self.progress - 0.7) * 3.33); // Start at 70% progress
+            gsap.set(headingRef.current, {
+              opacity: Math.min(1, headingProgress),
+              zIndex: 10, // Ensure heading stays above cards
+            });
+
+            // Only show carousel after heading is mostly visible (80% opacity)
+            if (carouselRef.current) {
+              const carouselProgress = Math.max(0, (self.progress - 0.8) * 5);
+              gsap.set(carouselRef.current, {
+                opacity: Math.min(1, carouselProgress),
+                zIndex: 5, // Lower z-index than heading
+              });
+            }
+          }
+        },
+        onEnterBack: () => {
+          // Reset opacity when scrolling back up
+          if (headingRef.current) gsap.set(headingRef.current, { opacity: 0 });
+          if (carouselRef.current) gsap.set(carouselRef.current, { opacity: 0 });
+        },
       },
     });
 
@@ -196,7 +374,7 @@ const AmaranthineAnimationMobile = ({ data }) => {
       },
     });
 
-    // Text fade out
+    // Initial content fade out
     gsap.to(box.querySelector('.content'), {
       opacity: 0,
       y: -50,
@@ -244,6 +422,87 @@ const AmaranthineAnimationMobile = ({ data }) => {
               3/4 BHK LUXURY APARTMENTS
             </Typography>
           </Box>
+          <Box
+            ref={headingRef}
+            sx={{
+              position: 'absolute',
+              top: '10%',
+              left: 0,
+              right: 0,
+              textAlign: 'center',
+              opacity: 0,
+              zIndex: 10,
+              padding: '0 16px',
+            }}
+          >
+            <Typography
+              variant="h3"
+              sx={{
+                color: 'white',
+                fontWeight: 400,
+                fontSize: '2rem',
+                mb: 2,
+                fontFamily: '"Playfair Display", serif',
+              }}
+            >
+              {data?.StoryCardSliderHeading || 'AMARANTHINE'}
+            </Typography>
+            <Box
+              sx={{
+                width: '40px',
+                height: '1px',
+                backgroundColor: 'white',
+                margin: '0 auto 1.5rem',
+              }}
+            />
+          </Box>
+
+          {cards.length > 0 && (
+            <Box
+              ref={carouselRef}
+              sx={{
+                position: 'absolute',
+                top: '25%',
+                left: 0,
+                right: 0,
+                width: '100%',
+                maxWidth: '1200px',
+                margin: '0 auto',
+                zIndex: 5,
+                opacity: 0,
+              }}
+            >
+              <Box sx={{ width: '100%', position: 'relative' }}>
+                <Carousel ref={carousel.carouselRef} {...carousel.carouselSettings}>
+                  {cards.map((card, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        padding: '0 8px',
+                        height: '100%',
+                        minHeight: 500,
+                        display: 'flex',
+                      }}
+                    >
+                      <Box sx={{ width: '100%', height: '100%' }}>{renderCard(card)}</Box>
+                    </div>
+                  ))}
+                </Carousel>
+                <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+                  <CustomArrow
+                    icon="eva:arrow-ios-back-fill"
+                    onClick={carousel.onPrev}
+                    sx={{ mr: 2 }}
+                  />
+                  <CustomArrow
+                    icon="eva:arrow-ios-forward-fill"
+                    onClick={carousel.onNext}
+                    sx={{ ml: 2 }}
+                  />
+                </Box>
+              </Box>
+            </Box>
+          )}
         </ColorBox>
         <BottomRow>
           <GridItem>

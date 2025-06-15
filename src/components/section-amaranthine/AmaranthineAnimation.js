@@ -217,7 +217,6 @@ const AmaranthineAnimation = ({ data }) => {
     });
   }, []);
 
-
   useEffect(() => {
     if (!colorBoxRef.current || !containerRef.current) return () => {};
 
