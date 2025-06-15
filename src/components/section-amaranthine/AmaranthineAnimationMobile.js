@@ -173,9 +173,7 @@ const AmaranthineAnimationMobile = ({ data }) => {
     gsap.set(box, {
       width: '353px',
       height: '260px',
-      // x: '-50%',
-      // y: '-50%',
-      transformOrigin: 'center center'
+      transformOrigin: 'center center',
     });
 
     tl.to(box, {
@@ -239,11 +237,10 @@ const AmaranthineAnimationMobile = ({ data }) => {
         <ColorBox ref={colorBoxRef} backgroundImage={backgroundImage}>
           <Box className="bg-image" />
           <Box className="content">
-            <Typography variant="h2" className="title">
+            <Typography variant="h2" className="title" color="white">
               AMARANTHINE
             </Typography>
-            <Box className="divider" />
-            <Typography variant="subtitle1" className="subtitle">
+            <Typography variant="subtitle1" className="subtitle" color="white">
               3/4 BHK LUXURY APARTMENTS
             </Typography>
           </Box>
