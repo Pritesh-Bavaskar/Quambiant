@@ -66,35 +66,47 @@ const ColorBox = styled(Box, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  color: 'white',
-  fontSize: '1.2rem',
-  fontWeight: 'bold',
-  position: 'relative',
-  aspectRatio: '1',
   overflow: 'hidden',
-  zIndex: 10,
+  position: 'relative',
+  width: '100%',
+  height: '100%',
   transformOrigin: 'center center',
-  willChange: 'transform, opacity',
+  willChange: 'width, height, transform',
+  zIndex: 2,
 
-  '> div': {
-    position: 'relative',
-    zIndex: 2,
-  },
-
-  '&::after': {
-    content: '""',
+  '& .bg-image': {
     position: 'absolute',
     top: 0,
     left: 0,
     width: '100%',
     height: '100%',
-    backgroundImage: backgroundImage || 'none',
+    backgroundImage,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    opacity: 0, // Start hidden
+    opacity: 0,
     transition: 'opacity 0.5s ease',
     zIndex: 1,
+  },
+
+  '& .content': {
+    position: 'relative',
+    zIndex: 2,
+    color: 'white',
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+    transition: 'opacity 0.5s ease',
+  },
+
+  '&.fullscreen': {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '100vw',
+    height: '100vh',
+    aspectRatio: 'unset',
+    zIndex: 100,
   },
 }));
 
@@ -109,17 +121,18 @@ const AmaranthineAnimation = ({ data }) => {
 
   const containerRef = useRef(null);
   const colorBoxRef = useRef(null);
+  const animationRef = useRef(null);
 
   useEffect(() => {
+    if (!colorBoxRef.current || !containerRef.current) return;
+
     const box = colorBoxRef.current;
-    const container = containerRef.current;
-
-    if (!box || !container) return;
-
     const rect = box.getBoundingClientRect();
-    const widthScale = window.innerWidth / rect.width;
-    const heightScale = window.innerHeight / rect.height;
-    const scaleValue = Math.max(widthScale, heightScale);
+
+    const targetWidth = window.innerWidth;
+    const targetHeight = window.innerHeight;
+
+    const deltaX = (targetWidth - rect.width) / 2;
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -127,43 +140,41 @@ const AmaranthineAnimation = ({ data }) => {
         start: 'center center',
         end: '+=100%',
         scrub: true,
-        pin: container, // this pins the entire grid
+        pin: containerRef.current,
         markers: true,
       },
     });
-
     tl.to(box, {
-      scale: scaleValue,
+      width: targetWidth,
+      height: targetHeight,
+      x: -deltaX,
+      y: 0, // ✅ Don't shift upward — this is what causes the image to overflow top
       ease: 'power2.inOut',
-    }).to(
-      box,
-      {
-        onUpdate: () => {
-          box.style.setProperty('--reveal', '1');
-        },
-      },
-      '<+=0.2' // starts slightly after scaling begins
-    );
+    });
 
-    gsap.to(box, {
+    gsap.to(box.querySelector('.bg-image'), {
+      opacity: 1,
       scrollTrigger: {
         trigger: box,
         start: 'center center',
         end: '+=100%',
         scrub: true,
       },
-      onUpdate: (self) => {
-        const progress = self.progress;
-        const after = box.querySelector('::after');
-        if (after) {
-          gsap.set(after, { opacity: progress });
-        }
+    });
+
+    gsap.to(box.querySelector('.content'), {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: box,
+        start: 'center center',
+        end: '+=100%',
+        scrub: true,
       },
     });
 
     // eslint-disable-next-line consistent-return
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
       tl.kill();
     };
   }, []);
@@ -171,6 +182,7 @@ const AmaranthineAnimation = ({ data }) => {
   const backgroundImage = data?.SpotlightImage?.url
     ? `url(${process.env.REACT_APP_HOST_API}${data.SpotlightImage.url})`
     : '';
+  console.log(backgroundImage);
 
   return (
     <StickyContainer>
@@ -190,8 +202,10 @@ const AmaranthineAnimation = ({ data }) => {
             <StyledImage src={`${process.env.REACT_APP_HOST_API}${images[3]}`} alt="Grid Item 4" />
           </GridItem>
           <ColorBox ref={colorBoxRef} backgroundImage={backgroundImage}>
-            <Box>Your Content Here</Box>
+            <Box className="bg-image" />
+            <Box className="content">Your Content Here</Box>
           </ColorBox>
+
           <GridItem>
             <StyledImage src={`${process.env.REACT_APP_HOST_API}${images[4]}`} alt="Grid Item 5" />
           </GridItem>
